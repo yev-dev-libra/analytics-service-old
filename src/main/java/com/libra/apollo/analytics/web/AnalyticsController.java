@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@RequestMapping("/v1/analytics")
+@RequestMapping("/v1/analytics")
 public class AnalyticsController {
 
 	protected Logger logger = Logger.getLogger(AnalyticsController.class.getName());
