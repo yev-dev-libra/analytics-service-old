@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/analytics")
 public class AnalyticsController {
-
+	
 	protected Logger logger = Logger.getLogger(AnalyticsController.class.getName());
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
