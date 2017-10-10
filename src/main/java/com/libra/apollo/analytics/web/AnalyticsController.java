@@ -13,7 +13,7 @@ public class AnalyticsController {
 	
 	protected Logger logger = Logger.getLogger(AnalyticsController.class.getName());
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<String> hello(){
 		return new ResponseEntity<String>("Hello!", HttpStatus.OK);
 	}
