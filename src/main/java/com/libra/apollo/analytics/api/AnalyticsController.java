@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.web;
+package com.libra.apollo.analytics.api;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/analytics")
+@RequestMapping("/api/v1")
 public class AnalyticsController {
 	
 	protected Logger logger = Logger.getLogger(AnalyticsController.class.getName());
 	
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public ResponseEntity<String> hello(){
 		return new ResponseEntity<String>("Hello!", HttpStatus.OK);
 	}

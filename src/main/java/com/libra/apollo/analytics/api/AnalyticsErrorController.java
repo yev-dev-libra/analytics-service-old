@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.web;
+package com.libra.apollo.analytics.api;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
