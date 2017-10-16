@@ -15,6 +15,7 @@ public class AnalyticsController {
 	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public ResponseEntity<String> hello(){
+		
 		return new ResponseEntity<String>("Hello!", HttpStatus.OK);
 	}
 }

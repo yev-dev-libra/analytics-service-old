@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.model;
+package com.libra.apollo.analytics.core.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.model;
+package com.libra.apollo.analytics.core.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,8 +8,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.libra.apollo.analytics.model.enums.MessageSeverity;
 
 @Embeddable
 public class StatusMessage implements Serializable {

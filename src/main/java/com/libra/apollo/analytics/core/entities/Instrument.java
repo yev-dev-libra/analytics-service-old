@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.model;
+package com.libra.apollo.analytics.core.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -6,9 +6,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.Table;
-
-import com.libra.apollo.analytics.model.enums.InstrumentStatus;
-import com.libra.apollo.analytics.model.enums.StockType;
 
 //@NamedQueries({@NamedQuery(name="com.libra.apollo.persistence.model.Instrument.findAll", query="select s from Instrument as s"), 
 //	@NamedQuery(name="com.libra.apollo.persistence.model.Instrument.countStocksByType", query="select s from Instrument as s where s.type = :stockTypeId"), 

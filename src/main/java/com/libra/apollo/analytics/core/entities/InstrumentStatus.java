@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.model.enums;
+package com.libra.apollo.analytics.core.entities;
 
 public enum InstrumentStatus {
 	ACTIVE("Active", 1), ACQUIRED("Acquired", 2), DELISTED("Delisted", 3), TICKER_CHANGED("Ticker Changed", 4), SUSPENDED("Suspended", 5);
