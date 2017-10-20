@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.core.repositories;
+package com.libra.apollo.analytics.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,7 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.libra.apollo.analytics.core.entities.Analytics;
+import com.libra.apollo.analytics.entity.Analytics;
+import com.libra.apollo.analytics.repository.AnalyticsRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

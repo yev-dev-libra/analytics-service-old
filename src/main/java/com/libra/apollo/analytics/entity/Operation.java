@@ -1,6 +1,6 @@
-package com.libra.apollo.analytics.core.entities;
+package com.libra.apollo.analytics.entity;
 
-public enum Operator {
+public enum Operation {
 
 	GREATER_THAN(">"), 
 	LESS_THAN("<"), 
@@ -11,7 +11,7 @@ public enum Operator {
 	
 	private String symbol;
 	
-	private Operator(String symbol) {
+	private Operation(String symbol) {
 		this.symbol = symbol;
 	}
 	

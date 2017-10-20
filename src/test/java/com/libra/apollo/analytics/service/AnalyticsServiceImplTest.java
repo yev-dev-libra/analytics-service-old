@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.core.services;
+package com.libra.apollo.analytics.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.libra.apollo.analytics.core.repositories.AnalyticsRepository;
+import com.libra.apollo.analytics.repository.AnalyticsRepository;
 
 @RunWith(SpringRunner.class)
 public class AnalyticsServiceImplTest {
