@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.libra.apollo.analytics.entity.Analytics;
+import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.repository.AnalyticsRepository;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +21,7 @@ public class AnalyticsRepositoryTest {
 	
 	@Test
 	public void shouldGetAListOfAnalytics() {
-		Analytics analytic = analyticsRepository.findOne(1L);
+		ApolloAnalytics analytic = analyticsRepository.findOne(1L);
 		assertThat(analyticsRepository.findAll().contains(analytic));
 	}
 }

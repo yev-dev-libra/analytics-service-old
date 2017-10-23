@@ -7,7 +7,13 @@ public enum Operation {
 	EQUAL("="), 
 	NOT_EQUAL("!="),
 	GREATER_THAN_OR_EQUAL(">="), 
-	LESS_THAN_OR_EQUAL("<=");
+	LESS_THAN_OR_EQUAL("<="), 
+	SORT_ASC(""),
+	SORT_DESC(""),
+	SORT_TOP(""),
+	SORT_BOTTOM(""),
+	SORT_TOP_BOTTOM(""),
+	;
 	
 	private String symbol;
 	

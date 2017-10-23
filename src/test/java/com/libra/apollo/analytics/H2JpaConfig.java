@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "com.libra.apollo.analytics.core.repositories")
-@PropertySource("application.properties")
+@PropertySource("it-application.properties")
 @EnableTransactionManagement
 public class H2JpaConfig {
 

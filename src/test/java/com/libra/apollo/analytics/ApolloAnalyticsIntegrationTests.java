@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 //}
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {H2JpaConfig.class})
+@SpringBootTest(classes = {ApolloAnalyticsApplication.class, H2JpaConfig.class})
 public class ApolloAnalyticsIntegrationTests{
 	@Test
     public void exampleTest() {

@@ -2,6 +2,7 @@ package com.libra.apollo.analytics.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -24,10 +25,12 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 	protected int version;
 	
 	@Column(nullable = false)
-	private LocalDateTime createdOn = LocalDateTime.now();
+//	private LocalDateTime createdOn = LocalDateTime.now();
+	private Date createdOn = new Date();
 	
 	@Column(nullable = false)
-	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
+//	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
+	private Date lastUpdatedOn  = new Date();
 
 	public int getVersion() {
 		return version;
@@ -37,19 +40,19 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 		this.version = version;
 	}
 
-	public LocalDateTime getCreatedOn() {
+	public Date getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(LocalDateTime createdOn) {
+	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
 
-	public LocalDateTime getLastUpdatedOn() {
+	public Date getLastUpdatedOn() {
 		return lastUpdatedOn;
 	}
 
-	public void setLastUpdatedOn(LocalDateTime lastUpdatedOn) {
+	public void setLastUpdatedOn(Date lastUpdatedOn) {
 		this.lastUpdatedOn = lastUpdatedOn;
 	}
 	
