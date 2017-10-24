@@ -2,12 +2,12 @@ package com.libra.apollo.analytics.comparator;
 
 import java.util.Comparator;
 
-import com.libra.apollo.analytics.entity.InvestmentCriteria;
+import com.libra.apollo.analytics.entity.Criteria;
 
-public class DefaultInvestmentCriteriaComparator implements Comparator<InvestmentCriteria> {
+public class DefaultInvestmentCriteriaComparator implements Comparator<Criteria> {
 
 	@Override
-	public int compare(InvestmentCriteria criteria, InvestmentCriteria otherCriteria) {
+	public int compare(Criteria criteria, Criteria otherCriteria) {
 		return 0;
 	}
 

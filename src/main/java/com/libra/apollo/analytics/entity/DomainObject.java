@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -20,17 +22,20 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 	public abstract ID getId();
 	
 	@Version
-	@Column(name = "version")
+	@Column(nullable = false)
 	@JsonIgnore
 	protected int version;
 	
 	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 //	private LocalDateTime createdOn = LocalDateTime.now();
 	private Date createdOn = new Date();
 	
 	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 //	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
 	private Date lastUpdatedOn  = new Date();
+
 
 	public int getVersion() {
 		return version;
