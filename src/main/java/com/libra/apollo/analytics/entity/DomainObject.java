@@ -1,7 +1,6 @@
 package com.libra.apollo.analytics.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -32,7 +31,7 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 	private Date createdOn = new Date();
 	
 	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 //	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
 	private Date lastUpdatedOn  = new Date();
 
