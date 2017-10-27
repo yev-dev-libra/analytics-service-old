@@ -60,7 +60,7 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 //		valueLongsInvestmentStyleCondition.setOperator(Operation.AND);
 //		
 //		Priority first = new Priority();
-//		first.setPriority(1);
+//		first.setPriority(1);Ê
 //		
 //		valueLongsInvestmentStyleCondition.setPriority(first);
 //		
