@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 public class ParameterCondition extends Condition {
 
 	@Enumerated(EnumType.STRING)
-	private ParameterDefinition criteriaDefinition;
+	private InstrumentDataFieldType dataFieldType;
 	
 	
 	@Column(name="parameter", nullable=false)

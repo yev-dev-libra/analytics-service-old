@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "analytics", schema="analytics")
+@Table(name = "apollo_analytics", schema="analytics")
 @SuppressWarnings("serial")
 @Data 
 @EqualsAndHashCode(callSuper=true)

@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 @SuppressWarnings("serial")
 @Entity
-@DiscriminatorValue(value = "SORT")
+@DiscriminatorValue(value = "SORT_DIR")
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class SortDirectionCondition extends Condition {
