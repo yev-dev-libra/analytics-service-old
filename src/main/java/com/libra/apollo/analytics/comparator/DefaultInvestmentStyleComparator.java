@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 
-public class DefaultInvestmentSyleComparator implements Comparator<InvestmentStyle> {
+public class DefaultInvestmentStyleComparator implements Comparator<InvestmentStyle> {
 
 	@Override
 	public int compare(InvestmentStyle o1, InvestmentStyle o2) {

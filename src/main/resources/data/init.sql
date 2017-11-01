@@ -22,11 +22,13 @@ insert into analytics.conditions( id, kind, data_field_type, parameter) values (
 insert into analytics.conditions( id, kind, data_field_type, parameter) values (15,'PARAMETER','INTRINSIC_VALUE',0.2);
 
 
--- Populating apollo_analytic 
-insert into analytics.apollo_analytics(id,description,name,run_type,analytics_type) values (1,'test', 'test','ON_DEMAND','BASIC_SCREENER');
+-- Populating apollo_analytics 
+insert into analytics.apollo_analytics(id,description,name,run_type,analytics_type) values (1,'Collection of defined Investment Styles', 'Apollo Screener','ON_DEMAND','APOLLO_SCREENER');
 
 -- Populating analytics_template 
 insert into analytics.analytics_template(id, analytics_id) values (1,1);
 
+-- Populating 
+
 -- Populating investment_style 
-insert into analytics.investment_style( id, code, name, description, priority, template_id) values (1,'TEST','TEST Name', 'TEST Desc', 1, 1);
+insert into analytics.investment_style( id, code, name, description, priority, template_id) values (1,'VL','Value Indicator', '', 1, 1);

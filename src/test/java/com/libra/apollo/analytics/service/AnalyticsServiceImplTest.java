@@ -2,6 +2,9 @@ package com.libra.apollo.analytics.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,5 +29,6 @@ public class AnalyticsServiceImplTest {
 		
 		Long count = analyticsRepository.count();
 		assertThat(count).isEqualTo(1L);
+		
 	}
 }

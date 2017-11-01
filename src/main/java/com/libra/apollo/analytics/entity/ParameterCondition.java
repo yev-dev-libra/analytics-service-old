@@ -20,6 +20,6 @@ public class ParameterCondition extends Condition {
 	private InstrumentDataFieldType dataFieldType;
 	
 	
-	@Column(name="parameter", nullable=false)
+	@Column(name="parameter", nullable=true)
 	private double parameter;
 }
