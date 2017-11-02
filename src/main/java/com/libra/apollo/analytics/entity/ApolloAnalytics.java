@@ -21,7 +21,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "apollo_analytics", schema="analytics", uniqueConstraints = @UniqueConstraint(columnNames = {"code", "analytics_type"}))
+@Table(name = "apollo_analytics",  uniqueConstraints = @UniqueConstraint(columnNames = {"code", "analytics_type"}))
 @SuppressWarnings("serial")
 @Data 
 @EqualsAndHashCode(callSuper=true)

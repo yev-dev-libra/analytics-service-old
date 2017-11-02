@@ -87,7 +87,8 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 	@Ignore
 	@Test
 	public void testListAllAvailableAnalyticsByType() {
+		
 		List<ApolloAnalytics> basicAnalytics = analyticsService
-				.getApolloAnalyticsByAnalyticsType(AnalyticsType.BASIC_SCREENER);
+				.getApolloAnalyticsByAnalyticsType(AnalyticsType.APOLLO_SCREENER);
 	}
 }

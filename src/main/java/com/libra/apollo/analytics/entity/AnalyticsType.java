@@ -3,7 +3,7 @@ package com.libra.apollo.analytics.entity;
 
 public enum AnalyticsType {
 
-	BASIC_SCREENER("");
+	APOLLO_SCREENER("");
 	
 	private final String desc;
 	

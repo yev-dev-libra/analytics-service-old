@@ -9,12 +9,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-@TestPropertySource(locations = "classpath:application-it.properties")
-public class AnalyticsRepositoryTest {
+public class AnalyticsRepositoryTest extends AbstractRepositoryTest {
 
 	@Autowired private AnalyticsRepository analyticsRepository;
 	
