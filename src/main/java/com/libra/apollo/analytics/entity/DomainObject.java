@@ -33,7 +33,7 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 //	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
-	private Date updatedOn  = new Date();
+	private Date lastUpdatedOn  = new Date();
 
 
 	public int getVersion() {
@@ -52,14 +52,12 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 		this.createdOn = createdOn;
 	}
 
-	
-	
-	public Date getUpdatedOn() {
-		return updatedOn;
+	public Date getLastUpdatedOn() {
+		return lastUpdatedOn;
 	}
 
-	public void setUpdatedOn(Date updatedOn) {
-		this.updatedOn = updatedOn;
+	public void setLastUpdatedOn(Date lastUpdatedOn) {
+		this.lastUpdatedOn = lastUpdatedOn;
 	}
 
 	@SuppressWarnings("rawtypes")

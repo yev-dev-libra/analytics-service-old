@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "kind", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "investment_style_condition")
-public abstract class InvestmentStyleCondition implements Serializable {
+public class InvestmentStyleCondition implements Serializable {
 
 	@Id
 	@ManyToOne
