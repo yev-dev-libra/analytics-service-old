@@ -30,8 +30,10 @@ insert into apollo_analytics(id,code,name,description,run_type,analytics_type,ve
 -- Populating analytics_template 
 insert into analytics_template(id, code,name, analytics_id,version,created_on,last_updated_on) values (1,'AC','ACUS',1, '0', '2017-11-01','2017-11-01');
 
--- Populating 
 
 -- Populating investment_style 
-insert into investment_style( id, code, name, description, priority, template_id,version,created_on,last_updated_on) values (1,'VL','Value Indicator', '', 1, 1, '0', '2017-11-01','2017-11-01');
+insert into investment_style( id, code, name, description, priority, template_id, analytics_id, version,created_on,last_updated_on) values (1,'VL','Value Indicator', '', 1, 1, '0', '2017-11-01','2017-11-01');
+
+
+-- Populating investment_style_condition
 
