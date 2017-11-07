@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -22,7 +23,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "apollo_analytics",  uniqueConstraints = @UniqueConstraint(columnNames = {"code", "analytics_type"}))
+@Table(name = "apollo_analytics",  
+		indexes = {
+				@Index(name="type_idx", columnList = "analytics_type"),
+				@Index(name="run_type_idx", columnList = "runType"),
+		}
+
+		)
 @SuppressWarnings("serial")
 @Data 
 @EqualsAndHashCode(callSuper=true)

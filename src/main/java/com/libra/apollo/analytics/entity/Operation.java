@@ -1,7 +1,7 @@
 package com.libra.apollo.analytics.entity;
 
 public enum Operation {
-	
+	WHERE(""),
 	AND(""),
 	OR(""),
 	GREATER_THAN(">"), 

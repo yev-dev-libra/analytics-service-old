@@ -10,9 +10,6 @@ import lombok.Data;
 @Data 
 public class Definition {
 
-	@NotNull
-	@Column(name = "code", nullable = false)
-	private String code;
 
 	@NotNull
 	@Column(name = "name", nullable = false)

@@ -23,7 +23,7 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 	@Version
 	@Column(nullable = false)
 	@JsonIgnore
-	protected int version;
+	protected int version = 0;
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
