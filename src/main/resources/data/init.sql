@@ -33,12 +33,12 @@ insert into apollo_analytics(id,name,description,run_type,analytics_type,version
 
 
 -- Populating analytics_template 
-insert into analytics_template(id,name, analytics_id,version,created_on,last_updated_on) values (1,'ACUS',1, '0', '2017-11-01','2017-11-01');
+insert into analytics_view(id,name, analytics_id,priority, version,created_on,last_updated_on) values (1,'ACUS',1, 1, '0', '2017-11-01','2017-11-01');
 
 
 -- Populating investment_style 
-insert into investment_style( id, name, description, priority, template_id, analytics_id, version,created_on,last_updated_on) values (1,'Value Indicator', 'Simple Test condition to check VI request', 1, 1,1, '0', '2017-11-01','2017-11-01');
-insert into investment_style( id, name, description, priority, template_id, analytics_id, version,created_on,last_updated_on) values (2,'Intrinsic Value', 'Simple Test condition to check IV request', 1, 1,1, '0', '2017-11-01','2017-11-01');
+insert into investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,last_updated_on) values (1,'Value Indicator', 'Simple Test condition to check VI request', 1, 1,1, '0', '2017-11-01','2017-11-01');
+insert into investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,last_updated_on) values (2,'Intrinsic Value', 'Simple Test condition to check IV request', 1, 1, 1, '0', '2017-11-01','2017-11-01');
 
 
 -- Populating investment_style_condition

@@ -6,14 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "PARAMETER")
-@Data
-@EqualsAndHashCode(callSuper=true)
 public class ParameterCondition extends Condition {
 
 	@Enumerated(EnumType.STRING)
@@ -22,4 +17,26 @@ public class ParameterCondition extends Condition {
 	
 	@Column(name="parameter", nullable=true)
 	private double parameter;
+
+
+	public InstrumentDataFieldType getDataFieldType() {
+		return dataFieldType;
+	}
+
+
+	public void setDataFieldType(InstrumentDataFieldType dataFieldType) {
+		this.dataFieldType = dataFieldType;
+	}
+
+
+	public double getParameter() {
+		return parameter;
+	}
+
+
+	public void setParameter(double parameter) {
+		this.parameter = parameter;
+	}
+	
+	
 }

@@ -5,13 +5,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 @Entity
 @Table(name = "investment_style_datasource")
-@Data
-@EqualsAndHashCode(callSuper = true)
 public class InvestmentStyleDataSource extends ProvidedId<Long> {
 
 	/**
@@ -26,5 +21,28 @@ public class InvestmentStyleDataSource extends ProvidedId<Long> {
 	@ManyToOne
 	@JoinColumn(name="investment_style_id", nullable=false)
 	private InvestmentStyle investmentStyleCondition;
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	public InvestmentStyle getInvestmentStyleCondition() {
+		return investmentStyleCondition;
+	}
+
+	public void setInvestmentStyleCondition(InvestmentStyle investmentStyleCondition) {
+		this.investmentStyleCondition = investmentStyleCondition;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	
 
 }

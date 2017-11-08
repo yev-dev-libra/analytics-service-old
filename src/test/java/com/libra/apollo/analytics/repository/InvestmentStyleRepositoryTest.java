@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.SortedSet;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Criteria;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,7 @@ import com.libra.apollo.analytics.entity.ParameterCondition;
 public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 
 	@Autowired private InvestmentStyleRepository repository;
+	
 	
 	@Ignore
 	@Test
@@ -37,9 +42,9 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void shouldConstructConditionsForInvestmentStyle() {
 		Optional<InvestmentStyle> invstStyleOptional = repository.findById(1L);
-		InvestmentStyle invstStyle = invstStyleOptional.orElse(invstStyleOptional.get() );
+		InvestmentStyle invstStyle = invstStyleOptional.get();
 		SortedSet<InvestmentStyleCondition> conditions = invstStyle.getInvestmentStyleConditions();
-		assertThat(conditions, hasSize(1));
+		assertThat(conditions, hasSize(3));
 		
 		for(InvestmentStyleCondition invstCondition : conditions) {
 			final Condition condition = invstCondition.getCondition();
@@ -51,5 +56,6 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 			}
 		}
 	}
+	
 	
 }

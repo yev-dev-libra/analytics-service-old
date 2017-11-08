@@ -5,16 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "SORT_DIR")
-@Data
-@EqualsAndHashCode(callSuper=true)
 public class SortDirectionCondition extends Condition {
 
 	@Enumerated(EnumType.STRING)
 	private SortDirection sortDirection;
+
+	public SortDirection getSortDirection() {
+		return sortDirection;
+	}
+
+	public void setSortDirection(SortDirection sortDirection) {
+		this.sortDirection = sortDirection;
+	}
+	
+	
 }
