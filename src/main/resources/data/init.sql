@@ -51,3 +51,6 @@ insert into investment_style_condition(id,investment_style_id, condition_id,prio
 
 insert into investment_style_datasource(id,data_source_id,investment_style_id,version,created_on,last_updated_on) values(216,1,1,'0', '2017-11-01','2017-11-01');
 
+-- Populating stock_indicators
+
+insert into stockindicators(id, stamp_date,open_price, version,created_on,last_updated_on) values(1, '2017-11-09',0.2 ,0,'2017-11-01','2017-11-01');
