@@ -27,13 +27,13 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-//	private LocalDateTime createdOn = LocalDateTime.now();
 	private Date createdOn = new Date();
+//	private LocalDateTime createdOn = LocalDateTime.now();
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-//	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
 	private Date lastUpdatedOn  = new Date();
+//	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
 
 
 	public int getVersion() {
