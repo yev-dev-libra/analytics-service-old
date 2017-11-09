@@ -36,6 +36,19 @@ public class InvestmentStyleCondition implements Serializable, Comparable<Invest
 		return id;
 	}
 
+	
+	public InvestmentStyleCondition() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	//TODO create a builder
+	public InvestmentStyleCondition(Long id, Priority priority) {
+		super();
+		this.id = id;
+		this.priority = priority;
+	}
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -69,11 +82,6 @@ public class InvestmentStyleCondition implements Serializable, Comparable<Invest
 		return this.getPriority().compareTo(o.getPriority());
 	}
 
-	public InvestmentStyleCondition(Long id, Priority priority) {
-		super();
-		this.id = id;
-		this.priority = priority;
-	}
 	
 	
 }

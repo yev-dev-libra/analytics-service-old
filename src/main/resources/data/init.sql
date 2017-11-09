@@ -42,9 +42,9 @@ insert into investment_style( id, name, description, priority, analytics_id, vie
 
 
 -- Populating investment_style_condition
+insert into investment_style_condition(id,investment_style_id, condition_id,priority ) values(3,1,6,3); -- equals
 insert into investment_style_condition(id,investment_style_id, condition_id,priority ) values(1,1,1,1); -- where
 insert into investment_style_condition(id,investment_style_id, condition_id,priority ) values(2,1,15,2); -- parameter FV
-insert into investment_style_condition(id,investment_style_id, condition_id,priority ) values(3,1,6,3); -- equals
 
 
 -- Populating investment_style_condition_datasource
