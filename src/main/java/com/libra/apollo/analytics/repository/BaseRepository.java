@@ -12,4 +12,6 @@ public interface BaseRepository<T, ID extends Serializable> extends JpaRepositor
 	Optional<T> findById(ID id);
 
 	<S extends T> S save(S entity);
+	
+	
 }

@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "OPERATION")
-public class OperationCondition extends Condition {
+public class OperandCondition extends Condition {
 
 	@Enumerated(EnumType.STRING)
 	private Operation operator;

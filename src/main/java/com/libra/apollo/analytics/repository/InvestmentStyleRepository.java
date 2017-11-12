@@ -1,14 +1,15 @@
 package com.libra.apollo.analytics.repository;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
+import javax.transaction.Transactional;
 
-import com.libra.apollo.analytics.entity.Condition;
+import org.springframework.stereotype.Repository;
+
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 
+@Repository
+@Transactional
 public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyle, Long> {
 
 //	@EntityGraph(value = "InvestmentStyleCondition.priority", type = EntityGraphType.LOAD)

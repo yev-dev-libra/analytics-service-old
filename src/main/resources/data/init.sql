@@ -53,4 +53,4 @@ insert into investment_style_datasource(id,data_source_id,investment_style_id,ve
 
 -- Populating stock_indicators
 
-insert into stockindicators(id, stamp_date,open_price, version,created_on,last_updated_on) values(1, '2017-11-09',0.2 ,0,'2017-11-01','2017-11-01');
+insert into stockindicators(id, instrument_id, stamp_date,open_price, version,created_on,last_updated_on) values(1, 1, '2017-11-09',0.2 ,0,'2017-11-01','2017-11-01');

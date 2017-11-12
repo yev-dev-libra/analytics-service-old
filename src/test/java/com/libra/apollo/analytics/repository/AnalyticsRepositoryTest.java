@@ -15,6 +15,7 @@ public class AnalyticsRepositoryTest extends AbstractRepositoryTest {
 
 	@Autowired private AnalyticsRepository analyticsRepository;
 	
+	
 	@Test
 	public void shouldGetAListOfAnalytics() {
 		ApolloAnalytics analytic = analyticsRepository.findOne(1L);

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @TypeDef(defaultForType = CustomBigDecimal.class, typeClass = CustomBigDecimal.class)
 public class CustomBigDecimal implements UserType {
 
-	public static final String HIBERNATE_TYPE_NAME = "CustomBigDecimal";
+	public static final String HIBERNATE_TYPE_NAME = "com.libra.apollo.analytics.entity.type.CustomBigDecimal";
 	private static final Logger log = LoggerFactory.getLogger(CustomBigDecimal.class);
 	
 	@Override
