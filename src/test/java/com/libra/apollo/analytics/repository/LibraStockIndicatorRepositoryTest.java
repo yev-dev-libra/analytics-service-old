@@ -6,16 +6,23 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 
+@Transactional
 public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	
 	@Autowired private LibraStockIndicatorRepository repository;
 	
+	@PersistenceContext 
+	private EntityManager entityManager;
 	//TODO
 	@Test
 	public void shouldBeImmutable() {
