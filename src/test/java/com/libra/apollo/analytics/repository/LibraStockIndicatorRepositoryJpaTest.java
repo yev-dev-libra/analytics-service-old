@@ -17,9 +17,9 @@ import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 
 @Transactional
-public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
+public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest {
 	
-	@Autowired private LibraStockIndicatorRepository repository;
+	@Autowired private LibraStockIndicatorRepositoryJpa repository;
 	
 	@PersistenceContext 
 	private EntityManager entityManager;
@@ -40,5 +40,6 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		List<LibraStockIndicator> stockIndicators = repository.findAll();
 		assertThat(stockIndicators, hasSize(1));
 	}
+	
 
 }
