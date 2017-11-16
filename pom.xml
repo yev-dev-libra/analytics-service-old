@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<spring.retry.version>1.1.2.RELEASE</spring.retry.version>
 		<unit-tests.skip>false</unit-tests.skip>
 		<integration-tests.skip>true</integration-tests.skip>
 	</properties>
@@ -106,6 +107,13 @@
 			<artifactId>hamcrest-library</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Retry Template -->
+		<dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+            <version>${spring.retry.version}</version>
+        </dependency>
 
 	</dependencies>
 

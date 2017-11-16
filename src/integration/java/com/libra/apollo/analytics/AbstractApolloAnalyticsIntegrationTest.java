@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -21,29 +22,36 @@ import org.springframework.web.client.RestTemplate;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.repository.LibraStockIndicatorRepositoryJpa;
 
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment= WebEnvironment.RANDOM_PORT)
-@TestPropertySource(locations = "classpath:application-dev.properties", 
-					properties = {})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+//@ActiveProfiles({ "integration", "dev" })
+@TestPropertySource(locations = "classpath:application-dev.properties", properties = {})
+public class AbstractApolloAnalyticsIntegrationTest {
 
-public class AbstractApolloAnalyticsIntegrationTest{
-	
 	private static final Logger log = LoggerFactory.getLogger(AbstractApolloAnalyticsIntegrationTest.class);
-	
+
 	@Autowired
 	private LibraStockIndicatorRepositoryJpa repository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	private RestTemplate restTemplate = new RestTemplate();
 	
+//	@InjectMocks
+//	private RestTemplate retryRestTemplate;
+
+	@Before
+	public void setUp() {
+//		MockitoAnnotations.initMocks(this);
+//		Mockito.when(retryRestTemplate.).thenReturn();
+	}
+
 	@Test
 	public void testQuery() {
 		LibraStockIndicator stockIndicators = repository.findOne(156261081L);
 		System.out.println(stockIndicators);
-		
+
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, -1);
 		Date date = new Date(cal.getTimeInMillis());
