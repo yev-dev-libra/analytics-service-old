@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "investment_style_datasource")
+@Table(name = "investment_style_datasource", schema="analytics")
 public class InvestmentStyleDataSource extends ProvidedId<Long> {
 
 	/**

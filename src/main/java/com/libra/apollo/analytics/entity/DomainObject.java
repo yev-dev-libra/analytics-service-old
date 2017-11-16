@@ -25,14 +25,14 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 	@JsonIgnore
 	protected int version = 0;
 	
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
+	@Column(name="created_on",nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdOn = new Date();
 //	private LocalDateTime createdOn = LocalDateTime.now();
 	
-	@Column(nullable = false)
+	@Column(name="updated_on", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastUpdatedOn  = new Date();
+	private Date updatedOn  = new Date();
 //	private LocalDateTime lastUpdatedOn  = LocalDateTime.now();
 
 
@@ -52,12 +52,13 @@ public abstract class DomainObject<ID extends Serializable> implements Serializa
 		this.createdOn = createdOn;
 	}
 
-	public Date getLastUpdatedOn() {
-		return lastUpdatedOn;
+
+	public Date getUpdatedOn() {
+		return updatedOn;
 	}
 
-	public void setLastUpdatedOn(Date lastUpdatedOn) {
-		this.lastUpdatedOn = lastUpdatedOn;
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	@SuppressWarnings("rawtypes")

@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 @DiscriminatorValue(value = "PARAMETER")
 public class ParameterCondition extends Condition {
 
+	@Column(name="data_field_type")
 	@Enumerated(EnumType.STRING)
 	private InstrumentDataFieldType dataFieldType;
 	

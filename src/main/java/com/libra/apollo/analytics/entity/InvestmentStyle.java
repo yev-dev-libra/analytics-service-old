@@ -16,7 +16,7 @@ import org.hibernate.annotations.SortNatural;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "investment_style"
+@Table(name = "investment_style", schema="analytics"
 // ,indexes = {
 // @Index(name="parentInvestmentStyle_idx", columnList="parent_id")
 // }

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "investment_style_condition")
+@Table(name = "investment_style_condition", schema="analytics")
 public class InvestmentStyleCondition implements Serializable, Comparable<InvestmentStyleCondition> {
 
 	@Id

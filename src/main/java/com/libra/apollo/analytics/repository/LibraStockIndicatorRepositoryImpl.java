@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 
 
-@Repository
+@Repository("libraStockIndicatorRepository")
 @Transactional(readOnly = true)
 public class LibraStockIndicatorRepositoryImpl implements LibraStockIndicatorRepository  {
 
