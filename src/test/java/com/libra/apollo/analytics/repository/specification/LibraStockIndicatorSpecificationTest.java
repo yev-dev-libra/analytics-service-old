@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
+import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.repository.LibraStockIndicatorRepositoryJpa;
 
 
@@ -20,10 +21,5 @@ public class LibraStockIndicatorSpecificationTest extends AbstractRepositoryTest
 	@Autowired 
 	private LibraStockIndicatorRepositoryJpa repository;
 	
-	@Test
-	public void testSpecificationQuery() {
-		
-		LibraStockIndicatorSpecification specification = new LibraStockIndicatorSpecification();
-		
-	}
+	
 }

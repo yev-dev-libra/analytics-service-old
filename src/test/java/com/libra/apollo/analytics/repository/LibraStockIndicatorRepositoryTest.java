@@ -24,9 +24,12 @@ import javax.persistence.criteria.Root;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.repository.specification.LibraStockIndicatorSpecification;
 
 public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 
@@ -38,7 +41,8 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	private EntityManager entityManager;
 
 	private Date previousDate;
-	private static Long stockId = 100L;
+	private static Long stockId = 131121L;
+;
 
 	@Before
 	public void setUp() {
@@ -135,4 +139,5 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	
 	//https://stackoverflow.com/questions/31740508/jpa-dynamic-criteria-api-query
 	//I can create a detached query and pass it over later on http://what-when-how.com/hibernate/advanced-query-options-hibernate/
+	
 }
