@@ -13,9 +13,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -94,6 +96,40 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		List<LibraStockIndicator> indicators = query.getResultList();
 		assertThat(indicators.isEmpty(), is(false));
 
+	}
+	
+	//https://javabeat.net/jpa-2-metamodel-eclipse/
+	@Test
+	public void testDynamicQueryForLibraStockIndicatorsWithCriteriaTuple() {
+		
+		
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createQuery( Tuple.class);
+		
+		Root<LibraStockIndicator> root = criteriaQuery.from(LibraStockIndicator.class);
+//		Path<Long> idPath = root.get(  );
+//		Path<String> nickNamePath = root.get( Person_.nickName);
+//
+//		criteria.multiselect( idPath, nickNamePath );
+//		
+//		Predicate stampDatePredicate = criteriaBuilder.equal(root.get("stampDate"), criteriaBuilder.parameter(Date.class, "stampDate"));
+//		Predicate stockIdPredicate = criteriaBuilder.equal(root.get("stockId"),criteriaBuilder.parameter(Long.class, "stockId"));
+//		
+//		Predicate predicate = criteriaBuilder.and(stampDatePredicate, stockIdPredicate);
+//		
+//		criteriaQuery.select(root);
+//		criteriaQuery.where(predicate);
+//		
+//		
+//		TypedQuery<LibraStockIndicator> query = entityManager.createQuery(criteriaQuery);
+//		
+//		query.setParameter("stampDate", previousDate);
+//		query.setParameter("stockId", stockId);
+//		
+//		List<LibraStockIndicator> indicators = query.getResultList();
+//		assertThat(indicators.isEmpty(), is(false));
+		
 	}
 	
 	

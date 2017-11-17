@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.metamodel.StaticMetamodel;
 
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Type;
