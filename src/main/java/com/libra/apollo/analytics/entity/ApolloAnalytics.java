@@ -18,6 +18,9 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.hibernate.annotations.SortNatural;
 
+import com.libra.apollo.analytics.entity.enums.AnalyticsType;
+import com.libra.apollo.analytics.entity.enums.RunType;
+
 @Entity
 @Table(name = "apollo_analytics", schema="analytics", indexes = { @Index(name = "type_idx", columnList = "analytics_type"),
 		@Index(name = "run_type_idx", columnList = "run_type"), }

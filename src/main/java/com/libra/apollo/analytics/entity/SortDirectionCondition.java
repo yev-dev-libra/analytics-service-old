@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import com.libra.apollo.analytics.entity.enums.SortDirection;
+
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "SORT_DIR")
-public class SortDirectionCondition extends Condition {
+public class SortDirectionCondition extends Parameter {
 
 	@Column(name="sort_direction")
 	@Enumerated(EnumType.STRING)

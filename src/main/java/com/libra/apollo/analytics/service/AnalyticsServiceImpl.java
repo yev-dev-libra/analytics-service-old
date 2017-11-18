@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
+import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.repository.AnalyticsRepository;
 
 @Service

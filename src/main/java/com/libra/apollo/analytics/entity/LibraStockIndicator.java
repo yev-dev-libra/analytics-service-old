@@ -16,6 +16,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Type;
 
+import com.libra.apollo.analytics.entity.enums.TrendType;
 import com.libra.apollo.analytics.entity.type.IndicatorBigDecimal;
 
 @Entity

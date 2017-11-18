@@ -11,6 +11,5 @@ public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyl
 
 //	@EntityGraph(value = "InvestmentStyleCondition.priority", type = EntityGraphType.LOAD)
 	Optional<InvestmentStyle> findById(Long id);
-	
 //	public List<Condition> fetchInvestmentStyleConditionsByPriority();
 }

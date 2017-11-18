@@ -6,11 +6,19 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import com.libra.apollo.analytics.entity.enums.CompositionType;
+import com.libra.apollo.analytics.entity.enums.InstrumentDataFieldType;
+import com.libra.apollo.analytics.entity.enums.Operation;
+
 @SuppressWarnings("serial")
 @Entity
-@DiscriminatorValue(value = "PARAMETER")
-public class ParameterCondition extends Condition {
-
+@DiscriminatorValue(value = "FILTER")
+public class FilterParameter extends Parameter {
+	
+	@Column(name="data_field_type")
+	@Enumerated(EnumType.STRING)
+	private CompositionType compositionType;
+	
 	@Column(name="data_field_type")
 	@Enumerated(EnumType.STRING)
 	private InstrumentDataFieldType dataFieldType;
@@ -39,5 +47,9 @@ public class ParameterCondition extends Condition {
 		this.parameter = parameter;
 	}
 	
+	private String compositionOperator;
+	private String field;
+	private Operation operation;
+	private String value;
 	
 }

@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import com.libra.apollo.analytics.entity.enums.Operation;
+
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "OPERATION")
-public class OperandCondition extends Condition {
+public class OperandCondition extends Parameter {
 
 	@Enumerated(EnumType.STRING)
 	private Operation operator;

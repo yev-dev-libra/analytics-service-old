@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.entity;
+package com.libra.apollo.analytics.entity.enums;
 
 import java.util.HashMap;
 import java.util.Map;
