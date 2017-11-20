@@ -5,10 +5,10 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.libra.apollo.analytics.entity.Parameter;
+import com.libra.apollo.analytics.entity.Property;
 
 @Repository
 @Transactional
-public interface ConditionRepository<T extends Parameter> extends JpaRepository<T, Long> {
+public interface PropertyRepository<T extends Property> extends JpaRepository<T, Long> {
 
 }

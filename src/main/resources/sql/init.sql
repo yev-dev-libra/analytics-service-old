@@ -8,15 +8,19 @@ INSERT INTO analytics.data_source (id, data_source_type,url_base,clazz_name,vers
 INSERT INTO analytics.data_source (id, data_source_type,url_base,clazz_name,version,created_on,updated_on) VALUES (2,'PORTFOLIO','http://localhost:8080/portfolios/api','com.libra.apollo.entity.Portfolio', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
 -- Populating OPERATION conditions
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (1,'OPERATION','WHERE', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (2,'OPERATION','AND', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (3,'OPERATION','OR', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (4,'OPERATION','GREATER_THAN', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (5,'OPERATION','LESS_THAN', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (6,'OPERATION','EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (7,'OPERATION','NOT_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (8,'OPERATION','GREATER_THAN_OR_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, operator,version,created_on,updated_on) VALUES (9,'OPERATION','LESS_THAN_OR_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (1,'OPERAND_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','WHERE_STAMP_DATE_EQUAL');
+INSERT INTO analytics.properties( id, kind, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (2,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
+INSERT INTO analytics.properties( id, kind, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (3,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
+-- Populating OPERATION conditions
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (2,'OPERATION','AND', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (1,'OPERATION','WHERE', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (3,'OPERATION','OR', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (4,'OPERATION','GREATER_THAN', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (5,'OPERATION','LESS_THAN', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (6,'OPERATION','EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (7,'OPERATION','NOT_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (8,'OPERATION','GREATER_THAN_OR_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (9,'OPERATION','LESS_THAN_OR_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
 -- Populating SORT_DIR conditions
 INSERT INTO analytics.conditions( id, kind, sort_direction,version,created_on,updated_on) VALUES (10,'SORT_DIR','ASC', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');

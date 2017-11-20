@@ -9,7 +9,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-public class AbstractAnalyticsSpecification<T> implements AnalyticsSpecification<T> {
+public class CommonAnalyticsSpecification<T> implements AnalyticsSpecification<T> {
 
 	public Specification<T> stampDateEqual(final Date date) {
 		return new Specification<T>() {

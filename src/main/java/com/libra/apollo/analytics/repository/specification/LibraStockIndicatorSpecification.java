@@ -14,11 +14,11 @@ import org.springframework.data.jpa.domain.Specification;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.enums.InstrumentDataFieldType;
 
-public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> extends AbstractAnalyticsSpecification<T> {
+public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> extends CommonAnalyticsSpecification<T> {
 
 	public Specification<T> stockIdEquals(final Long stockId) {
 		return new Specification<T>() {
-
+			
 			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				return cb.equal(root.<Long>get("stockId"), stockId);

@@ -12,7 +12,7 @@ public class OperationTest {
 
 	@Test
 	public void testEqualOperation() {
-		Operation operation = Operation.EQUAL;
+		Operand operation = Operand.EQUAL;
 
 		InstrumentDataFieldType fieldType = InstrumentDataFieldType.FAIR_VALUE;
 		String value = "0.2";

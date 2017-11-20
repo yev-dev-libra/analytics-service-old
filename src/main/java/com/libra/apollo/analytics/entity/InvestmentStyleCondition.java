@@ -30,7 +30,7 @@ public class InvestmentStyleCondition implements Serializable, Comparable<Invest
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "condition_id", nullable = true)
-	private Parameter condition;
+	private Property condition;
 
 	public Long getId() {
 		return id;
@@ -69,11 +69,11 @@ public class InvestmentStyleCondition implements Serializable, Comparable<Invest
 		this.priority = priority;
 	}
 
-	public Parameter getCondition() {
+	public Property getCondition() {
 		return condition;
 	}
 
-	public void setCondition(Parameter condition) {
+	public void setCondition(Property condition) {
 		this.condition = condition;
 	}
 

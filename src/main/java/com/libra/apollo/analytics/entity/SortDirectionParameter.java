@@ -10,8 +10,8 @@ import com.libra.apollo.analytics.entity.enums.SortDirection;
 
 @SuppressWarnings("serial")
 @Entity
-@DiscriminatorValue(value = "SORT_DIR")
-public class SortDirectionCondition extends Parameter {
+@DiscriminatorValue(value = "SORT_DIR_PARAMETER")
+public class SortDirectionParameter extends Property {
 
 	@Column(name="sort_direction")
 	@Enumerated(EnumType.STRING)

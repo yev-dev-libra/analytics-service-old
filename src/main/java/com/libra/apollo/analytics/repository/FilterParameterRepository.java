@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.libra.apollo.analytics.entity.FilterParameter;
 
 @Repository
-public interface ParameterConditionRepository extends PropertyRepository<FilterParameter> {
+public interface FilterParameterRepository extends PropertyRepository<FilterParameter> {
 
 }

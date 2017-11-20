@@ -10,14 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,7 +21,6 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.hamcrest.core.IsNull;
-import org.hibernate.validator.constraints.CompositionType;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +29,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
-import com.libra.apollo.analytics.entity.Parameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.InvestmentStyleCondition;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.entity.OperandCondition;
-import com.libra.apollo.analytics.entity.FilterParameter;
+import com.libra.apollo.analytics.entity.Property;
 import com.libra.apollo.analytics.entity.enums.InstrumentDataFieldType;
-import com.libra.apollo.analytics.entity.enums.Operation;
+import com.libra.apollo.analytics.entity.enums.Operand;
 import com.libra.apollo.analytics.repository.specification.LibraStockIndicatorSpecification;
 
 @Transactional
@@ -177,7 +170,7 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 		InstrumentDataFieldType fieldType = InstrumentDataFieldType.FAIR_VALUE ;
 		String value = "0.2";
 		
-		Operation operation = Operation.EQUAL;
+		Operand operation = Operand.EQUAL;
 
 		Specification<LibraStockIndicator> equalSpec = operation.query(fieldType, value);
 		
@@ -197,22 +190,9 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 		
 		for (InvestmentStyleCondition investmentStyleCondition : conditions) {
 			
-			final Parameter condition = investmentStyleCondition.getCondition();
+			final Property condition = investmentStyleCondition.getCondition();
 			final Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
 			
-			if(condition instanceof OperandCondition) {
-				final Operation operator = ((OperandCondition) condition).getOperator();
-				
-				
-			}
-			else if(condition instanceof FilterParameter) {
-				
-			}
-			else if(condition instanceof FilterParameter) {
-				
-			}
-			else
-				throw new UnsupportedOperationException();
 			
 		}
 		
