@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.Property;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
-import com.libra.apollo.analytics.entity.InvestmentStyleCondition;
+import com.libra.apollo.analytics.entity.InvestmentStyleProperty;
 
 public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 
@@ -40,15 +40,15 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 	public void shouldConstructConditionsForInvestmentStyle() {
 		Optional<InvestmentStyle> invstStyleOptional = repository.findById(1L);
 		InvestmentStyle invstStyle = invstStyleOptional.get();
-		SortedSet<InvestmentStyleCondition> conditions = invstStyle.getInvestmentStyleConditions();
+		SortedSet<InvestmentStyleProperty> conditions = invstStyle.getInvestmentStyleProperties();
 		assertThat(conditions, hasSize(3));
 		
 		// a sanity check to validate correct sorting
 		Map<Integer,Property> priorityWithConditions = new LinkedHashMap<>();
 		
 		
-		for(InvestmentStyleCondition invstCondition : conditions) {
-			priorityWithConditions.put(invstCondition.getPriority().getPriority(), invstCondition.getCondition());
+		for(InvestmentStyleProperty invstCondition : conditions) {
+			priorityWithConditions.put(invstCondition.getPriority().getPriority(), invstCondition.getProperty());
 		}
 
 		int i = 1;

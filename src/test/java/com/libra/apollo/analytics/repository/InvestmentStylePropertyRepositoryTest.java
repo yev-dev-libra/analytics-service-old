@@ -9,17 +9,18 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
-import com.libra.apollo.analytics.entity.InvestmentStyleCondition;
+import com.libra.apollo.analytics.entity.InvestmentStyleProperty;
 
-public class InvestmentStyleConditionRepositoryTest extends AbstractRepositoryTest  {
+public class InvestmentStylePropertyRepositoryTest extends AbstractRepositoryTest  {
 	
 	@Autowired
 	private InvestmentStyleConditionRepository repository;
 	
 	@Test
 	public void shouldRetrieveAllInvestmentStyle() {
-		List<InvestmentStyleCondition> allInvStyles = repository.findAll();
+		List<InvestmentStyleProperty> allInvStyles = repository.findAll();
 		assertThat(allInvStyles, hasSize(3));
 	}
+	
 
 }

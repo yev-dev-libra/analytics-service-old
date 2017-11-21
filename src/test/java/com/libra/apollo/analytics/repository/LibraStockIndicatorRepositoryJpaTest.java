@@ -4,12 +4,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.Matchers.greaterThan;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,19 +27,29 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
+import org.springframework.test.context.TestPropertySource;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
+import com.libra.apollo.analytics.entity.FilterParameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
-import com.libra.apollo.analytics.entity.InvestmentStyleCondition;
+import com.libra.apollo.analytics.entity.InvestmentStyleProperty;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.OperandParameter;
 import com.libra.apollo.analytics.entity.Property;
+import com.libra.apollo.analytics.entity.enums.CompositionType;
 import com.libra.apollo.analytics.entity.enums.InstrumentDataFieldType;
 import com.libra.apollo.analytics.entity.enums.Operand;
+import com.libra.apollo.analytics.repository.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.repository.specification.LibraStockIndicatorSpecification;
+import com.libra.apollo.analytics.repository.specification.StampDateSpecification;
+import com.libra.apollo.analytics.rules.LibraStockIndicatorPropertyVisitor;
+import com.libra.apollo.analytics.rules.Visitor;
 
-@Transactional
+@DataJpaTest
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest {
 
 	@Value("${spring.jpa.properties.hibernate.default_schema}")
@@ -54,9 +66,8 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 
 	
 	private static final Long existedStockId = 131121L;
+	private static final Long existedStockIndicatorId = 156355005L;
 	private static final List<Long> existedStockIds = new ArrayList<>(Arrays.asList(131121L,131123L));
-	
-	
 	
 	private Date previousDate;
 	
@@ -69,13 +80,13 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 	
 	@Test
 	public void testLibraStockIndicatorFindOne() {
-		LibraStockIndicator stockIndicator = repository.getOne(1L);
+		LibraStockIndicator stockIndicator = repository.getOne(existedStockIndicatorId);
 		assertThat(stockIndicator, is(IsNull.notNullValue()));
 	}
 
 	@Test
 	public void shouldFindLibraStockIndicatorByStockId() {
-		List<LibraStockIndicator> stockIndicators = repository.findByStockId(100L);
+		List<LibraStockIndicator> stockIndicators = repository.findByStockId(existedStockId);
 		assertThat(stockIndicators, hasSize(1));
 	}
 
@@ -110,38 +121,37 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 
 	@Test
 	public void shouldFindLibraStockIndicatorByStampDate_2017_11_14_WithSpecificationQuery() {
-		Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
-		Specification<LibraStockIndicator> stockIdSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stockIdEquals(existedStockId);
+		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
+		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.stockIdEquals(existedStockId);
 		LibraStockIndicator stockIndicator = repository.findOne(Specifications.where(stampDateSpec).and(stockIdSpec));
 		assertThat(stockIndicator,  is(IsNull.notNullValue()));
 	}
 	
 	@Test
 	public void shouldFindLibraStockIndicatorByMultipleStockIdsStampDate_2017_11_14_WithSpecificationQuery() {
-		final LibraStockIndicatorSpecification<LibraStockIndicator> analyticsSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>();
 		
-		Specification<LibraStockIndicator> stampDateSpec = analyticsSpec.stampDateEqual(previousDate);
-		Specification<LibraStockIndicator> stockIdsSpec = analyticsSpec.stockIdsEquals(existedStockIds);
+		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
+		Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.stockIdsEquals(existedStockIds);
 		
 		final List<LibraStockIndicator> stockIndicators = repository.findAll(Specifications.where(stampDateSpec).and(stockIdsSpec));
 		assertThat(stockIndicators,  hasSize(2));
 	}
 	@Test
 	public void shouldFindLibraStockIndicatorByStampDate_2017_11_14_AndSingleFiedlEqualsWithSpecificationQuery() {
-		Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
+		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
 		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		double discountToFairValue = Double.valueOf("0.0357");
-		Specification<LibraStockIndicator> stockIdSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().fieldEqualsTo(fieldType , discountToFairValue);
+		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.fieldEqualsTo(fieldType , discountToFairValue);
 		LibraStockIndicator stockIndicator = repository.findOne(Specifications.where(stampDateSpec).and(stockIdSpec));
 		assertThat(stockIndicator.getDiscountToFairValue().doubleValue(),  is(discountToFairValue));
 	}
 	
 	@Test
 	public void shouldFindLibraStockIndicatorsByStampDate_2017_11_14_AndSingleFiedlGreaterThanWithSpecificationQuery() {
-		Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
+		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
 		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		double discountToFairValue = Double.valueOf("0.0357");
-		Specification<LibraStockIndicator> stockIdSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
+		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
 		
 		Specification<LibraStockIndicator> spec = Specifications.where(stampDateSpec).and(stockIdSpec);
 		
@@ -149,64 +159,90 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 		assertThat(stockIndicators, hasSize(120));
 	}
 	
-	@Test
-	public void shouldFindLibraStockIndicatorsByStampDate_2017_11_14_AndWithMultipleStocksWithSpecificationQuery() {
-		Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
-		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
-		double discountToFairValue = Double.valueOf("0.0357");
-		Specification<LibraStockIndicator> stockIdSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
-		
-		Specification<LibraStockIndicator> spec = Specifications.where(stampDateSpec).and(stockIdSpec);
-		
-		List<LibraStockIndicator> stockIndicators = repository.findAll(spec);
-		assertThat(stockIndicators, hasSize(120));
-	}
 	
 	@Test
 	public void shouldFindLibraStockIndicatorsByStampDate_2017_11_14_AndWithMultipleStocksWithEnumSpecification() {
 		
-		Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
 		
-		InstrumentDataFieldType fieldType = InstrumentDataFieldType.FAIR_VALUE ;
-		String value = "0.2";
+		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		double discountToFairValue = Double.valueOf("0.0357");
 		
-		Operand operation = Operand.EQUAL;
+		Specification<LibraStockIndicator> disFVSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
 
-		Specification<LibraStockIndicator> equalSpec = operation.query(fieldType, value);
+		Operand operation = Operand.WHERE_STAMP_DATE_EQUAL;
+		Specification<LibraStockIndicator> stampDateSpec = operation.query(previousDate);
 		
-		Specification<LibraStockIndicator> spec = Specifications.where(stampDateSpec).and(equalSpec);
+		Specification<LibraStockIndicator> spec = Specifications.where(stampDateSpec).and(disFVSpec);
 		
 		List<LibraStockIndicator> stockIndicators = repository.findAll(spec);
 		assertThat(stockIndicators, hasSize(120));
 	}
 	
 	@Test
-	public void shouldFindLibraStockIndicatorsByStampDate_2017_11_14_AndSingleFiedlGreaterThanWithSpecificationQueryWithConversion() {
-		Optional<InvestmentStyle> invstStyleOptional = invstRepository.findById(1L);
-		InvestmentStyle invstStyle = invstStyleOptional.get();
-		Set<InvestmentStyleCondition> conditions = invstStyle.getInvestmentStyleConditions();
-		
-		Map<String,List<Specification<LibraStockIndicator>>> specifications = new HashMap<>();
-		
-		for (InvestmentStyleCondition investmentStyleCondition : conditions) {
-			
-			final Property condition = investmentStyleCondition.getCondition();
-			final Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
-			
-			
-		}
-		
-		
-		for(Map.Entry<String, List<Specification<LibraStockIndicator>>> entry : specifications.entrySet()) {
-			
-		}
-		
-		
-		Specification<LibraStockIndicator> stampDateSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().stampDateEqual(previousDate);
+	public void shouldFindLibraStockIndicatorsByStampDate_2017_11_14_And_With_DISCOUNT_TO_FAIR_VALUE() {
+		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
 		
 		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		double discountToFairValue = Double.valueOf("0.0357");
-		Specification<LibraStockIndicator> stockIdSpec = new LibraStockIndicatorSpecification<LibraStockIndicator>().fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
+		
+		Specification<LibraStockIndicator> disFVSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
+		
+		AnalyticsSpecifications<LibraStockIndicator> analyticsSpec = new AnalyticsSpecifications<LibraStockIndicator>(stampDateSpec);
+		analyticsSpec.and(disFVSpec);
+		
+		List<LibraStockIndicator> stockIndicators = repository.findAll(analyticsSpec);
+		assertThat(stockIndicators, hasSize(120));
+	}
+	
+	@Test
+	public void shouldFindLibraStockIndicatorsByStampDateAndMultipleFields() {
+		long startTime = System.nanoTime(); 
+		
+		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateLessOrGreater(previousDate);
+//		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
+		
+		InstrumentDataFieldType disFVfieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		Double discountToFairValue = Double.valueOf("0.0357");
+		
+		InstrumentDataFieldType ivfieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		Double iv = Double.valueOf("0.2");
+		
+		
+		Specification<LibraStockIndicator> disFVSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(disFVfieldType , discountToFairValue);
+		Specification<LibraStockIndicator> ivFVSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ivfieldType , iv);
+		
+		AnalyticsSpecifications<LibraStockIndicator> analyticsSpec = new AnalyticsSpecifications<LibraStockIndicator>(stampDateSpec);
+		analyticsSpec.and(disFVSpec);
+		analyticsSpec.and(ivFVSpec);
+		
+		List<LibraStockIndicator> stockIndicators = repository.findAll(analyticsSpec);
+		assertThat(stockIndicators, hasSize(greaterThan(0)) );
+		
+		long estimatedTime = System.nanoTime() - startTime;
+		
+		System.out.println(estimatedTime);
+	}
+	
+	@Test
+	public void shouldFindLibraStockIndicatorsByStampDateWithVisitor() {
+		Optional<InvestmentStyle> invstStyleOptional = invstRepository.findById(1L);
+		InvestmentStyle invstStyle = invstStyleOptional.get();
+		Set<InvestmentStyleProperty> properties = invstStyle.getInvestmentStyleProperties();
+		
+		Visitor visitor = new LibraStockIndicatorPropertyVisitor();
+		
+		for (InvestmentStyleProperty investmentStyleProperty : properties) {
+			final Property property = investmentStyleProperty.getProperty();
+			visitor.visit(property);
+			
+		}
+		
+		
+		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
+		
+		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		double discountToFairValue = Double.valueOf("0.0357");
+		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
 
 		Specification<LibraStockIndicator> spec = Specifications.where(stampDateSpec).and(stockIdSpec);
 		

@@ -10,7 +10,7 @@ import com.libra.apollo.analytics.entity.enums.SortDirection;
 
 @SuppressWarnings("serial")
 @Entity
-@DiscriminatorValue(value = "SORT_DIR_PARAMETER")
+@DiscriminatorValue(value = "SORT_DIRECTION_PARAMETER")
 public class SortDirectionParameter extends Property {
 
 	@Column(name="sort_direction")
@@ -24,6 +24,12 @@ public class SortDirectionParameter extends Property {
 	public void setSortDirection(SortDirection sortDirection) {
 		this.sortDirection = sortDirection;
 	}
+
+	@Override
+	public String toString() {
+		return "SortDirectionParameter [sortDirection=" + sortDirection + "]";
+	}
+	
 	
 	
 }

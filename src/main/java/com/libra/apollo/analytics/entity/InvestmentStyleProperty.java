@@ -14,8 +14,8 @@ import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "investment_style_condition", schema="analytics")
-public class InvestmentStyleCondition implements Serializable, Comparable<InvestmentStyleCondition> {
+@Table(name = "investment_style_property", schema="analytics")
+public class InvestmentStyleProperty implements Serializable, Comparable<InvestmentStyleProperty> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,20 +29,20 @@ public class InvestmentStyleCondition implements Serializable, Comparable<Invest
 	private Priority priority;
 
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "condition_id", nullable = true)
-	private Property condition;
+	@JoinColumn(name = "property_id", nullable = true)
+	private Property property;
 
 	public Long getId() {
 		return id;
 	}
 
 	
-	public InvestmentStyleCondition() {
+	public InvestmentStyleProperty() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	//TODO create a builder
-	public InvestmentStyleCondition(Long id, Priority priority) {
+	public InvestmentStyleProperty(Long id, Priority priority) {
 		super();
 		this.id = id;
 		this.priority = priority;
@@ -69,17 +69,24 @@ public class InvestmentStyleCondition implements Serializable, Comparable<Invest
 		this.priority = priority;
 	}
 
-	public Property getCondition() {
-		return condition;
+	public Property getProperty() {
+		return property;
 	}
 
-	public void setCondition(Property condition) {
-		this.condition = condition;
+	public void setProperty(Property property) {
+		this.property = property;
 	}
 
 	@Override
-	public int compareTo(InvestmentStyleCondition o) {
+	public int compareTo(InvestmentStyleProperty o) {
 		return this.getPriority().compareTo(o.getPriority());
+	}
+
+
+	@Override
+	public String toString() {
+		return "InvestmentStyleProperty [id=" + id + ", investmentStyle=" + investmentStyle + ", priority=" + priority
+				+ ", property=" + property + "]";
 	}
 
 	

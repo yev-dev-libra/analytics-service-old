@@ -2,12 +2,12 @@ package com.libra.apollo.analytics.comparator;
 
 import java.util.Comparator;
 
-import com.libra.apollo.analytics.entity.InvestmentStyleCondition;
+import com.libra.apollo.analytics.entity.InvestmentStyleProperty;
 
-public class DefaultInvestmentStyleConditionComparator implements Comparator<InvestmentStyleCondition> {
+public class DefaultInvestmentStyleConditionComparator implements Comparator<InvestmentStyleProperty> {
 
 	@Override
-	public int compare(InvestmentStyleCondition o1, InvestmentStyleCondition o2) {
+	public int compare(InvestmentStyleProperty o1, InvestmentStyleProperty o2) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

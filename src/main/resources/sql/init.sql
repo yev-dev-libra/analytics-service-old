@@ -1,36 +1,19 @@
 
-
-
 -- Populating data for analytics schema
 
 -- Populating Data Source
 INSERT INTO analytics.data_source (id, data_source_type,url_base,clazz_name,version,created_on,updated_on) VALUES (1,'GROUP','http://localhost:8080/groups/api','com.libra.apollo.entity.Group', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 INSERT INTO analytics.data_source (id, data_source_type,url_base,clazz_name,version,created_on,updated_on) VALUES (2,'PORTFOLIO','http://localhost:8080/portfolios/api','com.libra.apollo.entity.Portfolio', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
--- Populating OPERATION conditions
-INSERT INTO analytics.properties( id, kind, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (1,'OPERAND_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','WHERE_STAMP_DATE_EQUAL');
-INSERT INTO analytics.properties( id, kind, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (2,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
-INSERT INTO analytics.properties( id, kind, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (3,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
--- Populating OPERATION conditions
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (2,'OPERATION','AND', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (1,'OPERATION','WHERE', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (3,'OPERATION','OR', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (4,'OPERATION','GREATER_THAN', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (5,'OPERATION','LESS_THAN', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (6,'OPERATION','EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (7,'OPERATION','NOT_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (8,'OPERATION','GREATER_THAN_OR_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.properties( id, kind, operator,version,created_on,updated_on) VALUES (9,'OPERATION','LESS_THAN_OR_EQUAL', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+-- Populating OPERAND_PARAMETER
+INSERT INTO analytics.property( id, type, version,created_on, updated_on, operand ) VALUES (1,'OPERAND_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','WHERE_STAMP_DATE_EQUAL');
 
--- Populating SORT_DIR conditions
-INSERT INTO analytics.conditions( id, kind, sort_direction,version,created_on,updated_on) VALUES (10,'SORT_DIR','ASC', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, sort_direction,version,created_on,updated_on) VALUES (11,'SORT_DIR','DESC', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, sort_direction,version,created_on,updated_on) VALUES (12,'SORT_DIR','TOP_DECILE', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, sort_direction,version,created_on,updated_on) VALUES (13,'SORT_DIR','BOTTOM_DECILE', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, sort_direction,version,created_on,updated_on) VALUES (14,'SORT_DIR','TOP_BOTTOM_DECILE', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
-INSERT INTO analytics.conditions( id, kind, data_field_type, parameter,version,created_on,updated_on) VALUES (15,'PARAMETER','FAIR_VALUE', 0.2, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.conditions( id, kind, data_field_type, parameter,version,created_on,updated_on) VALUES (16,'PARAMETER','INTRINSIC_VALUE',0.2, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+-- Populating FILTER_PARAMETER
+INSERT INTO analytics.property( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (2,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
+INSERT INTO analytics.property( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (3,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','FAIR_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
+INSERT INTO analytics.property( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (4,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','INTRINSIC_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
+
 
 -- Populating apollo_analytics 
 INSERT INTO analytics.apollo_analytics(id,name,description,run_type,analytics_type,version,created_on,updated_on) VALUES (1,'Apollo Screener','Collection of defined Investment Styles', 'ON_DEMAND','APOLLO_SCREENER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
@@ -46,9 +29,9 @@ INSERT INTO analytics.investment_style( id, name, description, priority, analyti
 
 
 -- Populating investment_style_condition
-INSERT INTO analytics.investment_style_condition(id,investment_style_id, condition_id,priority ) VALUES(3,1,6,3); -- equals
-INSERT INTO analytics.investment_style_condition(id,investment_style_id, condition_id,priority ) VALUES(1,1,1,1); -- where
-INSERT INTO analytics.investment_style_condition(id,investment_style_id, condition_id,priority ) VALUES(2,1,15,2); -- parameter FV
+INSERT INTO analytics.investment_style_property(id,investment_style_id, property_id,priority ) VALUES(1,1,1,1); -- WHERE_STAMP_DATE_EQUAL
+INSERT INTO analytics.investment_style_property(id,investment_style_id, property_id,priority ) VALUES(2,1,2,2); -- AND STAR_RATING GREATER_THAN_OR_EQUAL 3.0
+INSERT INTO analytics.investment_style_property(id,investment_style_id, property_id,priority ) VALUES(3,1,3,3); -- AND FAIR_VALUE GREATER_THAN_OR_EQUAL 0.2
 
 
 -- Populating investment_style_condition_datasource

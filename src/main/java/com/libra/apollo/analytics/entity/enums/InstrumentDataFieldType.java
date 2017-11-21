@@ -209,7 +209,10 @@ public enum InstrumentDataFieldType {
 	DECILE_6_20D("decile_6_20D"),
 	DECILE_7_20D("decile_7_20D"),
 	DECILE_8_20D("decile_8_20D"),
-	DECILE_9_20D("decile_9_20D");
+	DECILE_9_20D("decile_9_20D"),
+	STOCK_ID("stockId"),
+	INSTRUMENT_ID("instrumentId"),
+	;
 	
 	
 	private final String fieldName;

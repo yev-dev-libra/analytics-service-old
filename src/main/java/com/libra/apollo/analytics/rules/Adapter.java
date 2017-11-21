@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine;
+package com.libra.apollo.analytics.rules;
 
 public interface Adapter<F,T> {
 

@@ -20,6 +20,20 @@ public class OperandParameter extends Property {
 	private static final long serialVersionUID = 3113127181216187044L;
 	@Enumerated(EnumType.STRING)
 	private Operand operand;
+	
+	
+	public Operand getOperand() {
+		return operand;
+	}
+	public void setOperand(Operand operand) {
+		this.operand = operand;
+	}
+	@Override
+	public String toString() {
+		return "OperandParameter [operand=" + operand + "]";
+	}
+	
+	
 
 	
 }
