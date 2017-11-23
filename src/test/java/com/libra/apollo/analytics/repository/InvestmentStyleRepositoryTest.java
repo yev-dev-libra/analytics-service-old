@@ -15,9 +15,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
-import com.libra.apollo.analytics.entity.Property;
+import com.libra.apollo.analytics.entity.Parameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
-import com.libra.apollo.analytics.entity.InvestmentStyleProperty;
+import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 
 public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 
@@ -40,19 +40,19 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 	public void shouldConstructConditionsForInvestmentStyle() {
 		Optional<InvestmentStyle> invstStyleOptional = repository.findById(1L);
 		InvestmentStyle invstStyle = invstStyleOptional.get();
-		SortedSet<InvestmentStyleProperty> conditions = invstStyle.getInvestmentStyleProperties();
+		SortedSet<InvestmentStyleParameter> conditions = invstStyle.getInvestmentStyleProperties();
 		assertThat(conditions, hasSize(3));
 		
 		// a sanity check to validate correct sorting
-		Map<Integer,Property> priorityWithConditions = new LinkedHashMap<>();
+		Map<Integer,Parameter> priorityWithConditions = new LinkedHashMap<>();
 		
 		
-		for(InvestmentStyleProperty invstCondition : conditions) {
+		for(InvestmentStyleParameter invstCondition : conditions) {
 			priorityWithConditions.put(invstCondition.getPriority().getPriority(), invstCondition.getProperty());
 		}
 
 		int i = 1;
-		for(Map.Entry<Integer, Property> entry : priorityWithConditions.entrySet()) {
+		for(Map.Entry<Integer, Parameter> entry : priorityWithConditions.entrySet()) {
 			System.out.println("Key value " + entry.getKey());
 			assertThat(entry.getKey(),equalTo(i));
 			i++;

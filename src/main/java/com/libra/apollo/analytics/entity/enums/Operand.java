@@ -4,105 +4,187 @@ import java.util.Date;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.libra.apollo.analytics.repository.specification.StampDateSpecification;
+import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
+import com.libra.apollo.analytics.specification.StampDateSpecification;
+import com.libra.apollo.analytics.specification.ValueParameter;
 
 public enum Operand {
 
-	
-	WHERE_STAMP_DATE_EQUAL("where"){
+	EQUAL("="){
 
 		@Override
-		public <T> Specification<T> query(final Date date) {
-			return StampDateSpecification.stampDateEqual(date);
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType) {
+			//TODO: return proveious buisness date
+			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType, ValueParameter value) {
+			if(value.getClazz().equals(Date.class)) {
+				Date stampDate = (Date)value.getValue();
+				return StampDateSpecification.stampDateEqual(stampDate);
+			}
+			else
+				throw new UnsupportedOperationException();
+		}
+		@Override
+		public <T> Specification<T> queryById(InstrumentDataFieldType fieldType, ValueParameter value) {
+			if(value.getClazz().equals(Long.class)) {
+				final Long stockId = (Long) value.getValue();
+				return LibraStockIndicatorSpecification.idEquals(fieldType, stockId);
+			}
+			else
+				throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public <T> Specification<T> queryByIds(InstrumentDataFieldType fieldType, ValueParameter value) {
+			
+			return null;
+		}
+
+
+		@Override
+		public <T> Specification<T> queryByBigDecimal(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByBigDouble(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		
+	},
+	NOT_EQUAL("!=") {
+
+		@Override
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public <T> Specification<T> queryById(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByIds(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		@Override
+		public <T> Specification<T> queryByBigDecimal(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByBigDouble(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+	},
+	GREATER_THAN(">") {
+
+		@Override
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public <T> Specification<T> queryById(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByIds(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+
+		@Override
+		public <T> Specification<T> queryByBigDecimal(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByBigDouble(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+
+	
+	},
+	LESS_THAN("<") {
+
+		@Override
+		public <T> Specification<T> queryById(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByIds(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 		
+		@Override
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByDate(InstrumentDataFieldType fieldType) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public <T> Specification<T> queryByBigDecimal(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public <T> Specification<T> queryByBigDouble(InstrumentDataFieldType fieldType, ValueParameter value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		
+
+
 	};
-//	GREATER_THAN(">") {
-//
-//		@Override
-//		public <T> Specification<T> query(InstrumentDataFieldType fieldType, String value) {
-//			return new Specification<T>() {
-//				@Override
-//				public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//					return cb.greaterThan(root.<BigDecimal>get(fieldType.getFieldName()), new BigDecimal(value));
-//				}
-//
-//			};
-//		}
-//
-//	},
-//	LESS_THAN("<") {
-//
-//		@Override
-//		public <T> Specification<T> query(InstrumentDataFieldType fieldType, String value) {
-//			return new Specification<T>() {
-//				@Override
-//				public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//					return cb.lessThan(root.<BigDecimal>get(fieldType.getFieldName()), new BigDecimal(value));
-//				}
-//
-//			};
-//		}
-//
-//	},
-//	EQUAL("=") {
-//
-//		@Override
-//		public <T> Specification<T> query(InstrumentDataFieldType fieldType, String value) {
-//			return new Specification<T>() {
-//				@Override
-//				public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//					return cb.equal(root.<BigDecimal>get(fieldType.getFieldName()), new BigDecimal(value));
-//				}
-//
-//			};
-//		}
-//
-//	},
-//	NOT_EQUAL("!=") {
-//
-//		@Override
-//		public <T> Specification<T> query(InstrumentDataFieldType fieldType, String value) {
-//			return new Specification<T>() {
-//				@Override
-//				public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//					return cb.notEqual(root.<BigDecimal>get(fieldType.getFieldName()), new BigDecimal(value));
-//				}
-//
-//			};
-//		}
-//
-//	},
-//	GREATER_THAN_OR_EQUAL(">=") {
-//
-//		@Override
-//		public <T> Specification<T> query(InstrumentDataFieldType fieldType, String value) {
-//			return new Specification<T>() {
-//				@Override
-//				public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//					return cb.greaterThanOrEqualTo(root.<BigDecimal>get(fieldType.getFieldName()),
-//							new BigDecimal(value));
-//				}
-//
-//			};
-//		}
-//
-//	},
-//	LESS_THAN_OR_EQUAL("<=") {
-//
-//		@Override
-//		public <T> Specification<T> query(InstrumentDataFieldType fieldType, String value) {
-//			return new Specification<T>() {
-//				@Override
-//				public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//					return cb.lessThanOrEqualTo(root.<BigDecimal>get(fieldType.getFieldName()), new BigDecimal(value));
-//				}
-//
-//			};
-//		}
-//
-//	};
 
 	private String symbol;
 
@@ -112,8 +194,14 @@ public enum Operand {
 
 	public String getSymbol() {
 		return symbol;
-	}
+	} 
 
-	public abstract <T> Specification<T> query(final Date value);
-
+	public abstract <T> Specification<T> queryByDate(final InstrumentDataFieldType fieldType);
+	public abstract <T> Specification<T> queryByDate(final InstrumentDataFieldType fieldType, final ValueParameter value);
+	public abstract <T> Specification<T> queryById(final InstrumentDataFieldType fieldType, final ValueParameter value);
+	public abstract <T> Specification<T> queryByIds(final InstrumentDataFieldType fieldType, final ValueParameter value);
+	public abstract <T> Specification<T> queryByBigDecimal(final InstrumentDataFieldType fieldType, final ValueParameter value);
+	public abstract <T> Specification<T> queryByBigDouble(final InstrumentDataFieldType fieldType, final ValueParameter value);
+	
+	
 }

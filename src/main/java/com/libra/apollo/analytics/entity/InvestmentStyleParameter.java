@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "investment_style_property", schema="analytics")
-public class InvestmentStyleProperty implements Serializable, Comparable<InvestmentStyleProperty> {
+public class InvestmentStyleParameter implements Serializable, Comparable<InvestmentStyleParameter> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,19 +30,19 @@ public class InvestmentStyleProperty implements Serializable, Comparable<Investm
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "property_id", nullable = true)
-	private Property property;
+	private Parameter property;
 
 	public Long getId() {
 		return id;
 	}
 
 	
-	public InvestmentStyleProperty() {
+	public InvestmentStyleParameter() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	//TODO create a builder
-	public InvestmentStyleProperty(Long id, Priority priority) {
+	public InvestmentStyleParameter(Long id, Priority priority) {
 		super();
 		this.id = id;
 		this.priority = priority;
@@ -69,16 +69,16 @@ public class InvestmentStyleProperty implements Serializable, Comparable<Investm
 		this.priority = priority;
 	}
 
-	public Property getProperty() {
+	public Parameter getProperty() {
 		return property;
 	}
 
-	public void setProperty(Property property) {
+	public void setProperty(Parameter property) {
 		this.property = property;
 	}
 
 	@Override
-	public int compareTo(InvestmentStyleProperty o) {
+	public int compareTo(InvestmentStyleParameter o) {
 		return this.getPriority().compareTo(o.getPriority());
 	}
 

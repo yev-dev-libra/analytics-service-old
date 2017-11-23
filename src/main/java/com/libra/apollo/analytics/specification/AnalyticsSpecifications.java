@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.repository.specification;
+package com.libra.apollo.analytics.specification;
 
 import java.io.Serializable;
 
@@ -77,11 +77,19 @@ public class AnalyticsSpecifications<T> implements Specification<T>, Serializabl
 	@SuppressWarnings("serial")
 	private static class WhereClauseSpecification<T> implements Specification<T>, Serializable{
 
-		@Override
-		public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-			// TODO Auto-generated method stub
-			return null;
+		private final Specification<T> spec;
+		
+		public WhereClauseSpecification(Specification<T> spec) {
+			super();
+			this.spec = spec;
 		}
+
+		@Override
+		public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+			Predicate p = spec == null ? null : builder.not(spec.toPredicate(root, query, builder));
+			return query.where(p).getRestriction();
+		}
+
 		
 	}
 	

@@ -1,5 +1,6 @@
-package com.libra.apollo.analytics.repository.specification;
+package com.libra.apollo.analytics.specification;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -33,6 +34,24 @@ public class StampDateSpecification {
 			return composite;
 		};
 
+	}
+	public static <T> Specification<T> stampDateEqual(final LocalDate stampDate) {
+		return (root, query,cb) -> {
+			return cb.equal(root.<LocalDate>get(stampDateFieldName), stampDate);
+		};
+		
+		
+	}
+	
+	public static <T> Specification<T> stampDateLessOrGreater(final LocalDate date) {
+		return  (root, query,cb) -> {
+			final Path<LocalDate> stampDateRoot = root.<LocalDate>get(stampDateFieldName);
+			Predicate p1 = cb.greaterThanOrEqualTo(stampDateRoot, date);
+			Predicate p2 = cb.lessThanOrEqualTo(stampDateRoot, date);
+			Predicate composite = cb.and(p1,p2);
+			return composite;
+		};
+		
 	}
 
 	public static <T> Specification<T> stampDateGreaterThanOrEqual(final Date stampDate) {

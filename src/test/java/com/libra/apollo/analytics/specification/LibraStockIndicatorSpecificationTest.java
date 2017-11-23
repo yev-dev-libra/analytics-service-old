@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.repository.specification;
+package com.libra.apollo.analytics.specification;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

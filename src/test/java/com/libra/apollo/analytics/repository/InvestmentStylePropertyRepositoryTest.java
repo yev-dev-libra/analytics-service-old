@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
-import com.libra.apollo.analytics.entity.InvestmentStyleProperty;
+import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 
 public class InvestmentStylePropertyRepositoryTest extends AbstractRepositoryTest  {
 	
@@ -18,7 +18,7 @@ public class InvestmentStylePropertyRepositoryTest extends AbstractRepositoryTes
 	
 	@Test
 	public void shouldRetrieveAllInvestmentStyle() {
-		List<InvestmentStyleProperty> allInvStyles = repository.findAll();
+		List<InvestmentStyleParameter> allInvStyles = repository.findAll();
 		assertThat(allInvStyles, hasSize(3));
 	}
 	

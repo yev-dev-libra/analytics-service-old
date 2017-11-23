@@ -1,15 +1,14 @@
 package com.libra.apollo.analytics.rules;
 
-import com.libra.apollo.analytics.entity.Property;
+import com.libra.apollo.analytics.entity.Parameter;
+import com.libra.apollo.analytics.specification.ValueParameter;
 
-public class LibraStockIndicatorPropertyVisitor implements Visitor {
+public class LibraStockIndicatorPropertyVisitor<T> implements Visitor<T> {
 
-	//TODO:define delegators
-	//TODO: should it be adaptor?
-	
 	@Override
-	public void visit(Property property) {
-		
+	public T visit(ValueParameter parameter) {
+		return null;
 	}
+
 
 }

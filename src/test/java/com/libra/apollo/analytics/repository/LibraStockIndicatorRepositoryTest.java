@@ -29,7 +29,7 @@ import org.springframework.data.jpa.domain.Specifications;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.repository.specification.LibraStockIndicatorSpecification;
+import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 
 public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 

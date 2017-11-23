@@ -6,13 +6,14 @@ INSERT INTO analytics.data_source (id, data_source_type,url_base,clazz_name,vers
 INSERT INTO analytics.data_source (id, data_source_type,url_base,clazz_name,version,created_on,updated_on) VALUES (2,'PORTFOLIO','http://localhost:8080/portfolios/api','com.libra.apollo.entity.Portfolio', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
 -- Populating OPERAND_PARAMETER
-INSERT INTO analytics.property( id, type, version,created_on, updated_on, operand ) VALUES (1,'OPERAND_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','WHERE_STAMP_DATE_EQUAL');
+-- INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, operand ) VALUES (1,'OPERAND_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','WHERE_STAMP_DATE_EQUAL');
 
 
 -- Populating FILTER_PARAMETER
-INSERT INTO analytics.property( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (2,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
-INSERT INTO analytics.property( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (3,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','FAIR_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
-INSERT INTO analytics.property( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (4,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','INTRINSIC_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
+INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (1,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAMP_DATE');
+INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (2,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
+INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (3,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','FAIR_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
+INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (4,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','INTRINSIC_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
 
 
 -- Populating apollo_analytics 
