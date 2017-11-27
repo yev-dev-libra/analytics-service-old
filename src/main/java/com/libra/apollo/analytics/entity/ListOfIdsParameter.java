@@ -1,10 +1,11 @@
 package com.libra.apollo.analytics.entity;
 
-import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -15,20 +16,26 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @DiscriminatorValue(value = "LIST_IDS_PARAMETER")
 public class ListOfIdsParameter extends Parameter {
 
-	//TODO: define @ElementCollection
-	private List<Long> ids;
+	@Column(name = "id_value", nullable = true)
+	private Long idValue;
+	
+	@OneToMany(mappedBy="listOfIdsParameter")
+	private List<IdParameter> ids;
 
 	public Object getValue() {
 		return ids;
 	}
 
-	public List<Long> getIds() {
+	
+	public List<IdParameter> getIds() {
 		return ids;
 	}
 
-	public void setIds(List<Long> ids) {
-		this.ids = Collections.unmodifiableList(ids);
+
+	public void setIds(List<IdParameter> ids) {
+		this.ids = ids;
 	}
+
 
 	@Override
 	public int compareTo(ValueParameter o) {
