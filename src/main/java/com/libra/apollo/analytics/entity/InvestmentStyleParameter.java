@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "investment_style_property", schema="analytics")
+@Table(name = "investment_style_parameter", schema="analytics")
 public class InvestmentStyleParameter implements Serializable, Comparable<InvestmentStyleParameter> {
 
 	@Id
@@ -31,6 +31,10 @@ public class InvestmentStyleParameter implements Serializable, Comparable<Invest
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "property_id", nullable = true)
 	private Parameter property;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name="data_source_id", nullable= true)
+	private DataSource dataSource;
 
 	public Long getId() {
 		return id;

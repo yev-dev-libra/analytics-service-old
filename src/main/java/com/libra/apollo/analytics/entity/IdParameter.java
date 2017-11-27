@@ -3,6 +3,9 @@ package com.libra.apollo.analytics.entity;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -15,6 +18,10 @@ public class IdParameter extends Parameter {
 
 	@Column(name = "id_value", nullable = true)
 	private Long idValue;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="list_of_id_parameter", referencedColumnName="id", nullable = true)
+	private ListOfIdsParameter listOfIdsParameter;
 
 	@Override
 	public Object getValue() {

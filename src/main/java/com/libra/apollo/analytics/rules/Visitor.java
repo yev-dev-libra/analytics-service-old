@@ -1,8 +1,11 @@
 package com.libra.apollo.analytics.rules;
 
-import com.libra.apollo.analytics.entity.Property;
+import com.libra.apollo.analytics.specification.ValueParameter;
 
-public interface Visitor {
+/*
+ * Modified visitor pattern. To return a "standard" visitor return <Void> type
+ */
+public interface Visitor<T> {
 
-	public void visit(Property property);
+	public T visit(ValueParameter parameter);
 }
