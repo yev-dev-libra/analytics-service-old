@@ -1,21 +1,24 @@
 package com.libra.apollo.analytics.entity.enums;
 
-
 public enum AnalyticsType {
 
-	APOLLO_SCREENER("");
-	
-	private final String desc;
-	
-	private AnalyticsType(String desc) {
-		this.desc = desc;
+	APOLLO_ANALYZER("Apollo Analyzer");
+
+	private final String name;
+
+	private AnalyticsType(String name) {
+		this.name = name;
 	}
 
-	public String getDescription() {
-		return desc;
+	public String getName() {
+		return name;
 	}
-	
-	
-	
+
+	public static AnalyticsType getAnalyticsType(String name) {
+		for (AnalyticsType type : AnalyticsType.values())
+			if (name.equals(type.getName()))
+				return type;
+		return null;
+	}
 
 }

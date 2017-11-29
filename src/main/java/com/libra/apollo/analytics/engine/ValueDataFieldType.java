@@ -1,6 +1,6 @@
-package com.libra.apollo.analytics.entity.enums;
+package com.libra.apollo.analytics.engine;
 
-public enum InstrumentDataFieldType {
+public enum ValueDataFieldType {
 	
 	//Libra stock price and indicator fields
 	DV_CB("DV-CB"),
@@ -221,7 +221,7 @@ public enum InstrumentDataFieldType {
 		return fieldName;
 	}
 
-	private InstrumentDataFieldType(final String name) {
+	private ValueDataFieldType(final String name) {
 		this.fieldName = name;
 	}
 	
@@ -235,8 +235,8 @@ public enum InstrumentDataFieldType {
 	 * @param name		Field name to convert
 	 * @return			The converted InstrumentDataFieldType
 	 */
-	public static InstrumentDataFieldType convertToInstrumentDataFieldType(String name) {
-		for(InstrumentDataFieldType field: InstrumentDataFieldType.values()) {
+	public static ValueDataFieldType convertToInstrumentDataFieldType(String name) {
+		for(ValueDataFieldType field: ValueDataFieldType.values()) {
 			if(field.toString().equals(name)) {
 				return field;
 			}

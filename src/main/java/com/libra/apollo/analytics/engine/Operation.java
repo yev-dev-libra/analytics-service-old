@@ -25,3 +25,4 @@ public enum Operation {
 		this.name = name;
 	}
 }
+	

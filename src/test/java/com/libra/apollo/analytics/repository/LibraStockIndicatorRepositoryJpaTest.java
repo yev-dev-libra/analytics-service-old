@@ -33,12 +33,12 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.test.context.TestPropertySource;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
+import com.libra.apollo.analytics.engine.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.Parameter;
 import com.libra.apollo.analytics.entity.enums.CompositionType;
-import com.libra.apollo.analytics.entity.enums.InstrumentDataFieldType;
 import com.libra.apollo.analytics.entity.enums.Operand;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
@@ -135,7 +135,7 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 	@Test
 	public void shouldFindLibraStockIndicatorByStampDate_2017_11_14_AndSingleFiedlEqualsWithSpecificationQuery() {
 		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
-		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType fieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		double discountToFairValue = Double.valueOf("0.0357");
 		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.fieldEqualsTo(fieldType , discountToFairValue);
 		LibraStockIndicator stockIndicator = repository.findOne(Specifications.where(stampDateSpec).and(stockIdSpec));
@@ -145,7 +145,7 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 	@Test
 	public void shouldFindLibraStockIndicatorsByStampDate_2017_11_14_AndSingleFiedlGreaterThanWithSpecificationQuery() {
 		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
-		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType fieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		double discountToFairValue = Double.valueOf("0.0357");
 		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
 		
@@ -178,7 +178,7 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 	public void shouldFindLibraStockIndicatorsByStampDate_2017_11_14_And_With_DISCOUNT_TO_FAIR_VALUE() {
 		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
 		
-		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType fieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		double discountToFairValue = Double.valueOf("0.0357");
 		
 		Specification<LibraStockIndicator> disFVSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
@@ -197,10 +197,10 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateLessOrGreater(previousDate);
 //		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
 		
-		InstrumentDataFieldType disFVfieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType disFVfieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		Double discountToFairValue = Double.valueOf("0.0357");
 		
-		InstrumentDataFieldType ivfieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType ivfieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		Double iv = Double.valueOf("0.2");
 		
 		
@@ -229,10 +229,10 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateLessOrGreater(previousDate);
 //		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
 		
-		InstrumentDataFieldType disFVfieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType disFVfieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		Double discountToFairValue = Double.valueOf("0.0357");
 		
-		InstrumentDataFieldType ivfieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType ivfieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		Double iv = Double.valueOf("0.2");
 		
 		
@@ -266,7 +266,7 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 		
 		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
 		
-		InstrumentDataFieldType fieldType = InstrumentDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
+		ValueDataFieldType fieldType = ValueDataFieldType.DISCOUNT_TO_FAIR_VALUE ;
 		double discountToFairValue = Double.valueOf("0.0357");
 		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType , discountToFairValue);
 

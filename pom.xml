@@ -119,6 +119,20 @@
 			<artifactId>spring-retry</artifactId>
 			<version>${spring.retry.version}</version>
 		</dependency>
+		
+		<!-- https://www.youtube.com/watch?v=JglWZ-wC3Vk -->
+		
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.7.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.7.0</version>
+		</dependency>
 
 	</dependencies>
 

@@ -11,11 +11,11 @@ import javax.persistence.criteria.Path;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.libra.apollo.analytics.entity.enums.InstrumentDataFieldType;
+import com.libra.apollo.analytics.engine.ValueDataFieldType;
 
 public class StampDateSpecification {
 
-	private static String stampDateFieldName = InstrumentDataFieldType.STAMP_DATE.getFieldName();
+	private static String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
 
 	public static <T> Specification<T> stampDateEqual(final Date stampDate) {
 		return (root, query,cb) -> {

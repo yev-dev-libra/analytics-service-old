@@ -24,7 +24,7 @@ public class AnalyticsRepositoryTest extends AbstractRepositoryTest {
 	
 	@Test
 	public void shouldFindByType() {
-		List<ApolloAnalytics> analytics =  analyticsRepository.findByType(AnalyticsType.APOLLO_SCREENER);
+		List<ApolloAnalytics> analytics =  analyticsRepository.findByType(AnalyticsType.APOLLO_ANALYZER);
 		assertThat(analytics.size()>0);
 	}
 }

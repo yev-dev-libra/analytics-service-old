@@ -2,14 +2,12 @@ package com.libra.apollo.analytics.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 
-public interface ValueParameter extends Comparable<ValueParameter>  {
+import com.libra.apollo.analytics.engine.Value;
 
-	public Object getValue();
-	public <T> Specification<T>  getSpecification();
-	public <T> Specification<T>  getSpecification(ValueParameter parameter);
+public interface ValueParameter extends Comparable<ValueParameter>, Value {
 
-	public default Class<?> getClazz() {
-		return getValue().getClass();
-	};
+	public <T> Specification<T> getSpecification();
+
+	public <T> Specification<T> getSpecification(ValueParameter parameter);
 
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 
+import com.libra.apollo.analytics.engine.ValueDataFieldType;
 import com.libra.apollo.analytics.specification.ValueParameter;
 
 public class OperationTest {
@@ -23,7 +24,7 @@ public class OperationTest {
 		cal.set(2017, 10, 14);
 		final Date previousDate = new Date(cal.getTimeInMillis()); 
 		final Operand operation = Operand.EQUAL;
-		final InstrumentDataFieldType fieldType = InstrumentDataFieldType.STAMP_DATE;
+		final ValueDataFieldType fieldType = ValueDataFieldType.STAMP_DATE;
 		
 		ValueParameter previousDateValue = new ValueParameter() {
 
@@ -49,7 +50,7 @@ public class OperationTest {
 			}
 			
 		};
-		Specification<Date> dateSpec = operation.queryByDate(InstrumentDataFieldType.STAMP_DATE,previousDateValue );
+		Specification<Date> dateSpec = operation.queryByDate(ValueDataFieldType.STAMP_DATE,previousDateValue );
 		Specification<Date> spec = Specifications.where(dateSpec);
 		assertThat(spec, is(IsNull.notNullValue()));
 	}
