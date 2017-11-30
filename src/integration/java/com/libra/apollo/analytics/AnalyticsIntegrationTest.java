@@ -2,15 +2,10 @@ package com.libra.apollo.analytics;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.libra.apollo.analytics.entity.ApolloAnalytics;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
 
 public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegrationTest {

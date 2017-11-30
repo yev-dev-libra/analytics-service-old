@@ -26,12 +26,12 @@ public class ConfigurationsController {
 	private static Logger logger = LoggerFactory.getLogger(ConfigurationsController.class);
 	
 	@Autowired
-	@Qualifier("investmentStylesConfigDelegatorStub")
+	@Qualifier("viewsConfigDelegatorStub")
 	private Delegator delegator;
-	
-	@RequestMapping(value = "/styles", method = RequestMethod.GET)
-	@ApiOperation(value = "Get list of Investment Styles", notes = "Returns a list of available Inverstment Styles with description")
-	public ResponseEntity<AnalyticsConfigurationResponse> getListOfInvestmentStyles(ConfigurationAnalyticsRequest configurationRequest){
+	           
+	@RequestMapping(value = "/views", method = RequestMethod.GET)
+	@ApiOperation(value = "Get a list of views", notes = "Returns a list of available Views with Inverstment Styles")
+	public ResponseEntity<AnalyticsConfigurationResponse> getViews(ConfigurationAnalyticsRequest configurationRequest){
 		
 		if(logger.isDebugEnabled()) {
 			logger.debug("IN getInvestmentStylesConfiguration");

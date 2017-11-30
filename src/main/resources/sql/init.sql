@@ -9,30 +9,34 @@ INSERT INTO analytics.data_source (id, data_source_type,url_base,clazz_name,vers
 -- INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, operand ) VALUES (1,'OPERAND_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','WHERE_STAMP_DATE_EQUAL');
 
 
--- Populating FILTER_PARAMETER
-INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (1,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAMP_DATE');
+-- Parameters
+
+INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, decimal_value ) VALUES (1,'DECIMAL_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING', 'GREATER_THAN_OR_EQUAL','3.0');
 INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (2,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','STAR_RATING','GREATER_THAN_OR_EQUAL','3.0' );
 INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (3,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','FAIR_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
 INSERT INTO analytics.parameter( id, type, version,created_on, updated_on, composition_type, data_field_type, operand, parameter ) VALUES (4,'FILTER_PARAMETER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00','AND','INTRINSIC_VALUE','GREATER_THAN_OR_EQUAL','0.2' );
 
+-- Populating ID_PARAMETER
 
 -- Populating apollo_analytics 
-INSERT INTO analytics.apollo_analytics(id,name,description,run_type,analytics_type,version,created_on,updated_on) VALUES (1,'Apollo Screener','Collection of defined Investment Styles', 'ON_DEMAND','APOLLO_SCREENER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.apollo_analytics(id,name,description,run_type,analytics_type,version,created_on,updated_on) VALUES (1,'Apollo Analyzer','Collection of defined Investment Styles', 'ON_DEMAND','APOLLO_ANALYZER', '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
 
 -- Populating analytics_view 
-INSERT INTO analytics.analytics_view(id,name, analytics_id,priority, version,created_on,updated_on) VALUES (1,'ACUS',1, 1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.analytics_view(id,name, analytics_id,priority, version,created_on,updated_on) VALUES (1,'',1, 1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
 
 -- Populating investment_style 
-INSERT INTO analytics.investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (1,'Value Indicator', 'Simple Test condition to check VI request', 1, 1,1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
-INSERT INTO analytics.investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (2,'Intrinsic Value', 'Simple Test condition to check IV request', 1, 1, 1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (1,'Apollo Classics', 'The Apollo Classics are those that we would be happy adding to at current positions, given the positive combination of value, growth, volatility and momentum.', 1, 1,1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (2,'Stocks on the Rocks', 'The Apollo SotR are companies that are currently unloved by the market, and in the absence or special situations or the reporting season, should underperform.', 1, 1, 1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (3,'Value Buy', 'These are companies trading with a Value Indicator score of 20% or below, meaning that there is a Deep Value opportunity here,  with a upside / downside ratio of 4:1.', 1, 1, 1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
+INSERT INTO analytics.investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (4,'Value Sell', 'These are companies trading with a Value Indicator score of 80% or above meaning that the stock looks overpriced in relation to future value, with a downside / upside ratio of 4:1.', 1, 1, 1, '0', '2017-11-01 00:00:00','2017-11-01 00:00:00');
 
 
 -- Populating investment_style_condition
-INSERT INTO analytics.investment_style_property(id,investment_style_id, property_id,priority ) VALUES(1,1,1,1); -- WHERE_STAMP_DATE_EQUAL
-INSERT INTO analytics.investment_style_property(id,investment_style_id, property_id,priority ) VALUES(2,1,2,2); -- AND STAR_RATING GREATER_THAN_OR_EQUAL 3.0
-INSERT INTO analytics.investment_style_property(id,investment_style_id, property_id,priority ) VALUES(3,1,3,3); -- AND FAIR_VALUE GREATER_THAN_OR_EQUAL 0.2
+INSERT INTO analytics.investment_style_parameter(id,investment_style_id, property_id,priority ) VALUES(1,1,1,1); -- WHERE_STAMP_DATE_EQUAL
+INSERT INTO analytics.investment_style_parameter(id,investment_style_id, property_id,priority ) VALUES(2,1,2,2); -- AND STAR_RATING GREATER_THAN_OR_EQUAL 3.0
+INSERT INTO analytics.investment_style_parameter(id,investment_style_id, property_id,priority ) VALUES(3,1,3,3); -- AND FAIR_VALUE GREATER_THAN_OR_EQUAL 0.2
 
 
 -- Populating investment_style_condition_datasource
