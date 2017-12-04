@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@RequestMapping("/api/v1/config")
+@RequestMapping("/config")
 @Api(value = "CONFIGURATIONS", description = "Analytics Configurations")
 public class ConfigurationsController {
 
