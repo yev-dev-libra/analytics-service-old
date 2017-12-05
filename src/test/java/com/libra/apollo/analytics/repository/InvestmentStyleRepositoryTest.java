@@ -48,7 +48,7 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 		
 		
 		for(InvestmentStyleParameter invstCondition : conditions) {
-			priorityWithConditions.put(invstCondition.getPriority().getPriority(), invstCondition.getProperty());
+			priorityWithConditions.put(invstCondition.getPriority().getPriority(), invstCondition.getParameter());
 		}
 
 		int i = 1;

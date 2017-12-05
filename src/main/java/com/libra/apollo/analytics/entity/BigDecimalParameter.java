@@ -1,26 +1,42 @@
 package com.libra.apollo.analytics.entity;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.libra.apollo.analytics.entity.enums.OperandBigDecimal;
 import com.libra.apollo.analytics.specification.ValueParameter;
 
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "DECIMAL_PARAMETER")
 public class BigDecimalParameter extends Parameter {
+	
+	@Column(name="operand")
+	@Enumerated(EnumType.STRING)
+	private OperandBigDecimal operand;
 
-	@Column(name="decimal_value", nullable=true)
+	public OperandBigDecimal getOperand() {
+		return operand;
+	}
+
+	public void setOperand(OperandBigDecimal operand) {
+		this.operand = operand;
+	}
+
+	@Column(name = "decimal_value", nullable = true)
 	private BigDecimal bigDecimalValue;
 
 	@Override
-	public Object getValue() {
-		return bigDecimalValue;
+	public Optional<Object> getValue() {
+		return Optional.ofNullable(bigDecimalValue);
 	}
 
 	public BigDecimal getBigDecimalValue() {
@@ -38,13 +54,8 @@ public class BigDecimalParameter extends Parameter {
 
 	@Override
 	public <T> Specification<T> getSpecification(ValueParameter parameter) {
-		return super.getOperand().queryByBigDecimal(getFieldType(), this);
-		
-	}
+		return this.getOperand().query(getFieldType(), this);
 
-	@Override
-	public <T> Specification<T> getSpecification() {
-		throw new UnsupportedOperationException();
 	}
 
 }

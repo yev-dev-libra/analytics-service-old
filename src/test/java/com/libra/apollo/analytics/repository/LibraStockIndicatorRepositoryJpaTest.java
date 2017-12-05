@@ -39,7 +39,6 @@ import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.Parameter;
 import com.libra.apollo.analytics.entity.enums.CompositionType;
-import com.libra.apollo.analytics.entity.enums.Operand;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.StampDateSpecification;
@@ -252,14 +251,14 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 	}
 	
 	@Test
-	public void shouldFindLibraStockIndicatorsByStampDateWithVisitor() {
+	public void shouldFindLibraStockIndicatorsByStampDate() {
 		Optional<InvestmentStyle> invstStyleOptional = invstRepository.findById(1L);
 		InvestmentStyle invstStyle = invstStyleOptional.get();
 		Set<InvestmentStyleParameter> properties = invstStyle.getInvestmentStyleProperties();
 		
 		
 		for (InvestmentStyleParameter investmentStyleProperty : properties) {
-			final Parameter property = investmentStyleProperty.getProperty();
+			final Parameter property = investmentStyleProperty.getParameter();
 			
 		}
 		

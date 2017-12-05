@@ -22,7 +22,7 @@ import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
 @Entity
-@Table(name = "apollo_analytics", schema="analytics", indexes = { @Index(name = "type_idx", columnList = "analytics_type"),
+@Table(name = "analytics", schema="analytics", indexes = { @Index(name = "type_idx", columnList = "analytics_type"),
 		@Index(name = "run_type_idx", columnList = "run_type"), }
 
 )

@@ -28,4 +28,10 @@ public class Priority implements Comparable<Priority> {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return "Priority [priority=" + priority + "]";
+	}
+
+	
 }
