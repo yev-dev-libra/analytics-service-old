@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
-import com.libra.apollo.analytics.entity.Parameter;
+import com.libra.apollo.analytics.entity.QueryParameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 
@@ -44,7 +44,7 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 		assertThat(conditions, hasSize(3));
 		
 		// a sanity check to validate correct sorting
-		Map<Integer,Parameter> priorityWithConditions = new LinkedHashMap<>();
+		Map<Integer,QueryParameter> priorityWithConditions = new LinkedHashMap<>();
 		
 		
 		for(InvestmentStyleParameter invstCondition : conditions) {
@@ -52,7 +52,7 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 		}
 
 		int i = 1;
-		for(Map.Entry<Integer, Parameter> entry : priorityWithConditions.entrySet()) {
+		for(Map.Entry<Integer, QueryParameter> entry : priorityWithConditions.entrySet()) {
 			System.out.println("Key value " + entry.getKey());
 			assertThat(entry.getKey(),equalTo(i));
 			i++;

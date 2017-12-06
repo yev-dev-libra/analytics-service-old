@@ -47,7 +47,7 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	@Before
 	public void setUp() {
 		Calendar cal = Calendar.getInstance();
-		cal.set(2017, 10, 14);
+		cal.set(2017, 11, 01);
 		previousDate = new Date(cal.getTimeInMillis());
 	}
 

@@ -17,7 +17,7 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "DECIMAL_PARAMETER")
-public class BigDecimalParameter extends Parameter {
+public class BigDecimalParameter extends QueryParameter {
 	
 	@Column(name="operand")
 	@Enumerated(EnumType.STRING)

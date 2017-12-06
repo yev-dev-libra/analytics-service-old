@@ -2,7 +2,6 @@ package com.libra.apollo.analytics.repository;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

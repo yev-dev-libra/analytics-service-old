@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.libra.apollo.analytics.entity.AnalyticsView;
 
 @Repository
-public interface AnalyticsTemplateRepository extends JpaRepository<AnalyticsView, Long> {
+public interface AnalyticsViewRepository extends JpaRepository<AnalyticsView, Long> {
 
 }

@@ -1,3 +1,27 @@
+
+select 
+	id, 
+	stamp_date,
+	star_rating, 
+	fair_value, fair_value_lower, 
+	fair_value_upper, 
+	intrinsic_value, 
+	intrinsic_value_pct, 
+	long_term_optimistic,
+	long_term_pessimistic,
+	long_term_neutral,
+	median_discount_to_fair_value, 
+	value_indicator_score, 
+	discount_premium_to_fair_value, 
+	net_discount_median_fair_value, 
+	fair_value_change_1m, 
+	expected_return_2m, 
+	discount_premium_to_intrinsic_value, 
+	intrinsic_value_change_3m, 
+	fair_value_change_3m, 
+	intrinsic_value_change_1m 
+from apollo.stockindicators;
+
 select si.* 
 from stockindicators si inner join stocks s on si.instrument_id = s.id 
 inner join stocks_groups sg on s.id = sg.stock_id
@@ -17,12 +41,12 @@ SELECT * FROM ANALYTICS.ANALYTICS ;
 SELECT * FROM ANALYTICS.ANALYTICS_DATA_SOURCE ;
 SELECT * FROM ANALYTICS.ANALYTICS_INVESTMENT_STYLE ;
 SELECT * FROM ANALYTICS.ANALYTICS_INVESTMENT_STYLE_PARAMETER ;
-SELECT * FROM ANALYTICS.ANALYTICS_PARAMETER ;
+SELECT * FROM ANALYTICS.ANALYTICS_QUERY_PARAMETER ;
 SELECT * FROM ANALYTICS.ANALYTICS_VIEW ;
 
 
-
-
+select * from analytics.analytics_investment_style ais inner join analytics.analytics_investment_style_parameter aisp on ais.id = aisp.investment_style_id where ais.id = 1;
+select aqp.* from analytics.analytics_investment_style ais inner join analytics.analytics_investment_style_parameter aisp on ais.id = aisp.investment_style_id inner join analytics.analytics_query_parameter aqp on aisp.parameter_id = aqp.id  where ais.id = 1;
 
 /*
 INSERT INTO apollo.stockindicators (`id`,`created_on`,`updated_on`,`version`,`stamp_date`,`adr`,`adx`,`bollinger_lower`,`bollinger_middle`,`bollinger_upper`,`cmci`,`cmci_score`,`daily_alpha_1d`,`daily_alpha_1w`,`daily_alpha_3w`,`daily_alpha_8w`,`day_index`,`dfv_score`,`discount_to_fair_value`,`dmi_negative`,`dmi_positive`,`dmi_score`,`dynamic_long_short`,`dynamic_short_weighting`,`dynamic_weighting`,`efficiency_ratio`,`efficiency_ratio_sma10d`,`efficiency_score`,`eps_fy1_pct_change_1d`,`eps_fy1_pct_change_1m`,`eps_fy1_pct_change_3m`,`eps_fy1_pct_change_5d`,`fair_value`,`fair_value_lower`,`fair_value_middle`,`fair_value_upper`,`fib_023`,`fib_038`,`fib_050`,`fib_061`,`fib_076`,`fireline`,`flow`,`flow_driver`,`flow_driver_score`,`flow_momentum`,`flow_momentum_score`,`flow_score`,`high_price_52w`,`intrinsic_value`,`intrinsic_value_pct`,`intrinsic_value_volatility`,`low_price_52w`,`lower_margin_of_safety_level`,`macd1`,`macd2`,`macd_score`,`macd_signal`,`median_discount_to_fair_value`,`money_manager`,`money_manager_advice`,`oscillator`,`oscillator_score`,`pb_maximum`,`pb_minimum`,`pcf_maximum`,`pcf_minimum`,`pct_change_ytd`,`pe_maximum`,`pe_minimum`,`pebitda_maximum`,`pebitda_minimum`,`price_driver`,`ps_maximum`,`ps_minimum`,`revisions`,`revisions1m`,`revisions3m`,`risk`,`roe_maximum`,`roe_minimum`,`rsi_14d`,`rsi_score`,`sentiment`,`skew`,`sma_200d`,`sma_20d`,`sma_50d`,`star_rating`,`stochastics_percent_d`,`stochastics_percent_k`,`stochastic_score`,`sweet_spot`,`target20d`,`target_20d_return`,`target2m`,`upper_margin_of_safety_level`,`valuation_trading_flags`,`value_indicator_score`,`volume_avg_3m`,`volume_score`,`williams`,`williams_score`,`instrument_id`,`ptps_af`,`ptps_sar`,`ptps_trend`,`stretch_value`,`base_value`,`long_term_optimistic`,`long_term_pessimistic`,`long_term_neutral`,`eps_trend`,`long_term_pb_forecast`,`long_term_pcf_forecast`,`long_term_pebitda_forecast`,`long_term_pe_forecast`,`long_term_ps_forecast`,`long_term_value`,`merger_value`,`pb_driver`,`pb_lower`,`pb_upper`,`pb_value`,`pb_second_order`,`pb_third_order`,`pb_tpm`,`pcf_driver`,`pcf_lower`,`pcf_upper`,`pcf_value`,`pcf_second_order`,`pcf_third_order`,`pcf_tpm`,`pebitda_driver`,`pebitda_lower`,`pebitda_upper`,`pebitda_value`,`pebitda_second_order`,`pebitda_third_order`,`pebitda_tpm`,`pe_driver`,`pe_lower`,`pe_upper`,`pe_value`,`pe_second_order`,`pe_third_order`,`pe_tpm`,`ps_driver`,`ps_lower`,`ps_upper`,`ps_value`,`ps_second_order`,`ps_third_order`,`ps_tpm`,`trigger_level`,`valuation_indicator`,`valuation_indicator_10d`,`estimates_fy1`,`estimates_fy2`,`dm_score_bookvalue`,`dm_score_earnings`,`dm_score_cashflow`,`dm_score_sales`,`dm_score_ebitda`,`fair_value_slope`,`intrinsic_value_slope`,`intrinsic_value_slope_signal`,`intrinsic_value_rsq`,`cvi_iv_flag`,`cvi_fv_flag`,`cvi_buy_signal`,`cvi_close_signal`,`cvi_short_signal`,`cvi_cover_signal`,`cvi_buy_count`,`cvi_close_count`,`cvi_short_count`,`cvi_cover_count`,`fractional_buy`,`fractional_sell`,`cvi_range_upside`,`cvi_range_downside`,`cvi`,`apollo_alpha`,`stock_index_beta`,`range_exp_20d_plus`,`range_exp_20d_minus`,`fair_value_range_flag`,`last_20d_performance`,`fair_value_projection`,`intrinsic_value_projection`,`new_target`,`new_target_return`,`conditional_direction_forecast`,`move_to_fair_value_projection`,`move_to_intrinsic_value_projection`,`fair_value_range_limits`,`green_iv_projection`,`green_cvi`,`green_fv_projection`,`green_forecast_return`,`green_alpha_beta`,`green_iv_slope`,`green_momentum`,`green_extreme_filter`,`green_range_limit`,`green_iv_pct_score`,`green_volatility_score`,`red_iv_projection`,`red_cvi`,`red_fv_projection`,`red_forecast_return`,`red_alpha_beta`,`red_iv_slope`,`red_momentum`,`red_extreme_filter`,`red_range_limit`,`red_iv_pct_score`,`red_volatility_score`) VALUES (156355005,'2017-11-14 17:17:28','2017-11-14 17:17:45',0,'2017-11-14',0.2665,0.2590,32.1966,33.4258,34.6549,-90.7917,-10.1051,32.3600,33.3816,33.1232,32.4334,NULL,-10.0000,0.0357,25.2220,19.2302,-10.0000,0.7663,0.9272,0.7663,0.1484,0.3897,-6.8216,0.0002,-0.0086,0.0463,0.0013,31.3983,27.8489,30.5028,33.1567,34.4042,32.9529,31.7800,30.6071,29.1558,3,0.1323,0.1323,-9.5000,-407099.7949,-8.3000,-5.8532,36.4900,32.6410,0.396779306135747,0.8423845742465434,26.1650,21.6700,0.3359,-0.1718,-3.3457,0.5077,0.0383,0,'Valuation stance: neutral, trading stance neutral. Neutral price based flow and flow momentum. No action.',45.2111,1.5639,2.9440,1.5372,7.1181,2.2796,0.0853,15.0977,6.1249,5.1188,1.6472,0.4750,0.3193,0.1286,-0.0130,-0.0088,0.0462,0.8992,35.5913,17.0834,45.5760,-10.0000,-0.0046,-0.6404,32.7743,33.4258,32.1866,0.0000,72.7239,38.7268,-12.8269,'1',32.7252,0.0045,32.7522,49.1663,NULL,NULL,783.7844,3.6000,-84.0000,10.0000,131121,0.0800,34.6785,'DOWN',38.3891,16.3401,42.8762,23.3974,32.6748,-0.0130,2.3097,6.8308,4.6495,12.2070,0.2848,30.8779,34.7768,0.1946,2.2857,2.5346,2.4101,1.5398,3.1584,2.1593,0.1622,5.8011,6.3138,6.0575,6.6347,6.0455,6.3860,0.1189,4.0618,4.6818,4.3718,4.8632,4.9399,4.3467,0.2270,11.9390,13.3715,12.6552,9.8709,14.6617,11.4121,0.2973,0.2693,0.2960,0.2826,0.2744,0.3083,0.2662,18.5940,NULL,NULL,0.0000,-0.2000,2.0000,0.0000,-1.0000,1.0000,-1.0000,-0.0164,-0.0125,'1',0.9342,'0','0','0','0','0','0',82,9,9,28,'0','0',37.2009,30.2999,0.6558,-0.0191,1.5049,0.0683,-0.0926,'0',0.0366,31.0698,32.3906,31.4206,-0.0356,-0.0329,0.0464,0.0058,'1',0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,1.0000,0.0000,0.0000,0.0000,-1.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000);VALUES (156355005,'2017-11-14','2017-11-14',0,'2017-11-14',0.2665,0.2590,0.1,0.1,0.1,0.1,0.1,'194.0646');

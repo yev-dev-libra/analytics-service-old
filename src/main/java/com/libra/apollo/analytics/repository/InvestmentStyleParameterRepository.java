@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 
 @Repository
-public interface InvestmentStyleConditionRepository extends BaseRepository<InvestmentStyleParameter, Long> {
+public interface InvestmentStyleParameterRepository extends BaseRepository<InvestmentStyleParameter, Long> {
 
 }

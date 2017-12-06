@@ -17,7 +17,7 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "DATE_PARAMETER")
-public class DateParameter extends Parameter {
+public class DateParameter extends QueryParameter {
 
 	@Column(name = "operand")
 	@Enumerated(EnumType.STRING)

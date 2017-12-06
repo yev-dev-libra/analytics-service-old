@@ -1,5 +1,13 @@
 package com.libra.apollo.analytics.engine;
 
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+
+import org.hibernate.annotations.Type;
+
+import com.libra.apollo.analytics.entity.type.IndicatorBigDecimal;
+
 public enum ValueDataFieldType {
 	
 	//Libra stock price and indicator fields
@@ -212,6 +220,19 @@ public enum ValueDataFieldType {
 	DECILE_9_20D("decile_9_20D"),
 	STOCK_ID("stockId"),
 	INSTRUMENT_ID("instrumentId"),
+	
+	//---------- ACUS indicators -------------//
+	PRICE_CHANGE_1M("priceChange1m"),
+	DISCOUNT_PREMIUM_TO_FAIR_VALUE("discountPremiumToFairValue"),
+	NET_DISCOUNT_MEDIAN_FAIR_VALUE("netDiscountMedianFairValue"),
+	FAIR_VALUE_CHANGE_1M("fairValueChange1m"),
+	EXPECTED_RETURN_2M("expectedReturn2m"),
+	DISCOUNT_PREMIUM_TO_INTRINSIC_VALUE("discountPremiumToIntrinsicValue"),
+	INTRINSIC_VALUE_CHANGE_3M("intrinsicValueChange3m"),
+	FAIR_VALUE_CHANGE_3M("fairValueChange3m"),
+	INTRINSIC_VALUE_CHANGE_1M("intrinsicValueChange1m"),
+	PCT_IN_FAIR_VALUE_RANGE("pctInFairValueRange")
+	
 	;
 	
 	

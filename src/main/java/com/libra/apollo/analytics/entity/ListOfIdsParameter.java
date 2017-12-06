@@ -18,7 +18,7 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "LIST_IDS_PARAMETER")
-public class ListOfIdsParameter extends Parameter {
+public class ListOfIdsParameter extends QueryParameter {
 
 	@Column(name = "operand", nullable = true)
 	@Enumerated(EnumType.STRING)
