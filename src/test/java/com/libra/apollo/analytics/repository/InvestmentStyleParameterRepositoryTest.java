@@ -19,7 +19,7 @@ public class InvestmentStyleParameterRepositoryTest extends AbstractRepositoryTe
 	@Test
 	public void shouldRetrieveAllInvestmentStyle() {
 		List<InvestmentStyleParameter> allInvStyles = repository.findAll();
-		assertThat(2, greaterThan(1));
+		assertThat(allInvStyles.size(), greaterThan(1));
 	}
 	
 

@@ -28,28 +28,16 @@ public class InvestmentStyleParameter implements Serializable, Comparable<Invest
 	@Embedded
 	private Priority priority;
 
-	@ManyToOne(optional = true)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "parameter_id", nullable = true)
 	private QueryParameter parameter;
 
-	@ManyToOne(optional = true)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "data_source_id", nullable = true)
 	private DataSource dataSource;
 
 	public Long getId() {
 		return id;
-	}
-
-	public InvestmentStyleParameter() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	// TODO create a builder
-	public InvestmentStyleParameter(Long id, Priority priority) {
-		super();
-		this.id = id;
-		this.priority = priority;
 	}
 
 	public void setId(Long id) {

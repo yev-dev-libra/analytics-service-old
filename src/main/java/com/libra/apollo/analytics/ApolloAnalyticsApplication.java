@@ -11,7 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import com.libra.apollo.analytics.repository.LibraStockIndicatorRepositoryJpa;
+import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
 
 @SpringBootApplication
 //@EnableEurekaClient
@@ -19,7 +19,7 @@ import com.libra.apollo.analytics.repository.LibraStockIndicatorRepositoryJpa;
 public class ApolloAnalyticsApplication {
 
 	@Autowired
-	private LibraStockIndicatorRepositoryJpa repository;
+	private LibraStockIndicatorRepository repository;
 
 	@PersistenceContext
 	private EntityManager entityManager;

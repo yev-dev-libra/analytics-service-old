@@ -1,9 +1,11 @@
 package com.libra.apollo.analytics.repository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.SortedSet;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.libra.apollo.analytics.entity.InvestmentStyle;
@@ -12,10 +14,15 @@ import com.libra.apollo.analytics.entity.QueryParameter;
 @Repository
 public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyle, Long> {
 
-	Optional<InvestmentStyle> findOptionalById(Long id);
+	@EntityGraph(value = InvestmentStyle.SHALLOW_GRAPH_NAME, type = EntityGraph.EntityGraphType.FETCH)
+	Optional<InvestmentStyle> findById(Long id);
 	
-	@Query("SELECT aqp FROM InvestmentStyle as is JOIN InvestmentStyleParameter isp on ais.id = aisp.investment_style_id inner join analytics.analytics_query_parameter aqp on aisp.parameter_id = aqp.id  where ais.id = 1")
-	SortedSet<QueryParameter> findQueryParametersById(Long id);
+	@EntityGraph(value = InvestmentStyle.DEEP_GRAPH_NAME, type = EntityGraph.EntityGraphType.FETCH)
+	@Query("SELECT s FROM InvestmentStyle s JOIN s.analytics v  WHERE v.id = :id")
+	List<InvestmentStyle> findAllByView(@Param("id") Long id);
 	
-//	Set<Map<InvestmentStyle,List<QueryParameter>>> findAllParametersById(Long id);
+	@Query("SELECT p FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp JOIN isp.parameter p WHERE ais.id = :id")
+	List<QueryParameter> findQueryParametersById(@Param("id") Long id);
+	
+
 }

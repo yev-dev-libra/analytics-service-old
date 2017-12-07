@@ -15,13 +15,13 @@ import com.libra.apollo.analytics.entity.LibraStockIndicator;
 
 @Repository("libraStockIndicatorRepository")
 @Transactional(readOnly = true)
-public class LibraStockIndicatorRepositoryImpl implements LibraStockIndicatorRepository  {
+public class LibraStockIndicatorRepositoryImpl implements CustomLibraStockIndicatorRepository  {
 
 	@PersistenceContext 
 	private EntityManager em;
 	
 	@Autowired 
-	private LibraStockIndicatorRepositoryJpa repo;
+	private LibraStockIndicatorRepository repo;
 	
 	@Override
 	public List<LibraStockIndicator> findAllBySpecification(Specification<LibraStockIndicator> specification) {

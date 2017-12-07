@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.repository.LibraStockIndicatorRepositoryJpa;
+import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -31,7 +31,7 @@ public class AbstractApolloAnalyticsIntegrationTest {
 	private static final Logger log = LoggerFactory.getLogger(AbstractApolloAnalyticsIntegrationTest.class);
 
 	@Autowired
-	private LibraStockIndicatorRepositoryJpa repository;
+	private LibraStockIndicatorRepository repository;
 
 	@PersistenceContext
 	private EntityManager entityManager;

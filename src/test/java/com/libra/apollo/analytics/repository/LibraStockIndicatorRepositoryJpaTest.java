@@ -3,24 +3,20 @@ package com.libra.apollo.analytics.repository;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
@@ -51,7 +47,7 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 	private String HIBERNATE_DEFAULT_SCHEMA;
 
 	@Autowired
-	private LibraStockIndicatorRepositoryJpa repository;
+	private LibraStockIndicatorRepository repository;
 	
 	@Autowired
 	private InvestmentStyleRepository invstRepository;
@@ -254,7 +250,7 @@ public class LibraStockIndicatorRepositoryJpaTest extends AbstractRepositoryTest
 	public void shouldFindLibraStockIndicatorsByStampDate() {
 		Optional<InvestmentStyle> invstStyleOptional = invstRepository.findById(1L);
 		InvestmentStyle invstStyle = invstStyleOptional.get();
-		Set<InvestmentStyleParameter> properties = invstStyle.getInvestmentStyleProperties();
+		Set<InvestmentStyleParameter> properties = invstStyle.getInvestmentStyleParameters();
 		
 		
 		for (InvestmentStyleParameter investmentStyleProperty : properties) {

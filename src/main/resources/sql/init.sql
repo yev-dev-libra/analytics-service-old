@@ -21,7 +21,7 @@ INSERT INTO analytics.analytics(id,version,created_on,updated_on, name,descripti
 
 
 -- Populating analytics_view 
-INSERT INTO analytics.analytics_view(id,name, analytics_id,priority, version,created_on,updated_on) VALUES (1,'Apollo Analyzer',1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
+INSERT INTO analytics.analytics_view(id,name, description, analytics_id,priority, version,created_on,updated_on) VALUES (1,'Apollo Selection','Apollo Selection Styles',1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 
 
 -- Populating investment_style 

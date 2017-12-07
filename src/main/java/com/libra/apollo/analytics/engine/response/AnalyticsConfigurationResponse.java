@@ -14,7 +14,7 @@ public class AnalyticsConfigurationResponse implements AnalyticsResponse {
 	 * 
 	 */
 	private static final long serialVersionUID = -6327485650244147942L;
-
+	
 	private List<AnalyticsView> analyticsViews = new ArrayList<>();
 
 	public void addAnalyticsView(AnalyticsView view) {

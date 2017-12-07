@@ -4,13 +4,14 @@ import com.libra.apollo.analytics.engine.Operation;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
-public class ConfigurationAnalyticsRequest implements AnalyticsRequest {
+public class ScreenerRequest implements AnalyticsRequest {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -580904360065898830L;
+	private static final long serialVersionUID = 1863827676275650547L;
 
+	
 	@Override
 	public AnalyticsType getAnalyticsType() {
 		return AnalyticsType.APOLLO_ANALYZER;
@@ -23,7 +24,7 @@ public class ConfigurationAnalyticsRequest implements AnalyticsRequest {
 
 	@Override
 	public Operation getOperation() {
-		return Operation.MODEL;
+		return Operation.ANALYZE;
 	}
 
 }
