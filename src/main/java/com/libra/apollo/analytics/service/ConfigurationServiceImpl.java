@@ -37,9 +37,10 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		final Operation operation = request.getOperation();
 		final RunType runType = request.getRunType();
 		
-//		analyticsRepository.findByFirst(type);
 		
-		return analyticsViewRepository.findAllByAnalytics();
+		
+//		return analyticsViewRepository.findAllByAnalytics();
+		return null;
 	}
 
 }
