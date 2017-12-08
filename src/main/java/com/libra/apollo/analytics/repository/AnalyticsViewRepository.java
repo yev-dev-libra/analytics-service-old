@@ -11,5 +11,7 @@ import com.libra.apollo.analytics.entity.AnalyticsView;
 public interface AnalyticsViewRepository extends JpaRepository<AnalyticsView, Long> {
 
 	List<AnalyticsView> findAllByAnalytics(Long id);
+	
+	List<AnalyticsView> findAllByAnalyticsIn(List<Long> ids);
 
 }

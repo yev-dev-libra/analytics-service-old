@@ -8,7 +8,7 @@ import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AnalyticsViewConfigurationRequest implements AnalyticsRequest {
+public class AnalyticsConfigurationRequest implements AnalyticsRequest {
 
 	/**
 	 * 
@@ -25,7 +25,7 @@ public class AnalyticsViewConfigurationRequest implements AnalyticsRequest {
 	private String operation;
 	
 	@JsonIgnore
-	public AnalyticsViewConfigurationRequest(String analyticsType, String runType, String operation) {
+	public AnalyticsConfigurationRequest(String analyticsType, String runType, String operation) {
 		super();
 		this.analyticsType = analyticsType;
 		this.runType = runType;
@@ -85,8 +85,8 @@ public class AnalyticsViewConfigurationRequest implements AnalyticsRequest {
 			return this;
 		}
 		
-		public AnalyticsViewConfigurationRequest build() {
-			return new AnalyticsViewConfigurationRequest(analyticsType,runType,operation);
+		public AnalyticsConfigurationRequest build() {
+			return new AnalyticsConfigurationRequest(analyticsType,runType,operation);
 		}
 	}
 

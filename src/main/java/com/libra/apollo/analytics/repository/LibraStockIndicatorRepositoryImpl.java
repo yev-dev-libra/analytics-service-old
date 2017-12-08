@@ -13,19 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 
 
-@Repository("libraStockIndicatorRepository")
+@Repository("customLibraStockIndicatorRepository")
 @Transactional(readOnly = true)
 public class LibraStockIndicatorRepositoryImpl implements CustomLibraStockIndicatorRepository  {
 
 	@PersistenceContext 
 	private EntityManager em;
 	
-	@Autowired 
-	private LibraStockIndicatorRepository repo;
+//	@Autowired 
+//	private LibraStockIndicatorRepository repo;
 	
 	@Override
-	public List<LibraStockIndicator> findAllBySpecification(Specification<LibraStockIndicator> specification) {
-		// TODO Auto-generated method stub
+	public List<LibraStockIndicator> findAllBySpecification(final Specification<LibraStockIndicator> specification) {
 		return null;
 	}
 

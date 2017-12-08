@@ -1,13 +1,10 @@
 package com.libra.apollo.analytics.repository;
 
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -17,25 +14,22 @@ import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 
 public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 
-	// @Autowired
-	// @Qualifier("libraStockIndicatorRepository")
-	// private LibraStockIndicatorRepository repository;
+	 @Autowired
+	 @Qualifier("customLibraStockIndicatorRepository")
+	 private CustomLibraStockIndicatorRepository repository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
