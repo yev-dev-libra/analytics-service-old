@@ -4,6 +4,6 @@ import javax.persistence.MappedSuperclass;
 
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class QueryParameter<T> extends Parameter<T> {
+public abstract class ResultParameter<T> extends Parameter<T> {
 
 }

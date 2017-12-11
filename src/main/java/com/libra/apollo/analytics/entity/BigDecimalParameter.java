@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -16,7 +16,8 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 
 @SuppressWarnings("serial")
 @Entity
-@DiscriminatorValue(value = "DECIMAL_PARAMETER")
+//@DiscriminatorValue(value = "DECIMAL_PARAMETER")
+@Table(name="decimal_parameter", schema="analytics")
 public class BigDecimalParameter extends QueryParameter<BigDecimal> {
 	
 	@Column(name="operand")

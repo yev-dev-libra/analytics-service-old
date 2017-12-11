@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 
 @Repository
-public interface LibraStockIndicatorRepository extends BaseRepository<LibraStockIndicator, Long>, JpaSpecificationExecutor<LibraStockIndicator> {
+public interface LibraStockIndicatorRepository extends BaseRepository<LibraStockIndicator, Long>, JpaSpecificationExecutor<LibraStockIndicator>, LibraStockIndicatorRepositoryCustom {
 	
 	public List<LibraStockIndicator> findByStampDate(Date date);
 	public List<LibraStockIndicator> findByStockId(Long stockId);

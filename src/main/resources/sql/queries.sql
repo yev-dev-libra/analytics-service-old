@@ -3,7 +3,8 @@ select
 	id, 
 	stamp_date,
 	star_rating, 
-	fair_value, fair_value_lower, 
+	fair_value, 
+	fair_value_lower, 
 	fair_value_upper, 
 	intrinsic_value, 
 	intrinsic_value_pct, 
@@ -21,6 +22,33 @@ select
 	fair_value_change_3m, 
 	intrinsic_value_change_1m 
 from apollo.stockindicators;
+
+select 
+	id, 
+	stamp_date,
+	star_rating, 
+	fair_value, 
+	fair_value_lower, 
+	fair_value_upper, 
+	intrinsic_value, 
+	intrinsic_value_pct, 
+	long_term_optimistic,
+	long_term_pessimistic,
+	long_term_neutral,
+	median_discount_to_fair_value, 
+	value_indicator_score, 
+	discount_premium_to_fair_value, 
+	net_discount_median_fair_value, 
+	fair_value_change_1m, 
+	expected_return_2m, 
+	discount_premium_to_intrinsic_value, 
+	intrinsic_value_change_3m, 
+	fair_value_change_3m, 
+	intrinsic_value_change_1m 
+from stockindicators si inner join stocks s on si.instrument_id = s.id 
+inner join stocks_groups sg on s.id = sg.stock_id
+where sg.group_id = 216
+and si.stamp_date = '2017-11-14' ;
 
 select si.* 
 from stockindicators si inner join stocks s on si.instrument_id = s.id 
@@ -40,9 +68,12 @@ and si.stamp_date = '2017-11-14' ;
 SELECT * FROM ANALYTICS.ANALYTICS ;
 SELECT * FROM ANALYTICS.ANALYTICS_DATA_SOURCE ;
 SELECT * FROM ANALYTICS.ANALYTICS_INVESTMENT_STYLE ;
-SELECT * FROM ANALYTICS.ANALYTICS_INVESTMENT_STYLE_PARAMETER ;
-SELECT * FROM ANALYTICS.ANALYTICS_QUERY_PARAMETER ;
 SELECT * FROM ANALYTICS.ANALYTICS_VIEW ;
+SELECT * FROM ANALYTICS.ANALYTICS_INVESTMENT_STYLE_PARAMETER ;
+SELECT * FROM ANALYTICS.ANALYTICS_PARAMETER ;
+SELECT * FROM ANALYTICS.DATE_PARAMETER ;
+SELECT * FROM ANALYTICS.DECIMAL_PARAMETER ;
+SELECT * FROM ANALYTICS.DOUBLE_PARAMETER ;
 
 
 select * from analytics.analytics_investment_style ais inner join analytics.analytics_investment_style_parameter aisp on ais.id = aisp.investment_style_id where ais.id = 1;

@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.libra.apollo.analytics.entity.InvestmentStyle;
-import com.libra.apollo.analytics.entity.QueryParameter;
+import com.libra.apollo.analytics.entity.Parameter;
 
 @Repository
 public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyle, Long> {
@@ -22,7 +22,7 @@ public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyl
 	List<InvestmentStyle> findAllByView(@Param("id") Long id);
 	
 	@Query("SELECT p FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp JOIN isp.parameter p WHERE ais.id = :id")
-	List<QueryParameter> findQueryParametersById(@Param("id") Long id);
+	List<Parameter> findQueryParametersById(@Param("id") Long id);
 	
 
 }
