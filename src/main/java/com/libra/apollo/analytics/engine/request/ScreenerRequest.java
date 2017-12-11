@@ -24,7 +24,7 @@ public class ScreenerRequest implements AnalyticsRequest {
 
 	@Override
 	public Operation getOperation() {
-		return Operation.ANALYZE;
+		return Operation.SCREEN;
 	}
 
 }

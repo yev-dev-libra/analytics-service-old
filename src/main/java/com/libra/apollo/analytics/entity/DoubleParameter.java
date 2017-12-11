@@ -16,7 +16,7 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "DOUBLE_PARAMETER")
-public class DoubleParameter extends QueryParameter {
+public class DoubleParameter extends QueryParameter<Double> {
 
 	@Column(name = "operand", nullable = true)
 	@Enumerated(EnumType.STRING)
@@ -47,14 +47,15 @@ public class DoubleParameter extends QueryParameter {
 	}
 
 	@Override
-	public int compareTo(ValueParameter o) {
+	public int compareTo(ValueParameter<Double> o) {
 		return this.getDoubleValue().compareTo(((DoubleParameter) o).getDoubleValue());
 	}
 
 	@Override
-	public <T> Specification<T> getSpecification(ValueParameter parameter) {
+	public Specification<Double> getSpecification(ValueParameter<Double> parameter) {
 		return this.getOperand().query(getFieldType(), this);
-
 	}
+	
+	
 
 }

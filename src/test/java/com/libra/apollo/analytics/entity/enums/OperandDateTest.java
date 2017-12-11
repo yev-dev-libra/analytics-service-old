@@ -27,7 +27,13 @@ public class OperandDateTest {
 		final OperandDate operation = OperandDate.EQUAL;
 		final ValueDataFieldType fieldType = ValueDataFieldType.STAMP_DATE;
 
-		final ValueParameter value = new ValueParameter() {
+		final ValueParameter<Date> value = new ValueParameter<Date>() {
+
+			@Override
+			public int compareTo(ValueParameter<Date> o) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
 
 			@Override
 			public Optional<Object> getValue() {
@@ -35,14 +41,13 @@ public class OperandDateTest {
 			}
 
 			@Override
-			public int compareTo(ValueParameter o) {
-				return 0;
-			}
-
-			@Override
-			public <T> Specification<T> getSpecification(ValueParameter parameter) {
+			public Specification<Date> getSpecification(ValueParameter<Date> parameter) {
+				// TODO Auto-generated method stub
 				return null;
 			}
+
+
+			
 		};
 
 		Specification<Date> dateSpec = operation.query(fieldType, value);

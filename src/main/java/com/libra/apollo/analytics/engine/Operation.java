@@ -2,7 +2,7 @@ package com.libra.apollo.analytics.engine;
 
 public enum Operation {
 
-	MODEL("model"), PERSIST("persist"), VALIDATE("validate"), ANALYZE("analyze");
+	MODEL("model"), PERSIST("persist"), VALIDATE("validate"), SCREEN("screen");
 
 	private String name;
 

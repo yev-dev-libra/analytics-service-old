@@ -17,7 +17,7 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue(value = "DATE_PARAMETER")
-public class DateParameter extends QueryParameter {
+public class DateParameter extends QueryParameter<Date> {
 
 	@Column(name = "operand")
 	@Enumerated(EnumType.STRING)
@@ -48,12 +48,12 @@ public class DateParameter extends QueryParameter {
 	}
 
 	@Override
-	public int compareTo(ValueParameter o) {
+	public int compareTo(ValueParameter<Date> o) {
 		return this.getDateValue().compareTo(((DateParameter) o).getDateValue());
 	}
 
 	@Override
-	public <T> Specification<T> getSpecification(ValueParameter parameter) {
+	public Specification<Date> getSpecification(ValueParameter<Date> parameter) {
 		return this.getOperand().query(getFieldType(), this);
 	}
 

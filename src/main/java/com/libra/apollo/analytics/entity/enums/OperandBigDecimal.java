@@ -1,17 +1,19 @@
 package com.libra.apollo.analytics.entity.enums;
 
+import java.math.BigDecimal;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.engine.ValueDataFieldType;
 import com.libra.apollo.analytics.specification.ValueParameter;
 import com.libra.apollo.analytics.specification.ValueParameterSpecification;
 
-public enum OperandBigDecimal implements ValueParameterSpecification {
+public enum OperandBigDecimal implements ValueParameterSpecification<BigDecimal> {
 
 	EQUAL("="){
 
 		@Override
-		public <T> Specification<T> query(ValueDataFieldType fieldType, ValueParameter value) {
+		public Specification<BigDecimal> query(ValueDataFieldType fieldType, ValueParameter<BigDecimal> value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -20,7 +22,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification {
 	NOT_EQUAL("!=") {
 
 		@Override
-		public <T> Specification<T> query(ValueDataFieldType fieldType, ValueParameter value) {
+		public Specification<BigDecimal> query(ValueDataFieldType fieldType, ValueParameter<BigDecimal> value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -29,7 +31,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification {
 	},
 	GREATER_THAN(">") {
 		@Override
-		public <T> Specification<T> query(ValueDataFieldType fieldType, ValueParameter value) {
+		public Specification<BigDecimal> query(ValueDataFieldType fieldType, ValueParameter<BigDecimal> value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -38,7 +40,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification {
 	GREATER_THAN_OR_EQUAL(">="){
 
 		@Override
-		public <T> Specification<T> query(ValueDataFieldType fieldType, ValueParameter value) {
+		public Specification<BigDecimal> query(ValueDataFieldType fieldType, ValueParameter<BigDecimal> value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -47,7 +49,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification {
 	LESS_THAN("<") {
 
 		@Override
-		public <T> Specification<T> query(ValueDataFieldType fieldType, ValueParameter value) {
+		public Specification<BigDecimal> query(ValueDataFieldType fieldType, ValueParameter<BigDecimal> value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -56,7 +58,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification {
 	LESS_THAN_OR_EQUAL("<="){
 
 		@Override
-		public <T> Specification<T> query(ValueDataFieldType fieldType, ValueParameter value) {
+		public Specification<BigDecimal> query(ValueDataFieldType fieldType, ValueParameter<BigDecimal> value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -66,7 +68,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification {
 	DATE_EQUALS(""){
 
 		@Override
-		public <T> Specification<T> query(ValueDataFieldType fieldType, ValueParameter value) {
+		public Specification<BigDecimal> query(ValueDataFieldType fieldType, ValueParameter<BigDecimal> value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
