@@ -70,8 +70,8 @@ INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, 
 INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (18,'LESS_THAN','0');
 
 -- Long term Optimistic
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (18,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','LONG_TERM_OPTIMISTIC');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (18,'GREATER_THAN','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (19,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','LONG_TERM_OPTIMISTIC');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (19,'GREATER_THAN','0');
 
 -- Populating apollo_analytics 
 INSERT INTO analytics.analytics(id,version,created_on,updated_on, name,description,run_type,analytics_type) VALUES (1,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','Apollo Analyzer','Collection of defined Investment Styles', 'ON_DEMAND','APOLLO_ANALYZER');
