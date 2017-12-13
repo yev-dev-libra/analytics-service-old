@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
+import com.libra.apollo.analytics.engine.Value;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 import com.libra.apollo.analytics.entity.Parameter;
@@ -57,7 +58,7 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 		SortedSet<InvestmentStyleParameter> conditions = invstStyle.getInvestmentStyleParameters();
 
 		// a sanity check to validate correct sorting
-		Map<Integer,Parameter> priorityWithConditions = new LinkedHashMap<>();
+		Map<Integer,Value> priorityWithConditions = new LinkedHashMap<>();
 		
 		
 		for(InvestmentStyleParameter invstCondition : conditions) {
@@ -65,7 +66,7 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 		}
 
 		int i = 1;
-		for(Map.Entry<Integer, Parameter> entry : priorityWithConditions.entrySet()) {
+		for(Map.Entry<Integer, Value> entry : priorityWithConditions.entrySet()) {
 			System.out.println("Key value " + entry.getKey());
 			assertThat(entry.getKey(),equalTo(i));
 			i++;
@@ -74,9 +75,16 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 	
 	@Test
 	public void should_Get_List_Of_Parameters() {
-		List<Parameter> parameters = repository.findQueryParametersById(1L);
+		List<Value> parameters = repository.findQueryParametersById(1L);
 		assertThat(parameters.size(), greaterThan(1));
 	}
+	
+	
+	@Test
+	public void should_Get_List_Apollo_Classics_Parameters() {
+		//5/4/3-star Green, Rising 1m FV and IV, trading within FV range
+	}
+	
 	
 	
 }

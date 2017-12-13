@@ -231,8 +231,9 @@ public enum ValueDataFieldType {
 	INTRINSIC_VALUE_CHANGE_3M("intrinsicValueChange3m"),
 	FAIR_VALUE_CHANGE_3M("fairValueChange3m"),
 	INTRINSIC_VALUE_CHANGE_1M("intrinsicValueChange1m"),
-	PCT_IN_FAIR_VALUE_RANGE("pctInFairValueRange")
-	
+	PCT_IN_FAIR_VALUE_RANGE("pctInFairValueRange"),
+	LONG_TERM_PESSIMISTIC("long_term_pessimistic"),
+	LONG_TERM_OPTIMISTIC("long_term_optimistic")
 	;
 	
 	
