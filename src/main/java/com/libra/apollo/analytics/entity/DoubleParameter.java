@@ -3,7 +3,6 @@ package com.libra.apollo.analytics.entity;
 import java.util.Optional;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,7 +17,7 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @Entity
 //@DiscriminatorValue(value = "DOUBLE_PARAMETER")
 @Table(name="double_parameter", schema="analytics")
-public class DoubleParameter extends QueryParameter<Double> {
+public class DoubleParameter extends QueryParameter {
 
 	@Column(name = "operand", nullable = true)
 	@Enumerated(EnumType.STRING)
@@ -49,12 +48,13 @@ public class DoubleParameter extends QueryParameter<Double> {
 	}
 
 	@Override
-	public int compareTo(ValueParameter<Double> o) {
+	public int compareTo(ValueParameter o) {
 		return this.getDoubleValue().compareTo(((DoubleParameter) o).getDoubleValue());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Specification<Double> getSpecification(ValueParameter<Double> parameter) {
+	public Specification<Double> getSpecification(ValueParameter parameter) {
 		return this.getOperand().query(getFieldType(), this);
 	}
 	

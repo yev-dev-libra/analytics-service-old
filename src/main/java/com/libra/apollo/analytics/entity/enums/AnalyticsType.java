@@ -2,7 +2,7 @@ package com.libra.apollo.analytics.entity.enums;
 
 public enum AnalyticsType {
 
-	APOLLO_ANALYZER("Apollo Analyzer");
+	APOLLO_SCREENER("Apollo Screener");
 
 	private final String name;
 

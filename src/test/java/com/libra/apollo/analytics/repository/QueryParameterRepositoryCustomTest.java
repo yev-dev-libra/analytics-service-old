@@ -1,5 +1,7 @@
 package com.libra.apollo.analytics.repository;
 
-public class QueryParameterRepositoryCustomTest {
+import com.libra.apollo.analytics.AbstractRepositoryTest;
+
+public class QueryParameterRepositoryCustomTest extends AbstractRepositoryTest {
 
 }

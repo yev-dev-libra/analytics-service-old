@@ -1,7 +1,5 @@
 package com.libra.apollo.analytics.repository;
 
-import java.math.BigDecimal;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -18,19 +16,19 @@ public class QueryParameterRepositoryCustomImpl implements QueryParameterReposit
 	private EntityManager em;
 
 	@Override
-	public void saveBigDecimalQueryParameter(QueryParameter<BigDecimal> parameter) {
+	public void saveBigDecimalQueryParameter(QueryParameter parameter) {
 		em.persist(parameter);
 
 	}
 
 	@Override
-	public void saveDoubleQueryParameter(QueryParameter<Double> parameter) {
+	public void saveDoubleQueryParameter(QueryParameter parameter) {
 		em.persist(parameter);
 
 	}
 
 	@Override
-	public void saveDataQueryParameter(QueryParameter<Double> parameter) {
+	public void saveDataQueryParameter(QueryParameter parameter) {
 		em.persist(parameter);
 
 	}

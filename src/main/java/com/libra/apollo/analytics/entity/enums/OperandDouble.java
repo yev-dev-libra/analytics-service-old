@@ -11,7 +11,7 @@ public enum OperandDouble implements ValueParameterSpecification<Double> {
 	EQUAL("=") {
 
 		@Override
-		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter<Double> value) {
+		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -20,7 +20,7 @@ public enum OperandDouble implements ValueParameterSpecification<Double> {
 	NOT_EQUAL("!=") {
 
 		@Override
-		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter<Double> value) {
+		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -30,7 +30,7 @@ public enum OperandDouble implements ValueParameterSpecification<Double> {
 	GREATER_THAN(">") {
 
 		@Override
-		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter<Double> value) {
+		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -40,7 +40,7 @@ public enum OperandDouble implements ValueParameterSpecification<Double> {
 	GREATER_THAN_OR_EQUAL(">=") {
 
 		@Override
-		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter<Double> value) {
+		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -49,7 +49,7 @@ public enum OperandDouble implements ValueParameterSpecification<Double> {
 	LESS_THAN("<") {
 
 		@Override
-		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter<Double> value) {
+		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -59,7 +59,7 @@ public enum OperandDouble implements ValueParameterSpecification<Double> {
 	LESS_THAN_OR_EQUAL("<=") {
 
 		@Override
-		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter<Double> value) {
+		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -68,7 +68,7 @@ public enum OperandDouble implements ValueParameterSpecification<Double> {
 	DATE_EQUALS("") {
 
 		@Override
-		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter<Double> value) {
+		public Specification<Double> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}

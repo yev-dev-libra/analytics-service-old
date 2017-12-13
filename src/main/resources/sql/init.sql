@@ -74,7 +74,7 @@ INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, 
 INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (19,'GREATER_THAN','0');
 
 -- Populating apollo_analytics 
-INSERT INTO analytics.analytics(id,version,created_on,updated_on, name,description,run_type,analytics_type) VALUES (1,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','Apollo Analyzer','Collection of defined Investment Styles', 'ON_DEMAND','APOLLO_ANALYZER');
+INSERT INTO analytics.analytics(id,version,created_on,updated_on, name,description,run_type,analytics_type) VALUES (1,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','Apollo Screener','Collection of defined Investment Styles', 'ON_DEMAND','APOLLO_SCREENER');
 
 
 -- Populating analytics_view 
@@ -94,8 +94,13 @@ INSERT INTO analytics.analytics_investment_style( id, name, description, priorit
 
 -- Populating investment_style parameters
 
+-- Apollo Classics
 INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(1,1,1,1); --WHERE_STAMP_DATE_EQUAL
-INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(2,1,2,2); --AND STAR_RATING GREATER_THAN_OR_EQUAL 3.0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(2,1,2,2); --AND STAR_RATING GREATER_THAN_OR_EQUAL  >= 3.0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(3,1,3,3); --FAIR_VALUE_CHANGE_1M >= 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(4,1,4,4); --INTRINSIC_VALUE_CHANGE_1M >= 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(5,1,5,5); -- PCT_IN_FAIR_VALUE_RANGE > 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(6,1,6,3); -- PCT_IN_FAIR_VALUE_RANGE < 1
 
 -- Populating stock_indicators. Stoxx 600 extract for the 08.12.2017
 

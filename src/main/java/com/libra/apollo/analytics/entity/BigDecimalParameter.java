@@ -18,7 +18,7 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 @Entity
 //@DiscriminatorValue(value = "DECIMAL_PARAMETER")
 @Table(name="decimal_parameter", schema="analytics")
-public class BigDecimalParameter extends QueryParameter<BigDecimal> {
+public class BigDecimalParameter extends QueryParameter {
 	
 	@Column(name="operand")
 	@Enumerated(EnumType.STRING)
@@ -49,16 +49,18 @@ public class BigDecimalParameter extends QueryParameter<BigDecimal> {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Specification<BigDecimal> getSpecification(ValueParameter<BigDecimal> parameter) {
+	public  Specification<BigDecimal> getSpecification(ValueParameter parameter) {
 		return this.getOperand().query(getFieldType(), this);
 
 	}
 
 	@Override
-	public int compareTo(ValueParameter<BigDecimal> o) {
+	public int compareTo(ValueParameter o) {
 		return this.getBigDecimalValue().compareTo(((BigDecimalParameter) o).getBigDecimalValue());
 	}
+
 
 
 }

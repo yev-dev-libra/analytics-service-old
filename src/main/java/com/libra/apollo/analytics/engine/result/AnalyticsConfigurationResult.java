@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.response;
+package com.libra.apollo.analytics.engine.result;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,7 +8,7 @@ import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
-public class AnalyticsConfigurationResponse implements AnalyticsResponse {
+public class AnalyticsConfigurationResult implements AnalyticsResult {
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public class AnalyticsConfigurationResponse implements AnalyticsResponse {
 
 	@Override
 	public AnalyticsType getAnalyticsType() {
-		return AnalyticsType.APOLLO_ANALYZER;
+		return AnalyticsType.APOLLO_SCREENER;
 	}
 
 	@Override

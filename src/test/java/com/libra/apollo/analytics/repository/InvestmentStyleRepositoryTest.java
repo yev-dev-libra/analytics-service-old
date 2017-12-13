@@ -17,13 +17,21 @@ import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.engine.Value;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
-import com.libra.apollo.analytics.entity.Parameter;
+import com.libra.apollo.analytics.entity.Priority;
+import com.libra.apollo.analytics.entity.QueryParameter;
 
 public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 
 	@Autowired private InvestmentStyleRepository repository;
 	
-	
+	private static final Long APOLLO_CLASSICS_STYLE_ID =1L;
+	private static final Long STOCKS_ON_THE_ROCKS_STYLE_ID =2L;
+	private static final Long VALUE_BUY_STYLE_ID =3L;
+	private static final Long VALUE_SELL_STYLE_ID =4L;
+	private static final Long APOLLO_GROWTH_STYLE_ID =5L;
+	private static final Long APOLLO_VALUE_STYLE_ID =6L;
+	private static final Long BELOW_12M_PESSIMISTIC =7L;
+	private static final Long ABOVE_12M_OPTIMISTIC =8L;
 	@Test
 	public void shouldRetrieveAllInvestmentStyle() {
 		List<InvestmentStyle> allInvStyles = repository.findAll();
@@ -75,14 +83,90 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 	
 	@Test
 	public void should_Get_List_Of_Parameters() {
-		List<Value> parameters = repository.findQueryParametersById(1L);
+		List<QueryParameter> parameters = repository.findQueryParametersById(1L);
+		assertThat(parameters.size(), greaterThan(1));
+	}
+	
+	@Test
+	public void should_Get_Map_Of_Parameters_With_Priority() {
+		List<Map<QueryParameter,Priority>> parameters = repository.findQueryParametersByIdWithPriority(1L);
+		assertThat(parameters.size(), greaterThan(1));
+	}
+	@Test
+	public void should_Get_SortedSet_Of_Parameters() {
+		SortedSet<QueryParameter> parameters = repository.findQueryParametersByIdSorted(1L);
 		assertThat(parameters.size(), greaterThan(1));
 	}
 	
 	
 	@Test
+	public void should_Count_Apollo_Classics_Parameters() {
+		
+		long cnt = repository.countQueryParametersById(APOLLO_CLASSICS_STYLE_ID);
+		assertThat(cnt,equalTo(6L));
+		
+	}
+	
+	@Test
+	public void should_Count_Stocks_on_The_Rocks_Parameters() {
+	}
+	
+	@Test
+	public void should_Count_Value_Buys_Parameters() {
+	}
+	
+	@Test
+	public void should_Count_Value_Sells_Parameters() {
+	}
+	
+	@Test
+	public void should_Count_Apollo_Growth_Parameters() {
+	}
+	
+	@Test
+	public void should_Count_Apollo_Value_Parameters() {
+	}
+	
+	@Test
+	public void should_Count_Long_Term_Optimistic_Parameters() {
+	}
+	
+	@Test
+	public void should_Count_Long_Term_Pessimistic_Parameters() {
+	}
+	
+	@Test
 	public void should_Get_List_Apollo_Classics_Parameters() {
 		//5/4/3-star Green, Rising 1m FV and IV, trading within FV range
+		
+	}
+	
+	@Test
+	public void should_Get_List_Stocks_on_The_Rocks_Parameters() {
+	}
+	
+	@Test
+	public void should_Get_List_Value_Buys_Parameters() {
+	}
+	
+	@Test
+	public void should_Get_List_Value_Sells_Parameters() {
+	}
+	
+	@Test
+	public void should_Get_List_Apollo_Growth_Parameters() {
+	}
+	
+	@Test
+	public void should_Get_List_Apollo_Value_Parameters() {
+	}
+	
+	@Test
+	public void should_Get_List_Long_Term_Optimistic_Parameters() {
+	}
+	
+	@Test
+	public void should_Get_List_Long_Term_Pessimistic_Parameters() {
 	}
 	
 	

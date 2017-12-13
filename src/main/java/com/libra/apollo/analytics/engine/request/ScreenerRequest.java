@@ -14,7 +14,7 @@ public class ScreenerRequest implements AnalyticsRequest {
 	
 	@Override
 	public AnalyticsType getAnalyticsType() {
-		return AnalyticsType.APOLLO_ANALYZER;
+		return AnalyticsType.APOLLO_SCREENER;
 	}
 
 	@Override

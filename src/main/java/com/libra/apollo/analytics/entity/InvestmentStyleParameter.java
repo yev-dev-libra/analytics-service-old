@@ -30,7 +30,7 @@ public class InvestmentStyleParameter implements Serializable, Comparable<Invest
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "parameter_id", nullable = true)
-	private Parameter parameter;
+	private QueryParameter parameter;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "data_source_id", nullable = true)
@@ -60,11 +60,11 @@ public class InvestmentStyleParameter implements Serializable, Comparable<Invest
 		this.priority = priority;
 	}
 
-	public Parameter getParameter() {
+	public QueryParameter getParameter() {
 		return parameter;
 	}
 
-	public void setParameter(Parameter parameter) {
+	public void setParameter(QueryParameter parameter) {
 		this.parameter = parameter;
 	}
 

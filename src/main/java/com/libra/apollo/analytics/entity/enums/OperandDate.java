@@ -18,7 +18,7 @@ public enum OperandDate implements ValueParameterSpecification<Date> {
 	EQUAL("="){
 		
 		@Override
-		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter<Date> value) {
+		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter value) {
 			if(value.getClazz().equals(Date.class)) {
 				
 				LocalDate today = LocalDate.now ( ZoneId.of ( Properties.DEFAULT_TIME_ZONE_ID ) ).minus(1, ChronoUnit.DAYS);
@@ -34,7 +34,7 @@ public enum OperandDate implements ValueParameterSpecification<Date> {
 	NOT_EQUAL("!=") {
 		
 		@Override
-		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter<Date> value) {
+		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -43,7 +43,7 @@ public enum OperandDate implements ValueParameterSpecification<Date> {
 	GREATER_THAN(">") {
 
 		@Override
-		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter<Date> value) {
+		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -53,7 +53,7 @@ public enum OperandDate implements ValueParameterSpecification<Date> {
 	GREATER_THAN_OR_EQUAL(">="){
 
 		@Override
-		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter<Date> value) {
+		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -63,7 +63,7 @@ public enum OperandDate implements ValueParameterSpecification<Date> {
 	LESS_THAN("<") {
 
 		@Override
-		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter<Date> value) {
+		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -73,7 +73,7 @@ public enum OperandDate implements ValueParameterSpecification<Date> {
 	LESS_THAN_OR_EQUAL("<="){
 
 		@Override
-		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter<Date> value) {
+		public Specification<Date> query(ValueDataFieldType fieldType, ValueParameter value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
