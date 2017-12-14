@@ -21,7 +21,6 @@ public class AnalyticsConfigurationResult implements AnalyticsResult {
 		analyticsViews.add(view);
 	}
 	
-	@Override
 	public Collection<AnalyticsView> getAnalyticsViews() {
 		return analyticsViews;
 	}
@@ -33,7 +32,7 @@ public class AnalyticsConfigurationResult implements AnalyticsResult {
 
 	@Override
 	public RunType getRunType() {
-		return RunType.ON_DEMAND;
+		return RunType.MANUAL;
 	}
 
 	

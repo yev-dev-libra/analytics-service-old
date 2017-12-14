@@ -1,7 +1,7 @@
 package com.libra.apollo.analytics.entity.enums;
 
 public enum RunType {
-	ON_DEMAND("on demand"), SCHEDULED("scheduled");
+	MANUAL("manual"), SCHEDULED("scheduled");
 	private final String name;
 
 	private RunType(String name) {

@@ -31,13 +31,13 @@ public class AnalyticsRepositoryTest extends AbstractRepositoryTest {
 	}
 	@Test
 	public void should_Find_By_Type_And_Operation_And_RunType() {
-		List<ApolloAnalytics> analytics =  analyticsRepository.findAllByTypeAndByRunType(AnalyticsType.APOLLO_SCREENER, RunType.ON_DEMAND);
+		List<ApolloAnalytics> analytics =  analyticsRepository.findAllByTypeAndByRunType(AnalyticsType.APOLLO_SCREENER, RunType.MANUAL);
 		assertThat(analytics.size(), greaterThan(0));
 	}
 	
 	@Test
 	public void should_Find_By_Type_And_Operation_Or_RunType() {
-		List<ApolloAnalytics> analytics =  analyticsRepository.findAllByTypeOrByRunType(AnalyticsType.APOLLO_SCREENER, RunType.ON_DEMAND);
+		List<ApolloAnalytics> analytics =  analyticsRepository.findAllByTypeOrByRunType(AnalyticsType.APOLLO_SCREENER, RunType.MANUAL);
 		assertThat(analytics.size(), greaterThan(0));
 	}
 }

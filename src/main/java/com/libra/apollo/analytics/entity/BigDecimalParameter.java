@@ -11,8 +11,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.libra.apollo.analytics.engine.Value;
 import com.libra.apollo.analytics.entity.enums.OperandBigDecimal;
-import com.libra.apollo.analytics.specification.ValueParameter;
 
 @SuppressWarnings("serial")
 @Entity
@@ -51,13 +51,13 @@ public class BigDecimalParameter extends QueryParameter {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public  Specification<BigDecimal> getSpecification(ValueParameter parameter) {
-		return this.getOperand().query(getFieldType(), this);
+	public  Specification<BigDecimal> getSpecification() {
+		return this.getOperand().query(this);
 
 	}
 
 	@Override
-	public int compareTo(ValueParameter o) {
+	public int compareTo(Value o) {
 		return this.getBigDecimalValue().compareTo(((BigDecimalParameter) o).getBigDecimalValue());
 	}
 

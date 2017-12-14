@@ -8,70 +8,67 @@ INSERT INTO analytics.analytics_data_source (id,type,version,created_on, updated
 
 
 -- Parameters
--- Base
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (1,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','STAMP_DATE');
-INSERT INTO analytics.date_parameter( id, operand, date_value ) VALUES (1,'EQUAL', NULL);
 
 -- Apollo Classics
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (2,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','STAR_RATING');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (2,'GREATER_THAN_OR_EQUAL','3.0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (1,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','STAR_RATING');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (1,'GREATER_THAN_OR_EQUAL','3.0');
 
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (3,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','FAIR_VALUE_CHANGE_1M');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (2,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','FAIR_VALUE_CHANGE_1M');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (2,'GREATER_THAN_OR_EQUAL','0');
+
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (3,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_CHANGE_1M');
 INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (3,'GREATER_THAN_OR_EQUAL','0');
 
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (4,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_CHANGE_1M');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (4,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','PCT_IN_FAIR_VALUE_RANGE');
 INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (4,'GREATER_THAN_OR_EQUAL','0');
 
 INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (5,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','PCT_IN_FAIR_VALUE_RANGE');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (5,'GREATER_THAN_OR_EQUAL','0');
-
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (6,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','PCT_IN_FAIR_VALUE_RANGE');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (6,'LESS_THAN_OR_EQUAL','1');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (5,'LESS_THAN_OR_EQUAL','1');
 
 
 -- Stocks on the Rocks
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (8,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','STAR_RATING');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (8,'LESS_THAN_OR_EQUAL','2.0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (6,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','STAR_RATING');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (6,'LESS_THAN_OR_EQUAL','2.0');
 
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (9,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','FAIR_VALUE_CHANGE_1M');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (9,'LESS_THAN','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (7,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','FAIR_VALUE_CHANGE_1M');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (7,'LESS_THAN','0');
 
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (10,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_CHANGE_1M');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (10,'LESS_THAN','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (8,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_CHANGE_1M');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (8,'LESS_THAN','0');
 
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (11,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','PCT_IN_FAIR_VALUE_RANGE');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (11,'GREATER_THAN_OR_EQUAL','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (9,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','PCT_IN_FAIR_VALUE_RANGE');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (9,'GREATER_THAN_OR_EQUAL','0');
 
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (12,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','PCT_IN_FAIR_VALUE_RANGE');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (12,'LESS_THAN_OR_EQUAL','0.5');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (10,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','PCT_IN_FAIR_VALUE_RANGE');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (10,'LESS_THAN_OR_EQUAL','0.5');
 
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (13,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_PCT');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (13,'GREATER_THAN','0.2');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (11,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_PCT');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (11,'GREATER_THAN','0.2');
 
 -- Value Buy
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (14,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_PCT');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (14,'LESS_THAN_OR_EQUAL','0.2');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (12,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_PCT');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (12,'LESS_THAN_OR_EQUAL','0.2');
 
 -- Value Sell
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (15,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_PCT');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (15,'GREATER_THAN_OR_EQUAL','0.8');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (13,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','INTRINSIC_VALUE_PCT');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (13,'GREATER_THAN_OR_EQUAL','0.8');
 
 -- Apollo "Growth"
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (16,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','MEDIAN_DISCOUNT_TO_FAIR_VALUE');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (16,'GREATER_THAN_OR_EQUAL','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (14,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','MEDIAN_DISCOUNT_TO_FAIR_VALUE');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (14,'GREATER_THAN_OR_EQUAL','0');
 
 -- Apollo "Value"
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (17,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','MEDIAN_DISCOUNT_TO_FAIR_VALUE');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (17,'LESS_THAN','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (15,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','MEDIAN_DISCOUNT_TO_FAIR_VALUE');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (15,'LESS_THAN','0');
 
 
 -- Long term Pessimistic
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (18,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','LONG_TERM_PESSIMISTIC');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (18,'LESS_THAN','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (16,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','LONG_TERM_PESSIMISTIC');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (16,'LESS_THAN','0');
 
 -- Long term Optimistic
-INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (19,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','LONG_TERM_OPTIMISTIC');
-INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (19,'GREATER_THAN','0');
+INSERT INTO analytics.analytics_parameter( id, version, created_on, updated_on, composition_type, data_field_type) VALUES (17,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','AND','LONG_TERM_OPTIMISTIC');
+INSERT INTO analytics.decimal_parameter( id, operand, decimal_value ) VALUES (17,'GREATER_THAN','0');
 
 -- Populating apollo_analytics 
 INSERT INTO analytics.analytics(id,version,created_on,updated_on, name,description,run_type,analytics_type) VALUES (1,'0', '2017-12-01 00:00:00','2017-12-01 00:00:00','Apollo Screener','Collection of defined Investment Styles', 'ON_DEMAND','APOLLO_SCREENER');
@@ -95,12 +92,11 @@ INSERT INTO analytics.analytics_investment_style( id, name, description, priorit
 -- Populating investment_style parameters
 
 -- Apollo Classics
-INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(1,1,1,1); --WHERE_STAMP_DATE_EQUAL
-INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(2,1,2,2); --AND STAR_RATING GREATER_THAN_OR_EQUAL  >= 3.0
-INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(3,1,3,3); --FAIR_VALUE_CHANGE_1M >= 0
-INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(4,1,4,4); --INTRINSIC_VALUE_CHANGE_1M >= 0
-INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(5,1,5,5); -- PCT_IN_FAIR_VALUE_RANGE > 0
-INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(6,1,6,3); -- PCT_IN_FAIR_VALUE_RANGE < 1
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(1,1,1,1); --AND STAR_RATING GREATER_THAN_OR_EQUAL  >= 3.0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(2,1,2,2); --FAIR_VALUE_CHANGE_1M >= 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(3,1,3,3); --INTRINSIC_VALUE_CHANGE_1M >= 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(4,1,4,4); -- PCT_IN_FAIR_VALUE_RANGE > 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(5,1,5,5); -- PCT_IN_FAIR_VALUE_RANGE < 1
 
 -- Populating stock_indicators. Stoxx 600 extract for the 08.12.2017
 

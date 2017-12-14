@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.libra.apollo.analytics.engine.Value;
 import com.libra.apollo.analytics.entity.enums.OperandDouble;
-import com.libra.apollo.analytics.specification.ValueParameter;
 
 @SuppressWarnings("serial")
 @Entity
@@ -48,14 +48,14 @@ public class DoubleParameter extends QueryParameter {
 	}
 
 	@Override
-	public int compareTo(ValueParameter o) {
+	public int compareTo(Value o) {
 		return this.getDoubleValue().compareTo(((DoubleParameter) o).getDoubleValue());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Specification<Double> getSpecification(ValueParameter parameter) {
-		return this.getOperand().query(getFieldType(), this);
+	public Specification<Double> getSpecification() {
+		return this.getOperand().query(this);
 	}
 	
 	

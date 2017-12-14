@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 //@ActiveProfiles({ "integration", "dev" })
-@TestPropertySource(locations = "classpath:application-dev.properties", properties = {})
+@TestPropertySource(locations = "classpath:application-test.properties", properties = {})
 public class AbstractApolloAnalyticsIntegrationTest {
 
 
