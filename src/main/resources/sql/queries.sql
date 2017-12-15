@@ -1,4 +1,6 @@
 
+select * from apollo.stockindicators si where si.stamp_date = ( select max(i.stamp_date) from apollo.stockindicators i );
+
 select 
 	id, 
 	stamp_date,

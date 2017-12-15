@@ -50,11 +50,11 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	@Override
 	public ScreenerResult getScreeningResults(final AnalyticsType type, final Date runDate, final Collection<Long> stockIds, final Long investmentStyleId) {
 
-		final Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(runDate);
+		final Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateGreatest();
 		final Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.stockIdsEquals(stockIds);
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specs = new AnalyticsSpecifications<>(stampDateSpec);
-		specs.and(stockIdSpec);
+		final AnalyticsSpecifications<LibraStockIndicator> specs = new AnalyticsSpecifications<>(stockIdSpec);
+		specs.and(stampDateSpec);
 		
 		Iterable<QueryParameter> queryParams = investmentStyleRepository.findIterableQueryParametersById(investmentStyleId);
 		
