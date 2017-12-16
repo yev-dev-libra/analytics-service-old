@@ -125,8 +125,7 @@ values (
 	'0.1', -- intrinsic_value_change_1m
 	'0.8166' -- pct_in_fair_value_range
 ) ;
-
--- Stocks on the Rocks
+-- Apollo Classics
 INSERT INTO apollo.stockindicators (
 	id,
 	version,
@@ -137,8 +136,7 @@ INSERT INTO apollo.stockindicators (
 	star_rating,
 	fair_value_change_1m,
 	intrinsic_value_change_1m,
-	pct_in_fair_value_range,
-	intrinsic_value_pct
+	pct_in_fair_value_range
 ) 
 values (
 	2,
@@ -146,93 +144,10 @@ values (
 	'2017-11-01 00:00:00',
 	'2017-11-01 00:00:00',
 	'2', -- instrument_id
-	'2017-12-01', 
-	'2.0000', -- star_rating
-	'-0.1',  -- fair_value_change_1m
-	'-0.1', -- intrinsic_value_change_1m
-	'0.4166', -- pct_in_fair_value_range 
-	'0.39042103846519144' -- intrinsic_value_pct (Value Indicator)
-) ;
-
-
--- Value Buy
-INSERT INTO apollo.stockindicators (
-	id,
-	version,
-	created_on,
-	updated_on,
-	instrument_id, 
-	stamp_date,
-	intrinsic_value_pct
-) 
-values (
-	3,
-	'0',
-	'2017-11-01 00:00:00',
-	'2017-11-01 00:00:00',
-	'3', -- instrument_id
-	'2017-12-01', 
-	'0.20'-- intrinsic_value_pct (Value Indicator)
-) ;
--- Value Sell
-INSERT INTO apollo.stockindicators (
-	id,
-	version,
-	created_on,
-	updated_on,
-	instrument_id, 
-	stamp_date, 
-	intrinsic_value_pct
-) 
-values (
-	4,
-	'0',
-	'2017-11-01 00:00:00',
-	'2017-11-01 00:00:00',
-	'4', -- instrument_id
-	'2017-12-01', 
-	'0.8'-- intrinsic_value_pct (Value Indicator)
-) ;
-
--- Rerating (Apollo "Growth")
-INSERT INTO apollo.stockindicators (
-	id,
-	version,
-	created_on,
-	updated_on,
-	instrument_id, 
-	stamp_date, 
-	median_discount_to_fair_value,
-) 
-values (
-	5,
-	'0',
-	'2017-11-01 00:00:00',
-	'2017-11-01 00:00:00',
-	'5', -- instrument_id
-	'2017-12-01',
-	'0.1' -- median_discount_to_fair_value
-	
-) ;
-
--- Derating (Apollo "Value")
-INSERT INTO apollo.stockindicators (
-	id,
-	version,
-	created_on,
-	updated_on,
-	instrument_id, 
-	stamp_date, 
-	median_discount_to_fair_value,
-) 
-values (
-	6,
-	'0',
-	'2017-11-01 00:00:00',
-	'2017-11-01 00:00:00',
-	'6', -- instrument_id
-	'2017-12-01',
-	'-0.1' -- median_discount_to_fair_value
-	
+	'2017-12-02', 
+	'3.0000', -- star_rating
+	'0.1',  -- fair_value_change_1m
+	'0.1', -- intrinsic_value_change_1m
+	'0.8166' -- pct_in_fair_value_range
 ) ;
 

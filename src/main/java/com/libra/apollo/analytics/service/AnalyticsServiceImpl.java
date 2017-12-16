@@ -63,8 +63,8 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 		Consumer<? super QueryParameter> action = consumer -> specs.and(consumer.getSpecification());
 		
 		queryParams.forEach(action);
-		
-		List<LibraStockIndicator> indicators = libraStockIndicatorRepository.findAll(specs); //TODO: add sorting
+		//TODO: add sorting
+		List<LibraStockIndicator> indicators = libraStockIndicatorRepository.findAll(specs); 
 		
 		ScreenerResult results = new ScreenerResult(indicators);
 		

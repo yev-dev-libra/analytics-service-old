@@ -49,7 +49,7 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2017, 11, 01);
 
-		Collection<Long> stockIds = Arrays.asList(1L);
+		Collection<Long> stockIds = Arrays.asList(1L, 2L);
 		
 	    analyticsService.getScreeningResults(type,previousDate,stockIds, APOLLO_CLASSICS_STYLE_ID );
 		

@@ -1,6 +1,10 @@
 
 select * from apollo.stockindicators si where si.stamp_date = ( select max(i.stamp_date) from apollo.stockindicators i );
 
+select si1.id, si1.instrument_id, si1.stamp_date 
+from apollo.stockindicators si1
+where exists ( select max(si2.stamp_date) from apollo.stockindicators si2 where si1.instrument_id = si2.instrument_id   );
+
 select 
 	id, 
 	stamp_date,
