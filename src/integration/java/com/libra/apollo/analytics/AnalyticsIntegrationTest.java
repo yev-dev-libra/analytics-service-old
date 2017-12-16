@@ -42,7 +42,7 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 	}
 	
 	@Test
-	public void should_Retrieve_List_Of_Indicators_For_Apollo_Classics() {
+	public void shouldRetrieveListOfIndicatorsForApolloClassics() {
 		
 		AnalyticsType type = AnalyticsType.APOLLO_SCREENER;
 		

@@ -22,14 +22,11 @@ public class StampDateSpecification {
 
 	public static <T> Specification<T> stampDateGreatest() {
 		return (root, query,cb) -> {
-//			Expression<Date> expression = cb.greatest(root.<Date>get(stampDateFieldName));
-//		
-//			return cb.equal(root.<Date>get(stampDateFieldName), query.multiselect(.select(expression)));
-			
 			 Subquery<Date> sq = query.subquery(Date.class);
-			 Root<LibraStockIndicator> r = sq.from(LibraStockIndicator.class);
-			 return null;
-//			 https://adrianhummel.wordpress.com/2010/07/02/composed-specifications-using-jpa-2-0/
+			 Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
+			 Expression<Date> expression = cb.greatest(rootSubquery.<Date>get(stampDateFieldName));
+			 sq.select(expression);
+			 return cb.equal(root.get(stampDateFieldName), sq);
 		};
 		
 
