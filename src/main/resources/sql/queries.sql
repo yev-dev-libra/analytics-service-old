@@ -2,8 +2,36 @@
 select * from apollo.stockindicators si where si.stamp_date = ( select max(i.stamp_date) from apollo.stockindicators i );
 
 select si1.id, si1.instrument_id, si1.stamp_date 
-from apollo.stockindicators si1
-where exists ( select max(si2.stamp_date) from apollo.stockindicators si2 where si1.instrument_id = si2.instrument_id   );
+from apollo.stockindicators si1 join (select instrument_id , max(stamp_date) as max_stamp_date from apollo.stockindicators group by instrument_id) si2
+on si1.instrument_id =  si2.instrument_id 
+where  si1.stamp_date =  si2.max_stamp_date
+and  si1.instrument_id  in (1,2)
+;
+
+select si1.id, si1.instrument_id, si1.stamp_date 
+from apollo.stockindicators si1 join (select instrument_id , max(stamp_date) as max_stamp_date from apollo.stockindicators group by instrument_id) si2
+on si1.instrument_id =  si2.instrument_id and  si1.stamp_date =  si2.max_stamp_date
+where  si1.instrument_id  in (1,2)
+;
+
+
+select si1.id, si1.instrument_id, si1.stamp_date 
+from apollo.stockindicators si1 join apollo.v_top_indicators_stamp_date si2
+on si1.instrument_id =  si2.instrument_id and  si1.stamp_date =  si2.max_stamp_date
+where  si1.instrument_id  in (1,2)
+;
+select * from v_top_indicators_stamp_date;
+
+select si1.id, si1.instrument_id, si1.stamp_date 
+from apollo.stockindicators si1 join v_top_indicators_stamp_date si2
+on si1.instrument_id =  si2.instrument_id and  si1.stamp_date =  si2.max_stamp_date
+where  si1.instrument_id  in (1,2)
+;
+
+CREATE VIEW apollo.v_top_indicators_stamp_date AS
+SELECT i.instrument_id , max(i.stamp_date) as max_stamp_date FROM apollo.stockindicators i 
+INNER JOIN apollo.stocks s ON i.instrument_id = s.id WHERE disabled = FALSE GROUP BY instrument_id
+;
 
 select 
 	id, 

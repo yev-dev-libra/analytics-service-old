@@ -20,8 +20,12 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
@@ -185,4 +189,22 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 
 	}
 
+	@Test
+	public void shouldFindLibraStockIndicatorJoinedByMaxStampDateAndGroupedByStockIdWithSpecification() {
+		
+		String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
+		String stockIdFieldName = ValueDataFieldType.STOCK_ID.getFieldName();
+
+		Specification<LibraStockIndicator> maxStampDateSpec =  (root, query, cb) -> {
+			
+			 Subquery<Long> sq = query.subquery(Long.class);
+			 Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
+			 sq.select(rootSubquery.get(stockIdFieldName));
+			 sq.select(rootSubquery.get(stampDateFieldName));
+			 return cb.equal(root.get(stockIdFieldName), sq);
+			
+		};
+		List<LibraStockIndicator> indicators = repository.findAll(maxStampDateSpec);		
+		assertThat(indicators.isEmpty(), is(false));
+	}
 }
