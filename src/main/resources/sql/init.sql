@@ -1,8 +1,7 @@
 
+-- CREATE VIEW apollo.v_top_indicators_stamp_date AS
+-- SELECT instrument_id , max(stamp_date) as max_stamp_date FROM apollo.stockindicators group by instrument_id
 
-CREATE VIEW apollo.v_top_indicators_stamp_date AS
-SELECT instrument_id , max(stamp_date) as max_stamp_date FROM apollo.stockindicators group by instrument_id
-;
 -- Populating data for analytics schema
 
 -- Populating Data Source

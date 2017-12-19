@@ -19,6 +19,7 @@ import com.libra.apollo.analytics.entity.LibraStockIndicator;
 public class StampDateSpecification {
 
 	private static String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
+	private static String stockIdFieldName = ValueDataFieldType.STOCK_ID.getFieldName();
 
 	public static <T> Specification<T> stampDateGreatest() {
 		return (root, query,cb) -> {
@@ -26,10 +27,38 @@ public class StampDateSpecification {
 			 Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
 			 Expression<Date> expression = cb.greatest(rootSubquery.<Date>get(stampDateFieldName));
 			 sq.select(expression);
+			 
 			 return cb.equal(root.get(stampDateFieldName), sq);
 		};
 		
 
+	}
+	public static <T> Specification<T> stampDateGreatestGroupedByStockId() {
+		return (root, query,cb) -> {
+			
+//			Subquery<Date> sq = query.subquery(Date.class);
+//			Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
+//			Expression<Date> maxDateExpression = cb.greatest(rootSubquery.<Date>get(stampDateFieldName));
+//			sq.select(maxDateExpression).groupBy(rootSubquery.<Long>get(stockIdFieldName));
+//			
+//			return cb.equal(root.get(stampDateFieldName), sq);
+			
+//			Root<LibraStockIndicator> stockIndicator1 = query.from(LibraStockIndicator.class);
+//			Root<LibraStockIndicator> stockIndicator2 = query.from(LibraStockIndicator.class);
+//			
+//			stockIndicator1.alias("si1");
+//			stockIndicator2.alias("si2");
+//			
+//			query.multiselect(stockIndicator1, stockIndicator2);
+			
+			Subquery<Date> sq = query.subquery(Date.class);
+			Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
+			Expression<Date> maxDateExpression = cb.greatest(rootSubquery.<Date>get(stampDateFieldName));
+			sq.select(maxDateExpression).groupBy(rootSubquery.<Long>get(stockIdFieldName));
+			return cb.in(maxDateExpression);
+		};
+		
+		
 	}
 	public static <T> Specification<T> stampDateEqual(final Date stampDate) {
 		return (root, query,cb) -> {

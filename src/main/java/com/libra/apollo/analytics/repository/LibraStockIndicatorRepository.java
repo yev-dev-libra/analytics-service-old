@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +16,8 @@ public interface LibraStockIndicatorRepository extends BaseRepository<LibraStock
 	public List<LibraStockIndicator> findByStampDate(Date date);
 	public List<LibraStockIndicator> findByStockId(Long stockId);
 	public List<LibraStockIndicator> findByStockIdAndStampDate(Long stockId,Date date );
-	public List<LibraStockIndicator> findByStockId(Long stockId, Sort sort);
+	public List<LibraStockIndicator> findByStockIdIn(List<Long> stockIdList);
+	public List<LibraStockIndicator> findByStockIdInAndStampDate(List<Long> stockIdList,Date date );
 	public Page<LibraStockIndicator> findByStockId(Long stockId, Pageable pageable);
 	
 		

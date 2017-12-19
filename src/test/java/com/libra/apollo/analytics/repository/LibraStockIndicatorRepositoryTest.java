@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,9 +18,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
@@ -37,12 +32,7 @@ import org.springframework.data.jpa.domain.Specifications;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.engine.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.InvestmentStyle;
-import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.entity.QueryParameter;
-import com.libra.apollo.analytics.entity.enums.CompositionType;
-import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.StampDateSpecification;
 
@@ -190,6 +180,7 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	}
 
 	@Test
+//	select instrument_id , max(stamp_date) as max_stamp_date from apollo.stockindicators group by instrument_id
 	public void shouldFindLibraStockIndicatorJoinedByMaxStampDateAndGroupedByStockIdWithSpecification() {
 		
 		String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
@@ -197,14 +188,18 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 
 		Specification<LibraStockIndicator> maxStampDateSpec =  (root, query, cb) -> {
 			
-			 Subquery<Long> sq = query.subquery(Long.class);
-			 Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
-			 sq.select(rootSubquery.get(stockIdFieldName));
-			 sq.select(rootSubquery.get(stampDateFieldName));
-			 return cb.equal(root.get(stockIdFieldName), sq);
+//			CriteriaQuery<LibraStockIndicator> q = cb.createQuery(LibraStockIndicator.class);
+//			Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
+//			q.multiselect(indicatorsRoot.get("stockId")).groupBy(indicatorsRoot.get("stockId"));
+//			return q.getRestriction();
+			
+			Subquery<LibraStockIndicator> subquery = query.subquery(LibraStockIndicator.class);
+			Root<LibraStockIndicator> fromLibraStockIndicator = subquery.from(LibraStockIndicator.class);
+			return null;
 			
 		};
 		List<LibraStockIndicator> indicators = repository.findAll(maxStampDateSpec);		
 		assertThat(indicators.isEmpty(), is(false));
 	}
+	
 }

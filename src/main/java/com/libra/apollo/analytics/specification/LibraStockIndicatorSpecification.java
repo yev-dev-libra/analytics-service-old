@@ -2,9 +2,12 @@ package com.libra.apollo.analytics.specification;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -14,11 +17,19 @@ import com.libra.apollo.analytics.entity.LibraStockIndicator;
 public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> {
 
 	private static String STOCK_ID = ValueDataFieldType.STOCK_ID.getFieldName();
+	private static String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
 
 	public static <T> Specification<T> stockIdEquals(final Long stockId) {
 
 		return (root, query, cb) -> {
 			return cb.equal(root.<Long>get(STOCK_ID), stockId);
+		};
+	}
+	public static <T> Specification<T> groupByStockId() {
+		
+		return (root, query, cb) -> {
+			Root<LibraStockIndicator> c = query.from(LibraStockIndicator.class);
+			return query.groupBy(c.get(STOCK_ID)).getRestriction();
 		};
 	}
 
