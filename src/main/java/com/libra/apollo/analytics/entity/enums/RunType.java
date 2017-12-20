@@ -1,7 +1,10 @@
 package com.libra.apollo.analytics.entity.enums;
 
 public enum RunType {
-	MANUAL("manual"), SCHEDULED("scheduled");
+	MANUAL("manual"),
+	SCHEDULED("scheduled"),
+	ON_DEMAND("on demand");
+	
 	private final String name;
 
 	private RunType(String name) {
@@ -17,6 +20,11 @@ public enum RunType {
 			if (name.equals(type.getName()))
 				return type;
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

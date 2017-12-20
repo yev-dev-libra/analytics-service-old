@@ -1,13 +1,11 @@
 package com.libra.apollo.analytics.repository;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
@@ -15,6 +13,13 @@ import com.libra.apollo.analytics.entity.enums.RunType;
 @Repository
 public interface AnalyticsRepository extends JpaRepository<ApolloAnalytics,Long> {
 
+	List<ApolloAnalytics> findAll();
+	
+	List<ApolloAnalytics> findAllById(Long id);
+	
+	@Query("Select a from ApolloAnalytics a where a.definition.name = :name")
+	List<ApolloAnalytics> findAllByName(@Param("name") String name);
+	
 	List<ApolloAnalytics> findAllByType(AnalyticsType type);
 	
 	List<ApolloAnalytics> findAllByRunType(RunType type);

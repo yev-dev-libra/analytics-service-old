@@ -20,5 +20,10 @@ public enum AnalyticsType {
 				return type;
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

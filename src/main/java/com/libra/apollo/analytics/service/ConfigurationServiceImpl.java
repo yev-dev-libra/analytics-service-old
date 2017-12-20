@@ -1,20 +1,15 @@
 package com.libra.apollo.analytics.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.libra.apollo.analytics.engine.Operation;
 import com.libra.apollo.analytics.engine.request.AnalyticsConfigurationRequest;
-import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 import com.libra.apollo.analytics.repository.AnalyticsRepository;
-import com.libra.apollo.analytics.repository.AnalyticsViewRepository;
 import com.libra.apollo.analytics.repository.InvestmentStyleRepository;
 
 @Service
@@ -32,6 +27,31 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		return investmentStyleRepository.findAllByView(analyticsViewId);
 	}
 
+	@Override
+	public List<ApolloAnalytics> getAnalytics() {
+		return analyticsRepository.findAll();
+	}
+	
+	@Override
+	public List<ApolloAnalytics> getAnalyticsById(Long id) {
+		return analyticsRepository.findAllById(id);
+	}
+	
+	@Override
+	public List<ApolloAnalytics> getAnalyticsByName(String name) {
+		return analyticsRepository.findAllByName(name);
+	}
+	
+	@Override
+	public List<ApolloAnalytics> getAnalyticsByType(AnalyticsType type) {
+		return analyticsRepository.findAllByType(type);
+	}
+	
+	@Override
+	public List<ApolloAnalytics> getAnalyticsByRunType(RunType runType) {
+		return analyticsRepository.findAllByRunType(runType);
+	}
+	
 	@Override
 	public List<ApolloAnalytics> getAnalyticsViews(AnalyticsConfigurationRequest request) {
 

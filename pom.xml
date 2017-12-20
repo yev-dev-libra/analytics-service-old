@@ -133,6 +133,12 @@
 		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>2.7.0</version>
 		</dependency>
+		
+		<!-- Java 8 date and time JSR310 converters -->
+		<dependency>
+		   <groupId>com.fasterxml.jackson.datatype</groupId>
+		   <artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
 
 	</dependencies>
 
