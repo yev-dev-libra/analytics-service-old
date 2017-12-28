@@ -1,6 +1,7 @@
 package com.libra.apollo.analytics.engine;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 import javax.persistence.Column;
 
@@ -63,7 +64,7 @@ public enum ValueDataFieldType {
 	CVI_COVER_COUNT("cviCoverCount"),
 	CVI_SHORT_COUNT("cviShortCount"),
 	DAILY_ALPHA_1W("dailyAlpha1W"), 
-	DISCOUNT_TO_FAIR_VALUE("discountToFairValue"),
+	DISCOUNT_TO_FAIR_VALUE("discountToFairValue", BigDecimal.class),
 	DYNAMIC_LONG_SHORT("dynamicLongShort"),
 	DYNAMIC_SHORT_WEIGHTING("dynamicShortWeighting"),
 	DYNAMIC_WEIGHTING("dynamicWeighting"),
@@ -91,9 +92,9 @@ public enum ValueDataFieldType {
 	EPS_FY2A("epsFY2a"),
 	EPS_FY3("epsFY3"),
 	EPS_FY3A("epsFY3a"),
-	FAIR_VALUE("fairValue"),
-	FAIR_VALUE_LOWER("fairValueLower"),
-	FAIR_VALUE_MIDDLE("fairValueMiddle"),
+	FAIR_VALUE("fairValue", BigDecimal.class),
+	FAIR_VALUE_LOWER("fairValueLower", BigDecimal.class),
+	FAIR_VALUE_MIDDLE("fairValueMiddle", BigDecimal.class),
 	FAIR_VALUE_PROJECTION("fairValueProjection"),
 	FAIR_VALUE_RANGE_FLAGS("fairValueRangeFlags"),
 	FAIR_VALUE_RANGE_LIMITS("fairValueRangeLimits"),
@@ -122,8 +123,8 @@ public enum ValueDataFieldType {
 	GREEN_IV_PCT_SCORE("greenIvPctScore"),
 	GREEN_VOLATILITY_SCORE("greenVolatilityScore"),
 	HIGH_PRICE("highPrice"),
-	INTRINSIC_VALUE("intrinsicValue"),
-	INTRINSIC_VALUE_PCT("intrinsicValuePct"),
+	INTRINSIC_VALUE("intrinsicValue", BigDecimal.class),
+	INTRINSIC_VALUE_PCT("intrinsicValuePct", BigDecimal.class),
 	INTRINSIC_VALUE_PROJECTION("intrinsicValueProjection"),
 	INTRINSIC_VALUE_RSQ("intrinsicValueRsq"),
 	INTRINSIC_VALUE_SLOPE("intrinsicValueSlope"),
@@ -186,8 +187,8 @@ public enum ValueDataFieldType {
 	SMA_50D("sma50D"),
 	SMA_200D("sma200D"),
 	SMOOTHED_FAIR_VALUE("smoothedFairValue"),
-	STAMP_DATE("stampDate"),
-	STAR_RATING("starRating"),
+	STAMP_DATE("stampDate",Date.class),
+	STAR_RATING("starRating",BigDecimal.class),
 	STOCHASTICS_PERCENT_K("stochasticsPercentK"),
 	STOCHASTICS_PERCENT_D("stochasticsPercentD"),
 	STOCK_INDEX_BETA("stockIndexBeta"),
@@ -218,26 +219,27 @@ public enum ValueDataFieldType {
 	DECILE_7_20D("decile_7_20D"),
 	DECILE_8_20D("decile_8_20D"),
 	DECILE_9_20D("decile_9_20D"),
-	STOCK_ID("stockId"),
-	INSTRUMENT_ID("instrumentId"),
+	STOCK_ID("stockId",Long.class),
+	INSTRUMENT_ID("instrumentId",Long.class),
 	
 	//---------- ACUS indicators -------------//
-	PRICE_CHANGE_1M("priceChange1m"),
-	DISCOUNT_PREMIUM_TO_FAIR_VALUE("discountPremiumToFairValue"),
-	NET_DISCOUNT_MEDIAN_FAIR_VALUE("netDiscountMedianFairValue"),
-	FAIR_VALUE_CHANGE_1M("fairValueChange1m"),
-	EXPECTED_RETURN_2M("expectedReturn2m"),
-	DISCOUNT_PREMIUM_TO_INTRINSIC_VALUE("discountPremiumToIntrinsicValue"),
-	INTRINSIC_VALUE_CHANGE_3M("intrinsicValueChange3m"),
-	FAIR_VALUE_CHANGE_3M("fairValueChange3m"),
-	INTRINSIC_VALUE_CHANGE_1M("intrinsicValueChange1m"),
-	PCT_IN_FAIR_VALUE_RANGE("pctInFairValueRange"),
-	LONG_TERM_PESSIMISTIC("long_term_pessimistic"),
-	LONG_TERM_OPTIMISTIC("long_term_optimistic")
+	PRICE_CHANGE_1M("priceChange1m", BigDecimal.class),
+	DISCOUNT_PREMIUM_TO_FAIR_VALUE("discountPremiumToFairValue", BigDecimal.class),
+	NET_DISCOUNT_MEDIAN_FAIR_VALUE("netDiscountMedianFairValue", BigDecimal.class),
+	FAIR_VALUE_CHANGE_1M("fairValueChange1m", BigDecimal.class),
+	EXPECTED_RETURN_2M("expectedReturn2m", BigDecimal.class),
+	DISCOUNT_PREMIUM_TO_INTRINSIC_VALUE("discountPremiumToIntrinsicValue", BigDecimal.class),
+	INTRINSIC_VALUE_CHANGE_3M("intrinsicValueChange3m", BigDecimal.class),
+	FAIR_VALUE_CHANGE_3M("fairValueChange3m", BigDecimal.class),
+	INTRINSIC_VALUE_CHANGE_1M("intrinsicValueChange1m", BigDecimal.class),
+	PCT_IN_FAIR_VALUE_RANGE("pctInFairValueRange", BigDecimal.class),
+	LONG_TERM_PESSIMISTIC("long_term_pessimistic", BigDecimal.class),
+	LONG_TERM_OPTIMISTIC("long_term_optimistic", BigDecimal.class)
 	;
 	
 	
 	private final String fieldName;
+	private Class<?> clazz;
 	
 	public String getFieldName() {
 		return fieldName;
@@ -246,12 +248,22 @@ public enum ValueDataFieldType {
 	private ValueDataFieldType(final String name) {
 		this.fieldName = name;
 	}
+	private ValueDataFieldType(final String name, final Class<?> clazz) {
+		this.fieldName = name;
+		this.clazz = clazz;
+	}
 	
 	@Override
     public String toString() {
         return fieldName;
     }
 	
+	
+	
+	public Class<?> getClazz() {
+		return clazz;
+	}
+
 	/**
 	 * Converts the string to its equivalent InstrumentDataFieldType or null if it doesn't exist
 	 * @param name		Field name to convert

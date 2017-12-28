@@ -98,6 +98,32 @@ INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_i
 INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(4,1,4,4); -- PCT_IN_FAIR_VALUE_RANGE > 0
 INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(5,1,5,5); -- PCT_IN_FAIR_VALUE_RANGE < 1
 
+-- Stocks on the rock
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(6,2,6,1); --AND STAR_RATING <= 2 
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(7,2,7,2); --AND FAIR_VALUE_CHANGE_1M < 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(8,2,8,3); --AND INTRINSIC_VALUE_CHANGE_1M < 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(9,2,9,4); --AND PCT_IN_FAIR_VALUE_RANGE >= 0
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(10,2,10,5); --AND PCT_IN_FAIR_VALUE_RANGE <= 0.5
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(11,2,11,6); --AND INTRINSIC_VALUE_PCT >= 0.2
+
+-- Value Buy
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(12,3,12,1); --AND INTRINSIC_VALUE_PCT  <= 0.2
+
+-- Value Sell
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(13,4,13,1); --AND INTRINSIC_VALUE_PCT  >=  0.8
+
+-- Value Growth
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(14,5,14,1); --AND MEDIAN_DISCOUNT_TO_FAIR_VALUE >= 0
+
+-- Apollo "Value"
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(15,6,15,1); --AND MEDIAN_DISCOUNT_TO_FAIR_VALUE < 0
+
+-- Long term Pessimistic
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(16,7,16,1); --AND LONG_TERM_PESSIMISTIC < 0
+
+-- Long term Optimistic
+INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(17,8,17,1); --AND LONG_TERM_OPTIMISTIC > 0
+
 -- Populating stock_indicators. Stoxx 600 extract for the 2017-12-01
 
 -- Apollo Classics

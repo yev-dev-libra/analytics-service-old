@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.libra.apollo.analytics.engine.result.AnalyticsResult;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
@@ -49,8 +49,11 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 
 	@Override
 	public ScreenerResult getScreeningResults(final AnalyticsType type, final Date runDate, final Collection<Long> stockIds, final Long investmentStyleId) {
+		throw new UnsupportedOperationException();
+	}
 
-		final Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateGreatestGroupedByStockId();
+	@Override
+	public AnalyticsResult getScreeningResults(AnalyticsType type, Collection<Long> stockIds, Long investmentStyleId) {
 		
 		final Specification<LibraStockIndicator> groupByStockIdSpec = LibraStockIndicatorSpecification.groupByStockId();
 		

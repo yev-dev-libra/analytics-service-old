@@ -2,7 +2,9 @@ package com.libra.apollo.analytics.repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -60,11 +62,11 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 
 		q.multiselect(r.get("stockId"), cb.greatest(r.get("stampDate")));
 		q.groupBy(r.get("stockId"));
-//		q.where(cb.equal(r.get("stockId"),cb.parameter(Long.class, "stockId")) );
+		q.where(cb.equal(r.get("stockId"),cb.parameter(Long.class, "stockId")) );
 		q.groupBy(r.get("stockId"));
 		
 		Query query = entityManager.createQuery(q);
-//		query.setParameter("stockId", 1L);
+		query.setParameter("stockId", 1L);
 		query.getResultList();
 		
 		
@@ -163,11 +165,11 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 		q.multiselect(selections);
 		
 		
+		final Collection<Long> stockIds = Arrays.asList(1L,2L,3L);
 		
 		Specification<LibraStockIndicator> spec = (root, query, criteriaBuilder) -> {
-			
-			Predicate p = cb.equal(indicatorsRoot.get("id"),cb.parameter(Long.class, "id")); // this is a fucking predicate
-			return p;
+			final Path<Long> stocks = root.<Long>get("stockId");
+			return stocks.in(stockIds);
 		};
 		
 		q.where(spec.toPredicate(indicatorsRoot, q, cb));
@@ -177,7 +179,6 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 		q.groupBy(indicatorsRoot.get("stockId"));
 		
 		Query query = entityManager.createQuery(q);
-		query.setParameter("id", 1L);
 		
 		List<Tuple> results = query.getResultList();
 		
