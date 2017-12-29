@@ -116,8 +116,8 @@ select aqp.* from analytics.analytics_investment_style ais inner join analytics.
 -- 
 
 select 
+	max(si.stamp_date),
 	si.instrument_id,
-	si.stamp_date,
 	si.star_rating, 
 	si.fair_value, 
 	si.fair_value_lower, 
@@ -140,12 +140,13 @@ select
 from stockindicators si inner join stocks s on si.instrument_id = s.id 
 inner join stocks_groups sg on s.id = sg.stock_id
 where sg.group_id = 216
-and si.stamp_date = '2017-11-14'
+and si.stamp_date >= '2017-12-28'
 and si.star_rating>=3.00
 and si.fair_value_change_1m>=0.00 
 and si.intrinsic_value_change_1m>=0.00 
 and si.pct_in_fair_value_range>=0.00 
 and si.pct_in_fair_value_range<1.00 
+group by si.instrument_id
 ;
 
 /*

@@ -8,7 +8,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import com.libra.apollo.analytics.engine.ValueDataFieldType;
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.enums.CompositionType;
 import com.libra.apollo.analytics.specification.ValueParameter;
 

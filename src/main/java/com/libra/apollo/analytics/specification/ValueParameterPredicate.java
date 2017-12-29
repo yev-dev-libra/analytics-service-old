@@ -2,7 +2,7 @@ package com.libra.apollo.analytics.specification;
 
 import javax.persistence.criteria.Predicate;
 
-import com.libra.apollo.analytics.engine.ValueDataFieldType;
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 
 public interface ValueParameterPredicate {
 

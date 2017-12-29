@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.libra.apollo.analytics.engine.Value;
+import com.libra.apollo.analytics.engine.core.Value;
 import com.libra.apollo.analytics.entity.enums.OperandDouble;
 
 @SuppressWarnings("serial")

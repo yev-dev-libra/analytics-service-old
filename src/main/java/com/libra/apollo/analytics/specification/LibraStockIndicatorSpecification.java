@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.libra.apollo.analytics.engine.ValueDataFieldType;
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 
 public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> {
@@ -47,10 +47,10 @@ public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> {
 		};
 	}
 	
-	public static <T> Specification<T> idsEquals(final List<Long> stockIds) {
+	public static <T> Specification<T> idsEquals(final ValueDataFieldType fieldType, final List<Long> ids) {
 		return (root, query, cb) -> {
-			final Path<Long> stocks = root.<Long>get(STOCK_ID);
-			return stocks.in(stockIds);
+			final Path<Long> stocks = root.<Long>get(fieldType.getFieldName());
+			return stocks.in(ids);
 		};
 	}
 

@@ -55,6 +55,5 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 		
 		assertTrue(true);
 	}
-
 	
 }

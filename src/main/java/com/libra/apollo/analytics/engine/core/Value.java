@@ -1,14 +1,10 @@
-package com.libra.apollo.analytics.engine;
+package com.libra.apollo.analytics.engine.core;
 
 import java.util.Optional;
-
-import com.libra.apollo.analytics.entity.enums.CompositionType;
 
 public interface Value extends Comparable<Value> {
 
 	public Optional<Object> getValue();
-	
-	public CompositionType getCompositionType();
 	
 	public ValueDataFieldType getFieldType();
 	

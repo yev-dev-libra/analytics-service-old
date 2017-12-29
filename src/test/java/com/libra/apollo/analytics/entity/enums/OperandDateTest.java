@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 
-import com.libra.apollo.analytics.engine.Value;
-import com.libra.apollo.analytics.engine.ValueDataFieldType;
+import com.libra.apollo.analytics.engine.core.Value;
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.specification.ValueParameter;
 
 public class OperandDateTest {

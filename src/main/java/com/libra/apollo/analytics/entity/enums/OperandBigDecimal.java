@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.google.common.base.Preconditions;
-import com.libra.apollo.analytics.engine.ValueDataFieldType;
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.exceptions.MissingParameterValueException;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.ValueParameter;

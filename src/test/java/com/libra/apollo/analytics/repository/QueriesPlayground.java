@@ -1,5 +1,6 @@
 package com.libra.apollo.analytics.repository;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -159,7 +160,7 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 		
 		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
 		selections.add(indicatorsRoot.get("stockId").alias("stockId") );
-		selections.add(cb.<Date>greatest(indicatorsRoot.get("stampDate")) );
+		selections.add(cb.<Date>greatest(indicatorsRoot.get("stampDate")).alias("maxStampDate") );
 		selections.add(indicatorsRoot.get("fairValue").alias("fairValue")  );
 		
 		q.multiselect(selections);
@@ -181,9 +182,10 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 		Query query = entityManager.createQuery(q);
 		
 		List<Tuple> results = query.getResultList();
-		
+		List<Object> values = new ArrayList<>();
 		for (Tuple tuple : results) {
-			System.out.println( tuple.get("stockId") + " " + tuple.get("fairValue", BigDecimal.class));
+			System.out.println( tuple.get("maxStampDate") + " " + tuple.get("stockId") + " " + tuple.get("fairValue", BigDecimal.class));
+			values.add(tuple.get("stockId"));
 		}
 		
 	}

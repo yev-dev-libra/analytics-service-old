@@ -3,7 +3,7 @@ package com.libra.apollo.analytics.engine.request;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.libra.apollo.analytics.engine.Operation;
+import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 

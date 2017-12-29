@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine;
+package com.libra.apollo.analytics.engine.core;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -188,6 +188,7 @@ public enum ValueDataFieldType {
 	SMA_200D("sma200D"),
 	SMOOTHED_FAIR_VALUE("smoothedFairValue"),
 	STAMP_DATE("stampDate",Date.class),
+	MAX_STAMP_DATE("maxStampDate",Date.class),
 	STAR_RATING("starRating",BigDecimal.class),
 	STOCHASTICS_PERCENT_K("stochasticsPercentK"),
 	STOCHASTICS_PERCENT_D("stochasticsPercentD"),
