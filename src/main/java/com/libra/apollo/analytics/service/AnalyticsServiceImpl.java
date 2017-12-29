@@ -1,8 +1,10 @@
 package com.libra.apollo.analytics.service;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.engine.result.AnalyticsResult;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
@@ -71,9 +74,20 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 		
 		
 		//TODO: add sorting
-		List<LibraStockIndicator> indicators = libraStockIndicatorRepository.findAll(specs); 
+		//TODO: add return parameters
 		
-		ScreenerResult results = new ScreenerResult(indicators);
+		List<ValueDataFieldType> values = Arrays.asList(
+				ValueDataFieldType.STAMP_DATE, 
+				ValueDataFieldType.STAR_RATING,
+				ValueDataFieldType.FAIR_VALUE,
+				ValueDataFieldType.INTRINSIC_VALUE,
+				ValueDataFieldType.STOCK_ID
+				);
+		
+		List<Map<ValueDataFieldType,Object>> indicators = libraStockIndicatorRepository.findAllBySpecification(values, specs);
+		
+		//TODO: convert to screener results
+		ScreenerResult results = null;
 		
 		return results;
 	}

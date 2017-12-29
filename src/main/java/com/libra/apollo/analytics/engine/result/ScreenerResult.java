@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.libra.apollo.analytics.engine.Megerable;
+import com.libra.apollo.analytics.engine.core.Megerable;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;

@@ -12,6 +12,7 @@ public interface ConfigurationService {
 	public List<ApolloAnalytics> getAnalytics();
 	public List<ApolloAnalytics> getAnalyticsById(Long id);
 	public List<ApolloAnalytics> getAnalyticsByName(String name);
+	public List<String> getAnalyticsNames();
 	public List<ApolloAnalytics> getAnalyticsByType(AnalyticsType type);
 	public List<ApolloAnalytics> getAnalyticsByRunType(RunType type);
 	
