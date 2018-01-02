@@ -18,6 +18,8 @@ import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 import com.libra.apollo.analytics.entity.jsonviews.AnalyticsJsonView;
 import com.libra.apollo.analytics.service.ConfigurationService;
+import com.libra.apollo.analytics.exceptions.EntityNotFoundException;
+import com.libra.apollo.analytics.entity.enums.AnalyticsSearchFieldApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -34,7 +36,7 @@ public class ConfigurationsController {
 
 	/**
 	 * Return a full list of available apollo analytics with its views and investment styles or a subgroup of analytics if the
-	 * parameter 'search' is used.
+	 * parameter 'search' is used with the Public view.
 	 * Use search=field:value to do a search for the field ([name|runType|analyticsType]) that contains 'value'
 	 * 
 	 * @return List of all available apollo anaylitics or a subgroup filtered using the parameter 'search'
@@ -58,28 +60,38 @@ public class ConfigurationsController {
 		// Using search with field:value, if search is not in the format field:value then return bad request
 		String[] result = search.split("\\:");
 		if(result.length!=2) {
-			throw new IllegalArgumentException("Search parameter needs to be in the format [name|runType|analyticsType]:string like name:Apollo Screener");
+			throw new IllegalArgumentException("Search parameter needs to be in the format searchParameter:searchValue like name:Apollo Screener. searchParameter valid values: " + Arrays.toString(AnalyticsSearchFieldApi.values()));
 		}
 		
 		String searchByField = result[0];
 		String searchValue = result[1];
 		
-		switch (searchByField) {
-			case "name":
+		AnalyticsSearchFieldApi searchParam = AnalyticsSearchFieldApi.getAnalyticsSearchFieldApi(searchByField);
+		if(searchParam==null) {
+			throw new IllegalArgumentException("Search parameter not valid. Valid values are: " + Arrays.toString(AnalyticsSearchFieldApi.values()));
+		}
+		
+		switch (searchParam) {
+			case NAME:
+				List<ApolloAnalytics> nameSearchResult = configService.getAnalyticsByName(searchValue);
+				if(nameSearchResult==null || nameSearchResult.isEmpty()) {
+					throw new IllegalArgumentException("Search parameter '"+ AnalyticsSearchFieldApi.NAME + "' is not valid. Valid values: " + configService.getAnalyticsNames());
+				}
+				
 				return new ResponseEntity<List<ApolloAnalytics>>(
-						configService.getAnalyticsByName(searchValue), HttpStatus.OK);
+						nameSearchResult, HttpStatus.OK);
 			
-			case "runType":
+			case RUN_TYPE:
 				if(RunType.getRunType(searchValue)==null) {
-					throw new IllegalArgumentException("Search parameter 'runType' is not valid. Valid values: " + Arrays.toString(RunType.values()));
+					throw new IllegalArgumentException("Search parameter '"+ AnalyticsSearchFieldApi.RUN_TYPE + "' is not valid. Valid values: " + Arrays.toString(RunType.values()));
 				}
 				
 				return new ResponseEntity<List<ApolloAnalytics>>(
 						configService.getAnalyticsByRunType(RunType.getRunType(searchValue)), HttpStatus.OK);
 
-			case "analyticsType":
+			case ANALYTICS_TYPE:
 				if(AnalyticsType.getAnalyticsType(searchValue)==null) {
-					throw new IllegalArgumentException("Search parameter 'analyticsType' is not valid. Valid values: " + Arrays.toString(AnalyticsType.values()));
+					throw new IllegalArgumentException("Search parameter '"+ AnalyticsSearchFieldApi.ANALYTICS_TYPE + "' is not valid. Valid values: " + Arrays.toString(AnalyticsType.values()));
 				}
 				
 				return new ResponseEntity<List<ApolloAnalytics>>(
@@ -87,21 +99,47 @@ public class ConfigurationsController {
 
 			// It is only allowed the search by the previous values otherwise return bad request
 			default:
-				throw new IllegalArgumentException("Search parameter valid values are: name, runType and analyticsType");
+				throw new IllegalArgumentException("Search parameter not valid. Valid values are: " + Arrays.toString(AnalyticsSearchFieldApi.values()));
 		}
 
 	}
 	
 	/**
+	 * Return public view of the analytic with identifier 'id', if the analytic is not found then
+	 * return not found code.
 	 * 
-	 * @param id
-	 * @return
+	 * @param id	Apollo analytic identifier
+	 * @return AnalyticsJsonView.Public that contains public information of the analytic
+	 * @throws EntityNotFoundException  
 	 */
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/{analyticId}", method = RequestMethod.GET)
 	@JsonView(AnalyticsJsonView.Public.class)
-	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsById(@PathVariable Long id) {
-		List<ApolloAnalytics> analytics = configService.getAnalyticsById(id);
+	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsById(@PathVariable Long analyticId) throws EntityNotFoundException {
+		List<ApolloAnalytics> analytics = configService.getAnalyticsById(analyticId);
 
+		// If analytic does not exist then return not found code
+		if(analytics == null || analytics.isEmpty()) {
+			throw new EntityNotFoundException(ApolloAnalytics.class, "analyticId", analyticId.toString());
+	    }
+		
 		return new ResponseEntity<List<ApolloAnalytics>>(analytics, HttpStatus.OK);
 	}
+	
+//	@RequestMapping(value="/{analyticId}/views", method = RequestMethod.GET)
+//	@JsonView(AnalyticsJsonView.Public.class)
+//	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsViewsByAnalyticId(@PathVariable Long analyticId) throws EntityNotFoundException {
+//
+//		return new ResponseEntity<List<ApolloAnalytics>>(null, HttpStatus.OK);
+//	}
+//	
+//	@RequestMapping(value="/{analyticId}/view/{viewId}", method = RequestMethod.GET)
+//	@JsonView(AnalyticsJsonView.Public.class)
+//	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsViewsByAnalyticIdAndViewId(
+//			@PathVariable Long analyticId,
+//			@PathVariable Long viewId) throws EntityNotFoundException {
+//		
+//		return new ResponseEntity<List<ApolloAnalytics>>(null, HttpStatus.OK);
+//	}
+	
+	
 }

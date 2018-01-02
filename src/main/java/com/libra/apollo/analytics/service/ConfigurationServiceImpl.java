@@ -26,6 +26,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public List<InvestmentStyle> getInvestmentStyles(Long analyticsViewId) {
 		return investmentStyleRepository.findAllByView(analyticsViewId);
 	}
+	
+	@Override
+	public List<String> getAnalyticsNames() {
+		return analyticsRepository.getAnalyticsNames();
+	}
 
 	@Override
 	public List<ApolloAnalytics> getAnalytics() {
