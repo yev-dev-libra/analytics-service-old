@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.Priority;
 import com.libra.apollo.analytics.entity.QueryParameter;
@@ -22,7 +23,8 @@ public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyl
 	
 	@EntityGraph(value = InvestmentStyle.DEEP_GRAPH_NAME, type = EntityGraph.EntityGraphType.FETCH)
 	@Query("SELECT s FROM InvestmentStyle s JOIN s.analytics v  WHERE v.id = :id")
-	List<InvestmentStyle> findAllByView(@Param("id") Long id);
+	List<InvestmentStyle> findAllByView(@Param("id") Long id); // TODO - it returns duplicates
+	List<InvestmentStyle> findAllByView(AnalyticsView analyticsView);
 	
 //	@Query("SELECT p FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp JOIN TREAT ( isp.parameter AS QueryParameter ) p WHERE ais.id = :id")
 	@Query("SELECT isp.parameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")

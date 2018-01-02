@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
+import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
-import com.libra.apollo.analytics.entity.jsonviews.AnalyticsJsonView;
+import com.libra.apollo.analytics.entity.jsonviews.ConfigurationJsonView;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.exceptions.EntityNotFoundException;
 import com.libra.apollo.analytics.entity.enums.AnalyticsSearchFieldApi;
@@ -35,19 +37,41 @@ public class ConfigurationsController {
 	private ConfigurationService configService;
 
 	/**
-	 * Return a full list of available apollo analytics with its views and investment styles or a subgroup of analytics if the
-	 * parameter 'search' is used with the Public view.
+	 * Return a full list of available apollo analytics or a subgroup of analytics if the parameter 'search' is used with the Public view.
 	 * Use search=field:value to do a search for the field ([name|runType|analyticsType]) that contains 'value'
 	 * 
 	 * @return List of all available apollo anaylitics or a subgroup filtered using the parameter 'search'
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ApiOperation(value = "Get a list of Apollo Analytics", notes = "Returns a list of available Analytics with views and Investment Styles")
-	@JsonView(AnalyticsJsonView.Public.class)
+	@JsonView(ConfigurationJsonView.Public.class)
 	public ResponseEntity<List<ApolloAnalytics>> getAnalytics(
 			@ApiParam(value="Use search=[name|runType|analyticsType]:value", name="search", allowableValues="name:Apollo Screener,runType:ON_DEMAND,analyticsType:APOLLO_SCREENER", required = false)
 			@RequestParam(value = "search", required=false) String search) {
 
+		return handleGetAnalytics(search);
+
+	}
+	
+	/**
+	 * Return a full list of available apollo analytics with its views and investment styles or a subgroup of analytics if the
+	 * parameter 'search' is used with the PublicExtended view.
+	 * Use search=field:value to do a search for the field ([name|runType|analyticsType]) that contains 'value'
+	 * 
+	 * @return List of all available apollo anaylitics or a subgroup filtered using the parameter 'search'
+	 */
+	@RequestMapping(value = "/extended", method = RequestMethod.GET)
+	@ApiOperation(value = "Get a list of Apollo Analytics", notes = "Returns a list of available Analytics with views and Investment Styles")
+	@JsonView(ConfigurationJsonView.PublicExtended.class)
+	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsExtended(
+			@ApiParam(value="Use search=[name|runType|analyticsType]:value", name="search", allowableValues="name:Apollo Screener,runType:ON_DEMAND,analyticsType:APOLLO_SCREENER", required = false)
+			@RequestParam(value = "search", required=false) String search) {
+
+		return handleGetAnalytics(search);
+
+	}
+	
+	private ResponseEntity<List<ApolloAnalytics>> handleGetAnalytics(String search) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Retrieving all analytics. Search param[" + search + "]");
 		}
@@ -101,7 +125,6 @@ public class ConfigurationsController {
 			default:
 				throw new IllegalArgumentException("Search parameter not valid. Valid values are: " + Arrays.toString(AnalyticsSearchFieldApi.values()));
 		}
-
 	}
 	
 	/**
@@ -109,37 +132,116 @@ public class ConfigurationsController {
 	 * return not found code.
 	 * 
 	 * @param id	Apollo analytic identifier
-	 * @return AnalyticsJsonView.Public that contains public information of the analytic
+	 * @return ConfigurationJsonView.Public that contains public information of the analytic
 	 * @throws EntityNotFoundException  
 	 */
 	@RequestMapping(value="/{analyticId}", method = RequestMethod.GET)
-	@JsonView(AnalyticsJsonView.Public.class)
-	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsById(@PathVariable Long analyticId) throws EntityNotFoundException {
-		List<ApolloAnalytics> analytics = configService.getAnalyticsById(analyticId);
+	@JsonView(ConfigurationJsonView.Public.class)
+	public ResponseEntity<ApolloAnalytics> getAnalyticsById(@PathVariable Long analyticId) throws EntityNotFoundException {
+		ApolloAnalytics analytics = configService.getAnalyticsById(analyticId);
 
 		// If analytic does not exist then return not found code
-		if(analytics == null || analytics.isEmpty()) {
+		if(analytics == null) {
 			throw new EntityNotFoundException(ApolloAnalytics.class, "analyticId", analyticId.toString());
 	    }
 		
-		return new ResponseEntity<List<ApolloAnalytics>>(analytics, HttpStatus.OK);
+		return new ResponseEntity<ApolloAnalytics>(analytics, HttpStatus.OK);
 	}
 	
-//	@RequestMapping(value="/{analyticId}/views", method = RequestMethod.GET)
-//	@JsonView(AnalyticsJsonView.Public.class)
-//	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsViewsByAnalyticId(@PathVariable Long analyticId) throws EntityNotFoundException {
-//
-//		return new ResponseEntity<List<ApolloAnalytics>>(null, HttpStatus.OK);
-//	}
-//	
-//	@RequestMapping(value="/{analyticId}/view/{viewId}", method = RequestMethod.GET)
-//	@JsonView(AnalyticsJsonView.Public.class)
-//	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsViewsByAnalyticIdAndViewId(
-//			@PathVariable Long analyticId,
-//			@PathVariable Long viewId) throws EntityNotFoundException {
-//		
-//		return new ResponseEntity<List<ApolloAnalytics>>(null, HttpStatus.OK);
-//	}
+	/**
+	 * Return all the specific analyticId's views using ConfigurationJsonView.Public
+	 * 
+	 * @param analyticId Apollo analytic identifier
+	 * @return ConfigurationJsonView.Public that contains public information of the analytic's views
+	 * @throws EntityNotFoundException
+	 */
+	@RequestMapping(value="/{analyticId}/views", method = RequestMethod.GET)
+	@JsonView(ConfigurationJsonView.Public.class)
+	public ResponseEntity<List<AnalyticsView>> getAnalyticsViewsByAnalyticId(@PathVariable Long analyticId) throws EntityNotFoundException {
+		ApolloAnalytics apolloAnalytics = configService.getAnalyticsById(analyticId);
+
+		// If apolloAnalytics does not exist then return not found code
+		if(apolloAnalytics == null) {
+			throw new EntityNotFoundException(ApolloAnalytics.class, "analyticId", analyticId.toString());
+	    }
+		
+		List<AnalyticsView> analyticViews = configService.getAnalyticsViewsByAnalyticId(apolloAnalytics);
+
+		// If analyticViews does not exist then return not found code
+		if(analyticViews == null || analyticViews.isEmpty()) {
+			throw new EntityNotFoundException(ApolloAnalytics.class, "analyticId", analyticId.toString());
+	    }
+		
+		return new ResponseEntity<List<AnalyticsView>>(analyticViews, HttpStatus.OK);
+	}
 	
+	/**
+	 * Return public view of the specific analytic with analyticId and view with identifier 'viewId', if the analytic or the view is not found then
+	 * return not found code.
+	 * 
+	 * @param analyticId Apollo analytic identifier
+	 * @param viewId View identifier
+	 * @return ConfigurationJsonView.Public that contains public information of the specific view
+	 * @throws EntityNotFoundException
+	 */
+	@RequestMapping(value="/{analyticId}/views/{viewId}", method = RequestMethod.GET)
+	@JsonView(ConfigurationJsonView.Public.class)
+	public ResponseEntity<AnalyticsView> getAnalyticsViewsByAnalyticIdAndViewId(
+			@PathVariable Long analyticId,
+			@PathVariable Long viewId) throws EntityNotFoundException {
+		ApolloAnalytics apolloAnalytics = configService.getAnalyticsById(analyticId);
+
+		// If apolloAnalytics does not exist then return not found code
+		if(apolloAnalytics == null) {
+			throw new EntityNotFoundException(ApolloAnalytics.class, "analyticId", analyticId.toString());
+	    }
+		
+		AnalyticsView analyticView = configService.getAnalyticsViewByAnalyticIdAndViewId(apolloAnalytics, viewId);
+
+		// If analyticView does not exist then return not found code
+		if(analyticView == null) {
+			throw new EntityNotFoundException(AnalyticsView.class, "viewId", viewId.toString());
+	    }
+		
+		return new ResponseEntity<AnalyticsView>(analyticView, HttpStatus.OK);
+	}
+	
+	/**
+	 * Return public view of all the investment styles with the specific analytic with analyticId and view with identifier 'viewId', if the analytic or the view is not found then
+	 * return not found code.
+	 * 
+	 * @param analyticId Apollo analytic identifier
+	 * @param viewId View identifier
+	 * @return ConfigurationJsonView.Public List that contains public information of the all the investment styles
+	 * @throws EntityNotFoundException
+	 */
+	@RequestMapping(value="/{analyticId}/views/{viewId}/investment-styles", method = RequestMethod.GET)
+	@JsonView(ConfigurationJsonView.Public.class)
+	public ResponseEntity<List<InvestmentStyle>> getInvestmentStylesByAnalyticIdAndViewId(
+			@PathVariable Long analyticId,
+			@PathVariable Long viewId) throws EntityNotFoundException {
+		ApolloAnalytics apolloAnalytics = configService.getAnalyticsById(analyticId);
+
+		// If apolloAnalytics does not exist then return not found code
+		if(apolloAnalytics == null) {
+			throw new EntityNotFoundException(ApolloAnalytics.class, "analyticId", analyticId.toString());
+	    }
+		
+		AnalyticsView analyticView = configService.getAnalyticsViewByAnalyticIdAndViewId(apolloAnalytics, viewId);
+
+		// If analyticView does not exist then return not found code
+		if(analyticView == null) {
+			throw new EntityNotFoundException(AnalyticsView.class, "viewId", viewId.toString());
+	    }
+		
+		List<InvestmentStyle> investmentStyles = configService.getInvestmentStylesByView(analyticView);
+		
+		// If investmentStyles does not exist then return not found code
+		if(investmentStyles == null || investmentStyles.isEmpty()) {
+			throw new EntityNotFoundException(AnalyticsView.class, "viewId", viewId.toString());
+	    }
+		
+		return new ResponseEntity<List<InvestmentStyle>>(investmentStyles, HttpStatus.OK);
+	}
 	
 }

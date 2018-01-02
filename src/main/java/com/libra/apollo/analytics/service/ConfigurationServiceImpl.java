@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.libra.apollo.analytics.engine.request.AnalyticsConfigurationRequest;
+import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 import com.libra.apollo.analytics.repository.AnalyticsRepository;
+import com.libra.apollo.analytics.repository.AnalyticsViewRepository;
 import com.libra.apollo.analytics.repository.InvestmentStyleRepository;
 
 @Service
@@ -21,10 +23,14 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 	@Autowired
 	private AnalyticsRepository analyticsRepository;
+	
+	@Autowired
+	private AnalyticsViewRepository analyticsViewRepository;
+	
 
 	@Override
-	public List<InvestmentStyle> getInvestmentStyles(Long analyticsViewId) {
-		return investmentStyleRepository.findAllByView(analyticsViewId);
+	public List<InvestmentStyle> getInvestmentStylesByView(AnalyticsView analyticsView) {
+		return investmentStyleRepository.findAllByView(analyticsView);
 	}
 	
 	@Override
@@ -38,8 +44,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 	
 	@Override
-	public List<ApolloAnalytics> getAnalyticsById(Long id) {
-		return analyticsRepository.findAllById(id);
+	public ApolloAnalytics getAnalyticsById(Long id) {
+		return analyticsRepository.findById(id);
 	}
 	
 	@Override
@@ -55,6 +61,16 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	@Override
 	public List<ApolloAnalytics> getAnalyticsByRunType(RunType runType) {
 		return analyticsRepository.findAllByRunType(runType);
+	}
+	
+	@Override
+	public List<AnalyticsView> getAnalyticsViewsByAnalyticId(ApolloAnalytics apolloAnalytics) {
+		return analyticsViewRepository.findAllByAnalytics(apolloAnalytics);
+	}
+	
+	@Override
+	public AnalyticsView getAnalyticsViewByAnalyticIdAndViewId(ApolloAnalytics apolloAnalytics, Long viewId) {
+		return analyticsViewRepository.findByAnalyticsAndId(apolloAnalytics, viewId);
 	}
 	
 	@Override

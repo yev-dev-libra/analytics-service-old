@@ -15,7 +15,7 @@ public interface AnalyticsRepository extends JpaRepository<ApolloAnalytics,Long>
 
 	List<ApolloAnalytics> findAll();
 	
-	List<ApolloAnalytics> findAllById(Long id);
+	ApolloAnalytics findById(Long id);
 	
 	@Query("Select a.definition.name from ApolloAnalytics a")
 	List<String> getAnalyticsNames();

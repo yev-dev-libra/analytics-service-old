@@ -76,6 +76,7 @@ INSERT INTO analytics.analytics(id,version,created_on,updated_on, name,descripti
 
 -- Populating analytics_view 
 INSERT INTO analytics.analytics_view(id,name, description, analytics_id,priority, version,created_on,updated_on) VALUES (1,'Apollo Selection','Apollo Selection Styles',1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
+INSERT INTO analytics.analytics_view(id,name, description, analytics_id,priority, version,created_on,updated_on) VALUES (2,'Apollo Rock Stars','Apollo Extended Selection Styles',1, 2, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 
 
 -- Populating investment_style 
@@ -87,6 +88,9 @@ INSERT INTO analytics.analytics_investment_style( id, name, description, priorit
 INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (6,'Apollo Value', 'These are stocks that are being de-rated by the market and the discount rate needing to be applied is high (or rising)', 6, 1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (7,'Below 12m Pessimistic', 'These are stocks trading at a discount to Apollo''s most pessimistic 12-month scenario.', 7, 1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (8,'Above 12m Optimistic', 'These are stocks trading at a premium to Apollo''s most optimistic 12-month scenario.', 8, 1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
+
+INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (9,'User Classics', 'The User Classics are those that we would be happy adding to at current positions, given the positive combination of value, growth, volatility and momentum.', 9, 1, 2, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
+INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (10,'User on the Rocks', 'The User SotR are companies that are currently unloved by the market, and in the absence or special situations or the reporting season, should underperform.', 10, 1, 2, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 
 
 -- Populating investment_style parameters
