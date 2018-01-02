@@ -141,5 +141,4 @@ public class ConfigurationsController {
 //		return new ResponseEntity<List<ApolloAnalytics>>(null, HttpStatus.OK);
 //	}
 	
-	
 }
