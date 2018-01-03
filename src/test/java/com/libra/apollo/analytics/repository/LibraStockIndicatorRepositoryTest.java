@@ -11,18 +11,18 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Subquery;
 
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
@@ -35,6 +35,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.StampDateSpecification;
 
@@ -46,8 +47,6 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	@Autowired
 	private LibraStockIndicatorRepository repository;
 	
-	@Autowired
-	private InvestmentStyleRepository invstRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -127,7 +126,7 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void shouldConstructDynamicQueryForLibraStockIndicatorsWithCriteria() {
 		
-		List<ValueDataFieldType> values = Arrays.asList(
+		List<ValueDataFieldType> fields = Arrays.asList(
 				ValueDataFieldType.MAX_STAMP_DATE, 
 				ValueDataFieldType.STAR_RATING,
 				ValueDataFieldType.FAIR_VALUE,
@@ -141,7 +140,11 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		
 		List<Long> stockIds = Arrays.asList(1L);
 		
+		//Passed stock ids
 		Specification<LibraStockIndicator> idsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
+		
+		final Date prevDateStampDate = previousDate;
+		Specification<LibraStockIndicator> equalsOrGreaterThanPrevBussDate = StampDateSpecification.stampDateGreaterThanOrEqual(prevDateStampDate );
 		
 		//STAR_RATING  >= 3.0
 		Specification<LibraStockIndicator> starRatingSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.STAR_RATING, BigDecimal.valueOf(3));
@@ -159,18 +162,35 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		Specification<LibraStockIndicator> pctFVRangeLessThanOne = LibraStockIndicatorSpecification.fieldLessThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(1));
 		
 		
-		Specification<LibraStockIndicator> specification = Specifications
-				.where(idsSpec)
-				.and(starRatingSpec)
-				.and(fvChange1m)
-				.and(ivChange1m)
-				.and(pctFVRangeGreaterThanZero)
-				.and(pctFVRangeLessThanOne);
 		
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
+		specification.and(equalsOrGreaterThanPrevBussDate);
+		specification.and(starRatingSpec);
+		specification.and(starRatingSpec);
+		specification.and(starRatingSpec);
+		specification.and(ivChange1m);
+		specification.and(pctFVRangeGreaterThanZero);
+		specification.and(pctFVRangeLessThanOne);
 		
-		List<Map<ValueDataFieldType,Object>> returnValue = repository.findAllBySpecification(values, specification);
+		List<Tuple> returnValues = repository.findAllBySpecification(fields, specification);
 		
-		assertThat(returnValue.isEmpty(), is(false));
+		assertThat(returnValues.isEmpty(), is(false));
+		
+		List<Map<ValueDataFieldType,Object>> values = new ArrayList<>();
+		
+		for (Tuple tuple : returnValues) {
+			
+			Map<ValueDataFieldType,Object> valuesDataMap = new HashMap<>(fields.size());
+			
+			for(ValueDataFieldType field : fields ) {
+				String fieldName = field.getFieldName();
+				valuesDataMap.put(field, tuple.get(fieldName));
+			}
+			
+			values.add(valuesDataMap);
+		}
+		
+		assertThat(values.isEmpty(), is(false));
 
 	}
 	

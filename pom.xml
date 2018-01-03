@@ -25,6 +25,9 @@
 		<spring.retry.version>1.1.2.RELEASE</spring.retry.version>
 		<unit-tests.skip>false</unit-tests.skip>
 		<integration-tests.skip>true</integration-tests.skip>
+		<!-- 
+		<hibernate.version>5.2.11.Final</hibernate.version>
+		 -->
 	</properties>
 
 	<profiles>
@@ -52,6 +55,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,8 +90,10 @@
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
+			<artifactId>hibernate-java8</artifactId>
 		</dependency>
+
+
 
 		<!-- Its own jdbc repository -->
 		<dependency>
@@ -119,25 +126,25 @@
 			<artifactId>spring-retry</artifactId>
 			<version>${spring.retry.version}</version>
 		</dependency>
-		
+
 		<!-- https://www.youtube.com/watch?v=JglWZ-wC3Vk -->
-		
+
 		<dependency>
-		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger2</artifactId>
-		    <version>2.7.0</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger-ui</artifactId>
-		    <version>2.7.0</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
 		</dependency>
-		
+
 		<!-- Java 8 date and time JSR310 converters -->
 		<dependency>
-		   <groupId>com.fasterxml.jackson.datatype</groupId>
-		   <artifactId>jackson-datatype-jsr310</artifactId>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -217,7 +224,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 
 		</plugins>
 	</build>

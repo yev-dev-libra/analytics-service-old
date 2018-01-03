@@ -32,6 +32,13 @@ public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> {
 			return query.groupBy(c.get(STOCK_ID)).getRestriction();
 		};
 	}
+	public static <T> Specification<T> groupByField(final ValueDataFieldType fieldType) {
+		
+		return (root, query, cb) -> {
+			Root<LibraStockIndicator> c = query.from(LibraStockIndicator.class);
+			return query.groupBy(c.get(fieldType.getFieldName())).getRestriction();
+		};
+	}
 
 	public static <T> Specification<T> stockIdsEquals(final Collection<Long> stockIds) {
 		return (root, query, cb) -> {
@@ -47,7 +54,7 @@ public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> {
 		};
 	}
 	
-	public static <T> Specification<T> idsEquals(final ValueDataFieldType fieldType, final List<Long> ids) {
+	public static <T> Specification<T> idsEquals(final ValueDataFieldType fieldType, final Collection<Long> ids) {
 		return (root, query, cb) -> {
 			final Path<Long> stocks = root.<Long>get(fieldType.getFieldName());
 			return stocks.in(ids);

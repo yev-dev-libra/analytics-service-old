@@ -1,11 +1,14 @@
 package com.libra.apollo.analytics.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import javax.persistence.criteria.Selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -58,12 +61,13 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	@Override
 	public AnalyticsResult getScreeningResults(AnalyticsType type, Collection<Long> stockIds, Long investmentStyleId) {
 		
-		final Specification<LibraStockIndicator> groupByStockIdSpec = LibraStockIndicatorSpecification.groupByStockId();
+		final Specification<LibraStockIndicator> groupByStockIdSpec = LibraStockIndicatorSpecification.groupByField(ValueDataFieldType.STOCK_ID);
 		
-		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.stockIdsEquals(stockIds);
+		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
 		final AnalyticsSpecifications<LibraStockIndicator> specs = new AnalyticsSpecifications<>(stockIdsSpec);
 		
+
 		specs.and(groupByStockIdSpec);
 		
 		Iterable<QueryParameter> queryParams = investmentStyleRepository.findIterableQueryParametersById(investmentStyleId);
@@ -76,15 +80,19 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 		//TODO: add sorting
 		//TODO: add return parameters
 		
-		List<ValueDataFieldType> values = Arrays.asList(
-				ValueDataFieldType.STAMP_DATE, 
+		List<ValueDataFieldType> fields = Arrays.asList(
+				ValueDataFieldType.MAX_STAMP_DATE, 
 				ValueDataFieldType.STAR_RATING,
 				ValueDataFieldType.FAIR_VALUE,
 				ValueDataFieldType.INTRINSIC_VALUE,
 				ValueDataFieldType.STOCK_ID
 				);
 		
-		List<Map<ValueDataFieldType,Object>> indicators = libraStockIndicatorRepository.findAllBySpecification(values, specs);
+		
+		
+		libraStockIndicatorRepository.streamAllBySpecification(fields, specs, null);
+		
+//		List<Map<ValueDataFieldType,Object>> indicators = libraStockIndicatorRepository.findAllBySpecification(fields, specs);
 		
 		//TODO: convert to screener results
 		ScreenerResult results = null;
