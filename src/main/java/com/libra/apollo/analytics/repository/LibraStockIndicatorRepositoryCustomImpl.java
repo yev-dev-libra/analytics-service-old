@@ -3,10 +3,7 @@ package com.libra.apollo.analytics.repository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
@@ -53,7 +50,6 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
-		List<Map<ValueDataFieldType,Object>> returnValues = new ArrayList<>();
 		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		
@@ -79,7 +75,6 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 		
 		q.multiselect(selections);
 		
-		//Dynamic query construction to extract defined query parameters
 		q.where(specification.toPredicate(indicatorsRoot, q, cb));
 		
 		final String stockIdFieldName = ValueDataFieldType.STOCK_ID.getFieldName();
@@ -105,62 +100,43 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 
 	@Override
 	public Stream<Tuple> streamAllBySpecification(final Collection<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification, final Date runDate) {
+		if(logger.isDebugEnabled()) {
+			logger.debug("");
+		}
 		
-		throw new UnsupportedOperationException();
-//		if(logger.isDebugEnabled()) {
-//			logger.debug("");
-//		}
-//		List<Map<ValueDataFieldType,Object>> returnValues = new ArrayList<>();
-//		
-//		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//		CriteriaQuery<Tuple> q = cb.createQuery(Tuple.class); 
-//		
-//		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
-//		
-//		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
-//		
-//		for(ValueDataFieldType field : fields ) {
-//			
-//			if(field.equals(ValueDataFieldType.MAX_STAMP_DATE)) {
-//				
-//				final String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
-//				
-//				selections.add(cb.<Date>greatest(indicatorsRoot.get(stampDateFieldName)).alias(ValueDataFieldType.MAX_STAMP_DATE.getFieldName()) );
-//			}
-//			else {
-//				selections.add(indicatorsRoot.get(field.getFieldName()).alias(field.getFieldName())  );
-//			}
-//			
-//		}
-//		
-//		q.multiselect(selections);
-//		
-//		//Dynamic query construction to extract defined query parameters
-//		q.where(specification.toPredicate(indicatorsRoot, q, cb));
-//		
-//		final String stockIdFieldName = ValueDataFieldType.STOCK_ID.getFieldName();
-//		
-//		q.groupBy(indicatorsRoot.get(stockIdFieldName));
-//		
-//		Query query = entityManager.createQuery(q);
-//		
-//		Stream<Tuple> s = query.getResultList().stream();
-//		
-//		Tuple tuple = s.findAny().get();
-////		
-////		for (Tuple tuple : results) {
-////			
-////			Map<ValueDataFieldType,Object> valuesDataMap = new HashMap<>(fields.size());
-////			
-////			for(ValueDataFieldType field : fields ) {
-////				String fieldName = field.getFieldName();
-////				valuesDataMap.put(field, tuple.get(fieldName));
-////			}
-////			
-////			returnValues.add(valuesDataMap);
-////		}
-//		
-//		return null;
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Tuple> q = cb.createTupleQuery();
+		
+		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
+		
+		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
+		
+		for(ValueDataFieldType field : fields ) {
+			
+			if(field.equals(ValueDataFieldType.MAX_STAMP_DATE)) {
+				
+				final String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
+				
+				selections.add(cb.<Date>greatest(indicatorsRoot.get(stampDateFieldName)).alias(ValueDataFieldType.MAX_STAMP_DATE.getFieldName()) );
+			}
+			else {
+				selections.add(indicatorsRoot.get(field.getFieldName()).alias(field.getFieldName())  );
+			}
+			
+		}
+		
+		q.multiselect(selections);
+		
+		q.where(specification.toPredicate(indicatorsRoot, q, cb));
+		
+		final String stockIdFieldName = ValueDataFieldType.STOCK_ID.getFieldName();
+		
+		q.groupBy(indicatorsRoot.get(stockIdFieldName));
+		
+		Query query = entityManager.createQuery(q);
+		
+		return query.getResultList().stream();
 	}
 
 	

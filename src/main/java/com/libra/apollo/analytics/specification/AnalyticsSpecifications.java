@@ -10,18 +10,22 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.Assert;
 
-public class AnalyticsSpecifications<T> implements Specification<T>, Serializable {
+public final class AnalyticsSpecifications<T> implements Specification<T>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	private AnalyticsSpecification<T> spec;
 
 	public Specification<T> getSpec() {
 		return spec;
 	}
 	
-	public AnalyticsSpecifications(Specification<T> spec) {
-		this.spec = new AnalyticsSpecification<T>(spec);
+	//Preventing from creating the object directly
+	public AnalyticsSpecifications() {}
+	
+	public void where(Specification<T> whereSpec) {
+		this.spec = new AnalyticsSpecification<T>(new WhereClauseSpecification<T>(whereSpec));
 	}
 
 	public void and(Specification<T> other) {
@@ -86,10 +90,9 @@ public class AnalyticsSpecifications<T> implements Specification<T>, Serializabl
 
 		@Override
 		public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-			Predicate p = spec == null ? null : builder.not(spec.toPredicate(root, query, builder));
+			Predicate p = spec == null ? null : builder.and(spec.toPredicate(root, query, builder));
 			return query.where(p).getRestriction();
 		}
-
 		
 	}
 	

@@ -1,47 +1,68 @@
 package com.libra.apollo.analytics.engine.result;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Stream;
 
-import com.libra.apollo.analytics.engine.core.Megerable;
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.engine.core.MergeableAnalytics;
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
-public class ScreenerResult implements AnalyticsResult, Megerable {
+public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 468624570135610833L;
+
+	final private List<ValueDataFieldType> requestedFields;
+	final private List<ValueDataFieldType> processedParameters;
+
+	List<Iterable<? extends Serializable>> results; // TODO: create a generic return result value wrapper
+
 	
-	private Stream<LibraStockIndicator> streamIndicators = Stream.empty() ;
-	private final List<LibraStockIndicator> indicators;
-	
-	
-	public ScreenerResult(List<LibraStockIndicator> indicators) {
+	public ScreenerResult(List<ValueDataFieldType> requestedFields, List<ValueDataFieldType> processedParameters) {
 		super();
-		this.indicators = indicators;
+		this.requestedFields = requestedFields;
+		this.processedParameters = processedParameters;
+		this.results = new LinkedList<>();
 	}
-
-	private AnalyticsType type = AnalyticsType.APOLLO_SCREENER;
-
-	private RunType runType = RunType.MANUAL;
 
 	@Override
 	public AnalyticsType getAnalyticsType() {
-		return type;
+		return AnalyticsType.APOLLO_SCREENER;
 	}
 
 	@Override
 	public RunType getRunType() {
-		return runType;
+		return RunType.MANUAL;
 	}
-	
-	//TODO return streams from Spring Data
-	public void of(List<LibraStockIndicator> indicators) {
-		
+
+	@Override
+	public boolean isMergeEnabled() {
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public List<ValueDataFieldType> getRequestedFields() {
+		return requestedFields;
+	}
+
+	@Override
+	public List<ValueDataFieldType> getProcessedParameters() {
+		return processedParameters;
+	}
+
+	@Override
+	public void merge(Iterable<? extends Serializable> value) {
+		results.add(value);
+
+	}
+
+	@Override
+	public List<Iterable<? extends Serializable>> getResults() {
+		return results;
 	}
 
 }

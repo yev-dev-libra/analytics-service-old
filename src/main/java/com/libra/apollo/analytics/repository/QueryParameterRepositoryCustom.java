@@ -11,5 +11,5 @@ public interface QueryParameterRepositoryCustom {
 
 	public void saveDoubleQueryParameter(QueryParameter parameter);
 
-	public void saveDataQueryParameter(QueryParameter parameter);
+	public void saveDateQueryParameter(QueryParameter parameter);
 }

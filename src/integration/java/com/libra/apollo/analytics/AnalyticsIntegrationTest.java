@@ -42,7 +42,7 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 	}
 	
 	@Test
-	public void shouldRetrieveListOfIndicatorsForApolloClassics() {
+	public void shouldRetrieveScreeningResultsForApolloClassics() {
 		
 		AnalyticsType type = AnalyticsType.APOLLO_SCREENER;
 		
@@ -51,8 +51,7 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 
 		Collection<Long> stockIds = Arrays.asList(1L, 2L);
 		
-//	    analyticsService.getScreeningResults(type,previousDate,stockIds, APOLLO_CLASSICS_STYLE_ID );
-	    analyticsService.getScreeningResults(type,stockIds, APOLLO_CLASSICS_STYLE_ID );
+	    analyticsService.getScreeningResults(type,previousDate,stockIds, APOLLO_CLASSICS_STYLE_ID );
 		
 		assertTrue(true);
 	}

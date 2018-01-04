@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import javax.persistence.Tuple;
 import javax.persistence.criteria.Selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.StampDateSpecification;
+import com.libra.apollo.analytics.utils.Utils;
 
 @Service
 @Transactional
@@ -59,27 +61,23 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	}
 
 	@Override
-	public AnalyticsResult getScreeningResults(AnalyticsType type, Collection<Long> stockIds, Long investmentStyleId) {
+	public AnalyticsResult getScreeningResults(final AnalyticsType type, final Collection<Long> stockIds, final Long investmentStyleId) {
 		
-		final Specification<LibraStockIndicator> groupByStockIdSpec = LibraStockIndicatorSpecification.groupByField(ValueDataFieldType.STOCK_ID);
 		
 		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specs = new AnalyticsSpecifications<>(stockIdsSpec);
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>();
 		
-
-		specs.and(groupByStockIdSpec);
+		specification.where(stockIdsSpec);
 		
-		Iterable<QueryParameter> queryParams = investmentStyleRepository.findIterableQueryParametersById(investmentStyleId);
+		//Obtaining persisted parameters as per investment style
+		List<QueryParameter> queryParams = investmentStyleRepository.findQueryParametersById(investmentStyleId);
 		
-		Consumer<? super QueryParameter> action = consumer -> specs.and(consumer.getSpecification());
+		Consumer<? super QueryParameter> action = consumer -> specification.and(consumer.getSpecification());
 		
 		queryParams.forEach(action);
 		
-		
-		//TODO: add sorting
-		//TODO: add return parameters
-		
+		//TODO: persist in the database
 		List<ValueDataFieldType> fields = Arrays.asList(
 				ValueDataFieldType.MAX_STAMP_DATE, 
 				ValueDataFieldType.STAR_RATING,
@@ -88,14 +86,19 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 				ValueDataFieldType.STOCK_ID
 				);
 		
+		List<ValueDataFieldType> processedParameters = new ArrayList<ValueDataFieldType>();
 		
+		List<Tuple> returnTuples = libraStockIndicatorRepository.findAllBySpecification(fields, specification);
 		
-		libraStockIndicatorRepository.streamAllBySpecification(fields, specs, null);
+		List<List<Object>> fieldResults = Utils.fromTupleToList(returnTuples, fields);
 		
-//		List<Map<ValueDataFieldType,Object>> indicators = libraStockIndicatorRepository.findAllBySpecification(fields, specs);
+		ScreenerResult results = new ScreenerResult(fields,processedParameters);
 		
-		//TODO: convert to screener results
-		ScreenerResult results = null;
+		if(results.isMergeEnabled()) {
+			
+			for(List<Object> object : fieldResults) {
+			}
+		}
 		
 		return results;
 	}

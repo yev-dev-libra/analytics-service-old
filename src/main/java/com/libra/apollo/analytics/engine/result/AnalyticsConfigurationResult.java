@@ -8,7 +8,7 @@ import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
-public class AnalyticsConfigurationResult implements AnalyticsResult {
+public class AnalyticsConfigurationResult implements Result {
 
 	/**
 	 * 

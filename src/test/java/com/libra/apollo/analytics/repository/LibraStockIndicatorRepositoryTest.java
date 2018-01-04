@@ -163,11 +163,11 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		
 		
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>();
+		specification.where(idsSpec);
 		specification.and(equalsOrGreaterThanPrevBussDate);
 		specification.and(starRatingSpec);
-		specification.and(starRatingSpec);
-		specification.and(starRatingSpec);
+		specification.and(fvChange1m);
 		specification.and(ivChange1m);
 		specification.and(pctFVRangeGreaterThanZero);
 		specification.and(pctFVRangeLessThanOne);
@@ -192,6 +192,79 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		
 		assertThat(values.isEmpty(), is(false));
 
+	}
+	@Test
+	public void shouldConstructDynamicQueryForLibraStockIndicatorsWithCriteriaAndBusinessDate() {
+		
+		List<ValueDataFieldType> fields = Arrays.asList(
+				ValueDataFieldType.MAX_STAMP_DATE, 
+				ValueDataFieldType.STAR_RATING,
+				ValueDataFieldType.FAIR_VALUE,
+				ValueDataFieldType.INTRINSIC_VALUE,
+				ValueDataFieldType.STOCK_ID
+				);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2017, 10, 30);
+		Date randomBusinessDate =  new Date(calendar.getTimeInMillis());
+		
+		//PCT_IN_FAIR_VALUE_RANGE > 0
+		//PCT_IN_FAIR_VALUE_RANGE < 1
+		
+		List<Long> stockIds = Arrays.asList(1L);
+		
+		//Passed stock ids
+		Specification<LibraStockIndicator> idsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
+		
+		final Date prevDateStampDate = previousDate;
+		Specification<LibraStockIndicator> equalsOrGreaterThanPrevBussDate = StampDateSpecification.stampDateGreaterThanOrEqual(prevDateStampDate );
+		
+		//STAR_RATING  >= 3.0
+		Specification<LibraStockIndicator> starRatingSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.STAR_RATING, BigDecimal.valueOf(3));
+		
+		//FAIR_VALUE_CHANGE_1M >= 0
+		Specification<LibraStockIndicator> fvChange1m = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.FAIR_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
+		
+		//INTRINSIC_VALUE_CHANGE_1M >= 0
+		Specification<LibraStockIndicator> ivChange1m = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.INTRINSIC_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
+		
+		//PCT_IN_FAIR_VALUE_RANGE > 0
+		Specification<LibraStockIndicator> pctFVRangeGreaterThanZero = LibraStockIndicatorSpecification.fieldGreaterThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(0));
+		
+		//PCT_IN_FAIR_VALUE_RANGE < 1
+		Specification<LibraStockIndicator> pctFVRangeLessThanOne = LibraStockIndicatorSpecification.fieldLessThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(1));
+		
+		
+		
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>();
+		specification.where(idsSpec);
+		specification.and(equalsOrGreaterThanPrevBussDate);
+		specification.and(starRatingSpec);
+		specification.and(fvChange1m);
+		specification.and(ivChange1m);
+		specification.and(pctFVRangeGreaterThanZero);
+		specification.and(pctFVRangeLessThanOne);
+		
+		List<Tuple> returnValues = repository.findAllBySpecification(fields, specification, randomBusinessDate);
+		
+		assertThat(returnValues.isEmpty(), is(false));
+		
+		List<Map<ValueDataFieldType,Object>> values = new ArrayList<>();
+		
+		for (Tuple tuple : returnValues) {
+			
+			Map<ValueDataFieldType,Object> valuesDataMap = new HashMap<>(fields.size());
+			
+			for(ValueDataFieldType field : fields ) {
+				String fieldName = field.getFieldName();
+				valuesDataMap.put(field, tuple.get(fieldName));
+			}
+			
+			values.add(valuesDataMap);
+		}
+		
+		assertThat(values.isEmpty(), is(false));
+		
 	}
 	
 }

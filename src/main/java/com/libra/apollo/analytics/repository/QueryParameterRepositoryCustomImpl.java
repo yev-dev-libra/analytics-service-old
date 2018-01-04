@@ -17,18 +17,28 @@ public class QueryParameterRepositoryCustomImpl implements QueryParameterReposit
 
 	@Override
 	public void saveBigDecimalQueryParameter(QueryParameter parameter) {
+		if(logger.isDebugEnabled()) {
+			logger.debug("Saving BigDecimal parameter [" + parameter+ "]");
+		}
 		em.persist(parameter);
 
 	}
 
 	@Override
 	public void saveDoubleQueryParameter(QueryParameter parameter) {
+		if(logger.isDebugEnabled()) {
+			logger.debug("Saving Double parameter [" + parameter+ "]");
+		}
 		em.persist(parameter);
 
 	}
 
 	@Override
-	public void saveDataQueryParameter(QueryParameter parameter) {
+	public void saveDateQueryParameter(QueryParameter parameter) {
+		
+		if(logger.isDebugEnabled()) {
+			logger.debug("Saving Double parameter [" + parameter+ "]");
+		}
 		em.persist(parameter);
 
 	}

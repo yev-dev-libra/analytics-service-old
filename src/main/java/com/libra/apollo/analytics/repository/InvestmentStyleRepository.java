@@ -31,6 +31,7 @@ public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyl
 	@Query("SELECT isp.parameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
 	Iterable<QueryParameter> findIterableQueryParametersById(@Param("id") Long id);
 	
+	
 	@Query("select new map(isp.priority, isp.parameter) FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
 	List<Map<QueryParameter,Priority>> findQueryParametersByIdWithPriority(@Param("id") Long id);
 	
