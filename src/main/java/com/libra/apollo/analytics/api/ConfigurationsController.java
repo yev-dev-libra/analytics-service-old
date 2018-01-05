@@ -175,7 +175,6 @@ public class ConfigurationsController {
 		return new ResponseEntity<List<AnalyticsView>>(analyticViews, HttpStatus.OK);
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * Return public view of the specific analytic with analyticId and view with identifier 'viewId', if the analytic or the view is not found then
 	 * return not found code.
@@ -245,6 +244,4 @@ public class ConfigurationsController {
 		return new ResponseEntity<List<InvestmentStyle>>(investmentStyles, HttpStatus.OK);
 	}
 	
-=======
->>>>>>> branch 'master' of https://github.com/libra-apollo-dev/analytics-service
 }
