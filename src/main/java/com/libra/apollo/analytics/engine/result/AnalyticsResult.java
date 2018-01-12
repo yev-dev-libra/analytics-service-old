@@ -12,8 +12,8 @@ public interface AnalyticsResult extends Serializable {
 	public AnalyticsType getAnalyticsType();
 	public RunType getRunType();
 	public List<ValueDataFieldType> getRequestedFields();
-	public List<ValueDataFieldType> getProcessedParameters();
-	public List<Iterable<? extends Serializable>> getResults();
+	public List<ValueDataFieldType> getParameters();
+	public List<Iterable<?>> getResults();
 	//TODO: add errors collectors
 	
 

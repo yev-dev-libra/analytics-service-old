@@ -1,15 +1,11 @@
 package com.libra.apollo.analytics.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 
 import javax.persistence.Tuple;
-import javax.persistence.criteria.Selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -28,7 +24,6 @@ import com.libra.apollo.analytics.repository.InvestmentStyleRepository;
 import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
-import com.libra.apollo.analytics.specification.StampDateSpecification;
 import com.libra.apollo.analytics.utils.Utils;
 
 @Service
@@ -38,8 +33,6 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	@Autowired
 	private AnalyticsRepository analyticsRepository;
 
-	@Autowired
-	private InvestmentStyleRepository investmentStyleRepository;
 	
 	@Autowired
 	private LibraStockIndicatorRepository libraStockIndicatorRepository;
@@ -56,50 +49,40 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	}
 
 	@Override
-	public ScreenerResult getScreeningResults(final AnalyticsType type, final Date runDate, final Collection<Long> stockIds, final Long investmentStyleId) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public AnalyticsResult getScreeningResults(final AnalyticsType type, final Collection<Long> stockIds, final Long investmentStyleId) {
-		
+	public void getScreeningResults(final AnalyticsType type, final Collection<Long> stockIds, final List<QueryParameter> queryParams, final ScreenerResult result, final Date runDate) {
 		
 		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>();
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(stockIdsSpec);
 		
-		specification.where(stockIdsSpec);
+		final List<ValueDataFieldType> requestedFields = result.getRequestedFields();
 		
-		//Obtaining persisted parameters as per investment style
-		List<QueryParameter> queryParams = investmentStyleRepository.findQueryParametersById(investmentStyleId);
+		final List<ValueDataFieldType> fields = result.getParameters();
 		
-		Consumer<? super QueryParameter> action = consumer -> specification.and(consumer.getSpecification());
-		
-		queryParams.forEach(action);
-		
-		//TODO: persist in the database
-		List<ValueDataFieldType> fields = Arrays.asList(
-				ValueDataFieldType.MAX_STAMP_DATE, 
-				ValueDataFieldType.STAR_RATING,
-				ValueDataFieldType.FAIR_VALUE,
-				ValueDataFieldType.INTRINSIC_VALUE,
-				ValueDataFieldType.STOCK_ID
-				);
-		
-		List<ValueDataFieldType> processedParameters = new ArrayList<ValueDataFieldType>();
-		
-		List<Tuple> returnTuples = libraStockIndicatorRepository.findAllBySpecification(fields, specification);
-		
-		List<List<Object>> fieldResults = Utils.fromTupleToList(returnTuples, fields);
-		
-		ScreenerResult results = new ScreenerResult(fields,processedParameters);
-		
-		if(results.isMergeEnabled()) {
+		for(QueryParameter param : queryParams) {
+			specification.and(param.getSpecification());
 			
-			for(List<Object> object : fieldResults) {
-			}
 		}
 		
-		return results;
+		
+		List<Tuple> returnTuples = null;
+		
+		if(runDate != null) {
+			returnTuples = libraStockIndicatorRepository.findAllBySpecification(fields, specification, runDate);
+		}
+		else {
+			returnTuples = libraStockIndicatorRepository.findAllBySpecification(fields, specification);
+		}
+		
+		Iterable<List<Object>> fieldResults = Utils.fromTupleToList(returnTuples, requestedFields);
+		
+		
+		result.merge(fieldResults);
+		
+	}
+
+	@Override
+	public void getScreeningResults(final AnalyticsType type, final Collection<Long> stockIds, final List<QueryParameter> queryParams, final ScreenerResult result) {
+		getScreeningResults(type, stockIds, queryParams, result);
 	}
 }

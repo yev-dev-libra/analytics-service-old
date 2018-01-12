@@ -23,7 +23,6 @@ import org.hibernate.annotations.SortNatural;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
-import com.libra.apollo.analytics.entity.jsonviews.AnalyticsJsonView;
 import com.libra.apollo.analytics.entity.jsonviews.ConfigurationJsonView;
 
 @Entity

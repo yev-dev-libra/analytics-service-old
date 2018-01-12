@@ -46,7 +46,7 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Tuple> findAllBySpecification(final Collection<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification) {
+	public List<Tuple> findAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification) {
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
@@ -87,7 +87,7 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 	}
 
 	@Override
-	public List<Tuple> findAllBySpecification(final Collection<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification, final Date stampDate) {
+	public List<Tuple> findAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification, final Date stampDate) {
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
@@ -99,7 +99,7 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 	}
 
 	@Override
-	public Stream<Tuple> streamAllBySpecification(final Collection<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification, final Date runDate) {
+	public Stream<Tuple> streamAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification, final Date runDate) {
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}

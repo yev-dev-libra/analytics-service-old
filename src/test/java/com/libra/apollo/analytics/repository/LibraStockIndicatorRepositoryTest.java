@@ -126,13 +126,13 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void shouldConstructDynamicQueryForLibraStockIndicatorsWithCriteria() {
 		
-		List<ValueDataFieldType> fields = Arrays.asList(
+		final List<ValueDataFieldType> fields  = Arrays.asList(
 				ValueDataFieldType.MAX_STAMP_DATE, 
 				ValueDataFieldType.STAR_RATING,
 				ValueDataFieldType.FAIR_VALUE,
 				ValueDataFieldType.INTRINSIC_VALUE,
 				ValueDataFieldType.STOCK_ID
-				);
+		);
 		
 		
 		//PCT_IN_FAIR_VALUE_RANGE > 0
@@ -163,8 +163,7 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		
 		
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>();
-		specification.where(idsSpec);
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
 		specification.and(equalsOrGreaterThanPrevBussDate);
 		specification.and(starRatingSpec);
 		specification.and(fvChange1m);
@@ -196,13 +195,13 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void shouldConstructDynamicQueryForLibraStockIndicatorsWithCriteriaAndBusinessDate() {
 		
-		List<ValueDataFieldType> fields = Arrays.asList(
+		final List<ValueDataFieldType> fields  = Arrays.asList(
 				ValueDataFieldType.MAX_STAMP_DATE, 
 				ValueDataFieldType.STAR_RATING,
 				ValueDataFieldType.FAIR_VALUE,
 				ValueDataFieldType.INTRINSIC_VALUE,
 				ValueDataFieldType.STOCK_ID
-				);
+		);
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2017, 10, 30);
@@ -236,8 +235,7 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		
 		
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>();
-		specification.where(idsSpec);
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
 		specification.and(equalsOrGreaterThanPrevBussDate);
 		specification.and(starRatingSpec);
 		specification.and(fvChange1m);

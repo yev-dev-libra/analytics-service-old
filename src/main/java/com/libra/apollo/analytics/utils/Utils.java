@@ -1,6 +1,5 @@
 package com.libra.apollo.analytics.utils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,19 +29,32 @@ public class Utils {
 		return values;
 	}
 
-	public static List<List<Object>> fromTupleToList(List<Tuple> tuples, List<ValueDataFieldType> fields) { 
+	public static Iterable<List<Object>> fromTupleToList(List<Tuple> tuples, List<ValueDataFieldType> fields) { 
 		
 		List<List<Object>> values = new ArrayList<>(tuples.size());
 
 		for (Tuple tuple : tuples) {
 
-			List<? extends Serializable> value = new ArrayList<>();
+			List<Object> value = new ArrayList<>(fields.size());
 
-			for (ValueDataFieldType field : fields) { //TODO: populate notification is something hasn't been matched
+			for (ValueDataFieldType field : fields) { 
+				
+				Object extractedValue = null;
+				
 				String fieldName = field.getFieldName();
-				Serializable o = (Serializable) tuple.get(fieldName);
+				Class<?> clazz = field.getClazz();
+				
+				if(clazz != null) {
+					extractedValue = tuple.get(fieldName,clazz);
+				}
+				else {
+					extractedValue =  tuple.get(fieldName);
+				}
+				
+				value.add(extractedValue);
 			}
-
+			
+			values.add(value);
 		}
 
 		return values;

@@ -22,12 +22,13 @@ public final class AnalyticsSpecifications<T> implements Specification<T>, Seria
 	}
 	
 	//Preventing from creating the object directly
-	public AnalyticsSpecifications() {}
+	@SuppressWarnings("unused")
+	private AnalyticsSpecifications() {}
 	
-	public void where(Specification<T> whereSpec) {
+	public AnalyticsSpecifications(Specification<T> whereSpec) {
 		this.spec = new AnalyticsSpecification<T>(new WhereClauseSpecification<T>(whereSpec));
 	}
-
+	
 	public void and(Specification<T> other) {
 		spec = new AnalyticsSpecification<T>(new ComposedSpecification<T>(spec, other, CompositionType.AND));
 	}

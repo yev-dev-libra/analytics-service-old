@@ -1,8 +1,10 @@
 package com.libra.apollo.analytics.engine.result;
 
-import java.io.Serializable;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.libra.apollo.analytics.engine.core.MergeableAnalytics;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
@@ -16,16 +18,18 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 	 */
 	private static final long serialVersionUID = 468624570135610833L;
 
-	final private List<ValueDataFieldType> requestedFields;
-	final private List<ValueDataFieldType> processedParameters;
-
-	List<Iterable<? extends Serializable>> results; // TODO: create a generic return result value wrapper
-
+	private final ValueDataFieldType[] requestedFields;
 	
-	public ScreenerResult(List<ValueDataFieldType> requestedFields, List<ValueDataFieldType> processedParameters) {
+	private final ValueDataFieldType[] parameters;
+
+	private List<Iterable<?>> results; 
+	
+	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+
+	public ScreenerResult(final ValueDataFieldType[] requestedFields, ValueDataFieldType[] parameters) {
 		super();
 		this.requestedFields = requestedFields;
-		this.processedParameters = processedParameters;
+		this.parameters = parameters;
 		this.results = new LinkedList<>();
 	}
 
@@ -46,23 +50,35 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 
 	@Override
 	public List<ValueDataFieldType> getRequestedFields() {
-		return requestedFields;
+		return Arrays.asList(requestedFields);
 	}
 
 	@Override
-	public List<ValueDataFieldType> getProcessedParameters() {
-		return processedParameters;
+	public List<ValueDataFieldType> getParameters() {
+		return Arrays.asList(parameters);
 	}
 
 	@Override
-	public void merge(Iterable<? extends Serializable> value) {
-		results.add(value);
+	public void merge(Iterable<?> value) {
+		readWriteLock.writeLock().lock();
 
+		try {
+			results.add(value);
+		} finally {
+			readWriteLock.writeLock().unlock();
+		}
 	}
 
 	@Override
-	public List<Iterable<? extends Serializable>> getResults() {
-		return results;
+	public List<Iterable<?>> getResults() {
+		
+		try {
+			readWriteLock.readLock().lock();
+			return results;
+			
+		} finally {
+			readWriteLock.readLock().unlock();
+		}
 	}
 
 }
