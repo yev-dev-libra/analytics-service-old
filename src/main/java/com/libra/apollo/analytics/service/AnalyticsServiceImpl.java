@@ -12,6 +12,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.libra.apollo.analytics.engine.converter.AnalyticsConveterConveter;
+import com.libra.apollo.analytics.engine.converter.Converter;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.engine.result.AnalyticsResult;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
@@ -57,25 +59,23 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 		
 		final List<ValueDataFieldType> requestedFields = result.getRequestedFields();
 		
-		final List<ValueDataFieldType> fields = result.getParameters();
-		
 		for(QueryParameter param : queryParams) {
 			specification.and(param.getSpecification());
 			
 		}
 		
-		
-		List<Tuple> returnTuples = null;
+		List<Tuple> from = null;
 		
 		if(runDate != null) {
-			returnTuples = libraStockIndicatorRepository.findAllBySpecification(fields, specification, runDate);
+			from = libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification, runDate);
 		}
 		else {
-			returnTuples = libraStockIndicatorRepository.findAllBySpecification(fields, specification);
+			from = libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification);
 		}
 		
-		Iterable<List<Object>> fieldResults = Utils.fromTupleToList(returnTuples, requestedFields);
+		Converter<List<Tuple>, Iterable<List<Object>>> convertedValues = AnalyticsConveterConveter.fromTupleToList(requestedFields);
 		
+		Iterable<List<Object>> fieldResults =  convertedValues.convert(from);
 		
 		result.merge(fieldResults);
 		

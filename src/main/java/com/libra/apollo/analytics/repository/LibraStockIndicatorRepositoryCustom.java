@@ -17,7 +17,7 @@ import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 public interface LibraStockIndicatorRepositoryCustom {
 
 	public List<LibraStockIndicator> findAllBySpecification(Specification<LibraStockIndicator> specification);
-	public List<Tuple> findAllBySpecification(List<ValueDataFieldType> fields, AnalyticsSpecifications<LibraStockIndicator> specification);
-	public List<Tuple> findAllBySpecification(List<ValueDataFieldType> fields, AnalyticsSpecifications<LibraStockIndicator> specification, Date runDate);
-	public Stream<Tuple> streamAllBySpecification(List<ValueDataFieldType> fields, AnalyticsSpecifications<LibraStockIndicator> specification, Date runDate);
+	public List<Tuple> findAllBySpecification(List<ValueDataFieldType> requestedFields, AnalyticsSpecifications<LibraStockIndicator> specification);
+	public List<Tuple> findAllBySpecification(List<ValueDataFieldType> requestedFields, AnalyticsSpecifications<LibraStockIndicator> specification, Date runDate);
+	public Stream<Tuple> streamAllBySpecification(List<ValueDataFieldType> requestedFields, AnalyticsSpecifications<LibraStockIndicator> specification, Date runDate);
 }
