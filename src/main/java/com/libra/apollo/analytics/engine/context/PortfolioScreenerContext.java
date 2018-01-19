@@ -1,5 +1,6 @@
 package com.libra.apollo.analytics.engine.context;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
-public class ScreenerContext implements AnalyticsContext {
+public class PortfolioScreenerContext implements AnalyticsContext {
 
 	public enum PropertyName{
 		
@@ -43,7 +44,7 @@ public class ScreenerContext implements AnalyticsContext {
 	private ScreenerResult result;
 	
 	
-	public ScreenerContext(final AnalyticsService analyticsService, final ConfigurationService configurationService, final  PortfolioService portfolioService, final Operation operation, final Map<String,String> properties) {
+	public PortfolioScreenerContext(final AnalyticsService analyticsService, final ConfigurationService configurationService, final  PortfolioService portfolioService, final Operation operation, final Map<String,String> properties) {
 		this.analyticsService = analyticsService;
 		this.configurationService = configurationService;
 		this.portfolioService = portfolioService;
@@ -139,6 +140,15 @@ public class ScreenerContext implements AnalyticsContext {
 		return AnalyticsType.APOLLO_SCREENER;
 	}
 	
+	@Override
+	public Collection<Long> getStockIds() {
+		return this.stockPortfolios.keySet();
+	}
+
+	public static class ScreenerContextBuilder {
+		
+	}
+
 	
 	
 }

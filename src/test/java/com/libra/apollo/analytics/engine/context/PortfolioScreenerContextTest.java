@@ -14,7 +14,7 @@ import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
-public class ScreenerContextTest {
+public class PortfolioScreenerContextTest {
 
 	private AnalyticsContext analyticsContext;
 
@@ -25,11 +25,11 @@ public class ScreenerContextTest {
 	
 	@Test
 	public void testContextSetup() {
-		assertEquals(Operation.SCREEN, analyticsContext.getOperation());
+		assertEquals(Operation.SCREEN_FOR_PORTFOLIO, analyticsContext.getOperation());
 	}
 
 	private AnalyticsContext createAnalyticsContext() {
 		Map<String, String> properties = new HashMap<>();
-		return new ScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), Operation.SCREEN, properties);
+		return new PortfolioScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), Operation.SCREEN_FOR_PORTFOLIO, properties);
 	}
 }

@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.libra.apollo.analytics.engine.context.ScreenerContext;
+import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
@@ -36,7 +36,7 @@ public class ScreenerDelegatorTest {
 	private static Map<Long,List<Long>> stockPortofioIds = new HashMap<>();
 	private static Set<Long> instrumentIds = stockPortofioIds.keySet();
 	
-	private ScreenerContext analyticsContext;
+	private PortfolioScreenerContext analyticsContext;
 	
 
 	@Before
@@ -84,7 +84,7 @@ public class ScreenerDelegatorTest {
 		
 	}
 	
-	private ScreenerContext createAnalyticsContext() {
+	private PortfolioScreenerContext createAnalyticsContext() {
 		Map<String, String> properties = new HashMap<>();
 		
 		ScreenerRequest mockRequest = mock(ScreenerRequest.class);
@@ -93,12 +93,12 @@ public class ScreenerDelegatorTest {
 		ConfigurationService mockConfigurationService = mock(ConfigurationService.class);
 		PortfolioService mockPortfolioService = mock(PortfolioService.class);
 		
-		ScreenerContext context = new ScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, Operation.SCREEN, properties);
+		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties);
 		
 		when(mockRequest.getAnalyticsType()).thenReturn(AnalyticsType.APOLLO_SCREENER);
 		when(mockRequest.getInvestmentStyleId()).thenReturn(APOLLO_CLASSICS_STYLE_ID);
 		when(mockRequest.getPortfolioIds()).thenReturn(portfolioIds);
-		when(mockRequest.getOperation()).thenReturn(Operation.SCREEN);
+		when(mockRequest.getOperation()).thenReturn(Operation.SCREEN_FOR_PORTFOLIO);
 		
 		when(mockPortfolioService.getStockIdsWithPortfolios(portfolioIds)).thenReturn(stockPortofioIds);
 		

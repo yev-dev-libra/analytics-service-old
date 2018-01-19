@@ -6,12 +6,20 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.libra.apollo.analytics.engine.command.Command;
+import com.libra.apollo.analytics.engine.command.PortfolioEnrichmentCommand;
+import com.libra.apollo.analytics.engine.command.ScreenerCommand;
+import com.libra.apollo.analytics.engine.command.ScreenerDelegator;
+import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
+import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.engine.result.AnalyticsResult;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
@@ -20,6 +28,7 @@ import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.repository.InvestmentStyleRepository;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
+import com.libra.apollo.analytics.service.PortfolioService;
 
 public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegrationTest {
 
@@ -41,6 +50,12 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 	@Autowired
 	private AnalyticsService analyticsService;
 	
+	@Autowired
+	private ConfigurationService configurationService;
+	
+	@Autowired
+	private PortfolioService portfolioService;
+	
 	private Date previousDate;
 	
 	@Before
@@ -58,27 +73,21 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 
 		Collection<Long> stockIds = Arrays.asList(1L, 2L);
 		
-		List<QueryParameter> query = investmentStyleRepository.findQueryParametersById(APOLLO_CLASSICS_STYLE_ID);
-
-		ValueDataFieldType[] paramFields = new ValueDataFieldType[query.size()];
 		
-		for (int i = 0; i < query.size(); i++) {
-			paramFields[i] = query.get(i).getFieldType();
-			
-		}
+		final Map<String,String> properties = new HashMap<>();
 		
-		//TODO: persist in the database
-		ValueDataFieldType[] fields = {
-						ValueDataFieldType.MAX_STAMP_DATE, 
-						ValueDataFieldType.STAR_RATING,
-						ValueDataFieldType.FAIR_VALUE,
-						ValueDataFieldType.INTRINSIC_VALUE,
-						ValueDataFieldType.STOCK_ID
-				};
+		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties);
 		
-		ScreenerResult result = new ScreenerResult(fields, paramFields);
-
-		analyticsService.getScreeningResults(stockIds, query, result, previousDate);
+		ScreenerDelegator delegator = new ScreenerDelegator(analyticsContext);
+		
+		Command portfolioEnrichment = new PortfolioEnrichmentCommand(analyticsContext);
+		
+		Command screenerCommand = new ScreenerCommand(analyticsContext);
+		
+		delegator.add(portfolioEnrichment);
+		delegator.add(screenerCommand);
+		
+		ScreenerResult results = analyticsContext.getResult();
 		
 		assertTrue(true);
 	}

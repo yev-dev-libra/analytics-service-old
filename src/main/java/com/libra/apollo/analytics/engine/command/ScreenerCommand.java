@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.libra.apollo.analytics.engine.context.ScreenerContext;
+import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.QueryParameter;
@@ -15,10 +15,10 @@ import com.libra.apollo.analytics.service.ConfigurationService;
 
 public class ScreenerCommand implements Command {
 
-	final private ScreenerContext context;
+	final private PortfolioScreenerContext context;
 	
 	
-	public ScreenerCommand(ScreenerContext context) {
+	public ScreenerCommand(PortfolioScreenerContext context) {
 		super();
 		this.context = context;
 	}

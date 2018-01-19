@@ -22,8 +22,10 @@ import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.domain.Specification;
 
+import com.google.common.collect.Lists;
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
@@ -33,6 +35,9 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 	//can have multiple unit names
 	@PersistenceContext 
 	private EntityManager entityManager;
+	
+	@Value("${analytics.service.batchsize}")
+	private String batchSize;
 	
 	@Test
 	public void testQueryForInvestmentStylesWithCriteria() {
@@ -190,5 +195,7 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 		
 	}
 		
+	
+	
 	
 }

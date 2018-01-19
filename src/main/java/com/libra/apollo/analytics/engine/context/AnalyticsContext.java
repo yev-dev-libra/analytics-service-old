@@ -1,5 +1,6 @@
 package com.libra.apollo.analytics.engine.context;
 
+import java.util.Collection;
 import java.util.Map;
 
 import com.libra.apollo.analytics.engine.core.Operation;
@@ -27,5 +28,7 @@ public interface AnalyticsContext {
 	public Operation getOperation();
 	
 	public AnalyticsType getAnalyticsType();
-
+	
+	public Collection<Long> getStockIds();
+	
 }

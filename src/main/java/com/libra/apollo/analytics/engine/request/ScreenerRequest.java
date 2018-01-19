@@ -43,7 +43,7 @@ public class ScreenerRequest implements AnalyticsRequest {
 
 	@Override
 	public Operation getOperation() {
-		return Operation.SCREEN;
+		return Operation.SCREEN_FOR_PORTFOLIO;
 	}
 
 	public Date getRunDate() {
