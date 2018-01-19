@@ -5,6 +5,7 @@ import com.libra.apollo.analytics.engine.request.AnalyticsConfigurationRequest;
 import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
+import com.libra.apollo.analytics.entity.QueryParameter;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
@@ -22,6 +23,9 @@ public interface ConfigurationService {
 	
 	public List<ApolloAnalytics> getAnalyticsViews(AnalyticsConfigurationRequest request);
 	public List<InvestmentStyle> getInvestmentStylesByView(AnalyticsView analyticsView);
+	
+	public List<QueryParameter> getInvestmentStylesQueryParameters(Long investmentStyleId);
+	
 
 
 }

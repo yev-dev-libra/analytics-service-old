@@ -53,8 +53,6 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 	@Test
 	public void shouldRetrieveScreeningResultsForApolloClassics() {
 		
-		AnalyticsType type = AnalyticsType.APOLLO_SCREENER;
-		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2017, 11, 01);
 
@@ -80,7 +78,7 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 		
 		ScreenerResult result = new ScreenerResult(fields, paramFields);
 
-		analyticsService.getScreeningResults(type, stockIds, query, result, previousDate);
+		analyticsService.getScreeningResults(stockIds, query, result, previousDate);
 		
 		assertTrue(true);
 	}

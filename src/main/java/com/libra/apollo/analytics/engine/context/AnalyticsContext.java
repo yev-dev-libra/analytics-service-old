@@ -5,24 +5,27 @@ import java.util.Map;
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
 public interface AnalyticsContext {
 
-	ScreenerRequest getRequest();
+	public ScreenerRequest getRequest();
 
-	ScreenerResult getResult();
+	public ScreenerResult getResult();
 
-	AnalyticsService getAnalyticsService();
+	public AnalyticsService getAnalyticsService();
 
-	ConfigurationService getConfigurationService();
+	public ConfigurationService getConfigurationService();
 
-	PortfolioService getPortfolioService();
+	public PortfolioService getPortfolioService();
 
-	Map<String, String> getProperties();
+	public Map<String, String> getProperties();
 	
 	public Operation getOperation();
+	
+	public AnalyticsType getAnalyticsType();
 
 }

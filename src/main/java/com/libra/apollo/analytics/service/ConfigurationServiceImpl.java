@@ -8,6 +8,7 @@ import com.libra.apollo.analytics.engine.request.AnalyticsConfigurationRequest;
 import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
+import com.libra.apollo.analytics.entity.QueryParameter;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 import com.libra.apollo.analytics.repository.AnalyticsRepository;
@@ -26,6 +27,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	@Autowired
 	private AnalyticsViewRepository analyticsViewRepository;
+	
 	
 
 	@Override
@@ -82,6 +84,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		List<ApolloAnalytics> analytics = analyticsRepository.findAllByTypeAndByRunType(type, runType);
 
 		return analytics;
+	}
+
+	@Override
+	public List<QueryParameter> getInvestmentStylesQueryParameters(Long investmentStyleId) {
+		return investmentStyleRepository.findQueryParametersById(investmentStyleId);
 	}
 
 }

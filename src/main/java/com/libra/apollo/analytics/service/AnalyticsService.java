@@ -13,7 +13,7 @@ public interface AnalyticsService {
 	
 	public List<ApolloAnalytics> getAllApolloAnalytics();
 	public List<ApolloAnalytics> getApolloAnalyticsByAnalyticsType(final AnalyticsType type);
-	public void getScreeningResults(final AnalyticsType type, final Collection<Long> instrumentIds, final List<QueryParameter> queryParams, final ScreenerResult result);
-	public void getScreeningResults(final AnalyticsType type, final Collection<Long> instrumentIds, final List<QueryParameter> queryParams, final ScreenerResult result, final Date runDate );
+	public void getScreeningResults(final Collection<Long> instrumentIds, final List<QueryParameter> queryParams, final ScreenerResult result);
+	public void getScreeningResults(final Collection<Long> instrumentIds, final List<QueryParameter> queryParams, final ScreenerResult result, final Date runDate );
 
 }

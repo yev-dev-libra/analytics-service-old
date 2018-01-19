@@ -15,11 +15,14 @@ public class ScreenerRequest implements AnalyticsRequest {
 	private static final long serialVersionUID = 1863827676275650547L;
 
 	private final List<Long> portfolioIds;
+	private final Long investmentStyleId; //TODO: this should be investment style populated by intercepter
 	
 	
-	public ScreenerRequest(List<Long> portfolioIds) {
+	
+	public ScreenerRequest(List<Long> portfolioIds, Long investmentStyleId) {
 		super();
 		this.portfolioIds = portfolioIds;
+		this.investmentStyleId = investmentStyleId;
 	}
 
 	
@@ -47,4 +50,10 @@ public class ScreenerRequest implements AnalyticsRequest {
 		return null;
 	}
 
+
+	public Long getInvestmentStyleId() {
+		return investmentStyleId;
+	}
+
+	
 }

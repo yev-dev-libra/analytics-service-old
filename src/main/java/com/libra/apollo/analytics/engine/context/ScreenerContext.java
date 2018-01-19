@@ -6,11 +6,12 @@ import java.util.Map;
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
-public class ScreeningContext implements AnalyticsContext {
+public class ScreenerContext implements AnalyticsContext {
 
 	public enum PropertyName{
 		
@@ -42,7 +43,7 @@ public class ScreeningContext implements AnalyticsContext {
 	private ScreenerResult result;
 	
 	
-	public ScreeningContext(final AnalyticsService analyticsService, final ConfigurationService configurationService, final  PortfolioService portfolioService, final Operation operation, final Map<String,String> properties) {
+	public ScreenerContext(final AnalyticsService analyticsService, final ConfigurationService configurationService, final  PortfolioService portfolioService, final Operation operation, final Map<String,String> properties) {
 		this.analyticsService = analyticsService;
 		this.configurationService = configurationService;
 		this.portfolioService = portfolioService;
@@ -130,6 +131,12 @@ public class ScreeningContext implements AnalyticsContext {
 	@Override
 	public Operation getOperation() {
 		return operation;
+	}
+
+
+	@Override
+	public AnalyticsType getAnalyticsType() {
+		return AnalyticsType.APOLLO_SCREENER;
 	}
 	
 	

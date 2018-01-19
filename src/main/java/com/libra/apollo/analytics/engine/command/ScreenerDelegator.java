@@ -3,7 +3,7 @@ package com.libra.apollo.analytics.engine.command;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.libra.apollo.analytics.engine.context.AnalyticsContext;
+import com.libra.apollo.analytics.engine.context.ScreenerContext;
 import com.netflix.servo.util.Preconditions;
 
 
@@ -13,10 +13,10 @@ import com.netflix.servo.util.Preconditions;
 public class ScreenerDelegator implements Delegator {
 
 	private final Queue<Command> commands;
-	private final AnalyticsContext context;
-	private Command next;
+	private final ScreenerContext context;
 	
-	public ScreenerDelegator(final AnalyticsContext context) {
+	
+	public ScreenerDelegator(final ScreenerContext context) {
 		super();
 		this.context = context;
 		commands = new LinkedList<>();
@@ -24,6 +24,10 @@ public class ScreenerDelegator implements Delegator {
 
 	@Override
 	public void execute() {
+		
+		if(commands.isEmpty())
+			throw new IllegalArgumentException("There are commands to execute");
+		
 		for(Command command : commands) {
 			
 			command.execute();
@@ -32,20 +36,19 @@ public class ScreenerDelegator implements Delegator {
 
 	@Override
 	public void add(Command command) {
-		Preconditions.checkArgument(command == null, "Passed parameter can not be null");
+		Preconditions.checkArgument(command != null, "Passed parameter can not be null");
 		commands.add(command);
-		next = command;
 		
 	}
 
 	@Override
-	public AnalyticsContext getContext() {
+	public ScreenerContext getContext() {
 		return context;
 	}
 
 	@Override
 	public Command next() {
-		return next;
+		return commands.poll();
 	}
 
 }

@@ -51,7 +51,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	}
 
 	@Override
-	public void getScreeningResults(final AnalyticsType type, final Collection<Long> stockIds, final List<QueryParameter> queryParams, final ScreenerResult result, final Date runDate) {
+	public void getScreeningResults(final Collection<Long> stockIds, final List<QueryParameter> queryParams, final ScreenerResult result, final Date runDate) {
 		
 		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
@@ -82,7 +82,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 	}
 
 	@Override
-	public void getScreeningResults(final AnalyticsType type, final Collection<Long> stockIds, final List<QueryParameter> queryParams, final ScreenerResult result) {
-		getScreeningResults(type, stockIds, queryParams, result);
+	public void getScreeningResults(final Collection<Long> stockIds, final List<QueryParameter> queryParams, final ScreenerResult result) {
+		getScreeningResults(stockIds, queryParams, result);
 	}
 }

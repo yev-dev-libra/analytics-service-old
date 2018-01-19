@@ -14,7 +14,7 @@ import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
-public class ScreeningContextTest {
+public class ScreenerContextTest {
 
 	private AnalyticsContext analyticsContext;
 
@@ -30,6 +30,6 @@ public class ScreeningContextTest {
 
 	private AnalyticsContext createAnalyticsContext() {
 		Map<String, String> properties = new HashMap<>();
-		return new ScreeningContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), Operation.SCREEN, properties);
+		return new ScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), Operation.SCREEN, properties);
 	}
 }

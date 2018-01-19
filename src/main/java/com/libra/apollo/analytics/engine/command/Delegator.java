@@ -8,5 +8,7 @@ public interface Delegator extends Command {
 
 	public void add(Command command);
 	
+	public Command next();
+	
 	public AnalyticsContext getContext();
 }

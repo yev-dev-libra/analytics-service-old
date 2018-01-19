@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.libra.apollo.analytics.engine.command.Command;
 import com.libra.apollo.analytics.engine.command.ScreenerDelegator;
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
-import com.libra.apollo.analytics.engine.context.ScreeningContext;
+import com.libra.apollo.analytics.engine.context.ScreenerContext;
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.service.AnalyticsService;
@@ -45,7 +45,7 @@ public class AnalyticsController {
 		
 		final Map<String,String> properties = new HashMap<>();
 		
-		AnalyticsContext context = new ScreeningContext(analyticsService, configurationService, portfolioService, Operation.SCREEN, properties);
+		ScreenerContext context = new ScreenerContext(analyticsService, configurationService, portfolioService, Operation.SCREEN, properties);
 		
 		Command delegator = new ScreenerDelegator(context);
 		
