@@ -1,6 +1,5 @@
 package com.libra.apollo.analytics.service;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -15,18 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.libra.apollo.analytics.engine.converter.AnalyticsConveterConveter;
 import com.libra.apollo.analytics.engine.converter.Converter;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.engine.result.AnalyticsResult;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.QueryParameter;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.repository.AnalyticsRepository;
-import com.libra.apollo.analytics.repository.InvestmentStyleRepository;
 import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
-import com.libra.apollo.analytics.utils.Utils;
 
 @Service
 @Transactional
@@ -73,10 +69,9 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 			from = libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification);
 		}
 		
-		Converter<List<Tuple>, Iterable<List<Object>>> convertedValues = AnalyticsConveterConveter.fromTupleToList(requestedFields);
+		Converter<List<Tuple>, Collection<List<?>>> convertedValues = AnalyticsConveterConveter.fromTupleToList(requestedFields);
 		
-		Iterable<List<Object>> fieldResults =  convertedValues.convert(from);
-		
+		Collection<List<?>> fieldResults =  convertedValues.convert(from);
 		result.merge(fieldResults);
 		
 	}

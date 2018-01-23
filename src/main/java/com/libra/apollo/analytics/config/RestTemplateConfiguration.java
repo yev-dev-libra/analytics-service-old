@@ -27,7 +27,7 @@ public class RestTemplateConfiguration {
 
     private static final ConcurrentHashMap<String, ExceptionHandler> SUPPORTED_EXCEPTIONS = new ConcurrentHashMap<>();
 
-    /**
+    /**spring boot
      * Configure and return the retry template.
      */
     public RetryTemplate getRetryTemplate(){

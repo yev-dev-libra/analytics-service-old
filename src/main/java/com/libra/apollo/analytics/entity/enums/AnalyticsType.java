@@ -1,6 +1,11 @@
 package com.libra.apollo.analytics.entity.enums;
 
-public enum AnalyticsType {
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+public enum AnalyticsType implements Serializable {
 
 	APOLLO_SCREENER("Apollo Screener");
 
@@ -10,10 +15,12 @@ public enum AnalyticsType {
 		this.name = name;
 	}
 
+	@JsonValue
 	public String getName() {
 		return name;
 	}
 
+	@JsonCreator
 	public static AnalyticsType getAnalyticsType(String name) {
 		for (AnalyticsType type : AnalyticsType.values())
 			if (name.equals(type.getName()))
@@ -25,5 +32,6 @@ public enum AnalyticsType {
 	public String toString() {
 		return name;
 	}
+	
 
 }

@@ -29,6 +29,8 @@ public interface AnalyticsContext {
 	
 	public AnalyticsType getAnalyticsType();
 	
+	public Collection<Long> getPortfolioIds();
+	
 	public Collection<Long> getStockIds();
 	
 }

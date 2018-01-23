@@ -19,7 +19,7 @@ public class ScreenerRequest implements AnalyticsRequest {
 	
 	
 	
-	public ScreenerRequest(List<Long> portfolioIds, Long investmentStyleId) {
+	public ScreenerRequest(Long investmentStyleId, List<Long> portfolioIds ) {
 		super();
 		this.portfolioIds = portfolioIds;
 		this.investmentStyleId = investmentStyleId;
@@ -55,5 +55,8 @@ public class ScreenerRequest implements AnalyticsRequest {
 		return investmentStyleId;
 	}
 
+	public static ScreenerRequest of(Long investmentStyleId, List<Long> portfolioIds ) {
+		return new ScreenerRequest(investmentStyleId, portfolioIds);
+	}
 	
 }

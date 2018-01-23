@@ -10,8 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 //@EnableEurekaClient
-@EntityScan(basePackages = {"com.libra.apollo.analytics.entity"}) 
-@EnableJpaRepositories(basePackages = "com.libra.apollo.analytics.repository", repositoryImplementationPostfix = "CustomImpl")
 public class ApolloAnalyticsApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(ApolloAnalyticsApplication.class);

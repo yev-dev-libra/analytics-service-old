@@ -1,9 +1,12 @@
 package com.libra.apollo.analytics.entity.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum RunType {
-	MANUAL("manual"),
-	SCHEDULED("scheduled"),
-	ON_DEMAND("on demand");
+	MANUAL("Manual"),
+	SCHEDULED("Scheduled"),
+	ON_DEMAND("On demand");
 	
 	private final String name;
 
@@ -11,10 +14,12 @@ public enum RunType {
 		this.name = name;
 	}
 
+	@JsonValue
 	public String getName() {
 		return name;
 	}
-
+	
+	@JsonCreator
 	public static RunType getRunType(String name) {
 		for (RunType type : RunType.values())
 			if (name.equals(type.getName()))

@@ -1,34 +1,27 @@
 package com.libra.apollo.analytics;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.client.RestTemplate;
 
-import com.libra.apollo.analytics.engine.command.Command;
-import com.libra.apollo.analytics.engine.command.PortfolioEnrichmentCommand;
-import com.libra.apollo.analytics.engine.command.ScreenerCommand;
-import com.libra.apollo.analytics.engine.command.ScreenerDelegator;
-import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
-import com.libra.apollo.analytics.engine.core.Operation;
-import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.engine.result.AnalyticsResult;
-import com.libra.apollo.analytics.engine.result.ScreenerResult;
-import com.libra.apollo.analytics.entity.QueryParameter;
+import com.libra.apollo.analytics.api.AnalyticsScreenerRestController;
+import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.repository.InvestmentStyleRepository;
-import com.libra.apollo.analytics.service.AnalyticsService;
-import com.libra.apollo.analytics.service.ConfigurationService;
-import com.libra.apollo.analytics.service.PortfolioService;
+import com.libra.apollo.analytics.entity.enums.RunType;
 
 public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegrationTest {
 
@@ -41,55 +34,52 @@ public class AnalyticsIntegrationTest extends AbstractApolloAnalyticsIntegration
 	private static final Long BELOW_12M_PESSIMISTIC =7L;
 	private static final Long ABOVE_12M_OPTIMISTIC =8L;
 	
+	private static final String ANALYTICS_API_URI = "/screener";
+	
+    @LocalServerPort
+    private int port;
+    
+    @Autowired
+    private MockMvc mvc;
+
+    final RestTemplate restTemplate = new RestTemplate();
+    
 	@Autowired
-	private ConfigurationService configService;
-	
-	@Autowired
-	private InvestmentStyleRepository investmentStyleRepository;
-	
-	@Autowired
-	private AnalyticsService analyticsService;
-	
-	@Autowired
-	private ConfigurationService configurationService;
-	
-	@Autowired
-	private PortfolioService portfolioService;
-	
-	private Date previousDate;
-	
-	@Before
-	public void setUp() {
-		Calendar cal = Calendar.getInstance();
-		cal.set(2017, 11, 01);
-		previousDate = new Date(cal.getTimeInMillis());
-	}
+	private AnalyticsScreenerRestController screenerRestController;
 	
 	@Test
-	public void shouldRetrieveScreeningResultsForApolloClassics() {
-		
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(2017, 11, 01);
-
-		Collection<Long> stockIds = Arrays.asList(1L, 2L);
-		
-		
-		final Map<String,String> properties = new HashMap<>();
-		
-		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties);
-		
-		ScreenerDelegator delegator = new ScreenerDelegator(analyticsContext);
-		
-		Command portfolioEnrichment = new PortfolioEnrichmentCommand(analyticsContext);
-		
-		Command screenerCommand = new ScreenerCommand(analyticsContext);
-		
-		delegator.add(portfolioEnrichment);
-		delegator.add(screenerCommand);
-		
-		ScreenerResult results = analyticsContext.getResult();
-		
-		assertTrue(true);
-	}
+    public void contexLoads() throws Exception {
+        assertThat(screenerRestController).isNotNull();
+    }
 	
+//	@Test
+//	public void shouldReturnReturnsPortfolioStockResults() {
+//		
+//		Long styleId = 1L;
+//		List<Long> portfolioIds = Arrays.asList(1L,2L);
+//		String analyticsUrl = ANALYTICS_API_URI + "/style/" + styleId + "/portfolios/" + 1L + "," + 2L; 
+//		
+//		PortfolioScreenerResultDTO result =  this.restTemplate.getForObject("http://localhost:" + port + analyticsUrl, PortfolioScreenerResultDTO.class);
+//		System.out.println(result);
+//	}
+	
+	@Test
+	public void givenStyleIdAndListOfPortfoliosShouldReturnStatus200() throws Exception {
+		
+		Long styleId = 1L;
+		String analyticsUrl = ANALYTICS_API_URI + "/style/" + styleId + "/portfolios/" + 1L + "," + 2L; 
+		
+		mvc.perform(get(analyticsUrl)
+				.contentType(APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.analyticsType", is(String.valueOf(AnalyticsType.APOLLO_SCREENER.getName()))))
+				.andExpect(jsonPath("$.runType", is(String.valueOf(RunType.MANUAL.getName()))))
+				.andExpect(jsonPath("$.investmentStyleId", is(1)))
+				.andExpect(jsonPath("$.investmentStyleName", is("Apollo Classics")))
+				.andExpect(jsonPath("$.requestedFields", hasSize(1)))
+				.andExpect(jsonPath("$.parameters", hasSize(1)))
+				.andExpect(jsonPath("$.results", hasSize(2))
+				);
+	}
 }

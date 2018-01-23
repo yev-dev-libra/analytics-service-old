@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.libra.apollo.analytics.engine.core.Operation;
+import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
@@ -30,6 +31,6 @@ public class PortfolioScreenerContextTest {
 
 	private AnalyticsContext createAnalyticsContext() {
 		Map<String, String> properties = new HashMap<>();
-		return new PortfolioScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), Operation.SCREEN_FOR_PORTFOLIO, properties);
+		return new PortfolioScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), Operation.SCREEN_FOR_PORTFOLIO, properties, mock(ScreenerRequest.class));
 	}
 }

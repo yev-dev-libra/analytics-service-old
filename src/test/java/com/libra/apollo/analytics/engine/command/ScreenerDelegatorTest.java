@@ -93,7 +93,7 @@ public class ScreenerDelegatorTest {
 		ConfigurationService mockConfigurationService = mock(ConfigurationService.class);
 		PortfolioService mockPortfolioService = mock(PortfolioService.class);
 		
-		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties);
+		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties, mockRequest);
 		
 		when(mockRequest.getAnalyticsType()).thenReturn(AnalyticsType.APOLLO_SCREENER);
 		when(mockRequest.getInvestmentStyleId()).thenReturn(APOLLO_CLASSICS_STYLE_ID);

@@ -1,6 +1,7 @@
 package com.libra.apollo.analytics.engine.converter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +34,11 @@ public class AnalyticsConveterConveter {
 		
 	}
 	
-	public static <F,T> Converter<List<Tuple>, Iterable<List<Object>>> fromTupleToList(List<ValueDataFieldType> fields){
+	public static <F,T> Converter<List<Tuple>, Collection<List<?>>> fromTupleToList(List<ValueDataFieldType> fields){
 		
 		return (from) -> {
 			
-			List<List<Object>> values = new ArrayList<>(from.size());
+			List<List<?>> values = new ArrayList<>(from.size());
 
 			for (Tuple tuple : from) {
 

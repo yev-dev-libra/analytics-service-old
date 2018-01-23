@@ -1,9 +1,11 @@
 package com.libra.apollo.analytics.engine.command;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
@@ -35,31 +37,30 @@ public class ScreenerCommand implements Command {
 		final Date runDate = context.getRequest().getRunDate();
 		
 		
-		final List<QueryParameter> queryParams = configService.getInvestmentStylesQueryParameters(investmentStyleId);
+		final List<QueryParameter> params = configService.getInvestmentStylesQueryParameters(investmentStyleId);
 		//TODO: request for queryResultsParams
 
-		ValueDataFieldType[] paramFields = new ValueDataFieldType[queryParams.size()];
-		
-		for (int i = 0; i < queryParams.size(); i++) {
-			paramFields[i] = queryParams.get(i).getFieldType();
-			
-		}
 		
 		//TODO: persist in the database
-		ValueDataFieldType[] queryResultsParams = {
+		List<ValueDataFieldType> requestParams = Arrays.asList(
 						ValueDataFieldType.MAX_STAMP_DATE, 
 						ValueDataFieldType.STAR_RATING,
 						ValueDataFieldType.FAIR_VALUE,
 						ValueDataFieldType.INTRINSIC_VALUE,
 						ValueDataFieldType.STOCK_ID
-				};
+						);
 		
+		List<ValueDataFieldType> queryParams = params.stream().map(f -> f.getFieldType()).collect(Collectors.toList());
 		
-		ScreenerResult result = new ScreenerResult(queryResultsParams, paramFields);
 
+		ScreenerResult results = new ScreenerResult.ScreenerResultBuilder()
+				.setParameters(queryParams)
+				.setRequestedFields(requestParams)
+				.build();
+		
 		Collection<Long> stockIds = stockPortfolios.keySet();
 		
-		analyticsService.getScreeningResults(stockIds, queryParams, result, runDate);
+		analyticsService.getScreeningResults(stockIds, params, results, runDate);
 
 	}
 

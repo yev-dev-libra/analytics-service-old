@@ -7,6 +7,8 @@ import javax.persistence.Column;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.libra.apollo.analytics.entity.type.IndicatorBigDecimal;
 
 public enum ValueDataFieldType {
@@ -242,6 +244,7 @@ public enum ValueDataFieldType {
 	private final String fieldName;
 	private Class<?> clazz;
 	
+	@JsonValue
 	public String getFieldName() {
 		return fieldName;
 	}
@@ -270,6 +273,7 @@ public enum ValueDataFieldType {
 	 * @param name		Field name to convert
 	 * @return			The converted InstrumentDataFieldType
 	 */
+	@JsonCreator
 	public static ValueDataFieldType convertToInstrumentDataFieldType(String name) {
 		for(ValueDataFieldType field: ValueDataFieldType.values()) {
 			if(field.toString().equals(name)) {

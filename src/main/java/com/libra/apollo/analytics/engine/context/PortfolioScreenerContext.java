@@ -37,20 +37,21 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	private final PortfolioService portfolioService;
 	private final Map<String,String> properties;
 	private final Operation operation;
+	private final ScreenerRequest request;
 	
 	private Map<Long,List<Long>> stockPortfolios;
 	
-	private ScreenerRequest request;
+	
 	private ScreenerResult result;
 	
 	
-	public PortfolioScreenerContext(final AnalyticsService analyticsService, final ConfigurationService configurationService, final  PortfolioService portfolioService, final Operation operation, final Map<String,String> properties) {
+	public PortfolioScreenerContext(final AnalyticsService analyticsService, final ConfigurationService configurationService, final  PortfolioService portfolioService, final Operation operation, final Map<String,String> properties, final ScreenerRequest request) {
 		this.analyticsService = analyticsService;
 		this.configurationService = configurationService;
 		this.portfolioService = portfolioService;
 		this.operation = operation;
 		this.properties = properties;
-		
+		this.request = request;
 	}
 
 
@@ -62,10 +63,6 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 		return request;
 	}
 
-
-	public void setRequest(ScreenerRequest request) {
-		this.request = request;
-	}
 
 
 	/* (non-Javadoc)
@@ -147,6 +144,12 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 
 	public static class ScreenerContextBuilder {
 		
+	}
+
+	@Override
+	public Collection<Long> getPortfolioIds() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

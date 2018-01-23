@@ -4,16 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
 
-public interface AnalyticsResult extends Serializable {
+
+public interface AnalyticsResult extends Serializable, Result {
 	
-	public AnalyticsType getAnalyticsType();
-	public RunType getRunType();
 	public List<ValueDataFieldType> getRequestedFields();
 	public List<ValueDataFieldType> getParameters();
-	public List<Iterable<?>> getResults();
+	public List<?> getResults();
 	//TODO: add errors collectors
 	
 
