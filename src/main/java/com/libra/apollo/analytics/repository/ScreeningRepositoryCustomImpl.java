@@ -31,7 +31,7 @@ public class ScreeningRepositoryCustomImpl implements ScreeningRepositoryCustom 
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
-		return null;
+		throw new UnsupportedOperationException("Method has not been implemented yet");
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ScreeningRepositoryCustomImpl implements ScreeningRepositoryCustom 
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
-		return null;
+		throw new UnsupportedOperationException("Method has not been implemented yet");
 	}
 
 }

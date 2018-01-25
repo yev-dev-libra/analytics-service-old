@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
@@ -97,46 +98,6 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 		return findAllBySpecification(fields, specification);
 	}
 
-	@Override
-	public Stream<Tuple> streamAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification, final Date runDate) {
-		if(logger.isDebugEnabled()) {
-			logger.debug("");
-		}
-		
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		
-		CriteriaQuery<Tuple> q = cb.createTupleQuery();
-		
-		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
-		
-		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
-		
-		for(ValueDataFieldType field : fields ) {
-			
-			if(field.equals(ValueDataFieldType.MAX_STAMP_DATE)) {
-				
-				final String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
-				
-				selections.add(cb.<Date>greatest(indicatorsRoot.get(stampDateFieldName)).alias(ValueDataFieldType.MAX_STAMP_DATE.getFieldName()) );
-			}
-			else {
-				selections.add(indicatorsRoot.get(field.getFieldName()).alias(field.getFieldName())  );
-			}
-			
-		}
-		
-		q.multiselect(selections);
-		
-		q.where(specification.toPredicate(indicatorsRoot, q, cb));
-		
-		final String stockIdFieldName = ValueDataFieldType.STOCK_ID.getFieldName();
-		
-		q.groupBy(indicatorsRoot.get(stockIdFieldName));
-		
-		Query query = entityManager.createQuery(q);
-		
-		return query.getResultList().stream();
-	}
 
 	
 }

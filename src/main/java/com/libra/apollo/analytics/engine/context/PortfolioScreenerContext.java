@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.task.AsyncTaskExecutor;
+
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
@@ -16,8 +18,7 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 
 	public enum PropertyName{
 		
-		BATCH_SIZE("analytics.service.batchsize"), 
-		THREAD_POOL_SIZE("analytics.service.numOfThread");
+		BATCH_SIZE("analytics.async.batch-size") ;
 		
 		private final String name;
 		
@@ -35,6 +36,8 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	private final AnalyticsService analyticsService;
 	private final ConfigurationService configurationService;
 	private final PortfolioService portfolioService;
+	private final AsyncTaskExecutor executorService;
+	
 	private final Map<String,String> properties;
 	private final Operation operation;
 	private final ScreenerRequest request;
@@ -45,10 +48,18 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	private ScreenerResult result;
 	
 	
-	public PortfolioScreenerContext(final AnalyticsService analyticsService, final ConfigurationService configurationService, final  PortfolioService portfolioService, final Operation operation, final Map<String,String> properties, final ScreenerRequest request) {
+	public PortfolioScreenerContext(	final AnalyticsService analyticsService, 
+									final ConfigurationService configurationService, 
+									final PortfolioService portfolioService, 
+									final AsyncTaskExecutor executorService, 
+									final Operation operation, 
+									final Map<String,String> properties, 
+									final ScreenerRequest request) {
+		
 		this.analyticsService = analyticsService;
 		this.configurationService = configurationService;
 		this.portfolioService = portfolioService;
+		this.executorService = executorService;
 		this.operation = operation;
 		this.properties = properties;
 		this.request = request;
@@ -114,6 +125,11 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	@Override
 	public PortfolioService getPortfolioService() {
 		return portfolioService;
+	}
+
+
+	public AsyncTaskExecutor getExecutorService() {
+		return executorService;
 	}
 
 

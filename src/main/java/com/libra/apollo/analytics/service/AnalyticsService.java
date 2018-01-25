@@ -4,16 +4,14 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import com.libra.apollo.analytics.engine.result.ScreenerResult;
-import com.libra.apollo.analytics.entity.ApolloAnalytics;
+import javax.persistence.Tuple;
+
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.QueryParameter;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 
 public interface AnalyticsService {
 	
-	public List<ApolloAnalytics> getAllApolloAnalytics();
-	public List<ApolloAnalytics> getApolloAnalyticsByAnalyticsType(final AnalyticsType type);
-	public void getScreeningResults(final Collection<Long> instrumentIds, final List<QueryParameter> queryParams, final ScreenerResult result);
-	public void getScreeningResults(final Collection<Long> instrumentIds, final List<QueryParameter> queryParams, final ScreenerResult result, final Date runDate );
+	public List<Tuple> getScreeningResults(final Collection<Long> instrumentIds, final List<QueryParameter> queryParams,  List<ValueDataFieldType> requestedFields, final Date runDate );
+	public List<Tuple> getScreeningResults(final Collection<Long> instrumentIds, final List<QueryParameter> queryParams,  List<ValueDataFieldType> requestedFields);
 
 }

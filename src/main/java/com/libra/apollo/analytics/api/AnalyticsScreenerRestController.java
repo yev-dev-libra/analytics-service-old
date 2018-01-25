@@ -4,9 +4,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +36,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/screener")
-@Api(value = "CONFIGURATIONS", description = "Analytics Rest Controller")
+@RequestMapping("/screen")
+@Api(value = "Screen", description = "Analytics Screener Api")
 public class AnalyticsScreenerRestController {
 	
 	protected Logger logger = Logger.getLogger(AnalyticsScreenerRestController.class.getName());
@@ -48,17 +51,20 @@ public class AnalyticsScreenerRestController {
 	@Autowired
 	private PortfolioService portfolioService;
 	
+	@Autowired
+	private AsyncTaskExecutor executorService;
 	
 	
+	
+	@RequestMapping(value = "/investment-style/{styleId}/portfolios/{portfolioIds}", method = RequestMethod.GET)
 	@ApiOperation(value = "Screen for results given a list of portfolios")
-	@RequestMapping(value = "/style/{styleId}/portfolios/{portfolioIds}", method = RequestMethod.GET)
 	public ResponseEntity<PortfolioScreenerResultDTO> screenForPortfolios(@PathVariable("styleId") Long styleId, @PathVariable("portfolioIds") List<Long> portfolioIds){
 		
 		final Map<String,String> properties = new HashMap<>();
 		
 		final ScreenerRequest resuest = ScreenerRequest.of(styleId, portfolioIds);
 		
-		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties, resuest);
+		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, executorService, Operation.SCREEN_FOR_PORTFOLIO, properties, resuest);
 		
 		Delegator delegator = new ScreenerDelegator(analyticsContext);
 		
@@ -79,7 +85,7 @@ public class AnalyticsScreenerRestController {
 	}
 	
 	@ApiOperation(value = "Screen for results given a list of stocks")
-	@RequestMapping(value = "/style/{styleId}/portfolio/{portfolioId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/investment-style/{styleId}/portfolio/{portfolioId}", method = RequestMethod.GET)
 	public ResponseEntity<StockScreenerResultDTO> screenForStocks(@PathVariable("styleId") Long styleId, @PathVariable("portfolioId") Long portfolioId){
 		
 		final Map<String,String> properties = new HashMap<>();
@@ -87,7 +93,7 @@ public class AnalyticsScreenerRestController {
 		final ScreenerRequest resuest = ScreenerRequest.of(styleId, Arrays.asList(portfolioId));
 		
 		//TODO: create separate context
-		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties, resuest);
+		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, executorService, Operation.SCREEN_FOR_PORTFOLIO, properties, resuest);
 		
 		Delegator delegator = new ScreenerDelegator(analyticsContext);
 		

@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/config")
-@Api(value = "CONFIGURATIONS", description = "Analytics Configurations")
+@Api(value = "CONFIGURATIONS", description = "Analytics Configurations Api")
 public class ConfigurationsRestController {
 
 	private static Logger logger = LoggerFactory.getLogger(ConfigurationsRestController.class);

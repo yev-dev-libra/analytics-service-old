@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.core.task.AsyncTaskExecutor;
 
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
@@ -31,6 +32,6 @@ public class PortfolioScreenerContextTest {
 
 	private AnalyticsContext createAnalyticsContext() {
 		Map<String, String> properties = new HashMap<>();
-		return new PortfolioScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), Operation.SCREEN_FOR_PORTFOLIO, properties, mock(ScreenerRequest.class));
+		return new PortfolioScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), mock(AsyncTaskExecutor.class), Operation.SCREEN_FOR_PORTFOLIO, properties, mock(ScreenerRequest.class));
 	}
 }

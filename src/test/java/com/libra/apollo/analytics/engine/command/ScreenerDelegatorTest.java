@@ -1,6 +1,6 @@
 package com.libra.apollo.analytics.engine.command;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -14,10 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.stream.Stream;
+
+import javax.persistence.Tuple;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.core.task.AsyncTaskExecutor;
 
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.core.Operation;
@@ -92,8 +97,9 @@ public class ScreenerDelegatorTest {
 		AnalyticsService mockAnalyticsService = mock(AnalyticsService.class);
 		ConfigurationService mockConfigurationService = mock(ConfigurationService.class);
 		PortfolioService mockPortfolioService = mock(PortfolioService.class);
+		AsyncTaskExecutor mockExecutorService = mock(AsyncTaskExecutor.class);
 		
-		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, Operation.SCREEN_FOR_PORTFOLIO, properties, mockRequest);
+		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, mockExecutorService, Operation.SCREEN_FOR_PORTFOLIO, properties, mockRequest);
 		
 		when(mockRequest.getAnalyticsType()).thenReturn(AnalyticsType.APOLLO_SCREENER);
 		when(mockRequest.getInvestmentStyleId()).thenReturn(APOLLO_CLASSICS_STYLE_ID);
@@ -104,7 +110,9 @@ public class ScreenerDelegatorTest {
 		
 		when(mockConfigurationService.getInvestmentStylesQueryParameters(APOLLO_CLASSICS_STYLE_ID)).thenReturn(Collections.EMPTY_LIST);
 		
-		doNothing().when(mockAnalyticsService).getScreeningResults(Mockito.anyCollection(), Mockito.any(), mockResult, Mockito.anyObject());
+		List<Object> returnValues = Collections.emptyList();
+		
+		when(mockAnalyticsService.getScreeningResults(Mockito.anyCollection(), Mockito.any(), Mockito.anyObject())).thenReturn(returnValues );
 		
 		
 		return context;
