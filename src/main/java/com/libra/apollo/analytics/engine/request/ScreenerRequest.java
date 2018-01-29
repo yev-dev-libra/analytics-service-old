@@ -1,5 +1,6 @@
 package com.libra.apollo.analytics.engine.request;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class ScreenerRequest implements AnalyticsRequest {
 	}
 
 	
-	public List<Long> getPortfolioIds() {
+	public Collection<Long> getPortfolioIds() {
 		return portfolioIds;
 	}
 

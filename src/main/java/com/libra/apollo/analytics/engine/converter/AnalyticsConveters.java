@@ -8,9 +8,12 @@ import java.util.Map;
 
 import javax.persistence.Tuple;
 
+import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
+import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.entity.InvestmentStyle;
 
-public class AnalyticsConveterConveter {
+public class AnalyticsConveters {
 
 	public static <F,T> Converter<List<Tuple>, List<Map<ValueDataFieldType,Object>>> fromTupleToValuesDataFieldMap(List<ValueDataFieldType> fields){
 		return (from) -> {
@@ -67,8 +70,31 @@ public class AnalyticsConveterConveter {
 			return values;
 			
 		};
-		
 	}
 	
+	public static <F,T> Converter<ScreenerResult,PortfolioScreenerResultDTO > fromScreenerResultToDto(){
+		return (from)-> {
+			
+			final PortfolioScreenerResultDTO dto = new PortfolioScreenerResultDTO();
+			
+			final List<ValueDataFieldType> requestedFields = from.getRequestedFields();
+			final List<ValueDataFieldType> parameters = from.getParameters();
+			final Collection<?> results = from.getResults();
+			
+			final List<Long> portfolioIds = from.getPortfolioIds();
+			
+			final String analyticsType = String.valueOf(from.getAnalyticsType());
+			final String runType = String.valueOf(from.getRunType());
+			final InvestmentStyle style = from.getInvestmentStyle();
+			
+			dto.setPortfolioIds(portfolioIds);
+			dto.setAnalyticsType(analyticsType);
+			dto.setInvestmentStyleId(style.getId());
+			dto.setRunType(runType);
+			dto.setInvestmentStyleName(style.getDefinition().getName());
+			
+			return dto;
+		};
+	}
 
 }

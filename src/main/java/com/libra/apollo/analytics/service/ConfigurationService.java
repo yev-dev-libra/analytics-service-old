@@ -23,6 +23,7 @@ public interface ConfigurationService {
 	
 	public List<ApolloAnalytics> getAnalyticsViews(AnalyticsConfigurationRequest request);
 	public List<InvestmentStyle> getInvestmentStylesByView(AnalyticsView analyticsView);
+	public InvestmentStyle getInvestmentStyleById(Long investmentStyleId);
 	
 	public List<QueryParameter> getInvestmentStylesQueryParameters(Long investmentStyleId);
 	

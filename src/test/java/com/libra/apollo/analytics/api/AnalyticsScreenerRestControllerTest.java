@@ -146,10 +146,10 @@ public class AnalyticsScreenerRestControllerTest {
 		dto.setParameters(parameters);
 		dto.setRequestedFields(requestFields);
 
-		PortfolioStockResults portfolioResults1 = dto.new PortfolioStockResults(1L,Arrays.asList(1L,2L));
-		PortfolioStockResults portfolioResults2 = dto.new PortfolioStockResults(2L,Arrays.asList(10L,20L));
-		
-		dto.setResults(Arrays.asList(portfolioResults1, portfolioResults2));
+//		PortfolioStockResults portfolioResults1 = dto.new PortfolioStockResults(1L,Arrays.asList(1L,2L));
+//		PortfolioStockResults portfolioResults2 = dto.new PortfolioStockResults(2L,Arrays.asList(10L,20L));
+//		
+//		dto.setResults(Arrays.asList(portfolioResults1, portfolioResults2));
 		
 		given(controller.screenForPortfolios(styleId, portfolioIds)).willReturn(new ResponseEntity<PortfolioScreenerResultDTO>(dto, HttpStatus.OK));
 		

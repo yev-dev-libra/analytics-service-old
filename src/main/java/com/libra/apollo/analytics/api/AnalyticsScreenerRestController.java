@@ -25,10 +25,12 @@ import com.libra.apollo.analytics.engine.command.PortfolioEnrichmentCommand;
 import com.libra.apollo.analytics.engine.command.ScreenerCommand;
 import com.libra.apollo.analytics.engine.command.ScreenerDelegator;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
+import com.libra.apollo.analytics.engine.converter.AnalyticsConveters;
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.service.AnalyticsService;
+import com.libra.apollo.analytics.service.CalendarService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
@@ -55,7 +57,6 @@ public class AnalyticsScreenerRestController {
 	private AsyncTaskExecutor executorService;
 	
 	
-	
 	@RequestMapping(value = "/investment-style/{styleId}/portfolios/{portfolioIds}", method = RequestMethod.GET)
 	@ApiOperation(value = "Screen for results given a list of portfolios")
 	public ResponseEntity<PortfolioScreenerResultDTO> screenForPortfolios(@PathVariable("styleId") Long styleId, @PathVariable("portfolioIds") List<Long> portfolioIds){
@@ -64,22 +65,23 @@ public class AnalyticsScreenerRestController {
 		
 		final ScreenerRequest resuest = ScreenerRequest.of(styleId, portfolioIds);
 		
-		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, executorService, Operation.SCREEN_FOR_PORTFOLIO, properties, resuest);
+		final PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, executorService, Operation.SCREEN_FOR_PORTFOLIO, properties, resuest);
 		
-		Delegator delegator = new ScreenerDelegator(analyticsContext);
+		final Delegator delegator = new ScreenerDelegator(analyticsContext);
 		
-		Command portfolioEnrichment = new PortfolioEnrichmentCommand(analyticsContext);
+		final Command portfolioEnrichment = new PortfolioEnrichmentCommand(analyticsContext);
 		
-		Command screenerCommand = new ScreenerCommand(analyticsContext);
+		final Command screenerCommand = new ScreenerCommand(analyticsContext);
 		
 		delegator.add(portfolioEnrichment);
+		
 		delegator.add(screenerCommand);
 		
 		delegator.execute();
 		
-		ScreenerResult results = analyticsContext.getResult();
+		final ScreenerResult result = analyticsContext.getResult();
 		
-		PortfolioScreenerResultDTO dto = null;
+		final PortfolioScreenerResultDTO dto = AnalyticsConveters.fromScreenerResultToDto().convert(result);
 		
 		return new ResponseEntity<PortfolioScreenerResultDTO>(dto, HttpStatus.OK);
 	}
@@ -103,10 +105,11 @@ public class AnalyticsScreenerRestController {
 		
 		delegator.execute();
 		
-		ScreenerResult results = analyticsContext.getResult();
+		ScreenerResult result = analyticsContext.getResult();
 		
 		StockScreenerResultDTO dto = null;
 		
 		return new ResponseEntity<StockScreenerResultDTO>(dto, HttpStatus.OK);
 	}
+	
 }

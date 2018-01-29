@@ -1,9 +1,12 @@
 package com.libra.apollo.analytics.dto;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class PortfolioScreenerResultDTO {
+
+	private List<Long> portfolioIds;
 
 	private String analyticsType;
 
@@ -17,7 +20,16 @@ public class PortfolioScreenerResultDTO {
 
 	private List<String> parameters;
 
-	private List<PortfolioStockResults> results;
+	
+	private Map<Long, List<PortfolioStockResults>> results;
+	
+	public List<Long> getPortfolioIds() {
+		return portfolioIds;
+	}
+
+	public void setPortfolioIds(List<Long> portfolioIds) {
+		this.portfolioIds = portfolioIds;
+	}
 
 	public String getAnalyticsType() {
 		return analyticsType;
@@ -67,33 +79,33 @@ public class PortfolioScreenerResultDTO {
 		this.parameters = parameters;
 	}
 
-	public List<PortfolioStockResults> getResults() {
+
+	public Map<Long, List<PortfolioStockResults>> getResults() {
 		return results;
 	}
 
-	public void setResults(List<PortfolioStockResults> results) {
+	public void setResults(Map<Long, List<PortfolioStockResults>> results) {
 		this.results = results;
 	}
 
+
+
+
 	public class PortfolioStockResults {
-		private Long portfolioId;
-		private List<Long> stockIds;
+		private final Long stockId;
+		private final Map<String,Object> values;
 
-		public PortfolioStockResults(Long portfolioId, List<Long> stockIds) {
-			this.portfolioId = portfolioId;
-			this.stockIds = stockIds;
+		public PortfolioStockResults(final Long stockId, final Map<String,Object> values) {
+			this.stockId = stockId;
+			this.values = values;
 		}
 
-		public Long getPortfolioId() {
-			return portfolioId;
+		public Long getStockId() {
+			return stockId;
 		}
 
-		public List<Long> getStockIds() {
-			return stockIds;
-		}
-
-		public int getSize() {
-			return stockIds != null ? stockIds.size() : 0;
+		public Map<String, Object> getValues() {
+			return values;
 		}
 
 	}

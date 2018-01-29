@@ -49,6 +49,21 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 
 	@Override
 	public List<Tuple> getScreeningResults(final Collection<Long> stockIds, final List<QueryParameter> queryParams,  List<ValueDataFieldType> requestedFields) {
-		return getScreeningResults(stockIds, queryParams,requestedFields);
+		Preconditions.checkArgument(stockIds != null, "Passed Stock Ids can not be null");
+		Preconditions.checkArgument(queryParams != null, "Passed QueryParameters can not be null");
+		Preconditions.checkArgument(requestedFields != null, "Passed ValueDataFieldType can not be null");
+		
+		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
+		
+		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(stockIdsSpec);
+		
+		
+		for(QueryParameter param : queryParams) {
+			specification.and(param.getSpecification());
+			
+		}
+		
+		return libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification);
+		
 	}
 }

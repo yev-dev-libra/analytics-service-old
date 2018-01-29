@@ -1,6 +1,7 @@
 package com.libra.apollo.analytics.engine.context;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 import com.libra.apollo.analytics.engine.core.Operation;
@@ -33,4 +34,7 @@ public interface AnalyticsContext {
 	
 	public Collection<Long> getStockIds();
 	
+	public Date screenDate();
+	
+	public boolean isResultMergeable();
 }

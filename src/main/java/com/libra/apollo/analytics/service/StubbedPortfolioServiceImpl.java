@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -22,10 +21,10 @@ public class StubbedPortfolioServiceImpl implements PortfolioService {
 	}
 
 	@Override
-	public Map<Long, List<Long>> getStockIdsWithPortfolios(Collection<Long> portfolioIds) {
+	public Map<Long, Collection<Long>> getStockIdsWithPortfolios(Collection<Long> portfolioIds) {
 		if(portfolioIds.contains(1L)) {
 			
-			Map<Long,List<Long>> values = new HashMap<>();
+			Map<Long,Collection<Long>> values = new HashMap<>();
 			values.put(1L, Arrays.asList(1L,2L));
 			
 			return values;

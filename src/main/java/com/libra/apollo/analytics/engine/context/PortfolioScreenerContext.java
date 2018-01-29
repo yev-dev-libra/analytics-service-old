@@ -1,8 +1,10 @@
 package com.libra.apollo.analytics.engine.context;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.core.task.AsyncTaskExecutor;
 
@@ -13,6 +15,7 @@ import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
+
 
 public class PortfolioScreenerContext implements AnalyticsContext {
 
@@ -42,8 +45,7 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	private final Operation operation;
 	private final ScreenerRequest request;
 	
-	private Map<Long,List<Long>> stockPortfolios;
-	
+	private Map<Long,Collection<Long>> stockPortfolios;
 	
 	private ScreenerResult result;
 	
@@ -66,19 +68,12 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.libra.apollo.analytics.engine.context.AnalyticsContext#getRequest()
-	 */
 	@Override
 	public ScreenerRequest getRequest() {
 		return request;
 	}
 
 
-
-	/* (non-Javadoc)
-	 * @see com.libra.apollo.analytics.engine.context.AnalyticsContext#getResult()
-	 */
 	@Override
 	public ScreenerResult getResult() {
 		return result;
@@ -91,37 +86,27 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 
 	
 
-	public Map<Long, List<Long>> getStockPortfolios() {
+	public Map<Long, Collection<Long>> getStockPortfolios() {
 		return stockPortfolios;
 	}
 
 
-	public void setStockPortfolios(Map<Long, List<Long>> stockPortfolios) {
+	public void setStockPortfolios(Map<Long, Collection<Long>> stockPortfolios) {
 		this.stockPortfolios = stockPortfolios;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see com.libra.apollo.analytics.engine.context.AnalyticsContext#getAnalyticsService()
-	 */
 	@Override
 	public AnalyticsService getAnalyticsService() {
 		return analyticsService;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.libra.apollo.analytics.engine.context.AnalyticsContext#getConfigurationService()
-	 */
 	@Override
 	public ConfigurationService getConfigurationService() {
 		return configurationService;
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see com.libra.apollo.analytics.engine.context.AnalyticsContext#getPortfolioService()
-	 */
 	@Override
 	public PortfolioService getPortfolioService() {
 		return portfolioService;
@@ -133,9 +118,6 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.libra.apollo.analytics.engine.context.AnalyticsContext#getProperties()
-	 */
 	@Override
 	public Map<String, String> getProperties() {
 		return properties;
@@ -158,14 +140,31 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 		return this.stockPortfolios.keySet();
 	}
 
-	public static class ScreenerContextBuilder {
-		
-	}
 
 	@Override
 	public Collection<Long> getPortfolioIds() {
-		// TODO Auto-generated method stub
+		Set<Long> portfolioIds = new HashSet<>();
+		
+		for(Map.Entry<Long,Collection<Long>> port : stockPortfolios.entrySet()) {
+			portfolioIds.addAll(port.getValue());
+		}
+		
+		return portfolioIds;
+	}
+
+
+	@Override
+	public Date screenDate() {
 		return null;
+	}
+
+	@Override
+	public boolean isResultMergeable() {
+		return Boolean.TRUE;
+	}
+
+	public static class ScreenerContextBuilder {
+		
 	}
 
 	

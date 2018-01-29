@@ -18,4 +18,5 @@ public interface LibraStockIndicatorRepositoryCustom {
 	public List<LibraStockIndicator> findAllBySpecification(Specification<LibraStockIndicator> specification);
 	public List<Tuple> findAllBySpecification(List<ValueDataFieldType> requestedFields, AnalyticsSpecifications<LibraStockIndicator> specification);
 	public List<Tuple> findAllBySpecification(List<ValueDataFieldType> requestedFields, AnalyticsSpecifications<LibraStockIndicator> specification, Date runDate);
+	
 }

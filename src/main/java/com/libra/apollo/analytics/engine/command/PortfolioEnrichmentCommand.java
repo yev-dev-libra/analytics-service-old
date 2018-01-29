@@ -1,5 +1,6 @@
 package com.libra.apollo.analytics.engine.command;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +23,11 @@ public class PortfolioEnrichmentCommand implements Command {
 	public void execute() {
 		final ScreenerRequest request = context.getRequest();
 		
-		final List<Long> portfolioIds = request.getPortfolioIds();
+		final Collection<Long> portfolioIds = request.getPortfolioIds();
 		
 		final PortfolioService portfolioService = context.getPortfolioService();
 		
-		final Map<Long,List<Long>> stockPortfolios = portfolioService.getStockIdsWithPortfolios(portfolioIds);
+		final Map<Long,Collection<Long>> stockPortfolios = portfolioService.getStockIdsWithPortfolios(portfolioIds);
 		
 		context.setStockPortfolios(stockPortfolios);
 	}

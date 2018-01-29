@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
@@ -20,5 +21,7 @@ public interface LibraStockIndicatorRepository extends BaseRepository<LibraStock
 	public List<LibraStockIndicator> findByStockIdInAndStampDate(List<Long> stockIdList,Date date );
 	public Page<LibraStockIndicator> findByStockId(Long stockId, Pageable pageable);
 	
+	@Query("select max(stampDate) from LibraStockIndicator")
+	public Date maxDate();
 		
 }

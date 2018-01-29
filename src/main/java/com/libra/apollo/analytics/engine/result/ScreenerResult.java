@@ -6,31 +6,32 @@ import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
-import com.libra.apollo.analytics.engine.core.MergeableAnalytics;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
+import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
-public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
+public class ScreenerResult implements AnalyticsResult{
 
 	private static final long serialVersionUID = 468624570135610833L;
 
+	private InvestmentStyle investmentStyle;
 	
 	private List<ValueDataFieldType> requestedFields;
 	
 	private List<ValueDataFieldType> parameters;
 
-	private List<List<?>> results; 
+	private Collection<List<?>> results; 
 	
 	private List<Long> portfolioIds;
 	
 	
 	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 	
-	public ScreenerResult(List<ValueDataFieldType> requestedFields, List<ValueDataFieldType> parameters, List<List<?>> results, List<Long> portfolioIds) {
+	public ScreenerResult(final InvestmentStyle investmentStyle, final List<ValueDataFieldType> requestedFields, final List<ValueDataFieldType> parameters, final Collection<List<?>> results, final List<Long> portfolioIds) {
 		super();
+		this.investmentStyle = investmentStyle;
 		this.requestedFields = requestedFields;
 		this.parameters = parameters;
 		
@@ -53,11 +54,6 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 		return RunType.MANUAL;
 	}
 
-	@JsonIgnore
-	@Override
-	public boolean isMergeEnabled() {
-		return Boolean.TRUE;
-	}
 
 	@Override
 	public List<ValueDataFieldType> getRequestedFields() {
@@ -70,7 +66,7 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 	}
 
 	@Override
-	public void merge(Collection<List<?>> values) {
+	public void addResults(Collection<List<?>> values) {
 		readWriteLock.writeLock().lock();
 
 		try {
@@ -83,7 +79,7 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 	}
 
 	@Override
-	public List<?> getResults() {
+	public Collection<?> getResults() {
 		
 		try {
 			readWriteLock.readLock().lock();
@@ -116,17 +112,24 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 
 	public static class ScreenerResultBuilder{
 		
+		private InvestmentStyle investmentStyle;
+		
 		private List<ValueDataFieldType> requestedFields;
 		
 		private List<ValueDataFieldType> parameters;
 
-		private List<List<?>> results;
+		private Collection<List<?>> results;
 		
 		private List<Long> portfolioIds;
 
 		public ScreenerResultBuilder() {
 			super();
 		} 
+		
+		public ScreenerResultBuilder setInvestmentStyle(InvestmentStyle investmentStyle) {
+			this.investmentStyle = investmentStyle;
+			return this;
+		}
 		
 		public ScreenerResultBuilder setRequestedFields(Collection<ValueDataFieldType> requestedFields) {
 			this.requestedFields =  Lists.newArrayList(requestedFields);
@@ -138,7 +141,7 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 			return this;
 		}
 		
-		public ScreenerResultBuilder setResults(List<List<?>> results) {
+		public ScreenerResultBuilder setResults(Collection<List<?>> results) {
 			this.results = results;
 			return this;
 		}
@@ -149,10 +152,13 @@ public class ScreenerResult implements AnalyticsResult, MergeableAnalytics {
 		}
 		
 		public ScreenerResult build() {
-			return new ScreenerResult(this.requestedFields, this.parameters, this.results, this.portfolioIds);
+			return new ScreenerResult(this.investmentStyle, this.requestedFields, this.parameters, this.results, this.portfolioIds);
 		}
-		
-		
+	}
+
+	@Override
+	public InvestmentStyle getInvestmentStyle() {
+		return investmentStyle;
 	}
 	
 }

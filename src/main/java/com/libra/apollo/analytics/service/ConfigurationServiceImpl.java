@@ -87,8 +87,14 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 
 	@Override
+	public InvestmentStyle getInvestmentStyleById(Long investmentStyleId) {
+		return investmentStyleRepository.getOne(investmentStyleId);
+	}
+
+	@Override
 	public List<QueryParameter> getInvestmentStylesQueryParameters(Long investmentStyleId) {
 		return investmentStyleRepository.findQueryParametersById(investmentStyleId);
 	}
+
 
 }
