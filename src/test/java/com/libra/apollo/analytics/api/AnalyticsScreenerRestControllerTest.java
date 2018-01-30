@@ -31,7 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
-import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO.PortfolioStockResults;
+import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO.PortfolioStockValues;
 import com.libra.apollo.analytics.dto.StockScreenerResultDTO;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
@@ -139,12 +139,12 @@ public class AnalyticsScreenerRestControllerTest {
 		List<String> parameters = Arrays.asList("");
 		
 		PortfolioScreenerResultDTO dto = new PortfolioScreenerResultDTO();
-		dto.setAnalyticsType(AnalyticsType.APOLLO_SCREENER.getName());
-		dto.setRunType(RunType.MANUAL.getName());
+		dto.setAnalyticsType(AnalyticsType.APOLLO_SCREENER);
+		dto.setRunType(RunType.MANUAL);
 		dto.setInvestmentStyleName("Apollo Classics");
 		dto.setInvestmentStyleId(styleId);
-		dto.setParameters(parameters);
-		dto.setRequestedFields(requestFields);
+//		dto.setParameters(parameters);
+//		dto.setRequestedFields(requestFields);
 
 //		PortfolioStockResults portfolioResults1 = dto.new PortfolioStockResults(1L,Arrays.asList(1L,2L));
 //		PortfolioStockResults portfolioResults2 = dto.new PortfolioStockResults(2L,Arrays.asList(10L,20L));

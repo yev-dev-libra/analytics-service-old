@@ -150,12 +150,11 @@ values (
 	'2017-11-01 00:00:00',
 	'1', -- instrument_id
 	'2017-12-01', 
-	'3.0000', -- star_rating
-	'0.1',  -- fair_value_change_1m
+	'6.0000', -- star_rating
+	'0.2',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
 	'0.8166' -- pct_in_fair_value_range
 ) ;
--- Apollo Classics
 INSERT INTO apollo.stockindicators (
 	id,
 	version,
@@ -173,9 +172,9 @@ values (
 	'0',
 	'2017-11-01 00:00:00',
 	'2017-11-01 00:00:00',
-	'2', -- instrument_id
-	'2017-12-01', 
-	'3.0000', -- star_rating
+	'1', -- instrument_id
+	'2017-12-02', 
+	'5.0000', -- star_rating
 	'0.1',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
 	'0.8166' -- pct_in_fair_value_range
@@ -199,8 +198,33 @@ values (
 	'2017-11-01 00:00:00',
 	'2017-11-01 00:00:00',
 	'2', -- instrument_id
+	'2017-12-01', 
+	'7.0000', -- star_rating
+	'0.1',  -- fair_value_change_1m
+	'0.1', -- intrinsic_value_change_1m
+	'0.8166' -- pct_in_fair_value_range
+) ;
+-- Apollo Classics
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	star_rating,
+	fair_value_change_1m,
+	intrinsic_value_change_1m,
+	pct_in_fair_value_range
+) 
+values (
+	4,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'2', -- instrument_id
 	'2017-12-02', 
-	'3.0000', -- star_rating
+	'5.0000', -- star_rating
 	'0.1',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
 	'0.8166' -- pct_in_fair_value_range

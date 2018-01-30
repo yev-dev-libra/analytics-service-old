@@ -91,12 +91,12 @@ public class ScreenerDelegatorTest {
 		PortfolioService mockPortfolioService = mock(PortfolioService.class);
 		AsyncTaskExecutor mockExecutorService = mock(AsyncTaskExecutor.class);
 		
-		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, mockExecutorService, Operation.SCREEN_FOR_PORTFOLIO, properties, mockRequest);
+		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, mockExecutorService, Operation.SCREEN_FOR_PORTFOLIOS, properties, mockRequest);
 		
 		when(mockRequest.getAnalyticsType()).thenReturn(AnalyticsType.APOLLO_SCREENER);
 		when(mockRequest.getInvestmentStyleId()).thenReturn(APOLLO_CLASSICS_STYLE_ID);
 		when(mockRequest.getPortfolioIds()).thenReturn(portfolioIds);
-		when(mockRequest.getOperation()).thenReturn(Operation.SCREEN_FOR_PORTFOLIO);
+		when(mockRequest.getOperation()).thenReturn(Operation.SCREEN_FOR_PORTFOLIOS);
 		
 		when(mockPortfolioService.getStockIdsWithPortfolios(portfolioIds)).thenReturn(stockPortofioIds);
 		

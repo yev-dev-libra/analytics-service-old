@@ -1,6 +1,7 @@
 package com.libra.apollo.analytics.engine.result;
 
 import java.util.Collection;
+import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -22,14 +23,14 @@ public class ScreenerResult implements AnalyticsResult{
 	
 	private List<ValueDataFieldType> parameters;
 
-	private Collection<List<?>> results; 
+	private List<EnumMap<ValueDataFieldType,?>> results; 
 	
 	private List<Long> portfolioIds;
 	
 	
 	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 	
-	public ScreenerResult(final InvestmentStyle investmentStyle, final List<ValueDataFieldType> requestedFields, final List<ValueDataFieldType> parameters, final Collection<List<?>> results, final List<Long> portfolioIds) {
+	public ScreenerResult(final InvestmentStyle investmentStyle, final List<ValueDataFieldType> requestedFields, final List<ValueDataFieldType> parameters, final List<EnumMap<ValueDataFieldType,?>> results, final List<Long> portfolioIds) {
 		super();
 		this.investmentStyle = investmentStyle;
 		this.requestedFields = requestedFields;
@@ -66,11 +67,11 @@ public class ScreenerResult implements AnalyticsResult{
 	}
 
 	@Override
-	public void addResults(Collection<List<?>> values) {
+	public void addValueResults(List<EnumMap<ValueDataFieldType,?>> values) {
 		readWriteLock.writeLock().lock();
 
 		try {
-			for(List<?> list : values) {
+			for(EnumMap<ValueDataFieldType,?> list : values) {
 				results.add(list);
 			}
 		} finally {
@@ -79,7 +80,7 @@ public class ScreenerResult implements AnalyticsResult{
 	}
 
 	@Override
-	public Collection<?> getResults() {
+	public List<EnumMap<ValueDataFieldType,?>> getResultValues() {
 		
 		try {
 			readWriteLock.readLock().lock();
@@ -118,7 +119,7 @@ public class ScreenerResult implements AnalyticsResult{
 		
 		private List<ValueDataFieldType> parameters;
 
-		private Collection<List<?>> results;
+		private List<EnumMap<ValueDataFieldType,?>> results;
 		
 		private List<Long> portfolioIds;
 
@@ -141,7 +142,7 @@ public class ScreenerResult implements AnalyticsResult{
 			return this;
 		}
 		
-		public ScreenerResultBuilder setResults(Collection<List<?>> results) {
+		public ScreenerResultBuilder setResults(List<EnumMap<ValueDataFieldType,?>>results) {
 			this.results = results;
 			return this;
 		}

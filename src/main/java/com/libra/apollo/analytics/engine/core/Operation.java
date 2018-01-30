@@ -2,7 +2,11 @@ package com.libra.apollo.analytics.engine.core;
 
 public enum Operation {
 
-	MODEL("model"), PERSIST("persist"), VALIDATE("validate"), SCREEN_FOR_PORTFOLIO("screen for portfolio"), SCREEN_FOR_STOCK("screen for stock");
+	MODEL("model"), 
+	PERSIST("persist"), 
+	VALIDATE("validate"), 
+	SCREEN_FOR_PORTFOLIOS("screen for portfolios"), 
+	SCREEN_FOR_STOCKS("screen for stocks");
 
 	private String name;
 

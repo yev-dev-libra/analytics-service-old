@@ -1,19 +1,19 @@
 package com.libra.apollo.analytics.engine.command;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
+import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.service.PortfolioService;
 
 public class PortfolioEnrichmentCommand implements Command {
 
-	final private PortfolioScreenerContext context;
+	final private AnalyticsContext context;
 	
 	
-	public PortfolioEnrichmentCommand(final PortfolioScreenerContext context) {
+	public PortfolioEnrichmentCommand(final AnalyticsContext context) {
 		super();
 		this.context = context;
 	}
@@ -21,15 +21,17 @@ public class PortfolioEnrichmentCommand implements Command {
 
 	@Override
 	public void execute() {
-		final ScreenerRequest request = context.getRequest();
+		final PortfolioScreenerContext screenerContext = (PortfolioScreenerContext)context;
+		
+		final ScreenerRequest request = screenerContext.getRequest();
 		
 		final Collection<Long> portfolioIds = request.getPortfolioIds();
 		
-		final PortfolioService portfolioService = context.getPortfolioService();
+		final PortfolioService portfolioService = screenerContext.getPortfolioService();
 		
 		final Map<Long,Collection<Long>> stockPortfolios = portfolioService.getStockIdsWithPortfolios(portfolioIds);
 		
-		context.setStockPortfolios(stockPortfolios);
+		screenerContext.setStockPortfolios(stockPortfolios);
 	}
 
 }

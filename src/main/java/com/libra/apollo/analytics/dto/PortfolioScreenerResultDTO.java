@@ -1,27 +1,31 @@
 package com.libra.apollo.analytics.dto;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
+import com.libra.apollo.analytics.entity.enums.AnalyticsType;
+import com.libra.apollo.analytics.entity.enums.RunType;
 
 
 public class PortfolioScreenerResultDTO {
 
 	private List<Long> portfolioIds;
 
-	private String analyticsType;
+	private AnalyticsType analyticsType;
 
-	private String runType;
+	private RunType runType;
 
 	private Long investmentStyleId;
 	
 	private String investmentStyleName;
 
-	private List<String> requestedFields;
-
-	private List<String> parameters;
-
+	private List<ValueDataFieldType> requestedFields;
 	
-	private Map<Long, List<PortfolioStockResults>> results;
+	private List<ValueDataFieldType> parameters;
+
+	private Map<Long, List<PortfolioStockValues>> portfolios;
 	
 	public List<Long> getPortfolioIds() {
 		return portfolioIds;
@@ -29,22 +33,6 @@ public class PortfolioScreenerResultDTO {
 
 	public void setPortfolioIds(List<Long> portfolioIds) {
 		this.portfolioIds = portfolioIds;
-	}
-
-	public String getAnalyticsType() {
-		return analyticsType;
-	}
-
-	public void setAnalyticsType(String analyticsType) {
-		this.analyticsType = analyticsType;
-	}
-
-	public String getRunType() {
-		return runType;
-	}
-
-	public void setRunType(String runType) {
-		this.runType = runType;
 	}
 
 	public Long getInvestmentStyleId() {
@@ -63,39 +51,55 @@ public class PortfolioScreenerResultDTO {
 		this.investmentStyleName = investmentStyleName;
 	}
 
-	public List<String> getRequestedFields() {
+
+	public AnalyticsType getAnalyticsType() {
+		return analyticsType;
+	}
+
+	public void setAnalyticsType(AnalyticsType analyticsType) {
+		this.analyticsType = analyticsType;
+	}
+
+	public RunType getRunType() {
+		return runType;
+	}
+
+	public void setRunType(RunType runType) {
+		this.runType = runType;
+	}
+
+	public List<ValueDataFieldType> getRequestedFields() {
 		return requestedFields;
 	}
 
-	public void setRequestedFields(List<String> requestedFields) {
+	public void setRequestedFields(List<ValueDataFieldType> requestedFields) {
 		this.requestedFields = requestedFields;
 	}
 
-	public List<String> getParameters() {
+	public List<ValueDataFieldType> getParameters() {
 		return parameters;
 	}
 
-	public void setParameters(List<String> parameters) {
+	public void setParameters(List<ValueDataFieldType> parameters) {
 		this.parameters = parameters;
 	}
 
 
-	public Map<Long, List<PortfolioStockResults>> getResults() {
-		return results;
+	public Map<Long, List<PortfolioStockValues>> getPortfolios() {
+		return portfolios;
 	}
 
-	public void setResults(Map<Long, List<PortfolioStockResults>> results) {
-		this.results = results;
+	public void setPortfolios(Map<Long, List<PortfolioStockValues>> portfolios) {
+		this.portfolios = portfolios;
 	}
 
 
 
-
-	public class PortfolioStockResults {
+	public static class PortfolioStockValues {
 		private final Long stockId;
-		private final Map<String,Object> values;
+		private final EnumMap<ValueDataFieldType,?> values;
 
-		public PortfolioStockResults(final Long stockId, final Map<String,Object> values) {
+		public PortfolioStockValues(final Long stockId, final EnumMap<ValueDataFieldType,?> values) {
 			this.stockId = stockId;
 			this.values = values;
 		}
@@ -104,7 +108,7 @@ public class PortfolioScreenerResultDTO {
 			return stockId;
 		}
 
-		public Map<String, Object> getValues() {
+		public EnumMap<ValueDataFieldType,?> getValues() {
 			return values;
 		}
 

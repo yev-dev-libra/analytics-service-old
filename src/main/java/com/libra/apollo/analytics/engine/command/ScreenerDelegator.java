@@ -3,6 +3,7 @@ package com.libra.apollo.analytics.engine.command;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.netflix.servo.util.Preconditions;
 
@@ -13,10 +14,10 @@ import com.netflix.servo.util.Preconditions;
 public class ScreenerDelegator implements Delegator {
 
 	private final Queue<Command> commands;
-	private final PortfolioScreenerContext context;
+	private final AnalyticsContext context;
 	
 	
-	public ScreenerDelegator(final PortfolioScreenerContext context) {
+	public ScreenerDelegator(final AnalyticsContext context) {
 		super();
 		this.context = context;
 		commands = new LinkedList<>();
@@ -42,7 +43,7 @@ public class ScreenerDelegator implements Delegator {
 	}
 
 	@Override
-	public PortfolioScreenerContext getContext() {
+	public AnalyticsContext getContext() {
 		return context;
 	}
 

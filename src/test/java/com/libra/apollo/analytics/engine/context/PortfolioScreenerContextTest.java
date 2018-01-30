@@ -27,11 +27,11 @@ public class PortfolioScreenerContextTest {
 	
 	@Test
 	public void testContextSetup() {
-		assertEquals(Operation.SCREEN_FOR_PORTFOLIO, analyticsContext.getOperation());
+		assertEquals(Operation.SCREEN_FOR_PORTFOLIOS, analyticsContext.getOperation());
 	}
 
 	private AnalyticsContext createAnalyticsContext() {
 		Map<String, String> properties = new HashMap<>();
-		return new PortfolioScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), mock(AsyncTaskExecutor.class), Operation.SCREEN_FOR_PORTFOLIO, properties, mock(ScreenerRequest.class));
+		return new PortfolioScreenerContext(mock(AnalyticsService.class), mock(ConfigurationService.class), mock(PortfolioService.class), mock(AsyncTaskExecutor.class), Operation.SCREEN_FOR_PORTFOLIOS, properties, mock(ScreenerRequest.class));
 	}
 }
