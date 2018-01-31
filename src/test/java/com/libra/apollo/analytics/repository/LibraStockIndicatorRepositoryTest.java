@@ -7,13 +7,16 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,10 +34,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
+import org.springframework.data.repository.query.Param;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.projection.MaxDateForStock;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.StampDateSpecification;
@@ -56,6 +61,7 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	private static final List<Long> existedStockIds = new ArrayList<>(Arrays.asList(1L));
 	
 	private Date previousDate;
+	private Date maxStampDate;
 	
 	@Before
 	public void setUp() {
@@ -63,6 +69,10 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		cal.set(2017, 11, 1);
 		previousDate = new Date(cal.getTimeInMillis());
 //		cal.add(Calendar.DATE, -1);
+		
+		Calendar maxStampDateCal = Calendar.getInstance();
+		maxStampDateCal.set(2017, 11, 2);
+		maxStampDate = new Date(maxStampDateCal.getTimeInMillis());
 	}
 	
 
@@ -264,5 +274,29 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		assertThat(values.isEmpty(), is(false));
 		
 	}
+	
+	@Test
+	public void shouldReturnMaxStampDate() {
+		Date maxStampDate = repository.maxDate();
+		assertThat(maxStampDate, equalTo(maxStampDate));
+	}
+	
+	@Test
+	public void shouldReturnMaxStampDateForStockIdGrouped() {
+		List<Long> ids = Arrays.asList(1L,2L,3L);
+		
+		List<MaxDateForStock> projections = repository.maxDateForStockAsProjection(ids, previousDate);
+		
+		Map<Long,Date> stockDate = projections.stream().collect(Collectors.toMap(MaxDateForStock::getStockId, MaxDateForStock::getMaxStampDate));
+		
+		Map<Date,List<MaxDateForStock>> dateStock1 = projections.stream().collect(Collectors.groupingBy(MaxDateForStock::getMaxStampDate));
+		
+		Map<Date,List<Long>> dateStock2 = projections.stream().collect(Collectors.groupingBy(MaxDateForStock::getMaxStampDate,Collectors.mapping(MaxDateForStock::getStockId,Collectors.toList())));
+		
+		Map<Date,Set<Long>> dateStock3 = projections.stream().collect(Collectors.groupingBy(MaxDateForStock::getMaxStampDate,Collectors.mapping(MaxDateForStock::getStockId,Collectors.toSet())));
+		
+		assertThat(projections.isEmpty(), is(false));
+	}
+	
 	
 }

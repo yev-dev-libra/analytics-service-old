@@ -23,6 +23,7 @@ import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
+import com.libra.apollo.analytics.service.CalendarService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
@@ -90,8 +91,9 @@ public class ScreenerDelegatorTest {
 		ConfigurationService mockConfigurationService = mock(ConfigurationService.class);
 		PortfolioService mockPortfolioService = mock(PortfolioService.class);
 		AsyncTaskExecutor mockExecutorService = mock(AsyncTaskExecutor.class);
+		CalendarService calendarService = mock(CalendarService.class);
 		
-		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, mockExecutorService, Operation.SCREEN_FOR_PORTFOLIOS, properties, mockRequest);
+		PortfolioScreenerContext context = new PortfolioScreenerContext(mockAnalyticsService, mockConfigurationService, mockPortfolioService, mockExecutorService, calendarService, Operation.SCREEN_FOR_PORTFOLIOS, properties, mockRequest);
 		
 		when(mockRequest.getAnalyticsType()).thenReturn(AnalyticsType.APOLLO_SCREENER);
 		when(mockRequest.getInvestmentStyleId()).thenReturn(APOLLO_CLASSICS_STYLE_ID);

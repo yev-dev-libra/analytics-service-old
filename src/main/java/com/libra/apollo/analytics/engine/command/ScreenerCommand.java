@@ -2,9 +2,11 @@ package com.libra.apollo.analytics.engine.command;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
@@ -55,7 +57,7 @@ public class ScreenerCommand implements Command {
 		
 		//TODO: persist in the database
 		List<ValueDataFieldType> requestedFields = Arrays.asList(
-						ValueDataFieldType.MAX_STAMP_DATE, 
+						ValueDataFieldType.STAMP_DATE, 
 						ValueDataFieldType.STAR_RATING,
 						ValueDataFieldType.FAIR_VALUE,
 						ValueDataFieldType.INTRINSIC_VALUE,
@@ -66,35 +68,31 @@ public class ScreenerCommand implements Command {
 		
 
 		
-		final Collection<Long> stockIds = stockPortfolios.keySet();
 		
+		final Map<Date,Set<Long>> stampDatesWithASetOfStocks = screenerContext.getMaxStampDatePerStock();
+
+		ScreenerResult result = new ScreenerResult.ScreenerResultBuilder()
+									.setParameters(queryParams)
+									.setRequestedFields(requestedFields)
+									.setInvestmentStyle(investmentStyle)
+									.setPortfolioIds(screenerContext.getPortfolioIds())
+									.build();
 		
-		final List<Tuple> tupleResults = analyticsService.getScreeningResults(stockIds, params, requestedFields);
-		 
-		
-		final List<EnumMap<ValueDataFieldType,?>> valueResults  = AnalyticsConveters.fromTupleToValuesDataFieldMap(requestedFields).convert(tupleResults);
-		
-		ScreenerResult result = null;
-		
-		if(screenerContext.isResultMergeable()) {
-			result = new ScreenerResult.ScreenerResultBuilder()
-					.setParameters(queryParams)
-					.setRequestedFields(requestedFields)
-					.setInvestmentStyle(investmentStyle)
-					.setPortfolioIds(screenerContext.getPortfolioIds())
-					.build();
+		//TODO: should be on a separate threads as tasks
+		for(Map.Entry<Date, Set<Long>> entry : stampDatesWithASetOfStocks.entrySet()) {
+			
+			final Date stampDate = entry.getKey();
+			final Set<Long> stockIds = entry.getValue();
+			
+			final List<Tuple> tupleResults = analyticsService.getScreeningResults(stockIds, params, requestedFields,stampDate);
+			
+			final List<EnumMap<ValueDataFieldType,?>> valueResults  = AnalyticsConveters.fromTupleToValuesDataFieldMap(requestedFields).convert(tupleResults);
 			
 			result.addValueResults(valueResults);
-		} else {
-			
-			result = new ScreenerResult.ScreenerResultBuilder()
-					.setParameters(queryParams)
-					.setRequestedFields(requestedFields)
-					.setInvestmentStyle(investmentStyle)
-					.setResults(valueResults)
-					.setPortfolioIds(screenerContext.getPortfolioIds())
-					.build();
 		}
+		
+		 
+		
 		
 		screenerContext.setResult(result);
 	}

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.ResultParameter;
-import com.libra.apollo.analytics.entity.ScreeningResult;
+import com.libra.apollo.analytics.projection.ScreeningResult;
 
 @Repository
 public interface ScreeningRepositoryCustom {

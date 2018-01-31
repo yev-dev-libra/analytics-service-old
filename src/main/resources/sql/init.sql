@@ -230,3 +230,29 @@ values (
 	'0.8166' -- pct_in_fair_value_range
 ) ;
 
+-- Apollo Classics
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	star_rating,
+	fair_value_change_1m,
+	intrinsic_value_change_1m,
+	pct_in_fair_value_range
+) 
+values (
+	5,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'3', -- instrument_id
+	'2017-12-03', 
+	'5.0000', -- star_rating
+	'0.1',  -- fair_value_change_1m
+	'0.1', -- intrinsic_value_change_1m
+	'0.8166' -- pct_in_fair_value_range
+) ;
+

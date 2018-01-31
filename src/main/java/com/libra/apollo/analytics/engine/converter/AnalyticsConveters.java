@@ -120,16 +120,18 @@ public class AnalyticsConveters {
 
 				final Collection<Long> portfolioIdsForThisStock = stockPortfolios.get(stockId);
 				
-				List<PortfolioStockValues> values = null;
 				for(Long portfolioId : portfolioIdsForThisStock) {
 					
+					List<PortfolioStockValues> values = null;
+
 					if(resultValues.containsKey(portfolioId)) {
 						values = resultValues.get(portfolioId);
 					}
 					else {
 						values = new LinkedList<>();
-						values.add(portfolioStockValues);
 					}
+
+					values.add(portfolioStockValues);
 					
 					resultValues.put(portfolioId, values);
 				}

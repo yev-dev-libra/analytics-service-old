@@ -29,11 +29,11 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 
 
 	@Override
-	public List<Tuple> getScreeningResults(final Collection<Long> stockIds, final List<QueryParameter> queryParams,  List<ValueDataFieldType> requestedFields, final Date runDate) {
+	public List<Tuple> getScreeningResults(final Collection<Long> stockIds, final List<QueryParameter> queryParams,  List<ValueDataFieldType> requestedFields, final Date stampDate) {
 		Preconditions.checkArgument(stockIds != null, "Passed Stock Ids can not be null");
 		Preconditions.checkArgument(queryParams != null, "Passed QueryParameters can not be null");
 		Preconditions.checkArgument(requestedFields != null, "Passed ValueDataFieldType can not be null");
-		Preconditions.checkArgument(runDate != null, "Passed runDate can not be null");
+		Preconditions.checkArgument(stampDate != null, "Passed runDate can not be null");
 		
 		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
@@ -44,7 +44,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 			specification.and(param.getSpecification());
 			
 		}
-		return libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification, runDate);
+		return libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification, stampDate);
 	}
 
 	@Override

@@ -160,38 +160,16 @@ public class QueriesPlayground extends AbstractRepositoryTest{
 	public void testQueryForIndicatorsWithSelectionAndSpecification() {
 		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Tuple> q = cb.createQuery(Tuple.class); //result class
+		CriteriaQuery<Number> q = cb.createQuery(Number.class);
+		
 		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
-		
-		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
-		selections.add(indicatorsRoot.get("stockId").alias("stockId") );
-		selections.add(cb.<Date>greatest(indicatorsRoot.get("stampDate")).alias("maxStampDate") );
-		selections.add(indicatorsRoot.get("fairValue").alias("fairValue")  );
-		
-		q.multiselect(selections);
-		
-		
-		final Collection<Long> stockIds = Arrays.asList(1L,2L,3L);
-		
-		Specification<LibraStockIndicator> spec = (root, query, criteriaBuilder) -> {
-			final Path<Long> stocks = root.<Long>get("stockId");
-			return stocks.in(stockIds);
-		};
-		
-		q.where(spec.toPredicate(indicatorsRoot, q, cb));
-		
-		//Adding dynamic parameters that should come from specifications
-		
+		q.select(cb.max(indicatorsRoot.get("stampDate")));
 		q.groupBy(indicatorsRoot.get("stockId"));
 		
 		Query query = entityManager.createQuery(q);
 		
-		List<Tuple> results = query.getResultList();
-		List<Object> values = new ArrayList<>();
-		for (Tuple tuple : results) {
-			System.out.println( tuple.get("maxStampDate") + " " + tuple.get("stockId") + " " + tuple.get("fairValue", BigDecimal.class));
-			values.add(tuple.get("stockId"));
-		}
+		query.getResultList();
+		
 		
 	}
 		

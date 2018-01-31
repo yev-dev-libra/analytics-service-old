@@ -13,6 +13,7 @@ import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
+import com.libra.apollo.analytics.service.CalendarService;
 import com.libra.apollo.analytics.service.ConfigurationService;
 import com.libra.apollo.analytics.service.PortfolioService;
 
@@ -44,16 +45,20 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	private final Map<String,String> properties;
 	private final Operation operation;
 	private final ScreenerRequest request;
+	private final CalendarService calendarService;
 	
 	private Map<Long,Collection<Long>> stockPortfolios;
 	
 	private ScreenerResult result;
+	
+	private Map<Date,Set<Long>> maxStampDatePerStock;
 	
 	
 	public PortfolioScreenerContext(	final AnalyticsService analyticsService, 
 									final ConfigurationService configurationService, 
 									final PortfolioService portfolioService, 
 									final AsyncTaskExecutor executorService, 
+									CalendarService calendarService,
 									final Operation operation, 
 									final Map<String,String> properties, 
 									final ScreenerRequest request) {
@@ -62,6 +67,7 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 		this.configurationService = configurationService;
 		this.portfolioService = portfolioService;
 		this.executorService = executorService;
+		this.calendarService = calendarService;
 		this.operation = operation;
 		this.properties = properties;
 		this.request = request;
@@ -94,6 +100,18 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	public void setStockPortfolios(Map<Long, Collection<Long>> stockPortfolios) {
 		this.stockPortfolios = stockPortfolios;
 	}
+	
+	
+
+	public Map<Date, Set<Long>> getMaxStampDatePerStock() {
+		return maxStampDatePerStock;
+	}
+
+
+	public void setMaxStampDatePerStock(Map<Date, Set<Long>> maxStampDatePerStock) {
+		this.maxStampDatePerStock = maxStampDatePerStock;
+	}
+
 
 	@Override
 	public AnalyticsService getAnalyticsService() {
@@ -115,6 +133,12 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 
 	public AsyncTaskExecutor getExecutorService() {
 		return executorService;
+	}
+
+
+
+	public CalendarService getCalendarService() {
+		return calendarService;
 	}
 
 
@@ -163,8 +187,10 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 		return Boolean.TRUE;
 	}
 
-	public static class ScreenerContextBuilder {
-		
+
+	@Override
+	public Map<Date, Set<Long>> stampDateWithSotcks() {
+		return maxStampDatePerStock;
 	}
 
 	

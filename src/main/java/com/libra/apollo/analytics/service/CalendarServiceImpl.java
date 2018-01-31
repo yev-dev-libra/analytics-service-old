@@ -1,45 +1,66 @@
 package com.libra.apollo.analytics.service;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.libra.apollo.analytics.projection.MaxDateForStock;
 import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
-import com.libra.apollo.analytics.utils.Utils;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
 	
 	@Autowired
-	private LibraStockIndicatorRepository libraStockIndicatorRepository;
+	private LibraStockIndicatorRepository libraStockIndicatorRepository; 
+
+	@Override
+	public Date getMaxStampDateForStock(Long stockId) {
+		return libraStockIndicatorRepository.maxDateForStock(stockId);
+	}
+
+	@Override
+	public Map<Date,Set<Long>> getMaxStampDateForStockIds(Collection<Long> stockIds, Date greaterThanStampDate) {
+		
+		List<MaxDateForStock> projection = libraStockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
+		
+		Map<Date,Set<Long>> maxDateStock = projection.stream().collect(Collectors.groupingBy(MaxDateForStock::getMaxStampDate,Collectors.mapping(MaxDateForStock::getStockId,Collectors.toSet())));
+				
+		return maxDateStock;
+	}
+
+	@Override
+	public Map<Long,Date> getStockDateForStockIdAndDate(Collection<Long> stockIds, Date greaterThanStampDate) {
+		
+		List<MaxDateForStock> projection = libraStockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
+		
+		Map<Long,Date> stockDate = projection.stream().collect(Collectors.toMap(MaxDateForStock::getStockId, MaxDateForStock::getMaxStampDate));
+		
+		return stockDate;
+	}
 	
 	@Override
-	public Date getClosestMaxStampDate() {
+	public Map<Date, Long> getDateStockForStockIdAndDate(Collection<Long> stockIds, Date greaterThanStampDate) {
+		List<MaxDateForStock> projection = libraStockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
 		
-//		LocalDate localDate = getClosestClosedLocalDate();
-//		
-//		ZoneId zoneId = ZoneId.of(Utils.DEFAULT_APOLLO_ZONE_ID);
-//		
-//		Instant instant = localDate.atStartOfDay(zoneId).toInstant();
-//		
-//		Date date = Date.from(instant);
+		Map<Date,Long> stockDate = projection.stream().collect(Collectors.toMap(MaxDateForStock::getMaxStampDate, MaxDateForStock::getStockId));
 		
-		Date date = libraStockIndicatorRepository.maxDate();
-		
-		return date;
+		return stockDate;
 	}
-
+	
 	@Override
-	public LocalDate getClosestClosedLocalDate() {
-		LocalDate today = LocalDate.now();
-		LocalDate yesterday = today.minusDays(1L);
-		return Utils.getPreviousWorkingDay(yesterday);
+	public Date getMaxStampDateForStockIndicators() { 
+		return libraStockIndicatorRepository.maxDate();
 	}
 
+
+	
+	
 	
 }

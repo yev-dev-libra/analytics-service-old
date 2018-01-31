@@ -51,6 +51,7 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 			logger.debug("");
 		}
 		
+		//TODO: get query for a max date
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		
 		CriteriaQuery<Tuple> q = cb.createTupleQuery();
@@ -92,10 +93,29 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 			logger.debug("");
 		}
 		
-		Specification<LibraStockIndicator> equalsOrGreaterThanPrevBussDate = StampDateSpecification.stampDateGreaterThanOrEqual(stampDate );
-		specification.and(equalsOrGreaterThanPrevBussDate);
+		Specification<LibraStockIndicator> stampDateLessOrGreater = StampDateSpecification.stampDateLessOrGreater(stampDate );
+		specification.and(stampDateLessOrGreater);
 		
-		return findAllBySpecification(fields, specification);
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Tuple> q = cb.createTupleQuery();
+		
+		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
+		
+		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
+		
+		for(ValueDataFieldType field : fields ) {
+			selections.add(indicatorsRoot.get(field.getFieldName()).alias(field.getFieldName())  );
+		}
+		
+		q.multiselect(selections);
+		
+		q.where(specification.toPredicate(indicatorsRoot, q, cb));
+		
+		Query query = entityManager.createQuery(q);
+		
+		return query.getResultList();
+		
 	}
 
 

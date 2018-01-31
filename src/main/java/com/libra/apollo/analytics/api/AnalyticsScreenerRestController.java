@@ -21,6 +21,7 @@ import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
 import com.libra.apollo.analytics.dto.StockScreenerResultDTO;
 import com.libra.apollo.analytics.engine.command.Command;
 import com.libra.apollo.analytics.engine.command.Delegator;
+import com.libra.apollo.analytics.engine.command.DelegatorFactory;
 import com.libra.apollo.analytics.engine.command.PortfolioEnrichmentCommand;
 import com.libra.apollo.analytics.engine.command.ScreenerCommand;
 import com.libra.apollo.analytics.engine.command.ScreenerDelegator;
@@ -58,6 +59,9 @@ public class AnalyticsScreenerRestController {
 	@Autowired
 	private AsyncTaskExecutor executorService;
 	
+	@Autowired
+	private CalendarService calendarService;
+	
 	
 	@RequestMapping(value = "/investment-style/{styleId}/portfolios/{portfolioIds}", method = RequestMethod.GET)
 	@ApiOperation(value = "Screen for results given a list of portfolios")
@@ -67,17 +71,10 @@ public class AnalyticsScreenerRestController {
 		
 		final ScreenerRequest request = ScreenerRequest.of(styleId, portfolioIds);
 		
-		final AnalyticsContext analyticsContext =  AnalyticsContextFactory.getContext(analyticsService, configurationService, portfolioService, executorService, properties, request);
+		final AnalyticsContext analyticsContext =  AnalyticsContextFactory.getContext(analyticsService, configurationService, portfolioService, executorService, calendarService, properties, request);
 		
-		final Delegator delegator = new ScreenerDelegator(analyticsContext);
+		final Delegator delegator = DelegatorFactory.getCommandDelegator(analyticsContext);
 		
-		final Command portfolioEnrichment = new PortfolioEnrichmentCommand(analyticsContext);
-		
-		final Command screenerCommand = new ScreenerCommand(analyticsContext);
-		
-		delegator.add(portfolioEnrichment);
-		
-		delegator.add(screenerCommand);
 		
 		delegator.execute();
 		
@@ -97,7 +94,7 @@ public class AnalyticsScreenerRestController {
 		final ScreenerRequest resuest = ScreenerRequest.of(styleId, Arrays.asList(portfolioId));
 		
 		//TODO: create separate context
-		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, executorService, Operation.SCREEN_FOR_PORTFOLIOS, properties, resuest);
+		PortfolioScreenerContext analyticsContext = new PortfolioScreenerContext(analyticsService, configurationService, portfolioService, executorService, calendarService, Operation.SCREEN_FOR_PORTFOLIOS, properties, resuest);
 		
 		Delegator delegator = new ScreenerDelegator(analyticsContext);
 		
