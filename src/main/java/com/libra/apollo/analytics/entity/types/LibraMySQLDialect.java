@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.entity.type;
+package com.libra.apollo.analytics.entity.types;
 
 import org.hibernate.dialect.MySQL5InnoDBDialect;
 import java.sql.Types;

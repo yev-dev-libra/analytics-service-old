@@ -7,7 +7,7 @@ import java.util.Set;
 
 import com.libra.apollo.analytics.engine.core.Operation;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
-import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.engine.results.ScreenerResult;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;

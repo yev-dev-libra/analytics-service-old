@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.converter;
+package com.libra.apollo.analytics.engine.converters;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +16,7 @@ import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO.PortfolioStockV
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.engine.results.ScreenerResult;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 

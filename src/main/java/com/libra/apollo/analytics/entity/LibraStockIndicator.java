@@ -16,7 +16,7 @@ import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Type;
 
 import com.libra.apollo.analytics.entity.enums.TrendType;
-import com.libra.apollo.analytics.entity.type.IndicatorBigDecimal;
+import com.libra.apollo.analytics.entity.types.IndicatorBigDecimal;
 
 @Entity
 @Table(name = "stockindicators", schema = "apollo")

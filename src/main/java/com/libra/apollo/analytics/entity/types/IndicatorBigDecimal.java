@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.entity.type;
+package com.libra.apollo.analytics.entity.types;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @TypeDef(defaultForType = IndicatorBigDecimal.class, typeClass = IndicatorBigDecimal.class)
 public class IndicatorBigDecimal implements UserType {
 
-	public static final String HIBERNATE_TYPE_NAME = "com.libra.apollo.analytics.entity.type.IndicatorBigDecimal";
+	public static final String HIBERNATE_TYPE_NAME = "com.libra.apollo.analytics.entity.types.IndicatorBigDecimal";
 	
 	private static final Logger log = LoggerFactory.getLogger(IndicatorBigDecimal.class);
 

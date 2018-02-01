@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.libra.apollo.analytics.api.assemblers.InvestmentStyleAssembler;
 import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
@@ -29,12 +31,16 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/config")
 @Api(value = "CONFIGURATIONS", description = "Analytics Configurations Api")
+@ExposesResourceFor(ApolloAnalytics.class)
 public class ConfigurationsRestController {
 
 	private static Logger logger = LoggerFactory.getLogger(ConfigurationsRestController.class);
 
 	@Autowired
 	private ConfigurationService configService;
+	
+	@Autowired
+	private InvestmentStyleAssembler investmentStyleAssembler;
 
 	/**
 	 * Return a full list of available apollo analytics or a subgroup of analytics if the parameter 'search' is used with the Public view.
@@ -46,7 +52,7 @@ public class ConfigurationsRestController {
 	@ApiOperation(value = "Get a list of Apollo Analytics", notes = "Returns a list of available Analytics with views and Investment Styles")
 	@JsonView(ConfigurationJsonView.Public.class)
 	public ResponseEntity<List<ApolloAnalytics>> getAnalytics(
-			@ApiParam(value="Use search=[name|runType|analyticsType]:value", name="search", allowableValues="name:Apollo Screener,runType:ON_DEMAND,analyticsType:APOLLO_SCREENER", required = false)
+			@ApiParam(value="Use search=[name|runType|analyticsType]:value", name="search", allowableValues="name:Apollo Screener,runType:On demand,analyticsType:APOLLO_SCREENER", required = false)
 			@RequestParam(value = "search", required=false) String search) {
 
 		return handleGetAnalytics(search);
@@ -64,7 +70,7 @@ public class ConfigurationsRestController {
 	@ApiOperation(value = "Get a list of Apollo Analytics", notes = "Returns a list of available Analytics with views and Investment Styles")
 	@JsonView(ConfigurationJsonView.PublicExtended.class)
 	public ResponseEntity<List<ApolloAnalytics>> getAnalyticsExtended(
-			@ApiParam(value="Use search=[name|runType|analyticsType]:value", name="search", allowableValues="name:Apollo Screener,runType:ON_DEMAND,analyticsType:APOLLO_SCREENER", required = false)
+			@ApiParam(value="Use search=[name|runType|analyticsType]:value", name="search", allowableValues="name:Apollo Screener,runType:On demand,analyticsType:APOLLO_SCREENER", required = false)
 			@RequestParam(value = "search", required=false) String search) {
 
 		return handleGetAnalytics(search);
@@ -216,10 +222,9 @@ public class ConfigurationsRestController {
 	 * @throws EntityNotFoundException
 	 */
 	@RequestMapping(value="/{analyticId}/views/{viewId}/investment-styles", method = RequestMethod.GET)
-	@JsonView(ConfigurationJsonView.Public.class)
-	public ResponseEntity<List<InvestmentStyle>> getInvestmentStylesByAnalyticIdAndViewId(
-			@PathVariable Long analyticId,
-			@PathVariable Long viewId) throws EntityNotFoundException {
+//	@JsonView(ConfigurationJsonView.Public.class)
+	public ResponseEntity<List<InvestmentStyle>> getInvestmentStylesByAnalyticIdAndViewId(@PathVariable Long analyticId, @PathVariable Long viewId) throws EntityNotFoundException {
+		
 		ApolloAnalytics apolloAnalytics = configService.getAnalyticsById(analyticId);
 
 		// If apolloAnalytics does not exist then return not found code

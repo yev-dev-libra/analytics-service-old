@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.command;
+package com.libra.apollo.analytics.engine.commands;
 
 public interface Command {
 

@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.result;
+package com.libra.apollo.analytics.engine.results;
 
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;

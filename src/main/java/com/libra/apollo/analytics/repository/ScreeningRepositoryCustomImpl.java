@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.ResultParameter;
-import com.libra.apollo.analytics.projection.ScreeningResult;
+import com.libra.apollo.analytics.projections.ScreeningResult;
 
 @Repository
 @Transactional(readOnly = true)

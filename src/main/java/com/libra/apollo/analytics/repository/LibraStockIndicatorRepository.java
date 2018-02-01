@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.projection.MaxDateForStock;
+import com.libra.apollo.analytics.projections.MaxDateForStock;
 
 @Repository
 public interface LibraStockIndicatorRepository extends BaseRepository<LibraStockIndicator, Long>, JpaSpecificationExecutor<LibraStockIndicator>, LibraStockIndicatorRepositoryCustom {

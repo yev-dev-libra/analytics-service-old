@@ -17,13 +17,14 @@ public class ScreenerRequest implements AnalyticsRequest {
 
 	private final List<Long> portfolioIds;
 	private final Long investmentStyleId; //TODO: this should be investment style populated by intercepter
+	private Date date;
 	
 	
-	
-	public ScreenerRequest(Long investmentStyleId, List<Long> portfolioIds ) {
+	public ScreenerRequest(Long investmentStyleId, List<Long> portfolioIds, Date date ) {
 		super();
 		this.portfolioIds = portfolioIds;
 		this.investmentStyleId = investmentStyleId;
+		this.date = date;
 	}
 
 	
@@ -55,9 +56,25 @@ public class ScreenerRequest implements AnalyticsRequest {
 	public Long getInvestmentStyleId() {
 		return investmentStyleId;
 	}
+	
+	
+
+	public Date getDate() {
+		return date;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 
 	public static ScreenerRequest of(Long investmentStyleId, List<Long> portfolioIds ) {
-		return new ScreenerRequest(investmentStyleId, portfolioIds);
+		return new ScreenerRequest(investmentStyleId, portfolioIds, null);
+	}
+	
+	public static ScreenerRequest of(Long investmentStyleId, List<Long> portfolioIds, Date date ) {
+		return new ScreenerRequest(investmentStyleId, portfolioIds, date);
 	}
 	
 }

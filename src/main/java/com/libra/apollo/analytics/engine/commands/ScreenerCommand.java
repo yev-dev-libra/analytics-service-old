@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.command;
+package com.libra.apollo.analytics.engine.commands;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,9 +15,9 @@ import org.springframework.core.task.AsyncTaskExecutor;
 
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
-import com.libra.apollo.analytics.engine.converter.AnalyticsConveters;
+import com.libra.apollo.analytics.engine.converters.AnalyticsConveters;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.engine.results.ScreenerResult;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.QueryParameter;
 import com.libra.apollo.analytics.service.AnalyticsService;

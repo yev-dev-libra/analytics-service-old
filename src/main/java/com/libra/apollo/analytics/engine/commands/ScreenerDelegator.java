@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.command;
+package com.libra.apollo.analytics.engine.commands;
 
 import java.util.LinkedList;
 import java.util.Queue;

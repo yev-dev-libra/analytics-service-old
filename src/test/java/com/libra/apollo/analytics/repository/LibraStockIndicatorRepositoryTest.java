@@ -39,7 +39,7 @@ import org.springframework.data.repository.query.Param;
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.projection.MaxDateForStock;
+import com.libra.apollo.analytics.projections.MaxDateForStock;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.StampDateSpecification;

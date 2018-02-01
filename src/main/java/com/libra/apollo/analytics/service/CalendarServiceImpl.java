@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.libra.apollo.analytics.projection.MaxDateForStock;
+import com.libra.apollo.analytics.projections.MaxDateForStock;
 import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
 
 @Service

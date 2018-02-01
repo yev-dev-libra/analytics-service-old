@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.result;
+package com.libra.apollo.analytics.engine.results;
 
 import java.util.ArrayList;
 import java.util.Collection;

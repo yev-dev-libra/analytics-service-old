@@ -1,4 +1,4 @@
-package com.libra.apollo.analytics.engine.command;
+package com.libra.apollo.analytics.engine.commands;
 
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 
