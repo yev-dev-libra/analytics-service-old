@@ -8,23 +8,34 @@ import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
 import com.libra.apollo.analytics.entity.enums.RunType;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel
 public class PortfolioScreenerResultDTO {
-
+	
+	@ApiModelProperty(notes = "Requested list of portfolio ids")
 	private List<Long> portfolioIds;
-
+	
+	@ApiModelProperty(notes = "Type of analytics")
 	private AnalyticsType analyticsType;
 
+	@ApiModelProperty(notes = "Requested run type")
 	private RunType runType;
 
+	@ApiModelProperty(notes = "Requested Investment Style unique identifier")
 	private Long investmentStyleId;
 	
+	@ApiModelProperty(notes = "Requested Investment Style name")
 	private String investmentStyleName;
 
+	@ApiModelProperty(notes = "List of fields to display")
 	private List<ValueDataFieldType> requestedFields;
 	
+	@ApiModelProperty(notes = "List of fields to screen by")
 	private List<ValueDataFieldType> parameters;
 
+	@ApiModelProperty(notes = "List of fields to screen by")
 	private Map<Long, List<PortfolioStockValues>> portfolios;
 	
 	public List<Long> getPortfolioIds() {

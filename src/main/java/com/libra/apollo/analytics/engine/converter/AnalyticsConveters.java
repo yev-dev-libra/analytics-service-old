@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.persistence.Tuple;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
 import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO.PortfolioStockValues;
@@ -18,7 +19,6 @@ import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.netflix.servo.util.Preconditions;
 
 public class AnalyticsConveters {
 

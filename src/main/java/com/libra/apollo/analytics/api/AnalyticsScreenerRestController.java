@@ -64,29 +64,22 @@ public class AnalyticsScreenerRestController {
 	
 	
 	@RequestMapping(value = "/investment-style/{styleId}/portfolios/{portfolioIds}", method = RequestMethod.GET)
-	@ApiOperation(value = "Screen for results given a list of portfolios")
+	@ApiOperation(value = "Get a list of Portfolio Screen Results", notes = "Screen for results given a list of portfolios", response=PortfolioScreenerResultDTO.class)
 	public ResponseEntity<PortfolioScreenerResultDTO> screenForPortfolios(@PathVariable("styleId") Long styleId, @PathVariable("portfolioIds") List<Long> portfolioIds){
 		
 		final Map<String,String> properties = new HashMap<>();
-		
 		final ScreenerRequest request = ScreenerRequest.of(styleId, portfolioIds);
-		
 		final AnalyticsContext analyticsContext =  AnalyticsContextFactory.getContext(analyticsService, configurationService, portfolioService, executorService, calendarService, properties, request);
-		
 		final Delegator delegator = DelegatorFactory.getCommandDelegator(analyticsContext);
-		
-		
 		delegator.execute();
-		
-		final ScreenerResult result = analyticsContext.getResult();
 		
 		final PortfolioScreenerResultDTO dto = AnalyticsConveters.fromScreenerResultToDto().convert(analyticsContext);
 		
 		return new ResponseEntity<PortfolioScreenerResultDTO>(dto, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Screen for results given a list of stocks")
 	@RequestMapping(value = "/investment-style/{styleId}/portfolio/{portfolioId}", method = RequestMethod.GET)
+	@ApiOperation(value = "Get a list of Stock Screen Results", notes = "Screen for results given a list of stocks", response=StockScreenerResultDTO.class)
 	public ResponseEntity<StockScreenerResultDTO> screenForStocks(@PathVariable("styleId") Long styleId, @PathVariable("portfolioId") Long portfolioId){
 		
 		final Map<String,String> properties = new HashMap<>();
@@ -103,8 +96,6 @@ public class AnalyticsScreenerRestController {
 		delegator.add(screenerCommand);
 		
 		delegator.execute();
-		
-		ScreenerResult result = analyticsContext.getResult();
 		
 		StockScreenerResultDTO dto = null;
 		
