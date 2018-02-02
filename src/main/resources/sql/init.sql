@@ -89,9 +89,6 @@ INSERT INTO analytics.analytics_investment_style( id, name, description, priorit
 INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (7,'Below 12m Pessimistic', 'These are stocks trading at a discount to Apollo''s most pessimistic 12-month scenario.', 7, 1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (8,'Above 12m Optimistic', 'These are stocks trading at a premium to Apollo''s most optimistic 12-month scenario.', 8, 1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 
-INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (9,'User Classics', 'The User Classics are those that we would be happy adding to at current positions, given the positive combination of value, growth, volatility and momentum.', 9, 1, 2, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
-INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (10,'User on the Rocks', 'The User SotR are companies that are currently unloved by the market, and in the absence or special situations or the reporting season, should underperform.', 10, 1, 2, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
-
 
 -- Populating investment_style parameters
 
@@ -256,3 +253,135 @@ values (
 	'0.8166' -- pct_in_fair_value_range
 ) ;
 
+
+-- Stocks on the Rock
+
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	star_rating,
+	fair_value_change_1m,
+	intrinsic_value_change_1m,
+	pct_in_fair_value_range,
+	intrinsic_value_pct
+) 
+values (
+	6,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'4', -- instrument_id
+	'2017-12-01', 
+	'-1.000', -- star_rating
+	'-0.2',  -- fair_value_change_1m
+	'-0.1', -- intrinsic_value_change_1m
+	'0.31', -- pct_in_fair_value_range
+	'-1.02' -- intrinsic_value_pct
+) ;
+
+-- Value Buy
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	intrinsic_value_pct
+) 
+values (
+	7,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'5', -- instrument_id
+	'2017-12-01', 
+	'0.1' -- intrinsic_value_pct
+) ;
+
+-- Value Sell
+
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	intrinsic_value_pct
+) 
+values (
+	8,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'6', -- instrument_id
+	'2017-12-01', 
+	'0.9' -- intrinsic_value_pct
+) ;
+
+-- Apollo Growth
+
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	median_discount_to_fair_value
+) 
+values (
+	9,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'7', -- instrument_id
+	'2017-12-01', 
+	'0.5' -- median_discount_to_fair_value
+) ;
+
+-- Apollo Value
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	median_discount_to_fair_value
+) 
+values (
+	10,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'8', -- instrument_id
+	'2017-12-01', 
+	'0' -- median_discount_to_fair_value
+) ;
+
+-- Below 12m Pessimistic
+
+INSERT INTO apollo.stockindicators (
+	id,
+	version,
+	created_on,
+	updated_on,
+	instrument_id, 
+	stamp_date, 
+	long_term_optimistic
+) 
+values (
+	11,
+	'0',
+	'2017-11-01 00:00:00',
+	'2017-11-01 00:00:00',
+	'9', -- instrument_id
+	'2017-12-01', 
+	'0.5' -- long_term_optimistic
+) ;
