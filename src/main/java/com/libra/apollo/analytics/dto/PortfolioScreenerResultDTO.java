@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.entity.AnalyticsType;
+import com.libra.apollo.analytics.entity.RunType;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

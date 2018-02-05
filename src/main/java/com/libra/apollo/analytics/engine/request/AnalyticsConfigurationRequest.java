@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.libra.apollo.analytics.engine.core.Operation;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.entity.AnalyticsType;
+import com.libra.apollo.analytics.entity.RunType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AnalyticsConfigurationRequest implements AnalyticsRequest {

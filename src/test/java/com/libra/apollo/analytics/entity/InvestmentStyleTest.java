@@ -2,7 +2,7 @@ package com.libra.apollo.analytics.entity;
 
 import org.junit.Test;
 
-import com.libra.apollo.analytics.utils.Properties;
+import com.libra.apollo.analytics.util.Properties;
 
 public class InvestmentStyleTest  {
 

@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
+import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.entity.RunType;
 
 public class AnalyticsRepositoryTest extends AbstractRepositoryTest {
 

@@ -9,7 +9,7 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.libra.apollo.analytics.entity.types.IndicatorBigDecimal;
+import com.libra.apollo.analytics.entity.type.IndicatorBigDecimal;
 
 public enum ValueDataFieldType {
 	

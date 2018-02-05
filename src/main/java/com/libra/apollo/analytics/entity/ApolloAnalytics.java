@@ -21,9 +21,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.hibernate.annotations.SortNatural;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
-import com.libra.apollo.analytics.entity.jsonviews.ConfigurationJsonView;
+import com.libra.apollo.analytics.entity.jsonview.ConfigurationJsonView;
 
 @Entity
 @Table(name = "analytics", schema="analytics", indexes = { @Index(name = "type_idx", columnList = "analytics_type"),

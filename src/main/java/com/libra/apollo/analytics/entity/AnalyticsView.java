@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.hibernate.annotations.SortNatural;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.libra.apollo.analytics.entity.jsonviews.ConfigurationJsonView;
+import com.libra.apollo.analytics.entity.jsonview.ConfigurationJsonView;
 
 @SuppressWarnings("serial")
 @Entity

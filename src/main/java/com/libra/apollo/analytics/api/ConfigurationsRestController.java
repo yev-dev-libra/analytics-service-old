@@ -14,16 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.libra.apollo.analytics.api.assemblers.InvestmentStyleAssembler;
+import com.libra.apollo.analytics.api.assembler.InvestmentStyleAssembler;
+import com.libra.apollo.analytics.entity.AnalyticsSearchFieldApi;
+import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
-import com.libra.apollo.analytics.entity.jsonviews.ConfigurationJsonView;
+import com.libra.apollo.analytics.entity.RunType;
+import com.libra.apollo.analytics.entity.jsonview.ConfigurationJsonView;
+import com.libra.apollo.analytics.exception.EntityNotFoundException;
 import com.libra.apollo.analytics.service.ConfigurationService;
-import com.libra.apollo.analytics.exceptions.EntityNotFoundException;
-import com.libra.apollo.analytics.entity.enums.AnalyticsSearchFieldApi;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -222,7 +223,7 @@ public class ConfigurationsRestController {
 	 * @throws EntityNotFoundException
 	 */
 	@RequestMapping(value="/{analyticId}/views/{viewId}/investment-styles", method = RequestMethod.GET)
-//	@JsonView(ConfigurationJsonView.Public.class)
+	@JsonView(ConfigurationJsonView.Public.class)
 	public ResponseEntity<List<InvestmentStyle>> getInvestmentStylesByAnalyticIdAndViewId(@PathVariable Long analyticId, @PathVariable Long viewId) throws EntityNotFoundException {
 		
 		ApolloAnalytics apolloAnalytics = configService.getAnalyticsById(analyticId);

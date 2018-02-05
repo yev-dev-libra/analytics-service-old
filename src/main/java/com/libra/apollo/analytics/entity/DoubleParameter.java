@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.engine.core.Value;
-import com.libra.apollo.analytics.entity.enums.OperandDouble;
 
 @SuppressWarnings("serial")
 @Entity
@@ -19,7 +18,7 @@ import com.libra.apollo.analytics.entity.enums.OperandDouble;
 @Table(name="double_parameter", schema="analytics")
 public class DoubleParameter extends QueryParameter {
 
-	@Column(name = "operand", nullable = true)
+	@Column(name = "operand", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private OperandDouble operand;
 

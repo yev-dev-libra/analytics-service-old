@@ -32,10 +32,6 @@ public class InvestmentStyleParameter implements Serializable, Comparable<Invest
 	@JoinColumn(name = "parameter_id", nullable = true)
 	private QueryParameter parameter;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "data_source_id", nullable = true)
-	private DataSource dataSource;
-
 	public Long getId() {
 		return id;
 	}
@@ -68,13 +64,6 @@ public class InvestmentStyleParameter implements Serializable, Comparable<Invest
 		this.parameter = parameter;
 	}
 
-	public DataSource getDataSource() {
-		return dataSource;
-	}
-
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 
 	@Override
 	public int compareTo(InvestmentStyleParameter o) {

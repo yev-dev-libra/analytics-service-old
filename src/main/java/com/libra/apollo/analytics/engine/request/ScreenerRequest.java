@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.libra.apollo.analytics.engine.core.Operation;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.entity.AnalyticsType;
+import com.libra.apollo.analytics.entity.RunType;
 
 public class ScreenerRequest implements AnalyticsRequest {
 

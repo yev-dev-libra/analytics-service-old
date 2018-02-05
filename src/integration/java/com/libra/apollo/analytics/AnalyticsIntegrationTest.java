@@ -26,8 +26,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.libra.apollo.analytics.api.AnalyticsScreenerRestController;
 import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.entity.AnalyticsType;
+import com.libra.apollo.analytics.entity.RunType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(	webEnvironment = WebEnvironment.RANDOM_PORT, 

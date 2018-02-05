@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.entity.RunType;
 
 @Repository
 public interface AnalyticsRepository extends JpaRepository<ApolloAnalytics,Long> {

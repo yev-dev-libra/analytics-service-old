@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.Specification;
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.entity.LibraStockIndicator;
 import com.libra.apollo.analytics.entity.ResultParameter;
-import com.libra.apollo.analytics.projections.ScreeningResult;
+import com.libra.apollo.analytics.projection.ScreeningResult;
 
 public class ScreeningRepositoryTest extends AbstractRepositoryTest {
 

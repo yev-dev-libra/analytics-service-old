@@ -2,12 +2,12 @@ package com.libra.apollo.analytics.service;
 
 import java.util.List;
 import com.libra.apollo.analytics.engine.request.AnalyticsConfigurationRequest;
+import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.QueryParameter;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.entity.RunType;
 
 public interface ConfigurationService {
 

@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
 import com.libra.apollo.analytics.dto.StockScreenerResultDTO;
-import com.libra.apollo.analytics.engine.commands.Delegator;
-import com.libra.apollo.analytics.engine.commands.DelegatorFactory;
+import com.libra.apollo.analytics.engine.command.Delegator;
+import com.libra.apollo.analytics.engine.command.DelegatorFactory;
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.AnalyticsContextFactory;
-import com.libra.apollo.analytics.engine.converters.AnalyticsConveters;
+import com.libra.apollo.analytics.engine.converter.AnalyticsConveters;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.CalendarService;

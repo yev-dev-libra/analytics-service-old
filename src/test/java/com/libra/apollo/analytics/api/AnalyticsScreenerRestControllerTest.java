@@ -34,9 +34,9 @@ import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO;
 import com.libra.apollo.analytics.dto.PortfolioScreenerResultDTO.PortfolioStockValues;
 import com.libra.apollo.analytics.dto.StockScreenerResultDTO;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.engine.results.ScreenerResult;
-import com.libra.apollo.analytics.entity.enums.AnalyticsType;
-import com.libra.apollo.analytics.entity.enums.RunType;
+import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.entity.AnalyticsType;
+import com.libra.apollo.analytics.entity.RunType;
 
 
 

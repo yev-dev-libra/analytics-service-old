@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.engine.core.Value;
-import com.libra.apollo.analytics.entity.enums.OperandBigDecimal;
 
 @SuppressWarnings("serial")
 @Entity
