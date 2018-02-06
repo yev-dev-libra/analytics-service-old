@@ -20,9 +20,13 @@ public interface LibraStockIndicatorRepository extends BaseRepository<LibraStock
 	public List<LibraStockIndicator> findByStampDate(Date date);
 	public List<LibraStockIndicator> findByStockId(Long stockId);
 	public List<LibraStockIndicator> findByStockIdAndStampDate(Long stockId,Date date );
-	public List<LibraStockIndicator> findByStockIdIn(List<Long> stockIdList);
-	public List<LibraStockIndicator> findByStockIdInAndStampDate(List<Long> stockIdList,Date date );
+	public List<LibraStockIndicator> findByStockIdAndStampDateBetween(Long stockId,Date fromDate, Date toDate );
 	public Page<LibraStockIndicator> findByStockId(Long stockId, Pageable pageable);
+	public List<LibraStockIndicator> findByStockIdInAndStampDateEquals(List<Long> stockIdList,Date date);
+	public List<LibraStockIndicator> findByStockIdInAndStampDateIsAfter(List<Long> stockIdList,Date date);
+	public List<LibraStockIndicator> findByStockIdInAndStampDateEquals(List<Long> stockIdList,Date date,Pageable pageable);
+	public List<LibraStockIndicator> findByStockIdInAndStampDateIsBetween(List<Long> stockIdList,Date fromDate, Date toDate );
+	public List<LibraStockIndicator> findByStockIdInAndStampDateIsBetween(List<Long> stockIdList,Date fromDate, Date toDate, Pageable pageable );
 	
 	@Query("select max(stampDate) from LibraStockIndicator")
 	public Date maxDate();
