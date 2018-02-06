@@ -23,7 +23,7 @@ select
 	si.discount_premium_to_intrinsic_value, 
 	si.intrinsic_value_change_3m, 
 	si.fair_value_change_3m, 
-	si.intrinsic_value_change_1m 
+	si.intrinsic_value_change_1m
 from stockindicators si inner join stocks s on si.instrument_id = s.id 
 inner join stocks_groups sg on s.id = sg.stock_id
 where sg.group_id = 216

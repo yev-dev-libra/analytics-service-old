@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.libra.apollo.analytics.entity.AnalyticsView;
+import com.libra.apollo.analytics.entity.FieldParameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.Priority;
 import com.libra.apollo.analytics.entity.QueryParameter;
@@ -26,23 +27,26 @@ public interface InvestmentStyleRepository extends BaseRepository<InvestmentStyl
 	List<InvestmentStyle> findAllByView(@Param("id") Long id); // TODO - it returns duplicates
 	List<InvestmentStyle> findAllByView(AnalyticsView analyticsView);
 	
-//	@Query("SELECT p FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp JOIN TREAT ( isp.parameter AS QueryParameter ) p WHERE ais.id = :id")
-	@Query("SELECT isp.parameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
+	@Query("SELECT isp.queryParameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
 	List<QueryParameter> findQueryParametersById(@Param("id") Long id);
 
-	@Query("SELECT isp.parameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
+	@Query("SELECT isp.queryParameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
 	Iterable<QueryParameter> findIterableQueryParametersById(@Param("id") Long id);
 	
 	
-	@Query("select new map(isp.priority, isp.parameter) FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
+	@Query("select new map(isp.priority, isp.queryParameter) FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
 	List<Map<QueryParameter,Priority>> findQueryParametersByIdWithPriority(@Param("id") Long id);
 	
-//	@Query("select new list(isp.parameter) FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
-	@Query("SELECT isp.parameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
+	@Query("SELECT isp.queryParameter FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
 	SortedSet<QueryParameter> findQueryParametersByIdSorted(@Param("id") Long id);
+
+	@Query("SELECT isfp.fieldParameter FROM InvestmentStyle ais JOIN ais.investmentStyleFieldParameters isfp WHERE ais.id = :id")
+	SortedSet<FieldParameter> findFieldParametersById(@Param("id")  Long id);
 	
-	@Query("SELECT count(isp.parameter.id) FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
+	@Query("SELECT count(isp.queryParameter.id) FROM InvestmentStyle ais JOIN ais.investmentStyleParameters isp WHERE ais.id = :id")
 	long countQueryParametersById(@Param("id") Long id);
+
+	
 	
 	
 	

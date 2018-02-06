@@ -1,6 +1,9 @@
 package com.libra.apollo.analytics.service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +11,7 @@ import com.libra.apollo.analytics.engine.request.AnalyticsConfigurationRequest;
 import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.entity.AnalyticsView;
 import com.libra.apollo.analytics.entity.ApolloAnalytics;
+import com.libra.apollo.analytics.entity.FieldParameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.QueryParameter;
 import com.libra.apollo.analytics.entity.RunType;
@@ -92,8 +96,13 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 
 	@Override
-	public List<QueryParameter> getInvestmentStylesQueryParameters(Long investmentStyleId) {
+	public Collection<QueryParameter> getInvestmentStyleQueryParameters(Long investmentStyleId) {
 		return investmentStyleRepository.findQueryParametersById(investmentStyleId);
+	}
+
+	@Override
+	public Collection<FieldParameter> getInvestmentStyleFieldParameters(Long investmentStyleId) {
+		return investmentStyleRepository.findFieldParametersById(investmentStyleId);
 	}
 
 

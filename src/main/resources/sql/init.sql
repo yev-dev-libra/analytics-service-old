@@ -1,21 +1,6 @@
 
 -- Populating data for analytics schema
 
--- Field Parameters:
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (1,'STAR_RATING');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (2,'FAIR_VALUE_CHANGE_1M');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (3,'FAIR_VALUE_CHANGE_3M');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (4,'INTRINSIC_VALUE_CHANGE_1M');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (5,'INTRINSIC_VALUE_CHANGE_3M');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (6,'PCT_IN_FAIR_VALUE_RANGE');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (7,'MEDIAN_DISCOUNT_TO_FAIR_VALUE');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (8,'DISCOUNT_PREMIUM_TO_FAIR_VALUE');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (9,'NET_DISCOUNT_MEDIAN_FAIR_VALUE');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (10,'EXPECTED_RETURN_2M');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (11,'DISCOUNT_PREMIUM_TO_INTRINSIC_VALUE');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (12,'LONG_TERM_PESSIMISTIC');
-INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (13,'LONG_TERM_OPTIMISTIC');
-
 -- Query Parameters:
 
 -- Apollo Classics
@@ -98,11 +83,6 @@ INSERT INTO analytics.analytics_investment_style( id, name, description, priorit
 INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (7,'Below 12m Pessimistic', 'These are stocks trading at a discount to Apollo''s most pessimistic 12-month scenario.', 7, 1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 INSERT INTO analytics.analytics_investment_style( id, name, description, priority, analytics_id, view_id,version,created_on,updated_on) VALUES (8,'Above 12m Optimistic', 'These are stocks trading at a premium to Apollo''s most optimistic 12-month scenario.', 8, 1, 1, '0', '2017-12-01 00:00:00','2017-12-01 00:00:00');
 
--- Populating investment_style_field_parameter
-
--- Apollo Classics
-INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(1,1,1,1); --STAR_RATING
-
 -- Populating investment_style parameters
 
 -- Apollo Classics
@@ -138,7 +118,30 @@ INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_i
 -- Long term Optimistic
 INSERT INTO analytics.analytics_investment_style_parameter(id,investment_style_id, parameter_id,priority ) VALUES(17,8,17,1); --AND LONG_TERM_OPTIMISTIC > 0
 
+-- Populating investment_style_field_parameter
 
+-- Field Parameters:
+-- TODO: add net discount to fv, value indicator scrore
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (1,'STAR_RATING');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (2,'FAIR_VALUE_CHANGE_1M');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (3,'FAIR_VALUE_CHANGE_3M');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (4,'INTRINSIC_VALUE_CHANGE_1M');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (5,'INTRINSIC_VALUE_CHANGE_3M');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (6,'PCT_IN_FAIR_VALUE_RANGE');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (7,'MEDIAN_DISCOUNT_TO_FAIR_VALUE');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (8,'DISCOUNT_PREMIUM_TO_FAIR_VALUE');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (9,'NET_DISCOUNT_MEDIAN_FAIR_VALUE');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (10,'EXPECTED_RETURN_2M');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (11,'DISCOUNT_PREMIUM_TO_INTRINSIC_VALUE');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (12,'LONG_TERM_PESSIMISTIC');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (13,'LONG_TERM_OPTIMISTIC');
+
+-- Apollo Classics
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(1,1,1,1); --STAR_RATING
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(2,1,2,2); --FAIR_VALUE_CHANGE_1M
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(3,1,5,3); --INTRINSIC_VALUE_CHANGE_3M
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(4,1,6,4); --PCT_IN_FAIR_VALUE_RANGE
+-- TODO: add net discount to fv, value indicator scrore
 
 -- Apollo Classics
 INSERT INTO apollo.stockindicators (
@@ -151,7 +154,9 @@ INSERT INTO apollo.stockindicators (
 	star_rating,
 	fair_value_change_1m,
 	intrinsic_value_change_1m,
+	intrinsic_value_change_3m,
 	pct_in_fair_value_range
+	
 ) 
 values (
 	1,
@@ -160,9 +165,10 @@ values (
 	'2017-11-01 00:00:00',
 	'1', -- instrument_id
 	'2017-12-01', 
-	'6.0000', -- star_rating
+	'5.0000', -- star_rating
 	'0.2',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
+	'0.1', -- intrinsic_value_change_3m
 	'0.8166' -- pct_in_fair_value_range
 ) ;
 INSERT INTO apollo.stockindicators (
@@ -175,6 +181,7 @@ INSERT INTO apollo.stockindicators (
 	star_rating,
 	fair_value_change_1m,
 	intrinsic_value_change_1m,
+	intrinsic_value_change_3m,
 	pct_in_fair_value_range
 ) 
 values (
@@ -187,6 +194,7 @@ values (
 	'5.0000', -- star_rating
 	'0.1',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
+	'0.1', -- intrinsic_value_change_3m
 	'0.8166' -- pct_in_fair_value_range
 ) ;
 -- Apollo Classics
@@ -200,6 +208,7 @@ INSERT INTO apollo.stockindicators (
 	star_rating,
 	fair_value_change_1m,
 	intrinsic_value_change_1m,
+	intrinsic_value_change_3m,
 	pct_in_fair_value_range
 ) 
 values (
@@ -209,12 +218,13 @@ values (
 	'2017-11-01 00:00:00',
 	'2', -- instrument_id
 	'2017-12-01', 
-	'7.0000', -- star_rating
+	'4.0000', -- star_rating
 	'0.1',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
+	'0.1', -- intrinsic_value_change_3m
 	'0.8166' -- pct_in_fair_value_range
 ) ;
--- Apollo Classics
+
 INSERT INTO apollo.stockindicators (
 	id,
 	version,
@@ -225,6 +235,7 @@ INSERT INTO apollo.stockindicators (
 	star_rating,
 	fair_value_change_1m,
 	intrinsic_value_change_1m,
+	intrinsic_value_change_3m,
 	pct_in_fair_value_range
 ) 
 values (
@@ -237,10 +248,11 @@ values (
 	'5.0000', -- star_rating
 	'0.1',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
+	'0.1', -- intrinsic_value_change_3m
 	'0.8166' -- pct_in_fair_value_range
 ) ;
 
--- Apollo Classics
+
 INSERT INTO apollo.stockindicators (
 	id,
 	version,
@@ -251,6 +263,7 @@ INSERT INTO apollo.stockindicators (
 	star_rating,
 	fair_value_change_1m,
 	intrinsic_value_change_1m,
+	intrinsic_value_change_3m,
 	pct_in_fair_value_range
 ) 
 values (
@@ -263,6 +276,7 @@ values (
 	'5.0000', -- star_rating
 	'0.1',  -- fair_value_change_1m
 	'0.1', -- intrinsic_value_change_1m
+	'0.1', -- intrinsic_value_change_3m
 	'0.8166' -- pct_in_fair_value_range
 ) ;
 

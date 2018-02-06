@@ -230,14 +230,15 @@ public enum ValueDataFieldType {
 	DISCOUNT_PREMIUM_TO_FAIR_VALUE("discountPremiumToFairValue", BigDecimal.class),
 	NET_DISCOUNT_MEDIAN_FAIR_VALUE("netDiscountMedianFairValue", BigDecimal.class),
 	FAIR_VALUE_CHANGE_1M("fairValueChange1m", BigDecimal.class),
+	VALUE_INDICATOR_SCORE("valueIndicatorScore",BigDecimal.class),
 	EXPECTED_RETURN_2M("expectedReturn2m", BigDecimal.class),
 	DISCOUNT_PREMIUM_TO_INTRINSIC_VALUE("discountPremiumToIntrinsicValue", BigDecimal.class),
 	INTRINSIC_VALUE_CHANGE_3M("intrinsicValueChange3m", BigDecimal.class),
 	FAIR_VALUE_CHANGE_3M("fairValueChange3m", BigDecimal.class),
 	INTRINSIC_VALUE_CHANGE_1M("intrinsicValueChange1m", BigDecimal.class),
 	PCT_IN_FAIR_VALUE_RANGE("pctInFairValueRange", BigDecimal.class),
-	LONG_TERM_PESSIMISTIC("long_term_pessimistic", BigDecimal.class),
-	LONG_TERM_OPTIMISTIC("long_term_optimistic", BigDecimal.class)
+	LONG_TERM_PESSIMISTIC("longTermPessimistic", BigDecimal.class),
+	LONG_TERM_OPTIMISTIC("longTermOptimistic", BigDecimal.class)
 	;
 	
 	

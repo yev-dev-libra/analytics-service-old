@@ -13,11 +13,13 @@ import javax.persistence.Tuple;
 
 import org.springframework.core.task.AsyncTaskExecutor;
 
+import com.google.common.collect.ImmutableList;
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.converter.AnalyticsConveters;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.engine.result.ScreenerResult;
+import com.libra.apollo.analytics.entity.FieldParameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.QueryParameter;
 import com.libra.apollo.analytics.service.AnalyticsService;
@@ -51,23 +53,13 @@ public class ScreenerCommand implements Command {
 		
 		final InvestmentStyle investmentStyle = configService.getInvestmentStyleById(investmentStyleId);
 		
-		final List<QueryParameter> params = configService.getInvestmentStylesQueryParameters(investmentStyleId);
-		//TODO: request for queryResultsParams
+		final List<QueryParameter> params = ImmutableList.copyOf(configService.getInvestmentStyleQueryParameters(investmentStyleId));
 
+		final List<FieldParameter> fieldParams = ImmutableList.copyOf(configService.getInvestmentStyleFieldParameters(investmentStyleId));
 		
-		//TODO: persist in the database
-		List<ValueDataFieldType> requestedFields = Arrays.asList(
-						ValueDataFieldType.STAMP_DATE, 
-						ValueDataFieldType.STAR_RATING,
-						ValueDataFieldType.FAIR_VALUE,
-						ValueDataFieldType.INTRINSIC_VALUE,
-						ValueDataFieldType.STOCK_ID
-						);
 		
 		final List<ValueDataFieldType> queryParams = params.stream().map(f -> f.getFieldType()).collect(Collectors.toList());
-		
-
-		
+		final List<ValueDataFieldType> requestedFields = fieldParams.stream().map(f -> f.getFieldType()).collect(Collectors.toList());
 		
 		final Map<Date,Set<Long>> stampDatesWithASetOfStocks = screenerContext.getMaxStampDatePerStock();
 

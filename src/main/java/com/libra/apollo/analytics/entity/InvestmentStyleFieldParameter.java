@@ -30,7 +30,7 @@ public class InvestmentStyleFieldParameter implements Serializable, Comparable<I
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "parameter_id", nullable = true)
-	private FieldParameter parameter;
+	private FieldParameter fieldParameter;
 
 	public Long getId() {
 		return id;
@@ -56,14 +56,14 @@ public class InvestmentStyleFieldParameter implements Serializable, Comparable<I
 		this.priority = priority;
 	}
 
-	public FieldParameter getParameter() {
-		return parameter;
+
+	public FieldParameter getFieldParameter() {
+		return fieldParameter;
 	}
 
-	public void setParameter(FieldParameter parameter) {
-		this.parameter = parameter;
+	public void setFieldParameter(FieldParameter fieldParameter) {
+		this.fieldParameter = fieldParameter;
 	}
-
 
 	@Override
 	public int compareTo(InvestmentStyleFieldParameter o) {
@@ -73,7 +73,7 @@ public class InvestmentStyleFieldParameter implements Serializable, Comparable<I
 	@Override
 	public String toString() {
 		return "InvestmentStyleParameter [id=" + id + ", investmentStyle=" + investmentStyle + ", priority=" + priority
-				+ ", property=" + parameter + "]";
+				+ ", property=" + fieldParameter + "]";
 	}
 
 }
