@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "analytics_investment_style_field_parameter", schema = "analytics")
-public class InvestmentStyleFieldParameter implements Serializable, Comparable<InvestmentStyleFieldParameter> {
+public class InvestmentStyleFieldParameter implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +29,7 @@ public class InvestmentStyleFieldParameter implements Serializable, Comparable<I
 	private Priority priority;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "parameter_id", nullable = true)
+	@JoinColumn(name = "field_parameter_id", nullable = true)
 	private FieldParameter fieldParameter;
 
 	public Long getId() {
@@ -65,10 +65,10 @@ public class InvestmentStyleFieldParameter implements Serializable, Comparable<I
 		this.fieldParameter = fieldParameter;
 	}
 
-	@Override
-	public int compareTo(InvestmentStyleFieldParameter o) {
-		return this.getPriority().compareTo(o.getPriority());
-	}
+//	@Override
+//	public int compareTo(InvestmentStyleFieldParameter o) {
+//		return this.getPriority().compareTo(o.getPriority());
+//	}
 
 	@Override
 	public String toString() {

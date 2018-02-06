@@ -135,12 +135,18 @@ INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (10
 INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (11,'DISCOUNT_PREMIUM_TO_INTRINSIC_VALUE');
 INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (12,'LONG_TERM_PESSIMISTIC');
 INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (13,'LONG_TERM_OPTIMISTIC');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (14,'STOCK_ID');
+INSERT INTO analytics.analytics_field_parameter( id, data_field_type) VALUES (15,'STAMP_DATE');
 
 -- Apollo Classics
-INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(1,1,1,1); --STAR_RATING
-INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(2,1,2,2); --FAIR_VALUE_CHANGE_1M
-INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(3,1,5,3); --INTRINSIC_VALUE_CHANGE_3M
-INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, parameter_id,priority ) VALUES(4,1,6,4); --PCT_IN_FAIR_VALUE_RANGE
+
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, field_parameter_id,priority ) VALUES(1,1,14,1); --STAR_RATING
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, field_parameter_id,priority ) VALUES(2,1,15,2); --STAR_RATING
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, field_parameter_id,priority ) VALUES(3,1,1,3); --STAR_RATING
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, field_parameter_id,priority ) VALUES(4,1,2,4); --FAIR_VALUE_CHANGE_1M
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, field_parameter_id,priority ) VALUES(5,1,5,5); --INTRINSIC_VALUE_CHANGE_3M
+INSERT INTO analytics.analytics_investment_style_field_parameter(id,investment_style_id, field_parameter_id,priority ) VALUES(6,1,6,6); --PCT_IN_FAIR_VALUE_RANGE
+
 -- TODO: add net discount to fv, value indicator scrore
 
 -- Apollo Classics

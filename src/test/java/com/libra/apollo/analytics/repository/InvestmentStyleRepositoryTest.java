@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.engine.core.Value;
+import com.libra.apollo.analytics.entity.FieldParameter;
 import com.libra.apollo.analytics.entity.InvestmentStyle;
 import com.libra.apollo.analytics.entity.InvestmentStyleParameter;
 import com.libra.apollo.analytics.entity.Priority;
@@ -95,6 +96,11 @@ public class InvestmentStyleRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void should_Get_SortedSet_Of_Parameters() {
 		SortedSet<QueryParameter> parameters = repository.findQueryParametersByIdSorted(APOLLO_CLASSICS_STYLE_ID);
+		assertThat(parameters.size(), greaterThan(1));
+	}
+	@Test
+	public void should_Get_SortedSet_Of_FieldParameters() {
+		SortedSet<FieldParameter> parameters = repository.findFieldParametersById(APOLLO_CLASSICS_STYLE_ID);
 		assertThat(parameters.size(), greaterThan(1));
 	}
 	

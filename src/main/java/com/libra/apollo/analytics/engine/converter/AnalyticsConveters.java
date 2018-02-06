@@ -113,7 +113,7 @@ public class AnalyticsConveters {
 			
 			
 			for(EnumMap<ValueDataFieldType,?> value : results) {
-				
+				//TODO: THROW BUSINESS EXCEPTIONS
 				Long stockId = (Long)value.get(ValueDataFieldType.STOCK_ID);
 				
 				final PortfolioStockValues portfolioStockValues = new PortfolioStockValues(stockId, value);

@@ -1,15 +1,12 @@
 package com.libra.apollo.analytics.entity;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import com.libra.apollo.analytics.engine.core.ValueDataField;
@@ -17,9 +14,7 @@ import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 
 @Entity
 @Table(name = "analytics_field_parameter", schema = "analytics")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorValue(value = "VALUE")
-public class FieldParameter implements ValueDataField {
+public class FieldParameter implements ValueDataField, Comparable<FieldParameter>{
 
 	/**
 	 * 
@@ -46,12 +41,14 @@ public class FieldParameter implements ValueDataField {
 		this.id = id;
 	}
 	
-	
 
 	public void setFieldType(ValueDataFieldType fieldType) {
 		this.fieldType = fieldType;
 	}
-	
-	
 
+	@Override
+	public int compareTo(FieldParameter o) {
+		return this.getId().compareTo(o.getId());
+	}
+	
 }
