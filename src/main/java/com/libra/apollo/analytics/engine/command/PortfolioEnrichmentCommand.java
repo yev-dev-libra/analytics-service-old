@@ -6,7 +6,7 @@ import java.util.Map;
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.engine.request.ScreenerRequest;
-import com.libra.apollo.analytics.service.PortfolioService;
+import com.libra.apollo.analytics.service.GroupsService;
 
 public class PortfolioEnrichmentCommand implements Command {
 
@@ -27,9 +27,9 @@ public class PortfolioEnrichmentCommand implements Command {
 		
 		final Collection<Long> portfolioIds = request.getPortfolioIds();
 		
-		final PortfolioService portfolioService = screenerContext.getPortfolioService();
+		final GroupsService portfolioService = screenerContext.getPortfolioService();
 		
-		final Map<Long,Collection<Long>> stockPortfolios = portfolioService.getStockIdsWithPortfolios(portfolioIds);
+		final Map<Long,Collection<Long>> stockPortfolios = portfolioService.getStockIdsWithGroups(portfolioIds);
 		
 		screenerContext.setStockPortfolios(stockPortfolios);
 	}

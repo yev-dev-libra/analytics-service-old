@@ -89,12 +89,12 @@ public class IndicatorBigDecimal implements UserType {
 			final BigDecimal doubleValue = BigDecimal.valueOf((Double)value);
 			if (doubleValue == null || Double.valueOf(doubleValue.doubleValue()).isInfinite() || Double.valueOf(doubleValue.doubleValue()).isNaN()) {
 
-				if (doubleValue != null && Double.valueOf(doubleValue.doubleValue()).isInfinite()) {
-					log.warn("Sending an infinitevalue to the database is not supported." + "\n.Statement = '" + statement + "' valueIndex = '" + index + "'.");
-				}
-
 				statement.setNull(index, Types.DOUBLE);
-			} else {
+			}
+			if (doubleValue != null && Double.valueOf(doubleValue.doubleValue()).isInfinite()) {
+				log.warn("Sending an infinitevalue to the database is not supported." + "\n.Statement = '" + statement + "' valueIndex = '" + index + "'.");
+			}
+			else {
 				statement.setBigDecimal(index, doubleValue);
 			}
 		} else {

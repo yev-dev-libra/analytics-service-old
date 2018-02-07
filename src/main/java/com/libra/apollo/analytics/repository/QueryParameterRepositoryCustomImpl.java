@@ -10,7 +10,7 @@ import com.libra.apollo.analytics.entity.QueryParameter;
 
 public class QueryParameterRepositoryCustomImpl implements QueryParameterRepositoryCustom {
 
-	private static Logger logger = LoggerFactory.getLogger(LibraStockIndicatorRepositoryCustomImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(StockIndicatorRepositoryCustomImpl.class);
 
 	@PersistenceContext
 	private EntityManager em;

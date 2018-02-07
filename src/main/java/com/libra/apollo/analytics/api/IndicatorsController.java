@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
-import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
+import com.libra.apollo.analytics.entity.StockIndicator;
+import com.libra.apollo.analytics.repository.StockIndicatorRepository;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,22 +25,22 @@ import io.swagger.annotations.ApiParam;
 public class IndicatorsController {
 
 	@Autowired
-	private LibraStockIndicatorRepository libraStockIndicatorRepository;
+	private StockIndicatorRepository StockIndicatorRepository;
 	
 	@RequestMapping(value="/stock", method=RequestMethod.GET, produces= {"application/json"})
-	@ApiOperation(value = "Get a list of Stock Indicators", notes = "Get a list of Stock Indicators for a date range", response=LibraStockIndicator.class, responseContainer = "List")
-	public ResponseEntity<List<LibraStockIndicator>> getStockIndicators(@ApiParam(value="Stock id: 1")  @RequestParam("id") Long id, @ApiParam(value="Date: '2018-01-01'")  @RequestParam(value="fromDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,  @ApiParam(value="Date: '2018-01-01'") @RequestParam(value="toDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd")Date toDate){
+	@ApiOperation(value = "Get a list of Stock Indicators", notes = "Get a list of Stock Indicators for a date range", response=StockIndicator.class, responseContainer = "List")
+	public ResponseEntity<List<StockIndicator>> getStockIndicators(@ApiParam(value="Stock id: 1")  @RequestParam("id") Long id, @ApiParam(value="Date: '2018-01-01'")  @RequestParam(value="fromDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,  @ApiParam(value="Date: '2018-01-01'") @RequestParam(value="toDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd")Date toDate){
 		
-		List<LibraStockIndicator> indicators = libraStockIndicatorRepository.findByStockIdAndStampDateBetween(id, fromDate, toDate);
+		List<StockIndicator> indicators = StockIndicatorRepository.findByStockIdAndStampDateBetween(id, fromDate, toDate);
 		
-		return new ResponseEntity<List<LibraStockIndicator>>(indicators, HttpStatus.OK);
+		return new ResponseEntity<List<StockIndicator>>(indicators, HttpStatus.OK);
 	}
 	@RequestMapping(value="/stocks", method=RequestMethod.GET, produces= {"application/json"})
-	@ApiOperation(value = "Get a list of Stocks Indicators", notes = "Get a list of Stocks Indicators for a date range", response=LibraStockIndicator.class, responseContainer = "List")
-	public ResponseEntity<List<LibraStockIndicator>> getStocksIndicators(@ApiParam(value="Stock ids: [1,2,3,...]")  @RequestParam("ids") List<Long> ids, @ApiParam(value="Date: '2018-01-01'")  @RequestParam(value="fromDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,  @ApiParam(value="Date: '2018-01-01'") @RequestParam(value="toDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd")Date toDate){
+	@ApiOperation(value = "Get a list of Stocks Indicators", notes = "Get a list of Stocks Indicators for a date range", response=StockIndicator.class, responseContainer = "List")
+	public ResponseEntity<List<StockIndicator>> getStocksIndicators(@ApiParam(value="Stock ids: [1,2,3,...]")  @RequestParam("ids") List<Long> ids, @ApiParam(value="Date: '2018-01-01'")  @RequestParam(value="fromDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,  @ApiParam(value="Date: '2018-01-01'") @RequestParam(value="toDate", required=false)  @DateTimeFormat(pattern="yyyy-MM-dd")Date toDate){
 		
-		List<LibraStockIndicator> indicators = libraStockIndicatorRepository.findByStockIdInAndStampDateIsBetween(ids, fromDate, toDate);
+		List<StockIndicator> indicators = StockIndicatorRepository.findByStockIdInAndStampDateIsBetween(ids, fromDate, toDate);
 		
-		return new ResponseEntity<List<LibraStockIndicator>>(indicators, HttpStatus.OK);
+		return new ResponseEntity<List<StockIndicator>>(indicators, HttpStatus.OK);
 	}
 }

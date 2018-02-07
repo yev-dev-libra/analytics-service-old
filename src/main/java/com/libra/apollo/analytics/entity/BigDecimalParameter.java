@@ -13,9 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.engine.core.Value;
 
-@SuppressWarnings("serial")
 @Entity
-//@DiscriminatorValue(value = "DECIMAL_PARAMETER")
 @Table(name="decimal_parameter", schema="analytics")
 public class BigDecimalParameter extends QueryParameter {
 	

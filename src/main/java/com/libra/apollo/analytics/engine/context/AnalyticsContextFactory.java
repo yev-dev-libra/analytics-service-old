@@ -9,12 +9,12 @@ import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.CalendarService;
 import com.libra.apollo.analytics.service.ConfigurationService;
-import com.libra.apollo.analytics.service.PortfolioService;
+import com.libra.apollo.analytics.service.GroupsService;
 
 public class AnalyticsContextFactory {
 
 	public static AnalyticsContext getContext(final AnalyticsService analyticsService,
-			final ConfigurationService configurationService, final PortfolioService portfolioService,
+			final ConfigurationService configurationService, final GroupsService portfolioService,
 			final AsyncTaskExecutor executorService, final CalendarService calendarService, final Map<String, String> properties,
 			final ScreenerRequest request) {
 

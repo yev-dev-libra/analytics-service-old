@@ -17,7 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.libra.apollo.analytics.service.PortfolioService;
+import com.libra.apollo.analytics.service.GroupsService;
 
 
 @ContextConfiguration

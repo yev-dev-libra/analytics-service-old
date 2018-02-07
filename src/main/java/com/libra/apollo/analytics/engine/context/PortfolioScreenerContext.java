@@ -15,7 +15,7 @@ import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.CalendarService;
 import com.libra.apollo.analytics.service.ConfigurationService;
-import com.libra.apollo.analytics.service.PortfolioService;
+import com.libra.apollo.analytics.service.GroupsService;
 
 
 public class PortfolioScreenerContext implements AnalyticsContext {
@@ -39,7 +39,7 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	
 	private final AnalyticsService analyticsService;
 	private final ConfigurationService configurationService;
-	private final PortfolioService portfolioService;
+	private final GroupsService portfolioService;
 	private final AsyncTaskExecutor executorService;
 	
 	private final Map<String,String> properties;
@@ -56,7 +56,7 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 	
 	public PortfolioScreenerContext(	final AnalyticsService analyticsService, 
 									final ConfigurationService configurationService, 
-									final PortfolioService portfolioService, 
+									final GroupsService portfolioService, 
 									final AsyncTaskExecutor executorService, 
 									CalendarService calendarService,
 									final Operation operation, 
@@ -126,7 +126,7 @@ public class PortfolioScreenerContext implements AnalyticsContext {
 
 	
 	@Override
-	public PortfolioService getPortfolioService() {
+	public GroupsService getPortfolioService() {
 		return portfolioService;
 	}
 

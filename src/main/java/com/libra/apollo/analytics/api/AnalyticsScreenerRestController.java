@@ -28,7 +28,7 @@ import com.libra.apollo.analytics.engine.request.ScreenerRequest;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.CalendarService;
 import com.libra.apollo.analytics.service.ConfigurationService;
-import com.libra.apollo.analytics.service.PortfolioService;
+import com.libra.apollo.analytics.service.GroupsService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +47,7 @@ public class AnalyticsScreenerRestController {
 	private ConfigurationService configurationService;
 	
 	@Autowired
-	private PortfolioService portfolioService;
+	private GroupsService portfolioService;
 	
 	@Autowired
 	private AsyncTaskExecutor executorService;

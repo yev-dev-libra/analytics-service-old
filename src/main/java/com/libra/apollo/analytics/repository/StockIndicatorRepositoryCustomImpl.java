@@ -3,7 +3,6 @@ package com.libra.apollo.analytics.repository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +13,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
-import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,23 +20,23 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
 import com.libra.apollo.analytics.specification.StampDateSpecification;
 
 
 @Repository
 @Transactional(readOnly = true)
-public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndicatorRepositoryCustom  {
+public class StockIndicatorRepositoryCustomImpl implements StockIndicatorRepositoryCustom  {
 
-	private static Logger logger = LoggerFactory.getLogger(LibraStockIndicatorRepositoryCustomImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(StockIndicatorRepositoryCustomImpl.class);
 	
 	@PersistenceContext 
 	private EntityManager entityManager;
 	
 	
 	@Override
-	public List<LibraStockIndicator> findAllBySpecification(final Specification<LibraStockIndicator> specification) {
+	public List<StockIndicator> findAllBySpecification(final Specification<StockIndicator> specification) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -46,7 +44,7 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Tuple> findAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification) {
+	public List<Tuple> findAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<StockIndicator> specification) {
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
@@ -56,7 +54,7 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 		
 		CriteriaQuery<Tuple> q = cb.createTupleQuery();
 		
-		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
+		Root<StockIndicator> indicatorsRoot = q.from(StockIndicator.class);
 		
 		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
 		
@@ -88,19 +86,19 @@ public class LibraStockIndicatorRepositoryCustomImpl implements LibraStockIndica
 	}
 
 	@Override
-	public List<Tuple> findAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<LibraStockIndicator> specification, final Date stampDate) {
+	public List<Tuple> findAllBySpecification(final List<ValueDataFieldType> fields, final AnalyticsSpecifications<StockIndicator> specification, final Date stampDate) {
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
 		
-		Specification<LibraStockIndicator> stampDateLessOrGreater = StampDateSpecification.stampDateLessOrGreater(stampDate );
+		Specification<StockIndicator> stampDateLessOrGreater = StampDateSpecification.stampDateLessOrGreater(stampDate );
 		specification.and(stampDateLessOrGreater);
 		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		
 		CriteriaQuery<Tuple> q = cb.createTupleQuery();
 		
-		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
+		Root<StockIndicator> indicatorsRoot = q.from(StockIndicator.class);
 		
 		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
 		

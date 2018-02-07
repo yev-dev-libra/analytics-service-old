@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 import com.libra.apollo.analytics.entity.ResultParameter;
 import com.libra.apollo.analytics.projection.ScreeningResult;
 
@@ -49,14 +49,14 @@ public class ScreeningRepositoryTest extends AbstractRepositoryTest {
 	}
 	@Test
 	public void shouldFindScreeningResultsBySpecification() {
-		Specification<LibraStockIndicator> specification = null;
+		Specification<StockIndicator> specification = null;
 		List<ScreeningResult> results = repository.findAllScreeningResultsBySpecification(specification);
 		System.out.println(results);
 		assertThat(results, hasSize(greaterThan(0)));
 	}
 	@Test
 	public void shouldFindScreeningResultsBySpecificationWithResultParameters() {
-		Specification<LibraStockIndicator> specification = null;
+		Specification<StockIndicator> specification = null;
 		List<ResultParameter> resultParameters = null;
 		List<Tuple> results = repository.findAllScreeningResultsBySpecification(resultParameters ,specification);
 		System.out.println(results);

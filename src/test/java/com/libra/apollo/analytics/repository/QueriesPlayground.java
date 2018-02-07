@@ -28,7 +28,7 @@
 //import com.google.common.collect.Lists;
 //import com.libra.apollo.analytics.AbstractRepositoryTest;
 //import com.libra.apollo.analytics.entity.InvestmentStyle;
-//import com.libra.apollo.analytics.entity.LibraStockIndicator;
+//import com.libra.apollo.analytics.entity.StockIndicator;
 //
 //public class QueriesPlayground extends AbstractRepositoryTest{
 //
@@ -64,7 +64,7 @@
 //		
 //		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 //		CriteriaQuery<Object[]> q = cb.createQuery(Object[].class); //result class
-//		Root<LibraStockIndicator> r = q.from(LibraStockIndicator.class);
+//		Root<StockIndicator> r = q.from(StockIndicator.class);
 //
 //		q.multiselect(r.get("stockId"), cb.greatest(r.get("stampDate")));
 //		q.groupBy(r.get("stockId"));
@@ -83,7 +83,7 @@
 //		
 //		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 //		CriteriaQuery<Tuple> q = cb.createQuery(Tuple.class); //result class
-//		Root<LibraStockIndicator> r = q.from(LibraStockIndicator.class);
+//		Root<StockIndicator> r = q.from(StockIndicator.class);
 //		
 //		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
 //		selections.add(r.<Long>get("stockId").alias("stockId") );
@@ -106,7 +106,7 @@
 //		
 //		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 //		CriteriaQuery<Tuple> q = cb.createQuery(Tuple.class); //result class
-//		Root<LibraStockIndicator> r = q.from(LibraStockIndicator.class);
+//		Root<StockIndicator> r = q.from(StockIndicator.class);
 //		
 //		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
 //		selections.add(r.get("stockId").alias("stockId") );
@@ -130,7 +130,7 @@
 //		
 //		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 //		CriteriaQuery<Tuple> q = cb.createQuery(Tuple.class); //result class
-//		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
+//		Root<StockIndicator> indicatorsRoot = q.from(StockIndicator.class);
 //		
 //		List<Selection<?>> selections = new ArrayList<Selection<?>>(); 
 //		selections.add(indicatorsRoot.get("stockId").alias("stockId") );
@@ -162,7 +162,7 @@
 //		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 //		CriteriaQuery<Number> q = cb.createQuery(Number.class);
 //		
-//		Root<LibraStockIndicator> indicatorsRoot = q.from(LibraStockIndicator.class);
+//		Root<StockIndicator> indicatorsRoot = q.from(StockIndicator.class);
 //		q.select(cb.max(indicatorsRoot.get("stampDate")));
 //		q.groupBy(indicatorsRoot.get("stockId"));
 //		

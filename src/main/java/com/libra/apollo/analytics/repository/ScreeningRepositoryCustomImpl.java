@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 import com.libra.apollo.analytics.entity.ResultParameter;
 import com.libra.apollo.analytics.projection.ScreeningResult;
 
@@ -27,7 +27,7 @@ public class ScreeningRepositoryCustomImpl implements ScreeningRepositoryCustom 
 	private EntityManager em;
 	
 	@Override
-	public List<ScreeningResult> findAllScreeningResultsBySpecification( Specification<LibraStockIndicator> specification) {
+	public List<ScreeningResult> findAllScreeningResultsBySpecification( Specification<StockIndicator> specification) {
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}
@@ -35,7 +35,7 @@ public class ScreeningRepositoryCustomImpl implements ScreeningRepositoryCustom 
 	}
 
 	@Override
-	public List<Tuple> findAllScreeningResultsBySpecification(List<ResultParameter> resultParameters,Specification<LibraStockIndicator> specification) {
+	public List<Tuple> findAllScreeningResultsBySpecification(List<ResultParameter> resultParameters,Specification<StockIndicator> specification) {
 		if(logger.isDebugEnabled()) {
 			logger.debug("");
 		}

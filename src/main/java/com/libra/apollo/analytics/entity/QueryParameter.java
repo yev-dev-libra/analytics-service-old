@@ -14,10 +14,7 @@ import javax.persistence.Table;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.specification.ValueParameter;
 
-@SuppressWarnings("serial")
 @Entity
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "analytics_parameter", schema = "analytics")
 public abstract class QueryParameter implements ValueParameter {

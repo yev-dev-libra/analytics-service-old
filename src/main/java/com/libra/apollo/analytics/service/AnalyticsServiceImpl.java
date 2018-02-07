@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 import com.libra.apollo.analytics.entity.QueryParameter;
-import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
+import com.libra.apollo.analytics.repository.StockIndicatorRepository;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
-import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
+import com.libra.apollo.analytics.specification.StockIndicatorSpecification;
 import com.netflix.servo.util.Preconditions;
 
 @Service
@@ -25,7 +25,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 
 	
 	@Autowired
-	private LibraStockIndicatorRepository libraStockIndicatorRepository;
+	private StockIndicatorRepository StockIndicatorRepository;
 
 
 	@Override
@@ -35,16 +35,16 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 		Preconditions.checkArgument(requestedFields != null, "Passed ValueDataFieldType can not be null");
 		Preconditions.checkArgument(stampDate != null, "Passed runDate can not be null");
 		
-		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
+		final Specification<StockIndicator> stockIdsSpec = StockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(stockIdsSpec);
+		final AnalyticsSpecifications<StockIndicator> specification = new AnalyticsSpecifications<>(stockIdsSpec);
 		
 		
 		for(QueryParameter param : queryParams) {
 			specification.and(param.getSpecification());
 			
 		}
-		return libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification, stampDate);
+		return StockIndicatorRepository.findAllBySpecification(requestedFields, specification, stampDate);
 	}
 
 	@Override
@@ -53,9 +53,9 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 		Preconditions.checkArgument(queryParams != null, "Passed QueryParameters can not be null");
 		Preconditions.checkArgument(requestedFields != null, "Passed ValueDataFieldType can not be null");
 		
-		final Specification<LibraStockIndicator> stockIdsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
+		final Specification<StockIndicator> stockIdsSpec = StockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(stockIdsSpec);
+		final AnalyticsSpecifications<StockIndicator> specification = new AnalyticsSpecifications<>(stockIdsSpec);
 		
 		
 		for(QueryParameter param : queryParams) {
@@ -63,7 +63,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 			
 		}
 		
-		return libraStockIndicatorRepository.findAllBySpecification(requestedFields, specification);
+		return StockIndicatorRepository.findAllBySpecification(requestedFields, specification);
 		
 	}
 }

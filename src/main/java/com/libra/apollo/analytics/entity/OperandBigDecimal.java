@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import com.google.common.base.Preconditions;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 import com.libra.apollo.analytics.exception.MissingParameterValueException;
-import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
+import com.libra.apollo.analytics.specification.StockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.ValueParameter;
 import com.libra.apollo.analytics.specification.ValueParameterSpecification;
 
@@ -22,7 +22,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification<BigDecimal>
 			
 			final ValueDataFieldType fieldType = value.getFieldType();
 			final BigDecimal decimalValue = (BigDecimal)value.getValue().orElseThrow( () -> new MissingParameterValueException() );
-			return LibraStockIndicatorSpecification.fieldEqualsTo(fieldType, decimalValue);
+			return StockIndicatorSpecification.fieldEqualsTo(fieldType, decimalValue);
 		}
 	},
 	NOT_EQUAL("!=") {
@@ -34,7 +34,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification<BigDecimal>
 			
 			final ValueDataFieldType fieldType = value.getFieldType();
 			final BigDecimal decimalValue = (BigDecimal)value.getValue().orElseThrow( () -> new MissingParameterValueException() );
-			return LibraStockIndicatorSpecification.fieldNotEqualsTo(fieldType, decimalValue);
+			return StockIndicatorSpecification.fieldNotEqualsTo(fieldType, decimalValue);
 		}
 
 
@@ -47,7 +47,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification<BigDecimal>
 			
 			final ValueDataFieldType fieldType = value.getFieldType();
 			final BigDecimal decimalValue = (BigDecimal)value.getValue().orElseThrow( () -> new MissingParameterValueException() );
-			return LibraStockIndicatorSpecification.fieldGreaterThan(fieldType, decimalValue);
+			return StockIndicatorSpecification.fieldGreaterThan(fieldType, decimalValue);
 		}
 
 	},
@@ -60,7 +60,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification<BigDecimal>
 			
 			final ValueDataFieldType fieldType = value.getFieldType();
 			final BigDecimal decimalValue = (BigDecimal)value.getValue().orElseThrow( () -> new MissingParameterValueException() );
-			return LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType, decimalValue);
+			return StockIndicatorSpecification.fieldGreaterThanOrEqualTo(fieldType, decimalValue);
 		}
 
 	},
@@ -73,7 +73,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification<BigDecimal>
 			
 			final ValueDataFieldType fieldType = value.getFieldType();
 			final BigDecimal decimalValue = (BigDecimal)value.getValue().orElseThrow( () -> new MissingParameterValueException() );
-			return LibraStockIndicatorSpecification.fieldLessThan(fieldType, decimalValue);
+			return StockIndicatorSpecification.fieldLessThan(fieldType, decimalValue);
 		}
 
 	},
@@ -86,7 +86,7 @@ public enum OperandBigDecimal implements ValueParameterSpecification<BigDecimal>
 			
 			final ValueDataFieldType fieldType = value.getFieldType();
 			final BigDecimal decimalValue = (BigDecimal)value.getValue().orElseThrow( () -> new MissingParameterValueException() );
-			return LibraStockIndicatorSpecification.fieldLessThan(fieldType, decimalValue);
+			return StockIndicatorSpecification.fieldLessThan(fieldType, decimalValue);
 		}
 		
 	}

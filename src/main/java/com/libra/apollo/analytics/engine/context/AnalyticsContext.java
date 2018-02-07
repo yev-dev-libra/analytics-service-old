@@ -11,7 +11,7 @@ import com.libra.apollo.analytics.engine.result.ScreenerResult;
 import com.libra.apollo.analytics.entity.AnalyticsType;
 import com.libra.apollo.analytics.service.AnalyticsService;
 import com.libra.apollo.analytics.service.ConfigurationService;
-import com.libra.apollo.analytics.service.PortfolioService;
+import com.libra.apollo.analytics.service.GroupsService;
 
 public interface AnalyticsContext {
 
@@ -23,7 +23,7 @@ public interface AnalyticsContext {
 
 	public ConfigurationService getConfigurationService();
 
-	public PortfolioService getPortfolioService();
+	public GroupsService getPortfolioService();
 
 	public Map<String, String> getProperties();
 	

@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 import com.libra.apollo.analytics.projection.ScreeningResult;
 
 @Repository
-public interface ScreeningRepository extends BaseRepository<LibraStockIndicator, Long>, JpaSpecificationExecutor<LibraStockIndicator>, ScreeningRepositoryCustom {
+public interface ScreeningRepository extends BaseRepository<StockIndicator, Long>, JpaSpecificationExecutor<StockIndicator>, ScreeningRepositoryCustom {
 
 	public List<ScreeningResult> findByStampDate(Date date);
 	public List<ScreeningResult> findByStockId(Long stockId);

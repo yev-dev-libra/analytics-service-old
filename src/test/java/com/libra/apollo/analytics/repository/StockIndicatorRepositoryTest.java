@@ -38,19 +38,19 @@ import org.springframework.data.repository.query.Param;
 
 import com.libra.apollo.analytics.AbstractRepositoryTest;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 import com.libra.apollo.analytics.projection.MaxDateForStock;
 import com.libra.apollo.analytics.specification.AnalyticsSpecifications;
-import com.libra.apollo.analytics.specification.LibraStockIndicatorSpecification;
+import com.libra.apollo.analytics.specification.StockIndicatorSpecification;
 import com.libra.apollo.analytics.specification.StampDateSpecification;
 
-public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
+public class StockIndicatorRepositoryTest extends AbstractRepositoryTest {
 
 	@Value("${spring.jpa.properties.hibernate.default_schema}")
 	private String HIBERNATE_DEFAULT_SCHEMA;
 
 	@Autowired
-	private LibraStockIndicatorRepository repository;
+	private StockIndicatorRepository repository;
 	
 
 	@PersistenceContext
@@ -78,32 +78,32 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 
 
 	@Test
-	public void shouldFindLibraStockIndicatorByStockId() {
-		List<LibraStockIndicator> stockIndicators = repository.findByStockId(existedStockId);
+	public void shouldFindStockIndicatorByStockId() {
+		List<StockIndicator> stockIndicators = repository.findByStockId(existedStockId);
 		assertThat(stockIndicators, hasSize(1));
 	}
 
 	@Test
-	public void shouldFindLibraStockIndicatorByStampDate_2017_12_01() {
-		List<LibraStockIndicator> stockIndicators = repository.findByStampDate(previousDate);
+	public void shouldFindStockIndicatorByStampDate_2017_12_01() {
+		List<StockIndicator> stockIndicators = repository.findByStampDate(previousDate);
 		System.out.println(stockIndicators);
 		assertThat(stockIndicators, hasSize(greaterThan(0)) );
 	}
 
 
 	@Test
-	public void shouldFindLibraStockIndicatorBySQL() {
-		String sql = "SELECT COUNT(si.id) FROM LibraStockIndicator si";
+	public void shouldFindStockIndicatorBySQL() {
+		String sql = "SELECT COUNT(si.id) FROM StockIndicator si";
 		Query q = entityManager.createQuery(sql);
 		long count = (long) q.getSingleResult();
 		assertThat(count, is(equalTo(1L)));
 	}
 
 	@Test
-	public void shouldFindLibraStockIndicatorByStampDate_2017_11_14_WithSpecificationQuery() {
-		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
-		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.stockIdEquals(existedStockId);
-		LibraStockIndicator stockIndicator = repository.findOne(Specifications.where(stampDateSpec).and(stockIdSpec));
+	public void shouldFindStockIndicatorByStampDate_2017_11_14_WithSpecificationQuery() {
+		Specification<StockIndicator> stampDateSpec = StampDateSpecification.stampDateEqual(previousDate);
+		Specification<StockIndicator> stockIdSpec = StockIndicatorSpecification.stockIdEquals(existedStockId);
+		StockIndicator stockIndicator = repository.findOne(Specifications.where(stampDateSpec).and(stockIdSpec));
 		assertThat(stockIndicator,  is(IsNull.notNullValue()));
 	}
 	
@@ -112,29 +112,29 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void shouldCreateSubqueryWithMaxStampDate() {
 		ValueDataFieldType fieldType = ValueDataFieldType.STOCK_ID ;
-		Specification<LibraStockIndicator> stockIdSpec = LibraStockIndicatorSpecification.idEquals(fieldType, 1L);
-		Specification<LibraStockIndicator> stampDateSpec = StampDateSpecification.stampDateGreatest();
-		Specification<LibraStockIndicator> spec = Specifications.where(stampDateSpec).and(stockIdSpec);
-		List<LibraStockIndicator> stockIndicators = repository.findAll(spec);
+		Specification<StockIndicator> stockIdSpec = StockIndicatorSpecification.idEquals(fieldType, 1L);
+		Specification<StockIndicator> stampDateSpec = StampDateSpecification.stampDateGreatest();
+		Specification<StockIndicator> spec = Specifications.where(stampDateSpec).and(stockIdSpec);
+		List<StockIndicator> stockIndicators = repository.findAll(spec);
 		System.out.println("Stock Indicators Size " + stockIndicators.size());
 	}
 
 	@Test
-	public void shouldFindLibraStockIndicatorByStampDateWithCriteria() {
+	public void shouldFindStockIndicatorByStampDateWithCriteria() {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<LibraStockIndicator> criteriaQuery = criteriaBuilder.createQuery(LibraStockIndicator.class); 
-		Root<LibraStockIndicator> root = criteriaQuery.from(LibraStockIndicator.class);
+		CriteriaQuery<StockIndicator> criteriaQuery = criteriaBuilder.createQuery(StockIndicator.class); 
+		Root<StockIndicator> root = criteriaQuery.from(StockIndicator.class);
 		criteriaQuery.select(root);
 		criteriaQuery.where(
 				criteriaBuilder.equal(root.get("stampDate"), criteriaBuilder.parameter(Date.class, "stampDate")));
-		TypedQuery<LibraStockIndicator> query = entityManager.createQuery(criteriaQuery);
+		TypedQuery<StockIndicator> query = entityManager.createQuery(criteriaQuery);
 		query.setParameter("stampDate", previousDate);
-		List<LibraStockIndicator> indicators = query.getResultList();
+		List<StockIndicator> indicators = query.getResultList();
 		assertThat(indicators.isEmpty(), is(false));
 	}
 
 	@Test
-	public void shouldConstructDynamicQueryForLibraStockIndicatorsWithCriteria() {
+	public void shouldConstructDynamicQueryForStockIndicatorsWithCriteria() {
 		
 		final List<ValueDataFieldType> fields  = Arrays.asList(
 				ValueDataFieldType.MAX_STAMP_DATE, 
@@ -151,29 +151,29 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		List<Long> stockIds = Arrays.asList(1L);
 		
 		//Passed stock ids
-		Specification<LibraStockIndicator> idsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
+		Specification<StockIndicator> idsSpec = StockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
 		final Date prevDateStampDate = previousDate;
-		Specification<LibraStockIndicator> equalsOrGreaterThanPrevBussDate = StampDateSpecification.stampDateGreaterThanOrEqual(prevDateStampDate );
+		Specification<StockIndicator> equalsOrGreaterThanPrevBussDate = StampDateSpecification.stampDateGreaterThanOrEqual(prevDateStampDate );
 		
 		//STAR_RATING  >= 3.0
-		Specification<LibraStockIndicator> starRatingSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.STAR_RATING, BigDecimal.valueOf(3));
+		Specification<StockIndicator> starRatingSpec = StockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.STAR_RATING, BigDecimal.valueOf(3));
 		
 		//FAIR_VALUE_CHANGE_1M >= 0
-		Specification<LibraStockIndicator> fvChange1m = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.FAIR_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
+		Specification<StockIndicator> fvChange1m = StockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.FAIR_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
 		
 		//INTRINSIC_VALUE_CHANGE_1M >= 0
-		Specification<LibraStockIndicator> ivChange1m = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.INTRINSIC_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
+		Specification<StockIndicator> ivChange1m = StockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.INTRINSIC_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
 		
 		//PCT_IN_FAIR_VALUE_RANGE > 0
-		Specification<LibraStockIndicator> pctFVRangeGreaterThanZero = LibraStockIndicatorSpecification.fieldGreaterThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(0));
+		Specification<StockIndicator> pctFVRangeGreaterThanZero = StockIndicatorSpecification.fieldGreaterThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(0));
 
 		//PCT_IN_FAIR_VALUE_RANGE < 1
-		Specification<LibraStockIndicator> pctFVRangeLessThanOne = LibraStockIndicatorSpecification.fieldLessThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(1));
+		Specification<StockIndicator> pctFVRangeLessThanOne = StockIndicatorSpecification.fieldLessThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(1));
 		
 		
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
+		final AnalyticsSpecifications<StockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
 		specification.and(equalsOrGreaterThanPrevBussDate);
 		specification.and(starRatingSpec);
 		specification.and(fvChange1m);
@@ -203,7 +203,7 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 
 	}
 	@Test
-	public void shouldConstructDynamicQueryForLibraStockIndicatorsWithCriteriaAndBusinessDate() {
+	public void shouldConstructDynamicQueryForStockIndicatorsWithCriteriaAndBusinessDate() {
 		
 		final List<ValueDataFieldType> fields  = Arrays.asList(
 				ValueDataFieldType.MAX_STAMP_DATE, 
@@ -223,29 +223,29 @@ public class LibraStockIndicatorRepositoryTest extends AbstractRepositoryTest {
 		List<Long> stockIds = Arrays.asList(1L);
 		
 		//Passed stock ids
-		Specification<LibraStockIndicator> idsSpec = LibraStockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
+		Specification<StockIndicator> idsSpec = StockIndicatorSpecification.idsEquals(ValueDataFieldType.STOCK_ID, stockIds);
 		
 		final Date prevDateStampDate = previousDate;
-		Specification<LibraStockIndicator> equalsOrGreaterThanPrevBussDate = StampDateSpecification.stampDateGreaterThanOrEqual(prevDateStampDate );
+		Specification<StockIndicator> equalsOrGreaterThanPrevBussDate = StampDateSpecification.stampDateGreaterThanOrEqual(prevDateStampDate );
 		
 		//STAR_RATING  >= 3.0
-		Specification<LibraStockIndicator> starRatingSpec = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.STAR_RATING, BigDecimal.valueOf(3));
+		Specification<StockIndicator> starRatingSpec = StockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.STAR_RATING, BigDecimal.valueOf(3));
 		
 		//FAIR_VALUE_CHANGE_1M >= 0
-		Specification<LibraStockIndicator> fvChange1m = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.FAIR_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
+		Specification<StockIndicator> fvChange1m = StockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.FAIR_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
 		
 		//INTRINSIC_VALUE_CHANGE_1M >= 0
-		Specification<LibraStockIndicator> ivChange1m = LibraStockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.INTRINSIC_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
+		Specification<StockIndicator> ivChange1m = StockIndicatorSpecification.fieldGreaterThanOrEqualTo(ValueDataFieldType.INTRINSIC_VALUE_CHANGE_1M, BigDecimal.valueOf(0));
 		
 		//PCT_IN_FAIR_VALUE_RANGE > 0
-		Specification<LibraStockIndicator> pctFVRangeGreaterThanZero = LibraStockIndicatorSpecification.fieldGreaterThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(0));
+		Specification<StockIndicator> pctFVRangeGreaterThanZero = StockIndicatorSpecification.fieldGreaterThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(0));
 		
 		//PCT_IN_FAIR_VALUE_RANGE < 1
-		Specification<LibraStockIndicator> pctFVRangeLessThanOne = LibraStockIndicatorSpecification.fieldLessThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(1));
+		Specification<StockIndicator> pctFVRangeLessThanOne = StockIndicatorSpecification.fieldLessThan(ValueDataFieldType.PCT_IN_FAIR_VALUE_RANGE, BigDecimal.valueOf(1));
 		
 		
 		
-		final AnalyticsSpecifications<LibraStockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
+		final AnalyticsSpecifications<StockIndicator> specification = new AnalyticsSpecifications<>(idsSpec);
 		specification.and(equalsOrGreaterThanPrevBussDate);
 		specification.and(starRatingSpec);
 		specification.and(fvChange1m);

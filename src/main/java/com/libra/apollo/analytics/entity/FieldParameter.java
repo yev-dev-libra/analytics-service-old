@@ -19,10 +19,10 @@ public class FieldParameter implements ValueDataField, Comparable<FieldParameter
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4760084034378078297L;
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@Column(name = "id", updatable = false, nullable = false)
 	protected Long id;
 	
 	@Column(name = "data_field_type", nullable = true)

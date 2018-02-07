@@ -12,9 +12,9 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 
-public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> {
+public class StockIndicatorSpecification<T extends StockIndicator> {
 
 	private static String STOCK_ID = ValueDataFieldType.STOCK_ID.getFieldName();
 	private static String stampDateFieldName = ValueDataFieldType.STAMP_DATE.getFieldName();
@@ -28,14 +28,14 @@ public class LibraStockIndicatorSpecification<T extends LibraStockIndicator> {
 	public static <T> Specification<T> groupByStockId() {
 		
 		return (root, query, cb) -> {
-			Root<LibraStockIndicator> c = query.from(LibraStockIndicator.class);
+			Root<StockIndicator> c = query.from(StockIndicator.class);
 			return query.groupBy(c.get(STOCK_ID)).getRestriction();
 		};
 	}
 	public static <T> Specification<T> groupByField(final ValueDataFieldType fieldType) {
 		
 		return (root, query, cb) -> {
-			Root<LibraStockIndicator> c = query.from(LibraStockIndicator.class);
+			Root<StockIndicator> c = query.from(StockIndicator.class);
 			return query.groupBy(c.get(fieldType.getFieldName())).getRestriction();
 		};
 	}

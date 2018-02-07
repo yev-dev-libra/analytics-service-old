@@ -14,7 +14,7 @@ import javax.persistence.criteria.Subquery;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
-import com.libra.apollo.analytics.entity.LibraStockIndicator;
+import com.libra.apollo.analytics.entity.StockIndicator;
 
 public class StampDateSpecification {
 
@@ -24,7 +24,7 @@ public class StampDateSpecification {
 	public static <T> Specification<T> stampDateGreatest() {
 		return (root, query,cb) -> {
 			 Subquery<Date> sq = query.subquery(Date.class);
-			 Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
+			 Root<StockIndicator> rootSubquery = sq.from(StockIndicator.class);
 			 Expression<Date> expression = cb.greatest(rootSubquery.<Date>get(stampDateFieldName));
 			 sq.select(expression);
 			 
@@ -37,14 +37,14 @@ public class StampDateSpecification {
 		return (root, query,cb) -> {
 			
 //			Subquery<Date> sq = query.subquery(Date.class);
-//			Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
+//			Root<StockIndicator> rootSubquery = sq.from(StockIndicator.class);
 //			Expression<Date> maxDateExpression = cb.greatest(rootSubquery.<Date>get(stampDateFieldName));
 //			sq.select(maxDateExpression).groupBy(rootSubquery.<Long>get(stockIdFieldName));
 //			
 //			return cb.equal(root.get(stampDateFieldName), sq);
 			
-//			Root<LibraStockIndicator> stockIndicator1 = query.from(LibraStockIndicator.class);
-//			Root<LibraStockIndicator> stockIndicator2 = query.from(LibraStockIndicator.class);
+//			Root<StockIndicator> stockIndicator1 = query.from(StockIndicator.class);
+//			Root<StockIndicator> stockIndicator2 = query.from(StockIndicator.class);
 //			
 //			stockIndicator1.alias("si1");
 //			stockIndicator2.alias("si2");
@@ -52,7 +52,7 @@ public class StampDateSpecification {
 //			query.multiselect(stockIndicator1, stockIndicator2);
 			
 			Subquery<Date> sq = query.subquery(Date.class);
-			Root<LibraStockIndicator> rootSubquery = sq.from(LibraStockIndicator.class);
+			Root<StockIndicator> rootSubquery = sq.from(StockIndicator.class);
 			Expression<Date> maxDateExpression = cb.greatest(rootSubquery.<Date>get(stampDateFieldName));
 			sq.select(maxDateExpression).groupBy(rootSubquery.<Long>get(stockIdFieldName));
 			return cb.in(maxDateExpression);

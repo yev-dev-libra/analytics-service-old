@@ -12,9 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import com.libra.apollo.analytics.engine.core.Value;
 
-@SuppressWarnings("serial")
 @Entity
-//@DiscriminatorValue(value = "DOUBLE_PARAMETER")
 @Table(name="double_parameter", schema="analytics")
 public class DoubleParameter extends QueryParameter {
 

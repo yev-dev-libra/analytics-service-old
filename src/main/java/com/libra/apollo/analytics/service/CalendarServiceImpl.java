@@ -11,24 +11,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.libra.apollo.analytics.projection.MaxDateForStock;
-import com.libra.apollo.analytics.repository.LibraStockIndicatorRepository;
+import com.libra.apollo.analytics.repository.StockIndicatorRepository;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
 	
 	@Autowired
-	private LibraStockIndicatorRepository libraStockIndicatorRepository; 
+	private StockIndicatorRepository StockIndicatorRepository; 
 
 	@Override
 	public Date getMaxStampDateForStock(Long stockId) {
-		return libraStockIndicatorRepository.maxDateForStock(stockId);
+		return StockIndicatorRepository.maxDateForStock(stockId);
 	}
 
 	@Override
 	public Map<Date,Set<Long>> getMaxStampDateForStockIds(Collection<Long> stockIds, Date greaterThanStampDate) {
 		
-		List<MaxDateForStock> projection = libraStockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
+		List<MaxDateForStock> projection = StockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
 		
 		Map<Date,Set<Long>> maxDateStock = projection.stream().collect(Collectors.groupingBy(MaxDateForStock::getMaxStampDate,Collectors.mapping(MaxDateForStock::getStockId,Collectors.toSet())));
 				
@@ -38,7 +38,7 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public Map<Long,Date> getStockDateForStockIdAndDate(Collection<Long> stockIds, Date greaterThanStampDate) {
 		
-		List<MaxDateForStock> projection = libraStockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
+		List<MaxDateForStock> projection = StockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
 		
 		Map<Long,Date> stockDate = projection.stream().collect(Collectors.toMap(MaxDateForStock::getStockId, MaxDateForStock::getMaxStampDate));
 		
@@ -47,7 +47,7 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	@Override
 	public Map<Date, Long> getDateStockForStockIdAndDate(Collection<Long> stockIds, Date greaterThanStampDate) {
-		List<MaxDateForStock> projection = libraStockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
+		List<MaxDateForStock> projection = StockIndicatorRepository.maxDateForStockAsProjection(stockIds, greaterThanStampDate );
 		
 		Map<Date,Long> stockDate = projection.stream().collect(Collectors.toMap(MaxDateForStock::getMaxStampDate, MaxDateForStock::getStockId));
 		
@@ -56,7 +56,7 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	@Override
 	public Date getMaxStampDateForStockIndicators() { 
-		return libraStockIndicatorRepository.maxDate();
+		return StockIndicatorRepository.maxDate();
 	}
 
 
