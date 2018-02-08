@@ -14,7 +14,8 @@ import org.springframework.data.jpa.domain.Specification;
 import com.libra.apollo.analytics.engine.core.Value;
 
 @Entity
-@Table(name="decimal_parameter", schema="analytics")
+//@Table(name="decimal_parameter", schema="analytics")
+@Table(name="analytics_decimal_parameter")
 public class BigDecimalParameter extends QueryParameter {
 	
 	@Column(name="operand")

@@ -16,7 +16,8 @@ import com.libra.apollo.analytics.specification.ValueParameter;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "analytics_parameter", schema = "analytics")
+//@Table(name = "analytics_parameter", schema="analytics")
+@Table(name = "analytics_parameter")
 public abstract class QueryParameter implements ValueParameter {
 
 	@Id 

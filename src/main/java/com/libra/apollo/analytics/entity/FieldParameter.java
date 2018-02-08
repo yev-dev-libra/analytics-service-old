@@ -13,7 +13,8 @@ import com.libra.apollo.analytics.engine.core.ValueDataField;
 import com.libra.apollo.analytics.engine.core.ValueDataFieldType;
 
 @Entity
-@Table(name = "analytics_field_parameter", schema = "analytics")
+@Table(name = "analytics_field_parameter", schema="analytics")
+//@Table(name = "analytics_field_parameter")
 public class FieldParameter implements ValueDataField, Comparable<FieldParameter>{
 
 	/**

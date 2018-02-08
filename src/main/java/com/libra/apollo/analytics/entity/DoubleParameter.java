@@ -13,7 +13,8 @@ import org.springframework.data.jpa.domain.Specification;
 import com.libra.apollo.analytics.engine.core.Value;
 
 @Entity
-@Table(name="double_parameter", schema="analytics")
+//@Table(name="double_parameter", schema="analytics")
+@Table(name="analytics_double_parameter")
 public class DoubleParameter extends QueryParameter {
 
 	@Column(name = "operand", nullable = false)

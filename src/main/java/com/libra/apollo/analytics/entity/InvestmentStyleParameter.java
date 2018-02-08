@@ -14,7 +14,8 @@ import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "analytics_investment_style_parameter", schema = "analytics")
+//@Table(name = "analytics_investment_style_parameter", schema="analytics")
+@Table(name = "analytics_investment_style_parameter")
 public class InvestmentStyleParameter implements Serializable, Comparable<InvestmentStyleParameter> {
 
 	@Id
