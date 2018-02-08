@@ -153,7 +153,15 @@
 			<artifactId>hamcrest-library</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<!-- Libra internal libraries -->
+		<dependency>
+			<groupId>com.libra.apollo</groupId>
+			<artifactId>groups-service-client-api</artifactId>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

@@ -8,18 +8,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.example.v5client.domain.GroupExtendedWithType;
-import com.example.v5client.domain.StockBasic;
 import com.google.common.collect.ImmutableList;
 import com.libra.apollo.group.api.GroupsRestControllerApi;
+import com.libra.apollo.group.v1client.domain.GroupExtendedWithType;
+import com.libra.apollo.group.v1client.domain.StockBasic;
 
 @Service
 public class GroupsRestServiceImpl implements GroupsService {
 
-	private final Logger logger = Logger.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private final GroupsRestControllerApi api = new GroupsRestControllerApi();
 
