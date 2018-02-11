@@ -44,12 +44,58 @@ public interface StockIndicatorRepository extends BaseRepository<StockIndicator,
 	
 	@Query("select MAX(stampDate) as maxStampDate, stockId as stockId from StockIndicator WHERE stockId IN :stockIdList AND stampDate >= :greaterThanStampDate GROUP BY stockId ORDER BY MAX(stampDate)")
 	public List<MaxDateForStock> maxDateForStockAsProjection(@Param("stockIdList") Collection<Long> stockIdList, @Param("greaterThanStampDate") Date greaterThanStampDate);
-//	
-//	@Query("SELECT sp.stockId, sp.stampDate, sp.openPrice , sp.highPrice , sp.lowPrice , sp.closePrice , sp.volume , sp.closePrice1D , sp.closePrice5D , sp.closePrice1m , sp.closePrice3M, si.priceChange1m, si.discountPremiumToFairValue , si.netDiscountMedianFairValue , si.fairValueChange1m , si.expectedReturn2m , si.discountPremiumToIntrinsicValue , si.intrinsicValueChange3m , si.fairValueChange3m , si.intrinsicValueChange1m , si.pctInFairValueRange "
-//			+ " FROM StockPrice sp INNER JOIN StockIndicator si ON sp.stockId = si.stockId WHERE sp.stockId = :stockId AND sp.stampDate BETWEEN :fromDate AND :toDate")
-//	public List<ApolloIndicators> findApolloIndicatorsByStockIdInAndStampDateIsBetween(@Param("stockId") Long stockId, @Param("fromDate") Date fromDate, @Param("toDate") Date toDate );
-//	
-//	@Query("SELECT sp.stockId, sp.stampDate, sp.openPrice , sp.highPrice , sp.lowPrice , sp.closePrice , sp.volume , sp.closePrice1D , sp.closePrice5D , sp.closePrice3M, si.priceChange1m, si.discountPremiumToFairValue , si.netDiscountMedianFairValue , si.fairValueChange1m , si.expectedReturn2m , si.discountPremiumToIntrinsicValue , si.intrinsicValueChange3m , si.fairValueChange3m , si.intrinsicValueChange1m , si.pctInFairValueRange "
-//			+ " FROM StockPrice sp INNER JOIN StockIndicator si ON sp.stockId = si.stockId WHERE sp.stockId IN :stockIdList AND sp.stampDate BETWEEN :fromDate AND :toDate")
-//	public List<ApolloIndicators> findApolloIndicatorsByStockIdsInAndStampDateIsBetween(@Param("stockIdList") Collection<Long> stockIdList, @Param("fromDate") Date fromDate, @Param("toDate") Date toDate );
+	
+	@Query("SELECT sp.stockId as stockId, "
+			+ "sp.stampDate as stampDate, "
+			+ "sp.openPrice as openPrice, "
+			+ "sp.highPrice as highPrice , "
+			+ "sp.lowPrice as lowPrice, "
+			+ "sp.closePrice as closePrice, "
+			+ "sp.volume as volume, "
+			+ "sp.closePrice1D as closePrice1D, "
+			+ "sp.closePrice5D as closePrice5D , "
+			+ "sp.closePrice1m as closePrice1m , "
+			+ "sp.closePrice3M as closePrice3M, "
+			+ "si.priceChange1m as priceChange1m, "
+			+ "si.fairValue as fairValue, "
+			+ "si.discountPremiumToFairValue as discountPremiumToFairValue , "
+			+ "si.medianDiscountToFairValue as medianDiscountToFairValue , "
+			+ "si.starRating as starRating , "
+			+ "si.intrinsicValue as  intrinsicValue ,"
+			+ "si.netDiscountMedianFairValue as netDiscountMedianFairValue, "
+			+ "si.fairValueChange1m as fairValueChange1m, "
+			+ "si.expectedReturn2m as expectedReturn2m, "
+			+ "si.discountPremiumToIntrinsicValue as discountPremiumToIntrinsicValue, "
+			+ "si.intrinsicValueChange3m as intrinsicValueChange3m, "
+			+ "si.fairValueChange3m as fairValueChange3m, "
+			+ "si.intrinsicValueChange1m as intrinsicValueChange1m, "
+			+ "si.pctInFairValueRange as pctInFairValueRange"
+			+ " FROM StockPrice sp, StockIndicator si WHERE sp.stockId = si.stockId AND sp.stampDate = si.stampDate AND sp.stockId = :stockId AND sp.stampDate >= :fromDate AND sp.stampDate <= :toDate")
+	public List<ApolloIndicators> findApolloIndicatorsByStockIdAndBetweenStampDates(@Param("stockId") Long stockId, @Param("fromDate") Date fromDate, @Param("toDate") Date toDate );
+	
+	@Query("SELECT sp.stockId as stockId, "
+			+ "sp.stampDate as stampDate, "
+			+ "sp.openPrice as openPrice, "
+			+ "sp.highPrice as highPrice , "
+			+ "sp.lowPrice as lowPrice, "
+			+ "sp.closePrice as closePrice, "
+			+ "sp.volume as volume, "
+			+ "sp.closePrice1D as closePrice1D, "
+			+ "sp.closePrice5D as closePrice5D , "
+			+ "sp.closePrice1m as closePrice1m , "
+			+ "sp.closePrice3M as closePrice3M, "
+			+ "si.priceChange1m as priceChange1m, "
+			+ "si.fairValue as fairValue, "
+			+ "si.discountPremiumToFairValue as discountPremiumToFairValue , "
+			+ "si.medianDiscountToFairValue as medianDiscountToFairValue , "
+			+ "si.netDiscountMedianFairValue as netDiscountMedianFairValue, "
+			+ "si.fairValueChange1m as fairValueChange1m, "
+			+ "si.expectedReturn2m as expectedReturn2m, "
+			+ "si.discountPremiumToIntrinsicValue as discountPremiumToIntrinsicValue, "
+			+ "si.intrinsicValueChange3m as intrinsicValueChange3m, "
+			+ "si.fairValueChange3m as fairValueChange3m, "
+			+ "si.intrinsicValueChange1m as intrinsicValueChange1m, "
+			+ "si.pctInFairValueRange as pctInFairValueRange"
+			+ " FROM StockPrice sp, StockIndicator si WHERE sp.stockId = si.stockId AND sp.stampDate = si.stampDate AND sp.stockId IN :stockIdList AND sp.stampDate >= :fromDate AND sp.stampDate <= :toDate")
+	public List<ApolloIndicators> findApolloIndicatorsByStockIdsAndBetweenStampDates(@Param("stockIdList") Collection<Long> stockIdList, @Param("fromDate") Date fromDate, @Param("toDate") Date toDate );
 }

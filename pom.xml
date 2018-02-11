@@ -40,6 +40,17 @@
 		</profile>
 	</profiles>
 
+	<repositories>
+		<repository>
+			<id>groups-service-client-api-mvn-repo</id>
+			<url>https://raw.github.com/yev-dev-libra/groups-service-client-api/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -153,7 +164,7 @@
 			<artifactId>hamcrest-library</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Libra internal libraries -->
 		<dependency>
 			<groupId>com.libra.apollo</groupId>
@@ -161,7 +172,7 @@
 			<version>1.0.0</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
@@ -239,10 +250,22 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin> <groupId>com.github.kongchen</groupId> <artifactId>swagger-maven-plugin</artifactId> 
-				<version>${swagger-maven-plugin-version}</version> <configuration> <apiSources> 
-				<apiSource> <springmvc>true</springmvc> <locations> <location>com.libra.apollo.analytics.api</location> 
-				</locations> </apiSource> </apiSources> </configuration> </plugin> -->
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.12</version>
+				<configuration>
+					<message>Creating site for ${project.version}</message>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site</phase>
+					</execution>
+				</executions>
+				</plugin>
 		</plugins>
 	</build>
 

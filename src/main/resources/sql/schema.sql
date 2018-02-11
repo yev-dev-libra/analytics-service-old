@@ -1,4 +1,4 @@
-
+/*
 
 drop table analytics if EXISTS;
 drop table analytics_parameter if EXISTS;
@@ -118,3 +118,4 @@ CREATE TABLE `analytics_view` (
   CONSTRAINT `FKma8jnkly15fgf3r4ayn9uybrt` FOREIGN KEY (`analytics_id`) REFERENCES `analytics` (`id`),
   CONSTRAINT `FKptjwdubiog4vq0aryvb3jtbts` FOREIGN KEY (`parent_id`) REFERENCES `analytics_view` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+*/

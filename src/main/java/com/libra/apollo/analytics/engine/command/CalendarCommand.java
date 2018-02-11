@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Multimap;
 import com.libra.apollo.analytics.engine.context.AnalyticsContext;
 import com.libra.apollo.analytics.engine.context.PortfolioScreenerContext;
 import com.libra.apollo.analytics.service.CalendarService;
@@ -36,12 +37,13 @@ public class CalendarCommand implements Command {
 		
 		final Calendar maxDateCalendar = Calendar.getInstance();
 		maxDateCalendar.setTime(maxDate);
-		
 		maxDateCalendar.add(Calendar.DATE, OFF_SET_DATE);
 		
 		Date greaterThanStampDate = new Date(maxDateCalendar.getTimeInMillis());
 		
 		Map<Date,Set<Long>> dateStocks =  calendarService.getMaxStampDateForStockIds(stockIds, greaterThanStampDate );
+		
+		Multimap<Date, Long> dateStockMultimap = calendarService.getMaxStampDateForStockIdsAsMultimap(stockIds, greaterThanStampDate);
 		
 		screenerContext.setMaxStampDatePerStock(dateStocks);
 		

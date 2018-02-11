@@ -22,9 +22,17 @@ public interface ApolloIndicators {
 
 	public Double getClosePrice5D();
 
+	public Double getClosePrice1M();
+
 	public Double getClosePrice3M();
 
+	public Double getFairValue();
+	
+	public Double getDiscountToFairValue();
+	
 	public Double getDiscountPremiumToFairValue();
+	
+	public Double getStarRating();
 
 	public Double getNetDiscountMedianFairValue();
 
